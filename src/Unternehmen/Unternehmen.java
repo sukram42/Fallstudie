@@ -47,7 +47,7 @@ public class Unternehmen {
 	
 	public Abteilung getDepartment(String department)
 	{
-		if("HR".equals(department))return hr;
+		if("HR".equalsIgnoreCase(department))return hr;
 		return null;
 	}
 	
