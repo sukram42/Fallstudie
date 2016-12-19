@@ -31,6 +31,7 @@ public class Interface {
 
 
     @POST
+    @Produces("application/json;charset=UTF-8")
     @Path("/{companyno}/{department}/employees/{anzahl}")
     public static Response newEmployee(@PathParam("companyno") int no, @PathParam("department") String department, @PathParam("anzahl") int anzahl) {
 
@@ -38,12 +39,11 @@ public class Interface {
         System.out.println(companies[no].getDepartment(department));
         companies[no].getDepartment(department).addMitarbeiter(anzahl);
 
-
         return Response.status(200).entity(new Gson().toJson(companies[no].getDepartment(department).getMitarbeiter())).build();
     }
 
     @GET
-    @Produces("application/json")
+    @Produces("application/json;charset=UTF-8")
     @Path("/{companyno}/{department}/employees")
     public static Response getEmployee(@PathParam("companyno") int no, @PathParam("department") String department) {
 
