@@ -12,7 +12,10 @@ public class Interface {
     private static Unternehmen[] companies = new Unternehmen[3];
     private static Gson gson = new Gson();
 
-
+    /**
+     * Testmethode für Schnittstelle
+     * @return Response
+     */
     @GET
     @Path("/testCompany")
     public static Response test() {
@@ -29,7 +32,16 @@ public class Interface {
         return Response.status(200).entity(new Gson().toJson(testcomp)).build();
     }
 
-
+    /**
+     * Methode zum Erstellen neuer Arbeitnehmern
+     *
+     * TODO Implementieren des Gehaltes
+     *
+     * @param no Unternehmensnummer
+     * @param department Abteilung in welche Arbeitnehmer gehen
+     * @param anzahl Anzahl der Arbeitnehmer
+     * @return
+     * */
     @POST
     @Produces("application/json;charset=UTF-8")
     @Path("/{companyno}/{department}/employees/{anzahl}")
@@ -42,6 +54,13 @@ public class Interface {
         return Response.status(200).entity(new Gson().toJson(companies[no].getDepartment(department).getMitarbeiter())).build();
     }
 
+    /**
+     * Getter Methode für
+     * @param no
+     * @param department
+     *
+     * @return gib eine Response zurück mit Statuswert 200 und gibt JSON zurück
+     */
     @GET
     @Produces("application/json;charset=UTF-8")
     @Path("/{companyno}/{department}/employees")
@@ -53,6 +72,15 @@ public class Interface {
         return Response.status(200).entity(erg).build();
     }
 
+    /**
+     * Erstellt eine neue Company
+     * Erwartet einen JSON Code
+     *
+     * TODO Umschreiben in verschiedene Parameter
+     *
+     * @param msg JSON Code
+     * @return
+     */
     @POST
     public Response newCompany(String msg) {
         System.out.println(new Gson().toJson(new Unternehmen("district gmbh", "wurst", 1000f)));
@@ -68,11 +96,21 @@ public class Interface {
         return Response.status(218).entity(test.toString()).build();
     }
 
+    /**
+     * Gibt alle Unternehmen zurück.
+     *
+     * @return Unternehmen als Array in JSON Form
+     */
     @GET
     public Response getCompanies() {
         return Response.status(200).entity(gson.toJson(companies)).build();
     }
 
+    /**
+     * Gibt einzelndes Unternehmen zurück
+     * @param no Unternemensnummer
+     * @return Unternehmen in JSON Form
+     */
     @GET
     @Path("/{companyno}")
     public Response getCompanies(@PathParam("companyno") int no) {
@@ -80,6 +118,11 @@ public class Interface {
     }
 
 
+    /**
+     * Löscht ein Unternehmen
+     * @param no Unternehmensnummer
+     * @return
+     */
     @DELETE
     @Path("/{companyno}")
     public Response deleteCompany(@PathParam("companyno") int no) {
@@ -92,6 +135,12 @@ public class Interface {
         }
     }
 
+    /**
+     * Prüft ob HeaderParameter dem Unternehmen passen
+     * @param user
+     * @param passwort
+     * @return 200 oder 401
+     */
     @POST
     @Path("/login")
     public static Response logIn(@HeaderParam("company") String user, @HeaderParam("passwort") String passwort) {
