@@ -68,6 +68,7 @@ public class Abteilung {
                     .append("imagelink", m.getImagelink())
                     .append("gender", m.getGender());
             coll.insertOne(doc);
+            mongo.close();
 
 			mitarbeiter.add(m);
 
