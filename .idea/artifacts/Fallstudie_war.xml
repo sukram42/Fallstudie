@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="Fallstudie:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="Fallstudie-0.0.1-SNAPSHOT.war">
-      <element id="artifact" artifact-name="Fallstudie:war exploded" />
-    </root>
-  </artifact>
-</component>
