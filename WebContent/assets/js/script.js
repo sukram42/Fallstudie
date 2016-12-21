@@ -4,7 +4,8 @@ function fillTable() {
          type: 'GET',
          url: 'http://localhost:8080/Fallstudie-0.0.1-SNAPSHOT/rest/companies/0/HR/employees',
          success: (function (data) {
-             alert(data);
+             console.log(data);
+             console.log("angèle")
              $('#employeesTable').bootstrapTable({
                  data: data
              })
