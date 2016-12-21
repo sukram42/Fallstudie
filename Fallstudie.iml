@@ -28,5 +28,9 @@
     <orderEntry type="library" name="Maven: com.sun.jersey:jersey-server:1.19" level="project" />
     <orderEntry type="library" name="Maven: com.sun.jersey:jersey-core:1.19" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1" level="project" />
+    <orderEntry type="library" name="jquery-3.1.1" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="bootstrap-table" level="application" />
+    <orderEntry type="library" name="bootstrap-table-zh-CN" level="application" />
   </component>
 </module>

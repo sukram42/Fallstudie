@@ -159,3 +159,41 @@ function debounce(func, wait, immediate) {
 		if (immediate && !timeout) func.apply(context, args);
 	};
 }
+
+
+
+
+
+
+
+
+//dynamic load content
+$(document).ready(function() {
+    var trigger = $('#nav ul li a'),
+        container = $('#content');
+    trigger.on('click', function() {
+        var $this = $(this),
+            target = $this.data('target');
+        container.load(target + '.html');
+        if (target == "humanresources")
+        {
+            fillTable();
+        }
+        return false;
+    });
+});
+
+$(document).ready(function() {
+    var $this = $(this),
+        container = $('#content');
+    target = $this.data('target');
+    container.load('dashboard.html');
+});
+
+// Change active state in sidebar
+$(document).ready(function() {
+    $('.sideBarButton').click(function() {
+        $('li').removeClass('active');
+        $(this).parent().addClass('active');
+    });
+});
