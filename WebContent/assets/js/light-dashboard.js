@@ -169,7 +169,7 @@ function debounce(func, wait, immediate) {
 
 //dynamic load content
 $(document).ready(function() {
-    var trigger = $('#nav ul li a'),
+    var trigger = $('ul li a'),
         container = $('#content');
     trigger.on('click', function() {
         var $this = $(this),
