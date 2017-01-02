@@ -1,4 +1,6 @@
-package Unternehmen;
+package Unternehmung.Abteilungen;
+
+import Unternehmung.Abteilung;
 
 /**
  * Abteilung, die für Vertrieb zuständig ist

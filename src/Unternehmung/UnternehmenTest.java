@@ -1,4 +1,6 @@
-package Unternehmen;
+package Unternehmung;
+
+import Unternehmung.Abteilungen.Marketing;
 
 /**
  * nur eine Testklasse!

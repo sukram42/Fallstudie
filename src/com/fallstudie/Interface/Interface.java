@@ -1,6 +1,6 @@
 package com.fallstudie.Interface;
 
-import Unternehmen.Unternehmen;
+import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 
 import javax.ws.rs.*;

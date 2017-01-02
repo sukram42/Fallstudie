@@ -1,10 +1,12 @@
-package Unternehmen;
+package Unternehmung.Abteilungen;
+
+import Unternehmung.Abteilung;
 
 /**
  * Klasse, die eine Abteilung repräsentiert, die für soziale Leistungen verantwortlich ist
  * Created by lucadommes on 29.12.2016.
  */
-public class SozialeLeistungen extends Abteilung{
+public class SozialeLeistungen extends Abteilung {
 
     /**
      * Einrichten / Ausbau einer Kantine
