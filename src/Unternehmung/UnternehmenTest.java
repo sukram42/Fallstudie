@@ -1,5 +1,7 @@
 package Unternehmung;
 
+import Unternehmung.Abteilungen.Marketing;
+
 /**
  * nur eine Testklasse!
  * Created by lucadommes on 28.12.2016.

@@ -1,10 +1,14 @@
-package Unternehmung;
+package Unternehmung.Abteilungen;
+
+import Unternehmung.Abteilung;
+import Unternehmung.Kennzahl;
+import Unternehmung.Unternehmen;
 
 /**
  * Klasse, die die Abteilung Marketing repräsentiert
  * Created by lucadommes on 29.12.2016.
  */
-public class Marketing extends Abteilung{
+public class Marketing extends Abteilung {
 
     public static void marketingKampagne(Unternehmen unternehmen, int dauer, int kosten){
         // Bekanntheitsgrad erhöhen:
