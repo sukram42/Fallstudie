@@ -1,5 +1,7 @@
 package Unternehmung;
 
+import Unternehmung.Abteilungen.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
