@@ -1,7 +1,7 @@
 package Unternehmung;
 
 /**
- * Klasse, die eine Kennzahl darstellt
+ * Klasse, die eine Kennzahl darstellt - hauptsächlich für "weiche" Kennzahlen gedacht
  * für jede Kennzahl wird ein Objekt dieser Klasse erstellt
  * Created by lucadommes on 29.12.2016.
  */
@@ -9,6 +9,7 @@ public class Kennzahl {
 
     private float basiswert; // Grundwert zur Berechnung (z.B. Vergleich mit Industriedurchschnitt
     private float modifier; // Variable zum Erhöhen (z.B. durch Investition) oder Verringern (z.B. durch längere Zeit nichts tun) der Kennzahl
+                            // bei (z.B. nichtmonetären) Kennzahlen, die keinen modifier haben sollen diesen einfach auf 0 setzen
     private float wert; // finaler Wert der Kennzahl
 
     /**
