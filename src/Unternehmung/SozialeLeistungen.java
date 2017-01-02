@@ -1,4 +1,4 @@
-package Unternehmen;
+package Unternehmung;
 
 /**
  * Klasse, die eine Abteilung repräsentiert, die für soziale Leistungen verantwortlich ist

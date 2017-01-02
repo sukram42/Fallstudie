@@ -1,4 +1,4 @@
-package Unternehmen;
+package Unternehmung;
 
 /**
  * Abteilung, die für Vertrieb zuständig ist

@@ -1,4 +1,4 @@
-package Unternehmen;
+package Unternehmung;
 
 /**
  * Klasse, die die Abteilung Finanzen repräsentiert
