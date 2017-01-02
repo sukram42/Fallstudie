@@ -1,5 +1,8 @@
 package Unternehmen;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Unternehmen {
 	// Unternehmenseigenschaften
 	private String passwort;
@@ -7,13 +10,11 @@ public class Unternehmen {
 	private float fremdkapital;
 	private float eigenkapital;
 	// Abteilungen:
-	private HR hr = new HR();
-	private Marketing marketing = new Marketing();
-	private Finanzen finanzen = new Finanzen();
-	private FuE FuE = new FuE();
-	private Produktion produktion = new Produktion();
-	private SozialeLeistungen sozialeLeistungen = new SozialeLeistungen();
-	private Vertrieb vertrieb = new Vertrieb();
+
+	private Map<String,Abteilung> abteilungen = new HashMap<String,Abteilung>();
+
+
+	//TODO  auslagern in andere Kennzahlenklasse ?
 	// Kennzahlen:
 	private Kennzahl bekanntheitsgrad = new Kennzahl();
 	private Kennzahl mitarbeiterzufriedenheit = new Kennzahl();
@@ -27,6 +28,20 @@ public class Unternehmen {
 		this.fremdkapital = fremdkapital;
 		this.eigenkapital = eigenkapital;
 		//Kennzahl Bekanntheitsgrad = new Kennzahl();
+	}
+
+	/**
+	 * Methode zum Initialisieren der Abteilungen.
+	 */
+	public void initDepartments()
+	{
+		abteilungen.put("marketing", new Marketing());
+		abteilungen.put("finanzen", new Finanzen());
+		abteilungen.put("FuE",new FuE());
+		abteilungen.put("produktion", new Produktion());
+		abteilungen.put("sozialeLeistungen", new SozialeLeistungen());
+		abteilungen.put("vertrieb", new Vertrieb());
+
 	}
 
 	
@@ -60,53 +75,11 @@ public class Unternehmen {
 	public void setEigenkapital(float eigenkapital) {
 		this.eigenkapital = eigenkapital;
 	}
-	public Abteilung getDepartment(String department) {
-		if("HR".equalsIgnoreCase(department))return hr; // TODO durch die "Abteilungs-Getter" ist diese Funktion überflüssig, oder?
-		return null;
-	}
+
 	// Abteilungen:
-	// TODO Setter überflüssig?!
-    public Marketing getMarketing() {
-        return marketing;
-    }
-    public void setMarketing(Marketing marketing) {
-        this.marketing = marketing;
-    }
-	public HR getHr() {
-		return hr;
-	}
-	public void setHr(HR hr) {
-		this.hr = hr;
-	}
-	public Finanzen getFinanzen() {
-		return finanzen;
-	}
-	public void setFinanzen(Finanzen finanzen) {
-		this.finanzen = finanzen;
-	}
-	public FuE getFuE() {
-		return FuE;
-	}
-	public void setFuE(FuE fuE) {
-		FuE = fuE;
-	}
-	public Produktion getProduktion() {
-		return produktion;
-	}
-	public void setProduktion(Produktion produktion) {
-		this.produktion = produktion;
-	}
-	public SozialeLeistungen getSozialeLeistungen() {
-		return sozialeLeistungen;
-	}
-	public void setSozialeLeistungen(SozialeLeistungen sozialeLeistungen) {
-		this.sozialeLeistungen = sozialeLeistungen;
-	}
-	public Vertrieb getVertrieb() {
-		return vertrieb;
-	}
-	public void setVertrieb(Vertrieb vertrieb) {
-		this.vertrieb = vertrieb;
+	public Abteilung getAbteilung(String key)
+	{
+		return abteilungen.get(key);
 	}
 
 	// Kennzahlen:
