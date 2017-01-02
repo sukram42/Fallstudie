@@ -15,14 +15,6 @@ public class Unternehmen {
 
 	private Map<String,Abteilung> abteilungen = new HashMap<String,Abteilung>();
 
-
-	//TODO  auslagern in andere Kennzahlenklasse ?
-	// Kennzahlen:
-	private Kennzahl bekanntheitsgrad = new Kennzahl();
-	private Kennzahl mitarbeiterzufriedenheit = new Kennzahl();
-	private Kennzahl kundenzufriedenheit = new Kennzahl();
-
-	
 	public Unternehmen( String name,String passwort, float fremdkapital, float eigenkapital) {
 		super();
 		this.passwort = passwort;
@@ -82,26 +74,5 @@ public class Unternehmen {
 	public Abteilung getAbteilung(String key)
 	{
 		return abteilungen.get(key);
-	}
-
-	// Kennzahlen:
-	// TODO werden Setter überhaupt benötigt, wird deren Aufgabe nicht von Kennzahl.wertBerechnen() übernommen?
-	public Kennzahl getBekanntheitsgrad() {
-        return bekanntheitsgrad;
-    }
-    public void setBekanntheitsgrad(Kennzahl bekanntheitsgrad) {
-        this.bekanntheitsgrad = bekanntheitsgrad;
-    }
-	public Kennzahl getMitarbeiterzufriedenheit() {
-		return mitarbeiterzufriedenheit;
-	}
-	public void setMitarbeiterzufriedenheit(Kennzahl mitarbeiterzufriedenheit) {
-		this.mitarbeiterzufriedenheit = mitarbeiterzufriedenheit;
-	}
-	public Kennzahl getKundenzufriedenheit() {
-		return kundenzufriedenheit;
-	}
-	public void setKundenzufriedenheit(Kennzahl kundenzufriedenheit) {
-		this.kundenzufriedenheit = kundenzufriedenheit;
 	}
 }
