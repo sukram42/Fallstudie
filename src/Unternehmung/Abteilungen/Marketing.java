@@ -1,7 +1,6 @@
 package Unternehmung.Abteilungen;
 
 import Unternehmung.Abteilung;
-import Unternehmung.Kennzahl;
 import Unternehmung.Unternehmen;
 
 /**
