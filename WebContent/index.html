@@ -18,6 +18,16 @@
 	<link href="assets/css/overwrite.css" rel="stylesheet" />
 	<link href="assets/fonts/glyphicons-halflings-regular.svg" rel="stylesheet" />
 
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
 	<!--Own Styles-->
 	<link href="assets/css/light-dashboard.css" rel="stylesheet" />
 	<link href="assets/css/sidebar.css" rel="stylesheet" />
@@ -45,12 +55,13 @@
 			<p>Das realistischste Unternehmensplanspiel</p>
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-4">
-					</div>
+					<div class="col-md-4"></div>
 					<div class="col-md-4">
 						<p>
 							<button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Jetzt Loslegen!</button>
+							<!--COLLAPSE-->
 							<div class="collapse" id="collapseExample">
+								<!--PANEL-->
 								<div class="panel panel-default">
 									<div class="panel-body">
 										<div class="row">
@@ -58,12 +69,17 @@
 											<div class="col-md-10">
 												<!-- Nav tabs -->
 												<ul class="nav nav-tabs" role="tablist">
-													<li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab" data-toggle="tab" color="green">Login</a></li>
-													<li role="presentation"><a href="#registrierung" aria-controls="registrierung" role="tab" data-toggle="tab">Registrierung</a></li>
+													<li role="presentation" class="active">
+														<a href="#login" aria-controls="login" role="tab" data-toggle="tab" color="green">Login</a>
+													</li>
+													<li role="presentation">
+														<a href="#registrierung" aria-controls="registrierung" role="tab" data-toggle="tab">Registrierung</a>
+													</li>
 												</ul>
 												<!-- Tab panes -->
 												<div class="tab-content">
-													<div role="tabpanel" class="tab-pane active" id="login">
+													<!--LOGIN TAB-->
+													<div  id="login" role="tabpanel" class="tab-pane active">
 														<form class="form-horizontal">
 															<br>
 															<div align="left">
@@ -96,6 +112,7 @@
 															</div>
 														</form>
 													</div>
+													<!-- REGISTRIERUNG -->
 													<div role="tabpanel" class="tab-pane" id="registrierung">
 														<form class="form-horizontal">
 															<br>
@@ -126,8 +143,6 @@
 															</div>
 														</form>
 													</div>
-													<div>
-													</div>
 												</div>
 											</div>
 											<div class="col-md-1"></div>
@@ -137,13 +152,19 @@
 							</div>
 						</p>
 					</div>
+					<div class="col-md-4">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
-<!--Scripts-->
+<!--Scripts
 
 <script type="text/javascript" src="assets/js/bootstrap.js"></script>
 <script type="text/javascript" src="assets/js/light-dashboard.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap-select.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
-
+-->
 
 </html>
