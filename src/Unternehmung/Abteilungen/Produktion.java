@@ -1,6 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Unternehmung.Abteilung;
+import Unternehmung.Kennzahlen;
 import Unternehmung.Produkt;
 
 import java.util.HashMap;
@@ -21,10 +22,12 @@ public class Produktion extends Abteilung {
      * @param name Bezeichnung des zu produzierenden Produkts (z.B. Rucksack)
      * @param anzahl Anzahl der zu produzierenden Produkte
      * @param herstellkosten des Produktes pro Stück // TODO feste Vorgabe je nach Produkt oder Auswahl durch den Spieler?
+     * @param kennzahlen Kennzahlen-Objekt, um Herstellkosten laufend fortzuschreiben
      */
-    public void produzieren(String name, int anzahl, int herstellkosten){
+    public void produzieren(String name, int anzahl, int herstellkosten, Kennzahlen kennzahlen){
         Produkt produkt = new Produkt(name, anzahl, herstellkosten);
         produzierteProdukte.put(produkt.getName(), produkt);
+        kennzahlen.addHerstellkosten(herstellkosten * anzahl); // laufende Fortschreibung der gesamten Herstellkosten
     }
 
     /**

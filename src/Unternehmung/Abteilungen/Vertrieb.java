@@ -1,6 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Unternehmung.Abteilung;
+import Unternehmung.Kennzahlen;
 import Unternehmung.Produkt;
 
 import java.util.HashMap;
@@ -15,7 +16,16 @@ public class Vertrieb extends Abteilung {
 
     private Map<String, Produkt> verkaufteProdukte = new HashMap<String, Produkt>(); // enthält alle bereits verkauften Produkte (relevant für Umsatzberechnung!)
 
-    public void verkaufen(Produktion produktion, String name, double preis, int anzahl) {
+    /**
+     * Funktion zum Verkaufen von Produkten
+     * verringert Bestand im Lager (Map produzierteProdukte in Klasse Produktion), erhöht den Bestand in der Map verkaufteProdukte und schreibt Umsatzzahlen fort
+     * @param produktion Produktions-Objekt, um Zugriff auf das Lager (Map produzierteProdukte) zu haben
+     * @param name Produktbezeichnung (z.B. Rucksack)
+     * @param preis Verkaufspreis eines Produkts
+     * @param anzahl Anzahl der verkauften / zu verkaufenden Produkte
+     * @param kennzahlen Kennzahlen-Objekt zur laufenden Fortschreibung des Umsatzes
+     */
+    public void verkaufen(Produktion produktion, String name, double preis, int anzahl, Kennzahlen kennzahlen) {
         // Herstellkosten des Produktes herausfinden:
         Map<String, Produkt> produzierteProdukte = produktion.getProduzierteProdukte();
         Produkt lager = produzierteProdukte.get(name);
@@ -24,6 +34,7 @@ public class Vertrieb extends Abteilung {
         produktion.bestandVerändern(name, anzahl);
         Produkt verkauft = new Produkt(name, anzahl, herstellkosten, preis);
         verkaufteProdukte.put(name, verkauft);
+        // erwirtschafteten Umsatz weitergeben (laufende Fortschreibung):
+        kennzahlen.addUmsatz(preis * anzahl);
     }
-
 }
