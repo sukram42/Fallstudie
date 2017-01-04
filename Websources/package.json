@@ -1,0 +1,155 @@
+{
+  "//": "alias: JumanjiJS, angular-2-boilerplate, angular-library, angular-2-library, angular2-library, ng2-library, ng2-boilerplate",
+  "_args": [
+    [
+      {
+        "raw": "jumanjijs",
+        "scope": null,
+        "escapedName": "jumanjijs",
+        "name": "jumanjijs",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\boebel\\Documents\\Git\\Fallstudie2"
+    ]
+  ],
+  "_from": "jumanjijs@latest",
+  "_id": "jumanjijs@2.3.6",
+  "_inCache": true,
+  "_location": "/jumanjijs",
+  "_nodeVersion": "6.4.0",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/jumanjijs-2.3.6.tgz_1475605899303_0.5599585841409862"
+  },
+  "_npmUser": {
+    "name": "rafay826",
+    "email": "rafay826@gmail.com"
+  },
+  "_npmVersion": "3.10.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "jumanjijs",
+    "scope": null,
+    "escapedName": "jumanjijs",
+    "name": "jumanjijs",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/jumanjijs/-/jumanjijs-2.3.6.tgz",
+  "_shasum": "5f604ec4770c7d429bcee9be9ab945fbe8d00ebd",
+  "_shrinkwrap": null,
+  "_spec": "jumanjijs",
+  "_where": "C:\\Users\\boebel\\Documents\\Git\\Fallstudie2",
+  "author": {
+    "name": "Rafay Choudhury"
+  },
+  "bugs": {
+    "url": "https://bitbucket.org/rafay826/jumanjijs/issues",
+    "email": "info@fywave.com"
+  },
+  "dependencies": {
+    "@angular/common": "2.0.0",
+    "@angular/compiler": "2.0.0",
+    "@angular/core": "2.0.0",
+    "@angular/forms": "2.0.0",
+    "@angular/http": "2.0.0",
+    "@angular/platform-browser": "2.0.0",
+    "@angular/platform-browser-dynamic": "2.0.0",
+    "@angular/router": "3.0.0",
+    "@angular/upgrade": "2.0.0",
+    "angular2-in-memory-web-api": "0.0.20",
+    "bootstrap": "^3.3.6",
+    "core-js": "^2.4.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean-css": "^2.0.11",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-jshint": "^2.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.1",
+    "gulp-server-livereload": "^1.8.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-streamify": "^1.0.2",
+    "gulp-typescript": "^2.14.1",
+    "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.9.2",
+    "reflect-metadata": "^0.1.3",
+    "rxjs": "5.0.0-beta.12",
+    "systemjs": "0.19.27",
+    "zone.js": "^0.6.23"
+  },
+  "description": "Angular-2 boilerplate",
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
+    "concurrently": "^3.1.0",
+    "es6-promise": "^3.2.1",
+    "es6-shim": "^0.35.1",
+    "lite-server": "^2.2.0",
+    "tsify": "^1.0.0",
+    "typescript": "^2.0.2",
+    "typings": "^1.3.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "5f604ec4770c7d429bcee9be9ab945fbe8d00ebd",
+    "tarball": "https://registry.npmjs.org/jumanjijs/-/jumanjijs-2.3.6.tgz"
+  },
+  "gitHead": "7256a0ad7808e9c865d5afd0b99d39039614a458",
+  "homepage": "https://bitbucket.org/rafay826/jumanjijs",
+  "keywords": [
+    "angular 2",
+    "angular library",
+    "angular framework",
+    "angular boilerplate",
+    "beginning angular 2",
+    "develop angular 2"
+  ],
+  "license": "ISC",
+  "main": "./dist/main.js",
+  "maintainers": [
+    {
+      "name": "rafay826",
+      "email": "rafay826@gmail.com"
+    }
+  ],
+  "name": "jumanjijs",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/rafay826/jumanjijs.git"
+  },
+  "scripts": {
+    "component": "cd src/system_templates/components && cp component.ts new.ts; mv new.ts ../../../src/ts/modules/components; cd ../../../src/ts/modules/components; mv new.ts ",
+    "component-template": "cd templates/components; touch ",
+    "deploy": "git checkout master; git push -u origin master",
+    "deploy-sand": "git checkout sandbox; git push -u origin sandbox",
+    "directive": "cd src/system_templates/directives && cp directive.ts new.ts; mv new.ts ../../../src/ts/modules/directives; cd ../../../src/ts/modules/directives; mv new.ts ",
+    "directive-template": "cd templates/directives; touch ",
+    "lite": "lite-server",
+    "merge": "git checkout master; git merge sandbox",
+    "pipe": "cd src/system_templates/pipes && cp pipe.ts new.ts; mv new.ts ../../../src/ts/modules/pipes; cd ../../../src/ts/modules/pipes; mv new.ts ",
+    "pipe-template": "cd templates/pipes; touch ",
+    "postinstall": "typings install",
+    "service": "cd src/system_templates/services && cp service.ts new.ts; mv new.ts ../../../src/ts/modules/services; cd ../../../src/ts/modules/services; mv new.ts ",
+    "service-template": "cd templates/services; touch ",
+    "start": "concurrently \"tsc -w\" \"gulp\" \"lite-server\" ",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "typings": "typings"
+  },
+  "version": "2.3.6"
+}

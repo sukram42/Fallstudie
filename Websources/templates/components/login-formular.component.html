@@ -1,0 +1,37 @@
+
+    <form class="form-horizontal">
+        <br>
+        <div align="left">
+            <!--Falsches Passwort Alert-->
+            <div [hidden] ='!error' class="alert alert-danger">
+                <strong>NOPE!</strong> NEIN!NEIN!NEIN!.
+            </div>
+
+            <div class="form-group">
+                <label for="eingabefeldEmail3" class="col-sm-2 control-label">Unternehmen</label>
+                <div class="col-sm-10">
+                    <input type="text" [(ngModel)]="creds.username" class="form-control" name = "usereingabe" id="eingabefeldEmail3" placeholder="Unternehmensname">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="eingabefeldPasswort3" class="col-sm-2 control-label">Passwort</label>
+            <div class="col-sm-10">
+                <input type="password" [(ngModel)]="creds.password" class="form-control" name="passworteingabe" id="eingabefeldPasswort3" placeholder="Passwort">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Anmeldung speichern
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" (click) = "anmeldenClicked()" class="btn btn-default">Anmelden</button>
+            </div>
+        </div>
+    </form>
