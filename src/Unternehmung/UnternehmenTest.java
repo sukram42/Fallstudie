@@ -1,4 +1,6 @@
-package Unternehmen;
+package Unternehmung;
+
+import Unternehmung.Abteilungen.Marketing;
 
 /**
  * nur eine Testklasse!
@@ -8,25 +10,10 @@ public class UnternehmenTest {
     public static void main(String[] args) {
         Unternehmen unternehmen = new Unternehmen("TestCo", "kennwort", 100000, 100000);
 
-        //unternehmen.getBekanntheitsgrad().wertBerechnen((float) 0.5, (float) 1.2);
 
-        System.out.println("Bekanntheitsgrad vorher: " + unternehmen.getBekanntheitsgrad().getWert());
 
-        Marketing.marketingKampagne(unternehmen, 2, 5);
-        //unternehmen.getMarketing().
 
-        System.out.println("Bekanntheitsgrad nachher: " + unternehmen.getBekanntheitsgrad().getWert());
-
-        /*
-        HR hr = new HR();
-        hr.mitarbeiter.add(new Mitarbeiter("Musterdude", "Tom", "Musteradresse", "bild", 'm'));
-        hr.mitarbeiter.add(new Mitarbeiter("Musterdude", "Peter", "Musteradresse", "bild", 'm'));
-        for (int i = 0; i < hr.mitarbeiter.size(); i++) {
-            System.out.println(hr.mitarbeiter.get(i).getVorname() + " " + hr.mitarbeiter.get(i).getName());
-        }
-        */
-
-        /*
+        /* // Mitarbeiterzufriedenheit:
         float gesamtesGehalt = 100000;
         Kennzahl mitarbeiterzufriedenheit = new Kennzahl((gesamtesGehalt/(float) hr.mitarbeiter.size()/ 70000), (float) 1.02);
         System.out.println("Mitarbeiterzufriedenheit: " + mitarbeiterzufriedenheit.getWert());
@@ -36,7 +23,7 @@ public class UnternehmenTest {
 
 
 
-        /*
+        /* // Mitarbeiter hinzufügen:
         FuE FuE = new FuE();
         FuE.mitarbeiter.add(new Mitarbeiter("Musterlurch", "Tom", "Musteradresse", "bild", 'm'));
         for (int i = 0; i < FuE.mitarbeiter.size(); i++) {
