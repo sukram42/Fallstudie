@@ -1,6 +1,6 @@
 package com.fallstudie.Interface;
 
-import Unternehmen.Unternehmen;
+import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 
 import javax.ws.rs.*;
@@ -48,10 +48,10 @@ public class Interface {
     public static Response newEmployee(@PathParam("companyno") int no, @PathParam("department") String department, @PathParam("anzahl") int anzahl) {
 
         System.out.println(no);
-        System.out.println(companies[no].getDepartment(department));
-        companies[no].getDepartment(department).addMitarbeiter(anzahl);
+        System.out.println(companies[no].getAbteilung(department));
+        companies[no].getAbteilung(department).addMitarbeiter(anzahl);
 
-        return Response.status(200).entity(new Gson().toJson(companies[no].getDepartment(department).getMitarbeiter())).build();
+        return Response.status(200).entity(new Gson().toJson(companies[no].getAbteilung(department).getMitarbeiter())).build();
     }
 
     /**
@@ -67,7 +67,7 @@ public class Interface {
     public static Response getEmployee(@PathParam("companyno") int no, @PathParam("department") String department) {
 
         System.out.println(companies[no]);
-        String erg = gson.toJson(companies[no].getDepartment(department).getMitarbeiter());
+        String erg = gson.toJson(companies[no].getAbteilung(department).getMitarbeiter());
 
         return Response.status(200).entity(erg).build();
     }
