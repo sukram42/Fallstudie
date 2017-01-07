@@ -49,7 +49,7 @@ public class Interface {
 
         System.out.println(no);
         System.out.println(companies[no].getAbteilung(department));
-        companies[no].getAbteilung(department).addMitarbeiter(anzahl);
+        companies[no].getAbteilung(department).addMitarbeiter(anzahl, 50000); // TODO Gehalt implementieren, 50000 sind nur Platzhalter, der Spieler muss den Wert im Interface festlegen können
 
         return Response.status(200).entity(new Gson().toJson(companies[no].getAbteilung(department).getMitarbeiter())).build();
     }
