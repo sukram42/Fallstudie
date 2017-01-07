@@ -25,6 +25,18 @@ public class Kennzahlen {
     private double gewinn; // wird bei Änderungen von Umsatz oder Kosten automatisch aktualisiert (siehe unten gewinnBerechnen())
     private double ausschussrate;
     private double reklamationsrate;
+    private double fremdkapital;
+    private double eigenkapital;
+
+    /**
+     * Konstruktor zum Erstellen einen Kennzahlenobjekts eines Unternehmens (wird im Unternehmenskonstruktor aufgerufen)
+     * @param eigenkapital muss bei Gründung des Unternehmens definiert werden
+     * @param fremdkapital muss bei Gründung des Unternehmens definiert werden
+     */
+    public Kennzahlen(double eigenkapital, double fremdkapital) {
+        this.eigenkapital = eigenkapital;
+        this.fremdkapital = fremdkapital;
+    }
 
     // Berechnungen:
     /**
@@ -151,5 +163,21 @@ public class Kennzahlen {
 
     public void setReklamationsrate(double reklamationsrate) {
         this.reklamationsrate = reklamationsrate;
+    }
+
+    public double getFremdkapital() {
+        return fremdkapital;
+    }
+
+    public void setFremdkapital(double fremdkapital) {
+        this.fremdkapital = fremdkapital;
+    }
+
+    public double getEigenkapital() {
+        return eigenkapital;
+    }
+
+    public void setEigenkapital(double eigenkapital) {
+        this.eigenkapital = eigenkapital;
     }
 }

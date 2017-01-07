@@ -10,8 +10,6 @@ public class Unternehmen {
 	private String passwort;
 	private String name;
 	private Kennzahlen kennzahlen;
-	private float fremdkapital;
-	private float eigenkapital;
 
 	private Map<String,Abteilung> abteilungen = new HashMap<String,Abteilung>();
 
@@ -19,8 +17,8 @@ public class Unternehmen {
 		super();
 		this.passwort = passwort;
 		this.name = name;
-		this.fremdkapital = fremdkapital;
-		this.eigenkapital = eigenkapital;
+		this.kennzahlen = new Kennzahlen(eigenkapital, fremdkapital);
+		initDepartments();
 	}
 
 	/**
@@ -54,18 +52,6 @@ public class Unternehmen {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public float getFremdkapital() {
-		return fremdkapital;
-	}
-	public void setFremdkapital(float fremdkapital) {
-		this.fremdkapital = fremdkapital;
-	}
-	public float getEigenkapital() {
-		return eigenkapital;
-	}
-	public void setEigenkapital(float eigenkapital) {
-		this.eigenkapital = eigenkapital;
 	}
 	public Abteilung getAbteilung(String key)
 	{

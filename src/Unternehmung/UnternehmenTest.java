@@ -8,19 +8,11 @@ import Unternehmung.Abteilungen.Marketing;
  */
 public class UnternehmenTest {
     public static void main(String[] args) {
-        Unternehmen unternehmen = new Unternehmen("TestCo", "kennwort", 100000, 100000);
+        Unternehmen unternehmen1 = new Unternehmen("TestCo", "kennwort", 100000, 100000);
 
-
-
-
-        /* // Mitarbeiterzufriedenheit:
-        float gesamtesGehalt = 100000;
-        Kennzahl mitarbeiterzufriedenheit = new Kennzahl((gesamtesGehalt/(float) hr.mitarbeiter.size()/ 70000), (float) 1.02);
-        System.out.println("Mitarbeiterzufriedenheit: " + mitarbeiterzufriedenheit.getWert());
-        mitarbeiterzufriedenheit.wertBerechnen(gesamtesGehalt/(float) hr.mitarbeiter.size(), (float) 1.5);
-        System.out.println("neue Mitarbeiterzufriedenheit: " + mitarbeiterzufriedenheit.getWert());
-        */
-
+        System.out.println("Unternehmen " + unternehmen1.getName() + " mit Eigenkapital in Höhe von " +
+                unternehmen1.getKennzahlen().getEigenkapital() + " und Fremdkapital in Höhe von " +
+                unternehmen1.getKennzahlen().getFremdkapital() + " gegründet.");
 
 
         /* // Mitarbeiter hinzufügen:
