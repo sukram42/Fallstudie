@@ -22,6 +22,8 @@ public class Kennzahlen {
     private double umsatz; // wird laufend fortgeschrieben (siehe unten addUmsatz())
     private double herstellkosten; // wird laufend fortgeschrieben (siehe unten addHerstellkosten())
     private double sonstigeKosten; // wird laufend fortgeschrieben (siehe unten addSonstigeKosten)
+    private int gehälter; // wird laufend fortgeschrieben (siehe unten addGehälter)
+            // TODO Fortzahlung der Gehälter im nächsten Geschäftsjahr implementieren
     private double gewinn; // wird bei Änderungen von Umsatz oder Kosten automatisch aktualisiert (siehe unten gewinnBerechnen())
     private double ausschussrate;
     private double reklamationsrate;
@@ -43,7 +45,7 @@ public class Kennzahlen {
      * Funktion, die den Gewinn (Jahresüberschuss) berechnet. Wird von addX() ausgeführt (siehe unten)
      */
     public void gewinnBerechnen(){
-        this.setGewinn(this.umsatz - (this.herstellkosten + this.sonstigeKosten));
+        this.setGewinn(this.umsatz - (this.herstellkosten + this.sonstigeKosten + this.gehälter));
     }
 
 
@@ -63,6 +65,15 @@ public class Kennzahlen {
      */
     public void addSonstigeKosten(double kosten){
         this.setSonstigeKosten(this.herstellkosten + kosten);
+        this.gewinnBerechnen();
+    }
+
+    /**
+     * Funktion, die Gehälter fortschreibt. Wird von Abteilung.addMitarbeiter() aufgerufen
+     * @param gehalt = Anzahl neu eingestellter Mitarbeiter * Jahresgehalt pro Mitarbeiter
+     */
+    public void addGehälter(int gehalt){
+        this.setGehälter(this.gehälter + gehalt);
         this.gewinnBerechnen();
     }
 
@@ -139,6 +150,14 @@ public class Kennzahlen {
 
     public void setSonstigeKosten(double sonstigeKosten) {
         this.sonstigeKosten = sonstigeKosten;
+    }
+
+    public int getGehälter() {
+        return gehälter;
+    }
+
+    public void setGehälter(int gehälter) {
+        this.gehälter = gehälter;
     }
 
     public double getGewinn() {

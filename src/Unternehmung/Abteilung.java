@@ -17,6 +17,7 @@ import java.util.Map;
 public class Abteilung {
 
 	ArrayList<Mitarbeiter> mitarbeiter = new ArrayList<>();
+	private Kennzahlen kennzahlen;
 
 	public void addMitarbeiter(int anzahl, int gehalt) {
 
@@ -54,6 +55,8 @@ public class Abteilung {
 			mitarbeiter.add(m);
 
 		}
+
+		kennzahlen.addGehälter(anzahl * gehalt);
 	}
 
 	public ArrayList<Mitarbeiter> getMitarbeiter() {

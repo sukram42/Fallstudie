@@ -1,6 +1,8 @@
 package Unternehmung;
 
-import Unternehmung.Abteilungen.Marketing;
+import Unternehmung.Abteilungen.Produktion;
+
+import java.util.Map;
 
 /**
  * nur eine Testklasse!
@@ -8,11 +10,21 @@ import Unternehmung.Abteilungen.Marketing;
  */
 public class UnternehmenTest {
     public static void main(String[] args) {
-        Unternehmen unternehmen1 = new Unternehmen("TestCo", "kennwort", 100000, 100000);
+
+        // Unternehmen erstellen:
+        Unternehmen unternehmen1 = new Unternehmen("TestCo1", "kennwort", 100000, 100000);
 
         System.out.println("Unternehmen " + unternehmen1.getName() + " mit Eigenkapital in Höhe von " +
                 unternehmen1.getKennzahlen().getEigenkapital() + " und Fremdkapital in Höhe von " +
                 unternehmen1.getKennzahlen().getFremdkapital() + " gegründet.");
+
+
+        // Mitarbeiter einstellen:
+        unternehmen1.getAbteilung("produktion").addMitarbeiter(2, 25000);
+        unternehmen1.getAbteilung("vertrieb").addMitarbeiter(2, 35000);
+
+        // Rucksäcke produzieren:
+
 
 
         /* // Mitarbeiter hinzufügen:
