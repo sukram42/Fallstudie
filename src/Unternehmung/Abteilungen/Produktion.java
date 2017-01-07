@@ -15,19 +15,26 @@ import java.util.Map;
 public class Produktion extends Abteilung {
 
     private Map<String,Produkt> produzierteProdukte = new HashMap<String,Produkt>(); //kann als Lager angesehen werden
+    private Kennzahlen kennzahlen; // Kennzahlenobjekt des Unternehmens benötigt, um Kennzahlen zu manipulieren
 
+    /**
+     * Konstruktor, zum Erstellen der Abteilung Produktion
+     * @param kennzahlen Kennzahlenobjekt wird später benötigt, um Herstellkosten laufend fortzuschreiben (siehe produzieren())
+     */
+    public Produktion(Kennzahlen kennzahlen) {
+        this.kennzahlen = kennzahlen;
+    }
 
     /**
      * Funktion zum Produzieren von Produkten
      * @param name Bezeichnung des zu produzierenden Produkts (z.B. Rucksack)
      * @param anzahl Anzahl der zu produzierenden Produkte
      * @param herstellkosten des Produktes pro Stück // TODO feste Vorgabe je nach Produkt oder Auswahl durch den Spieler?
-     * @param kennzahlen Kennzahlen-Objekt, um Herstellkosten laufend fortzuschreiben
      */
-    public void produzieren(String name, int anzahl, int herstellkosten, Kennzahlen kennzahlen){
+    public void produzieren(String name, int anzahl, int herstellkosten){
         Produkt produkt = new Produkt(name, anzahl, herstellkosten);
         produzierteProdukte.put(produkt.getName(), produkt);
-        kennzahlen.addHerstellkosten(herstellkosten * anzahl); // laufende Fortschreibung der gesamten Herstellkosten
+        this.kennzahlen.addHerstellkosten(herstellkosten * anzahl); // laufende Fortschreibung der gesamten Herstellkosten
     }
 
     /**

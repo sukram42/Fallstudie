@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Unternehmen {
-	// Unternehmenseigenschaften
+
 	private String passwort;
 	private String name;
+	private Kennzahlen kennzahlen;
 	private float fremdkapital;
 	private float eigenkapital;
-	// Abteilungen:
 
 	private Map<String,Abteilung> abteilungen = new HashMap<String,Abteilung>();
 
@@ -21,7 +21,6 @@ public class Unternehmen {
 		this.name = name;
 		this.fremdkapital = fremdkapital;
 		this.eigenkapital = eigenkapital;
-		//Kennzahl Bekanntheitsgrad = new Kennzahl();
 	}
 
 	/**
@@ -29,12 +28,12 @@ public class Unternehmen {
 	 */
 	public void initDepartments()
 	{
-		abteilungen.put("marketing", new Marketing());
-		abteilungen.put("finanzen", new Finanzen());
-		abteilungen.put("FuE",new FuE());
-		abteilungen.put("produktion", new Produktion());
-		abteilungen.put("sozialeLeistungen", new SozialeLeistungen());
-		abteilungen.put("vertrieb", new Vertrieb());
+		abteilungen.put("marketing", new Marketing(kennzahlen));
+		abteilungen.put("finanzen", new Finanzen(kennzahlen));
+		abteilungen.put("FuE",new FuE(kennzahlen));
+		abteilungen.put("produktion", new Produktion(kennzahlen));
+		abteilungen.put("sozialeLeistungen", new SozialeLeistungen(kennzahlen));
+		abteilungen.put("vertrieb", new Vertrieb(kennzahlen));
 
 	}
 
@@ -44,7 +43,6 @@ public class Unternehmen {
 	}
 
 	// Getter und Setter:
-	// Unternehmenseigenschaften:
 	public String getPasswort() {
 		return passwort;
 	}
@@ -69,10 +67,11 @@ public class Unternehmen {
 	public void setEigenkapital(float eigenkapital) {
 		this.eigenkapital = eigenkapital;
 	}
-
-	// Abteilungen:
 	public Abteilung getAbteilung(String key)
 	{
 		return abteilungen.get(key);
+	}
+	public Kennzahlen getKennzahlen() {
+		return kennzahlen;
 	}
 }

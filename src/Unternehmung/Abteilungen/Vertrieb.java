@@ -15,6 +15,15 @@ import java.util.Map;
 public class Vertrieb extends Abteilung {
 
     private Map<String, Produkt> verkaufteProdukte = new HashMap<String, Produkt>(); // enthält alle bereits verkauften Produkte (relevant für Umsatzberechnung!)
+    private Kennzahlen kennzahlen; // Kennzahlenobjekt des Unternehmens benötigt, um Kennzahlen zu manipulieren
+
+    /**
+     * Konstruktor, zum Erstellen der Abteilung Vertrieb
+     * @param kennzahlen Kennzahlenobjekt wird später benötigt, um Umsatz laufend fortzuschreiben (siehe verkaufen())
+     */
+    public Vertrieb(Kennzahlen kennzahlen) {
+        this.kennzahlen = kennzahlen;
+    }
 
     /**
      * Funktion zum Verkaufen von Produkten
@@ -23,9 +32,8 @@ public class Vertrieb extends Abteilung {
      * @param name Produktbezeichnung (z.B. Rucksack)
      * @param preis Verkaufspreis eines Produkts
      * @param anzahl Anzahl der verkauften / zu verkaufenden Produkte
-     * @param kennzahlen Kennzahlen-Objekt zur laufenden Fortschreibung des Umsatzes
      */
-    public void verkaufen(Produktion produktion, String name, double preis, int anzahl, Kennzahlen kennzahlen) {
+    public void verkaufen(Produktion produktion, String name, double preis, int anzahl) {
         // Herstellkosten des Produktes herausfinden:
         Map<String, Produkt> produzierteProdukte = produktion.getProduzierteProdukte();
         Produkt lager = produzierteProdukte.get(name);
@@ -35,6 +43,6 @@ public class Vertrieb extends Abteilung {
         Produkt verkauft = new Produkt(name, anzahl, herstellkosten, preis);
         verkaufteProdukte.put(name, verkauft);
         // erwirtschafteten Umsatz weitergeben (laufende Fortschreibung):
-        kennzahlen.addUmsatz(preis * anzahl);
+        this.kennzahlen.addUmsatz(preis * anzahl);
     }
 }
