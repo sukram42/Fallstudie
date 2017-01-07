@@ -18,7 +18,7 @@ public class Abteilung {
 
 	ArrayList<Mitarbeiter> mitarbeiter = new ArrayList<>();
 
-	public void addMitarbeiter(int anzahl) {
+	public void addMitarbeiter(int anzahl, int gehalt) {
 
 		String erg = "";
 		String content;
@@ -48,7 +48,7 @@ public class Abteilung {
 
 			Mitarbeiter m = new Mitarbeiter(name.get("last").getAsString(), name.get("first").getAsString(),
 					address.get("street").getAsString() + " " + address.get("city").getAsString(),
-					picture.get("medium").getAsString(), 'w');
+					picture.get("medium").getAsString(), 'w', gehalt);
 			System.out.println(m.getVorname() + " " + m.getName());
 
 			mitarbeiter.add(m);
