@@ -17,9 +17,13 @@ import java.util.Map;
 public class Abteilung {
 
 	ArrayList<Mitarbeiter> mitarbeiter = new ArrayList<>();
-	private Kennzahlen kennzahlen;
+	public Kennzahlen kennzahlen;
 
-	public void addMitarbeiter(int anzahl, int gehalt) {
+    public Abteilung(Kennzahlen kennzahlen) {
+        this.kennzahlen = kennzahlen;
+    }
+
+    public void addMitarbeiter(int anzahl, int gehalt) {
 
 		String erg = "";
 		String content;

@@ -1,8 +1,7 @@
 package Unternehmung;
 
 import Unternehmung.Abteilungen.Produktion;
-
-import java.util.Map;
+import Unternehmung.Abteilungen.Vertrieb;
 
 /**
  * nur eine Testklasse!
@@ -24,15 +23,17 @@ public class UnternehmenTest {
         unternehmen1.getAbteilung("vertrieb").addMitarbeiter(2, 35000);
 
         // Rucksäcke produzieren:
+        Produktion produktion = (Produktion) unternehmen1.getAbteilung("produktion");
+        produktion.produzieren("Rucksack", 5000, 10);
+
+        // Rucksäcke verkaufen:
+        Vertrieb vertrieb = (Vertrieb) unternehmen1.getAbteilung("vertrieb");
+        vertrieb.verkaufen("Rucksack", 50, 5000);
+
+        // Jahresende:
+        System.out.println("Das Unternehmen " + unternehmen1.getName() + " hat in diesem Geschäftsjahr ein Ergebnis von " +
+                unternehmen1.getKennzahlen().getGewinn() + " € erzielt.");
 
 
-
-        /* // Mitarbeiter hinzufügen:
-        FuE FuE = new FuE();
-        FuE.mitarbeiter.add(new Mitarbeiter("Musterlurch", "Tom", "Musteradresse", "bild", 'm'));
-        for (int i = 0; i < FuE.mitarbeiter.size(); i++) {
-            System.out.println(FuE.mitarbeiter.get(i).getVorname() + " " + FuE.mitarbeiter.get(i).getName());
-        }
-        */
     }
 }

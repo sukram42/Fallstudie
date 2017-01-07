@@ -15,14 +15,13 @@ import java.util.Map;
 public class Produktion extends Abteilung {
 
     private Map<String,Produkt> produzierteProdukte = new HashMap<String,Produkt>(); //kann als Lager angesehen werden
-    private Kennzahlen kennzahlen; // Kennzahlenobjekt des Unternehmens benötigt, um Kennzahlen zu manipulieren
 
     /**
      * Konstruktor, zum Erstellen der Abteilung Produktion
      * @param kennzahlen Kennzahlenobjekt wird später benötigt, um Herstellkosten laufend fortzuschreiben (siehe produzieren())
      */
     public Produktion(Kennzahlen kennzahlen) {
-        this.kennzahlen = kennzahlen;
+        super(kennzahlen);
     }
 
     /**
@@ -34,7 +33,7 @@ public class Produktion extends Abteilung {
     public void produzieren(String name, int anzahl, int herstellkosten){
         Produkt produkt = new Produkt(name, anzahl, herstellkosten);
         produzierteProdukte.put(produkt.getName(), produkt);
-        this.kennzahlen.addHerstellkosten(herstellkosten * anzahl); // laufende Fortschreibung der gesamten Herstellkosten
+        super.kennzahlen.addHerstellkosten(herstellkosten * anzahl); // laufende Fortschreibung der gesamten Herstellkosten
     }
 
     /**

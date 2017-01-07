@@ -10,14 +10,12 @@ import Unternehmung.Unternehmen;
  */
 public class Marketing extends Abteilung {
 
-    private Kennzahlen kennzahlen; // Kennzahlenobjekt des Unternehmens benötigt, um Kennzahlen zu manipulieren
-
     /**
      * Konstruktor, zum Erstellen der Abteilung Marketing
      * @param kennzahlen Kennzahlenobjekt wird später benötigt, um Kennzahlen laufend fortzuschreiben / zu berechnen
      */
     public Marketing(Kennzahlen kennzahlen) {
-        this.kennzahlen = kennzahlen;
+        super(kennzahlen);
     }
 
     public static void marketingKampagne(Unternehmen unternehmen, int dauer, int kosten){
