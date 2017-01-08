@@ -62,6 +62,7 @@ public class Produktion extends Abteilung {
         super.kennzahlen.addSonstigeKosten(maschinen.get(klasse).getAnschaffungskst() * anzahl);
     }
 
+    // TODO noch nicht fertig implementiert
     public void maschineVerkaufen(String klasse, int anzahl){
         // TODO Wiederverkaufswert implementieren -> sonstigenUmsatz verbuchen!
         Maschine m = maschinen.get(klasse);
@@ -81,18 +82,7 @@ public class Produktion extends Abteilung {
      * @param herstellkosten des Produktes pro Stück // TODO feste Vorgabe je nach Produkt oder Auswahl durch den Spieler?
      */
     public void produzieren(String name, int anzahl, int herstellkosten){
-        // Prüfen, ob genügend Maschinenkapazität vorhanden ist:
-        int kapazität = 0;
-        if(maschinen.get("1") != null){
-            kapazität += maschinen.get("1").getKapazität() * maschinen.get("1").getAnzahl();
-        }
-        if(maschinen.get("2") != null){
-            kapazität += maschinen.get("2").getKapazität() * maschinen.get("2").getAnzahl();
-        }
-        if(maschinen.get("3") != null){
-            kapazität += maschinen.get("3").getKapazität() * maschinen.get("3").getAnzahl();
-        }
-        if(kapazität >= anzahl) {
+        if(this.getMaschinenKapazität() >= anzahl) { // Prüfen, ob genügend Maschinenkapazität vorhanden ist
             Produkt produkt = new Produkt(name, anzahl, herstellkosten);
             produzierteProdukte.put(produkt.getName(), produkt);
             super.kennzahlen.addHerstellkosten(herstellkosten * anzahl); // laufende Fortschreibung der gesamten Herstellkosten
@@ -125,5 +115,23 @@ public class Produktion extends Abteilung {
 
     public Map<String, Maschine> getMaschinen() {
         return maschinen;
+    }
+
+    /**
+     * Methode zum Ermitteln der gesamten Kapazität aller im Maschinenpark vorhandener Maschinen
+     * @return gesamte Kapazität aller Maschinen
+     */
+    public int getMaschinenKapazität(){
+        int kapazität = 0;
+        if(maschinen.get("1") != null){
+            kapazität += maschinen.get("1").getKapazität() * maschinen.get("1").getAnzahl();
+        }
+        if(maschinen.get("2") != null){
+            kapazität += maschinen.get("2").getKapazität() * maschinen.get("2").getAnzahl();
+        }
+        if(maschinen.get("3") != null){
+            kapazität += maschinen.get("3").getKapazität() * maschinen.get("3").getAnzahl();
+        }
+        return kapazität;
     }
 }
