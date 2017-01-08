@@ -13,11 +13,19 @@ export class LoginFormularService {
 
     requestToken(username:string, password:string)
     {
+        var error = false;
         var params = "username=" + username +"&password=" + password;
         var headers = new Headers();
         headers.append('Content-Type','application/x-www-form-urlencoded');
         return this.http.post('http://localhost:8080/Fallstudie-0.0.1-SNAPSHOT/rest',params,{headers})
-            .map(response => response.text());
+            .map(response => response.text())
+            .subscribe(data =>(window.localStorage.setItem("auth_key", data),error=false),
+                err => (alert(err),error = true),
+                ()=>{
+                    if(!error) {
+                        window.location.href = "home.html";
+                    }
+                } );
     }
 
 

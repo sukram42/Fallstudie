@@ -1,28 +1,33 @@
 <form class="form-horizontal">
     <br>
     <div align="left">
+
+        <div class="alert alert-danger" [hidden] = "!passworderror">
+            <strong>FALSCH!</strong> Zu dumm um nen Passwort zu kopieren...
+        </div>
+
         <div class="form-group">
             <label for="nameUnternehmen" class="col-sm-2 control-label">Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="nameUnternehmen" placeholder="Name des Unternehmens">
+                <input type="text" class="form-control" name = "CompanyName" [(ngModel)] = "input_companyName" id="nameUnternehmen" placeholder="Name des Unternehmens">
             </div>
         </div>
     </div>
     <div class="form-group">
         <label for="passwordUser" class="col-sm-2 control-label">Passwort</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" id="passwordUser" placeholder="Passwort eingeben">
+            <input type="password" class="form-control" name="Password" id="passwordUser" [(ngModel)] = "input_password" placeholder="Passwort eingeben">
         </div>
     </div>
     <div class="form-group">
         <label for="passwortUser2" class="col-sm-2 control-label"></label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" id="passwortUser2" placeholder="Passwort wiederholen">
+            <input type="password" class="form-control" name = "Password2" id="passwortUser2" [(ngModel)] = "input_password2" placeholder="Passwort wiederholen">
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Registrieren</button>
+            <button type="submit" class="btn btn-default" (click)="onRegisterClicked()">Registrieren</button>
         </div>
     </div>
 </form>

@@ -161,12 +161,6 @@ function debounce(func, wait, immediate) {
 }
 
 
-
-
-
-
-
-
 //dynamic load content
 $(document).ready(function() {
     var trigger = $('ul li a'),
@@ -175,7 +169,7 @@ $(document).ready(function() {
         var $this = $(this),
             target = $this.data('target');
         container.load(target + '.html');
-        if (target == "humanresources")
+        if (target == "src/html/humanresources")
         {
             fillTable();
         }
@@ -187,7 +181,7 @@ $(document).ready(function() {
     var $this = $(this),
         container = $('#content');
     target = $this.data('target');
-    container.load('dashboard.html');
+    container.load('src/html/dashboard.html');
 });
 
 // Change active state in sidebar

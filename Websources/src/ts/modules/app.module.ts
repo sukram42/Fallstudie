@@ -8,11 +8,13 @@ import {LoginFormComponent} from "./components/login-formular.component";
 import {RegisterFormularComponent} from "./components/register-formular.component";
 
 @NgModule({
-    imports: [BrowserModule,
-              FormsModule,
-              HttpModule
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule
     ],
-    declarations: [StartComponent,
+    declarations: [
+        StartComponent,
         LoginFormComponent,
         RegisterFormularComponent],
 

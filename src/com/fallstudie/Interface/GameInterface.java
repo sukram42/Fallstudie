@@ -5,7 +5,9 @@ import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.HashMap;
@@ -13,18 +15,17 @@ import java.util.Map;
 import java.util.UUID;
 
 
-
 @Path("/")
 public class GameInterface {
     private static Gson gson = new Gson();
-    private static Map<Unternehmen,String> auth = new HashMap<Unternehmen,String>();
+    private static Map<Unternehmen, String> auth = new HashMap<Unternehmen, String>();
 
     private static Unternehmen[] companies = new Unternehmen[3];
 
     /**
      * Erstellt eine neue Company
      * Erwartet einen JSON Code
-     *
+     * <p>
      * TODO Umschreiben in verschiedene Parameter
      *
      * @param msg JSON Code
@@ -47,16 +48,16 @@ public class GameInterface {
         return Response.status(218).entity(test.toString()).build();
     }
 
-    /**
-     * Gibt alle Unternehmen zurück.
-     *
-     * @return Unternehmen als Array in JSON Form
-     */
-    @GET
-    @Path("companies")
-    public static Response getCompaniesPOST() {
-        return Response.status(200).entity(gson.toJson(companies)).build();
-    }
+//    /**
+//     * Gibt alle Unternehmen zurück.
+//     *
+//     * @return Unternehmen als Array in JSON Form
+//     */
+//    @GET
+//    @Path("companies")
+//    public static Response getCompaniesPOST() {
+//        return Response.status(200).entity(gson.toJson(companies)).build();
+//    }
 
     @POST
     @Produces("application/json")
@@ -71,13 +72,51 @@ public class GameInterface {
         }
     }
 
+    /**
+     * Gibt einzelndes Unternehmen zurück
+     *
+     * @return Unternehmen in JSON Form
+     */
+    @GET
+    @Secured
+    @Path("companies")
+    public Response getCompanies(@Context SecurityContext securityContext) {
+        return Response.status(200).entity(gson.toJson(GameInterface.getUnternehmenByName(securityContext.getUserPrincipal().getName()))).build();
+    }
+
+    @GET
+    @Path("auth")
+    public static Response validate(@HeaderParam("Authorization") String authHeader) {
+        String tmp_token;
+        boolean auth=true;
+        System.out.println(authHeader);
+        if (authHeader.startsWith("Bearer ")) {
+            tmp_token = authHeader.substring("Bearer ".length()).trim();
+
+            System.out.println(tmp_token);
+
+            try
+            {
+                validateToken(tmp_token);
+            }catch(NotAuthorizedException e)
+            {
+
+                System.out.println("Not auth");
+              auth =false;
+            }
+        }else auth = false;
+        if(auth)
+            return Response.status(Response.Status.OK).entity(true).build();
+        return Response.status(Response.Status.OK).entity(false).build();
+    }
+
     private static String issueToken(String companyName) throws Exception {
         SecureRandom random = new SecureRandom();
-        String token =  new BigInteger(130, random).toString(32);
+        String token = new BigInteger(130, random).toString(32);
         Unternehmen u = getUnternehmenByName(companyName);
 
-        if(u!=null)
-            auth.put(getUnternehmenByName(companyName),token);
+        if (u != null)
+            auth.put(getUnternehmenByName(companyName), token);
         else
             throw new Exception("Token could not be created");
 
@@ -87,36 +126,41 @@ public class GameInterface {
 
     private static void authenticate(String companyName, String password) throws Exception {
         Unternehmen u = getUnternehmenByName(companyName);
-        if(u != null && password.equals(u.getPasswort()))
+        if (u != null && password.equals(u.getPasswort()))
             return;
         throw new Exception("No such User");
     }
 
-    public static Unternehmen getUnternehmenByName(String name)
-    {
+    public static Unternehmen getUnternehmenByName(String name) {
         for (Unternehmen u : companies) {
-            if(name.equals(u.getName()))
+            if (name.equals(u.getName()))
                 return u;
         }
         return null;
     }
 
-    public static Unternehmen[] getCompanies()
-    {
+    public static Unternehmen[] getCompanies() {
         return companies;
     }
 
-    public static void setCompany(int no,Unternehmen u)
-    {
+    public static void setCompany(int no, Unternehmen u) {
         companies[no] = u;
     }
 
-    public static void validateToken(String token) throws NotAuthorizedException{
-        if(!auth.containsValue(token))
-        {
+    public static void validateToken(String token) throws NotAuthorizedException {
+        if (!auth.containsValue(token)) {
             throw new NotAuthorizedException("not authorized token used");
         }
+    }
 
+    public static Unternehmen getUnternehmenByToken(String token) {
+        for (Map.Entry<Unternehmen, String> entry : auth.entrySet()) {
+            if (entry.getValue().equals(token))
+                return entry.getKey();
+        }
+        return null;
     }
 }
+
+
 

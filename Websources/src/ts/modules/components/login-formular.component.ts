@@ -14,20 +14,11 @@ export class LoginFormComponent {
   creds = {username:""
           ,password:""};
 
-  token:string ;
-  error:boolean ;
+  token:String ;
 
   anmeldenClicked()
   {
-      this._logFormService.requestToken(this.creds.username,this.creds.password)
-          .subscribe(data =>this.token = data,
-                     err => this.error = true);
-      if(!this.error) {
-          window.localStorage.setItem("auth_key", this.token);
-          console.log("TOKEN Saved : " + this.token);
-          window.location.href = "";
-      }
-
+      this._logFormService.requestToken(this.creds.username,this.creds.password);
   }
 
 }

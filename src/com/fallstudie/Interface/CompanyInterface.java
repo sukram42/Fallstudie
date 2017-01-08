@@ -1,10 +1,11 @@
 package com.fallstudie.Interface;
 
-import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 
 @Path("/companies/{companyno}")
 public class CompanyInterface {
@@ -51,16 +52,7 @@ public class CompanyInterface {
     }
 
 
-    /**
-     * Gibt einzelndes Unternehmen zurück
-     * @param no Unternemensnummer
-     * @return Unternehmen in JSON Form
-     */
-    @GET
-    @Secured
-    public Response getCompanies(@PathParam("companyno") int no) {
-        return Response.status(200).entity(gson.toJson(GameInterface.getCompanies()[no])).build();
-    }
+
 
     /**
      * Löscht ein Unternehmen

@@ -194,3 +194,14 @@ a.thumbnail.active {
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {
     border-bottom-color: #FFAD29;
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #FFAD29;
+    border-color: #FFAD29;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #D69122;
+    border-color: #D69122;
+}
