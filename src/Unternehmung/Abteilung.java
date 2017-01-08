@@ -17,42 +17,52 @@ import java.util.Map;
 public class Abteilung {
 
 	ArrayList<Mitarbeiter> mitarbeiter = new ArrayList<>();
+	public Kennzahlen kennzahlen;
 
-	public void addMitarbeiter(int anzahl) {
+    public Abteilung(Kennzahlen kennzahlen) {
+        this.kennzahlen = kennzahlen;
+    }
+
+    public void addMitarbeiter(int anzahl, int gehalt) {
 
 		String erg = "";
 		String content;
 
-		try {
-			URL url = new URL("https://randomuser.me/api/?results=" + anzahl + "&inc=name,picture,gender,location");
-			URLConnection connection = url.openConnection();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			while ((content = reader.readLine()) != null) {
-				erg += content;
+		if (this.kennzahlen.liquiditätVorhanden(gehalt * anzahl, "gehälter")) {
+
+			try {
+				URL url = new URL("https://randomuser.me/api/?results=" + anzahl + "&inc=name,picture,gender,location");
+				URLConnection connection = url.openConnection();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				while ((content = reader.readLine()) != null) {
+					erg += content;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
-		Type type = new TypeToken<Map<String, Object>>() {
-		}.getType();
-		Map<String, Object> myMap = new Gson().fromJson(erg, type);
+			Type type = new TypeToken<Map<String, Object>>() {
+			}.getType();
+			Map<String, Object> myMap = new Gson().fromJson(erg, type);
 
-		JsonObject object = new Gson().fromJson(erg, JsonObject.class);
-		JsonArray array = object.getAsJsonArray("results");
+			JsonObject object = new Gson().fromJson(erg, JsonObject.class);
+			JsonArray array = object.getAsJsonArray("results");
 
-		for (int i = 0; i < array.size(); i++) {
-			JsonObject name = (JsonObject) array.get(i).getAsJsonObject().get("name");
-			JsonObject address = (JsonObject) array.get(i).getAsJsonObject().get("location");
-			JsonObject picture = (JsonObject) array.get(i).getAsJsonObject().get("picture");
+			for (int i = 0; i < array.size(); i++) {
+				JsonObject name = (JsonObject) array.get(i).getAsJsonObject().get("name");
+				JsonObject address = (JsonObject) array.get(i).getAsJsonObject().get("location");
+				JsonObject picture = (JsonObject) array.get(i).getAsJsonObject().get("picture");
 
-			Mitarbeiter m = new Mitarbeiter(name.get("last").getAsString(), name.get("first").getAsString(),
-					address.get("street").getAsString() + " " + address.get("city").getAsString(),
-					picture.get("medium").getAsString(), 'w');
-			System.out.println(m.getVorname() + " " + m.getName());
+				Mitarbeiter m = new Mitarbeiter(name.get("last").getAsString(), name.get("first").getAsString(),
+						address.get("street").getAsString() + " " + address.get("city").getAsString(),
+						picture.get("medium").getAsString(), 'w', gehalt);
+				System.out.println(m.getVorname() + " " + m.getName());
 
-			mitarbeiter.add(m);
+				mitarbeiter.add(m);
 
+			}
+		}else{
+			System.out.println("Nicht genügend Liquidität vorhanden!");
 		}
 	}
 

@@ -1,7 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Unternehmung.Abteilung;
-import Unternehmung.Unternehmen;
+import Unternehmung.Kennzahlen;
 
 /**
  * Klasse, die die Abteilung Marketing repräsentiert
@@ -9,17 +9,73 @@ import Unternehmung.Unternehmen;
  */
 public class Marketing extends Abteilung {
 
-    public static void marketingKampagne(Unternehmen unternehmen, int dauer, int kosten){
-        // Bekanntheitsgrad erhöhen:
-        //Kennzahl bekanntheitsgrad = unternehmen.getBekanntheitsgrad();
-        //bekanntheitsgrad.wertBerechnen(bekanntheitsgrad.getBasiswert(), bekanntheitsgrad.getModifier() + (float) 0.5);
-        // TODO EK verringern (um kosten)
-        // TODO Verkaufszahlen steigen
+    /**
+     * Konstruktor, zum Erstellen der Abteilung Marketing
+     * @param kennzahlen Kennzahlenobjekt wird später benötigt, um Kennzahlen laufend fortzuschreiben / zu berechnen
+     */
+    public Marketing(Kennzahlen kennzahlen) {
+        super(kennzahlen);
     }
 
-    public static void marktforschung(int kosten){
-        // TODO EK verringern (um kosten)
-        // TODO Verkaufszahlen steigen
+    /**
+     * Werbekampagne, die jeweils für ein Jahr (oder Quartal?) läuft
+     * @param kampagne Art der Kampagne, etwa Plakate, Print, Radio oder TV (unterschiedlich teuer und unterschiedlich effektiv)
+     */
+    public void marketingKampagne(String kampagne){
+        double impact = 0;
+        int kosten = 0;
+        switch (kampagne){
+            case "Plakate":
+                impact = 0.1;
+                kosten = 1000;
+                break;
+            case "Print":
+                impact = 0.2;
+                kosten = 2500;
+                break;
+            case "Radio":
+                impact = 0.3;
+                kosten = 5000;
+                break;
+            case "TV":
+                impact = 0.4;
+                kosten = 10000;
+                break;
+        }
+        if (this.kennzahlen.liquiditätVorhanden(kosten, "sonstige Kosten")){
+            this.kennzahlen.setBekanntheitsgrad(this.kennzahlen.getBekanntheitsgrad() + impact);
+            System.out.println("Marketingkampagne \"" + kampagne + "\" gestartet. Kosten: " + kosten + " €, Bekanntheitsgrad steigt um " + impact);
+        }
+    }
+
+    /**
+     * Methode zur Durchführung von Marktforschung. Hierdurch können z.B. besser Zielgruppen angesprochen werden,
+     * wodurch sich Produkte besser verkaufen lassen (Absatzrate steigt)
+     * @param umfang drei verschiedene "Größen" mit unterschiedlichen Kosten und Effektivität
+     */
+    public void marktforschung(int umfang){
+        double impact = 0;
+        int kosten = 0;
+        switch (umfang){
+            case 1:
+                impact = 0.1;
+                kosten = 2500;
+                break;
+            case 2:
+                impact = 0.21;
+                kosten = 5000;
+                break;
+            case 3:
+                impact = 0.43;
+                kosten = 10000;
+                break;
+        }
+        if (this.kennzahlen.liquiditätVorhanden(kosten, "sonstige Kosten")) {
+            this.kennzahlen.setAbsatzrate(this.kennzahlen.getAbsatzrate() + impact);
+            System.out.println("Marktforschung durchgeführt: Kosten " + kosten + " €, Erhöhung der Verkaufsrate um " + impact);
+        }else {
+            System.out.println("Nicht genügend Liquidität vorhanden!");
+        }
     }
 
 }

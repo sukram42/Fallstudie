@@ -6,12 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Unternehmen {
-	// Unternehmenseigenschaften
+
 	private String passwort;
 	private String name;
-	private float fremdkapital;
-	private float eigenkapital;
-	// Abteilungen:
+	private Kennzahlen kennzahlen;
 
 	private Map<String,Abteilung> abteilungen = new HashMap<String,Abteilung>();
 
@@ -19,9 +17,8 @@ public class Unternehmen {
 		super();
 		this.passwort = passwort;
 		this.name = name;
-		this.fremdkapital = fremdkapital;
-		this.eigenkapital = eigenkapital;
-		//Kennzahl Bekanntheitsgrad = new Kennzahl();
+		this.kennzahlen = new Kennzahlen(eigenkapital, fremdkapital);
+		initDepartments();
 	}
 
 	/**
@@ -29,12 +26,12 @@ public class Unternehmen {
 	 */
 	public void initDepartments()
 	{
-		abteilungen.put("marketing", new Marketing());
-		abteilungen.put("finanzen", new Finanzen());
-		abteilungen.put("FuE",new FuE());
-		abteilungen.put("produktion", new Produktion());
-		abteilungen.put("sozialeLeistungen", new SozialeLeistungen());
-		abteilungen.put("vertrieb", new Vertrieb());
+		abteilungen.put("marketing", new Marketing(kennzahlen));
+		abteilungen.put("finanzen", new Finanzen(kennzahlen));
+		abteilungen.put("FuE",new FuE(kennzahlen));
+		abteilungen.put("produktion", new Produktion(kennzahlen));
+		abteilungen.put("sozialeLeistungen", new SozialeLeistungen(kennzahlen));
+		abteilungen.put("vertrieb", new Vertrieb(kennzahlen, (Produktion) this.getAbteilung("produktion")));
 
 	}
 
@@ -44,7 +41,6 @@ public class Unternehmen {
 	}
 
 	// Getter und Setter:
-	// Unternehmenseigenschaften:
 	public String getPasswort() {
 		return passwort;
 	}
@@ -57,22 +53,11 @@ public class Unternehmen {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public float getFremdkapital() {
-		return fremdkapital;
-	}
-	public void setFremdkapital(float fremdkapital) {
-		this.fremdkapital = fremdkapital;
-	}
-	public float getEigenkapital() {
-		return eigenkapital;
-	}
-	public void setEigenkapital(float eigenkapital) {
-		this.eigenkapital = eigenkapital;
-	}
-
-	// Abteilungen:
 	public Abteilung getAbteilung(String key)
 	{
 		return abteilungen.get(key);
+	}
+	public Kennzahlen getKennzahlen() {
+		return kennzahlen;
 	}
 }

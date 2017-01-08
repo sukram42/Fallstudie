@@ -1,8 +1,5 @@
 package Unternehmung;
 
-import Unternehmung.Abteilungen.Produktion;
-import Unternehmung.Abteilungen.Vertrieb;
-
 /**
  * Diese Klasse beinhaltet alle Kennzahlen eines Unternehmens
  * diese werden unterschieden in "weiche" und faktische Kennzahlen
@@ -12,7 +9,7 @@ import Unternehmung.Abteilungen.Vertrieb;
 public class Kennzahlen {
 
     // "weiche" Kennzahlen:
-    private Kennzahl bekanntheitsgrad = new Kennzahl();
+    //private Kennzahl bekanntheitsgrad = new Kennzahl(); // TODO als Kennzahl (statt double) implementieren?!
     private Kennzahl mitarbeiterzufriedenheit = new Kennzahl();
     private Kennzahl kundenzufriedenheit = new Kennzahl();
     private Kennzahl image = new Kennzahl(); // soll sich aus Mitarbeiterzufriedenheit, Reklamationsrate und Kundenzufriedenheit berechnen
@@ -22,16 +19,75 @@ public class Kennzahlen {
     private double umsatz; // wird laufend fortgeschrieben (siehe unten addUmsatz())
     private double herstellkosten; // wird laufend fortgeschrieben (siehe unten addHerstellkosten())
     private double sonstigeKosten; // wird laufend fortgeschrieben (siehe unten addSonstigeKosten)
+    private int gehälter; // wird laufend fortgeschrieben (siehe unten addGehälter)
+            // TODO Fortzahlung der Gehälter im nächsten Geschäftsjahr implementieren
     private double gewinn; // wird bei Änderungen von Umsatz oder Kosten automatisch aktualisiert (siehe unten gewinnBerechnen())
     private double ausschussrate;
     private double reklamationsrate;
+    private double fremdkapital;
+    private double eigenkapital;
+    private double bekanntheitsgrad;
+    private double absatzrate; // Wahrscheinlichkeit, alle seine Produkte zu verkaufen (abhängig von Maßnahmen und zufällige Ereignisse wie z.B. Konjunktur, Werbekampagnen etc.)
+    private double liquideMittel;
+
+    /**
+     * Konstruktor zum Erstellen einen Kennzahlenobjekts eines Unternehmens (wird im Unternehmenskonstruktor aufgerufen)
+     * @param eigenkapital muss bei Gründung des Unternehmens definiert werden
+     * @param fremdkapital muss bei Gründung des Unternehmens definiert werden
+     */
+    public Kennzahlen(double eigenkapital, double fremdkapital) {
+        // TODO alle Defaultwerte definieren (zumindest solche, die nicht 0 sein sollen)
+        this.eigenkapital = eigenkapital;
+        this.fremdkapital = fremdkapital;
+        this.absatzrate = 0.2;
+        this.liquideMittel = eigenkapital + fremdkapital;
+    }
 
     // Berechnungen:
     /**
-     * Funktion, die den Gewinn (Jahresüberschuss) berechnet. Wird von addX() ausgeführt (siehe unten)
+     * Methode, die den Gewinn (Jahresüberschuss) berechnet. Wird von addX() ausgeführt (siehe unten)
      */
     public void gewinnBerechnen(){
-        this.setGewinn(this.umsatz - (this.herstellkosten + this.sonstigeKosten));
+        this.setGewinn(this.umsatz - (this.herstellkosten + this.sonstigeKosten + this.gehälter));
+    }
+
+    /**
+     * Methode, die die Verkaufsrate berechnet (beeinflusst von Bekanntheitsgrad, Image, Kundenzufriedenheit, Mitarbeiterzufriedenheit, ...)
+     * // TODO weitere Kennzahlen mit einrechnen
+     */
+    public void verkaufsrateBerechnen(){
+        double verkaufsrate = this.getBekanntheitsgrad();
+        if(verkaufsrate >= 1){
+            this.setAbsatzrate(1);
+        }else {
+            this.setAbsatzrate(verkaufsrate);
+        }
+    }
+
+    /**
+     * wird bei Investitionen aufgerufen und prüft ob genügend Liquidität vorhanden ist und verringert den Kassenbestand (Kennzahlen.cash) entsprechend
+     * @param kosten Kosten einer Maßnahme (z.B. Marketingmaßnahme oder Produktion)
+     * @param posten "Kostenstelle", wo die kosten addiert werden sollen (z.B. Gehälter, Herstellkosten, sonstige Kosten, ...)
+     * @return true, wenn ausreichend Bargeld vorhanden ist; false, wenn nicht
+     */
+    public boolean liquiditätVorhanden(double kosten, String posten){
+        if (this.liquideMittel >= kosten){
+            switch (posten){
+                case "gehälter":
+                    addGehälter((int) kosten);
+                    this.setLiquideMittel(this.getLiquideMittel() - kosten);
+                    return true;
+                case "herstellkosten":
+                    addHerstellkosten(kosten);
+                    this.setLiquideMittel(this.getLiquideMittel() - kosten);
+                    return true;
+                case "sonstige Kosten":
+                    addSonstigeKosten(kosten);
+                    this.setLiquideMittel(this.getLiquideMittel() - kosten);
+                    return true;
+            }
+        }
+        return false;
     }
 
 
@@ -55,6 +111,15 @@ public class Kennzahlen {
     }
 
     /**
+     * Funktion, die Gehälter fortschreibt. Wird von Abteilung.addMitarbeiter() aufgerufen
+     * @param gehalt = Anzahl neu eingestellter Mitarbeiter * Jahresgehalt pro Mitarbeiter
+     */
+    public void addGehälter(int gehalt){
+        this.setGehälter(this.gehälter + gehalt);
+        this.gewinnBerechnen();
+    }
+
+    /**
      * Funktion, die Umsatz fortschreibt. Wird von Vertrieb.verkaufen() aufgerufen
      * @param umsatz erwirtschafteter Umsatz, sprich Verkaufspreis * Menge
      */
@@ -65,12 +130,28 @@ public class Kennzahlen {
 
 
     // Getter und Setter:
+    /*
     public Kennzahl getBekanntheitsgrad() {
         return bekanntheitsgrad;
     }
 
     public void setBekanntheitsgrad(Kennzahl bekanntheitsgrad) {
         this.bekanntheitsgrad = bekanntheitsgrad;
+    }
+    */
+
+    public double getBekanntheitsgrad() {
+        return bekanntheitsgrad;
+    }
+
+    public void setBekanntheitsgrad(double bekanntheitsgrad) {
+        if (bekanntheitsgrad >= 1){
+            this.bekanntheitsgrad = 1;
+            this.verkaufsrateBerechnen();
+        }else {
+            this.bekanntheitsgrad = bekanntheitsgrad;
+            this.verkaufsrateBerechnen();
+        }
     }
 
     public Kennzahl getMitarbeiterzufriedenheit() {
@@ -129,6 +210,14 @@ public class Kennzahlen {
         this.sonstigeKosten = sonstigeKosten;
     }
 
+    public int getGehälter() {
+        return gehälter;
+    }
+
+    public void setGehälter(int gehälter) {
+        this.gehälter = gehälter;
+    }
+
     public double getGewinn() {
         return gewinn;
     }
@@ -151,5 +240,41 @@ public class Kennzahlen {
 
     public void setReklamationsrate(double reklamationsrate) {
         this.reklamationsrate = reklamationsrate;
+    }
+
+    public double getFremdkapital() {
+        return fremdkapital;
+    }
+
+    public void setFremdkapital(double fremdkapital) {
+        this.fremdkapital = fremdkapital;
+    }
+
+    public double getEigenkapital() {
+        return eigenkapital;
+    }
+
+    public void setEigenkapital(double eigenkapital) {
+        this.eigenkapital = eigenkapital;
+    }
+
+    public double getAbsatzrate() {
+        return absatzrate;
+    }
+
+    public void setAbsatzrate(double absatzrate) {
+        if(absatzrate >= 1){
+            this.absatzrate = 1;
+        }else {
+            this.absatzrate = absatzrate;
+        }
+    }
+
+    public double getLiquideMittel() {
+        return liquideMittel;
+    }
+
+    public void setLiquideMittel(double liquideMittel) {
+        this.liquideMittel = liquideMittel;
     }
 }

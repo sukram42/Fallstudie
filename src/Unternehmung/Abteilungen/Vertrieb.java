@@ -14,27 +14,41 @@ import java.util.Map;
  */
 public class Vertrieb extends Abteilung {
 
-    private Map<String, Produkt> verkaufteProdukte = new HashMap<String, Produkt>(); // enthält alle bereits verkauften Produkte (relevant für Umsatzberechnung!)
+    private Map<String, Produkt> verkaufteProdukte = new HashMap<String, Produkt>(); // enthält alle bereits verkauften Produkte
+    private Produktion produktion; // Produktionsobjekt, um auf "Lager" zugreifen zu können
+
+    /**
+     * Konstruktor, zum Erstellen der Abteilung Vertrieb
+     * @param kennzahlen Kennzahlenobjekt wird später benötigt, um Umsatz laufend fortzuschreiben (siehe verkaufen())
+     */
+    public Vertrieb(Kennzahlen kennzahlen, Produktion produktion) {
+        super(kennzahlen);
+        this.produktion = produktion;
+    }
 
     /**
      * Funktion zum Verkaufen von Produkten
      * verringert Bestand im Lager (Map produzierteProdukte in Klasse Produktion), erhöht den Bestand in der Map verkaufteProdukte und schreibt Umsatzzahlen fort
-     * @param produktion Produktions-Objekt, um Zugriff auf das Lager (Map produzierteProdukte) zu haben
      * @param name Produktbezeichnung (z.B. Rucksack)
      * @param preis Verkaufspreis eines Produkts
-     * @param anzahl Anzahl der verkauften / zu verkaufenden Produkte
-     * @param kennzahlen Kennzahlen-Objekt zur laufenden Fortschreibung des Umsatzes
      */
-    public void verkaufen(Produktion produktion, String name, double preis, int anzahl, Kennzahlen kennzahlen) {
+    public void verkaufen(String name, double preis) {
         // Herstellkosten des Produktes herausfinden:
-        Map<String, Produkt> produzierteProdukte = produktion.getProduzierteProdukte();
+        Map<String, Produkt> produzierteProdukte = this.produktion.getProduzierteProdukte();
         Produkt lager = produzierteProdukte.get(name);
-        double herstellkosten = lager.getHerstellkosten();
-        // Produkt "verkaufen" (sprich aus Lager (Klasse Produktion) entfernen und zu Map verkaufteProdukte hinzufügen):
-        produktion.bestandVerändern(name, anzahl);
-        Produkt verkauft = new Produkt(name, anzahl, herstellkosten, preis);
-        verkaufteProdukte.put(name, verkauft);
-        // erwirtschafteten Umsatz weitergeben (laufende Fortschreibung):
-        kennzahlen.addUmsatz(preis * anzahl);
+        if (lager != null) {
+            double herstellkosten = lager.getHerstellkosten();
+            int vorhanden = produzierteProdukte.get(name).getAnzahl();
+            // Produkt "verkaufen" (sprich aus Lager (Klasse Produktion) entfernen und zu Map verkaufteProdukte hinzufügen):
+            int anzahl = (int) (vorhanden * this.kennzahlen.getAbsatzrate()); // Anzahl der Produkte, die abgesetzt werden, durch Verkaufsrate berechnen
+            produktion.bestandVerändern(name, anzahl);
+            Produkt verkauft = new Produkt(name, anzahl, herstellkosten, preis);
+            verkaufteProdukte.put(name, verkauft);
+            // erwirtschafteten Umsatz weitergeben (laufende Fortschreibung):
+            super.kennzahlen.addUmsatz(preis * anzahl);
+            System.out.println(anzahl + " von " + vorhanden + " Produkten (" + name + ") verkauft.");
+        } else {
+            System.out.println("Kein Produkt dieser Art im Lager vorhanden!");
+        }
     }
 }

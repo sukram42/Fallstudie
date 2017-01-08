@@ -8,6 +8,7 @@ public class Mitarbeiter {
 	private String imagelink;
 	private Abteilung department;
 	private char gender;
+	private int gehalt; // Jahresgehalt
 	
 	
 	
@@ -15,13 +16,14 @@ public class Mitarbeiter {
 		return name;
 	}
 	
-	public Mitarbeiter(String name, String vorname, String adresse, String imagelink, char gender) {
+	public Mitarbeiter(String name, String vorname, String adresse, String imagelink, char gender, int gehalt) {
 		super();
 		this.name = name;
 		this.vorname = vorname;
 		this.adresse = adresse;
 		this.imagelink = imagelink;
 		this.gender = gender;
+		this.gehalt = gehalt;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -56,7 +58,10 @@ public class Mitarbeiter {
 	public void setGender(char gender) {
 		this.gender = gender;
 	}
-	
-	
-	
+    public int getGehalt() {
+        return gehalt;
+    }
+    public void setGehalt(int gehalt) {
+        this.gehalt = gehalt;
+    }
 }

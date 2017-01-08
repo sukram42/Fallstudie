@@ -1,6 +1,6 @@
 package com.fallstudie.Interface;
 
-import Unternehmen.Unternehmen;
+import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 
 import javax.ws.rs.*;
@@ -64,7 +64,6 @@ public class CompanyInterface {
 
     /**
      * Löscht ein Unternehmen
-     * @param no Unternehmensnummer
      * @return Response
      */
     @DELETE
