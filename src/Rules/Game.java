@@ -47,9 +47,9 @@ public class Game {
                 u2++;
             }
             // Verkaufsrate vergleichen:
-            if (unternehmen1.getKennzahlen().getVerkaufsrate() > unternehmen2.getKennzahlen().getVerkaufsrate()){
+            if (unternehmen1.getKennzahlen().getAbsatzrate() > unternehmen2.getKennzahlen().getAbsatzrate()){
                 u1++;
-            }else if (unternehmen1.getKennzahlen().getVerkaufsrate() < unternehmen2.getKennzahlen().getVerkaufsrate()){
+            }else if (unternehmen1.getKennzahlen().getAbsatzrate() < unternehmen2.getKennzahlen().getAbsatzrate()){
                 u2++;
             }
             // Punkte vergleichen um Gewinner zu ermitteln:

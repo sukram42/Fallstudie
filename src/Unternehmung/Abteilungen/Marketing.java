@@ -54,17 +54,17 @@ public class Marketing extends Abteilung {
     public void marktforschung(int umfang){
         switch (umfang){
             case 1:
-                this.kennzahlen.setVerkaufsrate(this.kennzahlen.getVerkaufsrate() + 0.1);
+                this.kennzahlen.setAbsatzrate(this.kennzahlen.getAbsatzrate() + 0.1);
                 this.kennzahlen.addSonstigeKosten(2500);
                 System.out.println("Marktforschung durchgeführt: Kosten 2500 €, Erhöhung der Verkaufsrate um 10%");
                 break;
             case 2:
-                this.kennzahlen.setVerkaufsrate(this.kennzahlen.getVerkaufsrate() + 0.21);
+                this.kennzahlen.setAbsatzrate(this.kennzahlen.getAbsatzrate() + 0.21);
                 this.kennzahlen.addSonstigeKosten(5000);
                 System.out.println("Marktforschung durchgeführt: Kosten 5000 €, Erhöhung der Verkaufsrate um 21%");
                 break;
             case 3:
-                this.kennzahlen.setVerkaufsrate(this.kennzahlen.getVerkaufsrate() + 0.43);
+                this.kennzahlen.setAbsatzrate(this.kennzahlen.getAbsatzrate() + 0.43);
                 this.kennzahlen.addSonstigeKosten(10000);
                 System.out.println("Marktforschung durchgeführt: Kosten 10000 €, Erhöhung der Verkaufsrate um 43%");
                 break;

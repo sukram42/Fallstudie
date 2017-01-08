@@ -82,7 +82,7 @@ public class UnternehmenTest {
                 unternehmen1.getKennzahlen().getHerstellkosten()));
         System.out.println("Umsatz: " + unternehmen1.getKennzahlen().getUmsatz());
         System.out.println("Bekanntheitsgrad: " + unternehmen1.getKennzahlen().getBekanntheitsgrad());
-        System.out.println("Verkaufsrate: " + unternehmen1.getKennzahlen().getVerkaufsrate());
+        System.out.println("Verkaufsrate: " + unternehmen1.getKennzahlen().getAbsatzrate());
 
         // Unternehmen 2:
         System.out.println("Das Unternehmen " + unternehmen2.getName() + " hat in diesem Geschäftsjahr ein Ergebnis von " +
@@ -91,7 +91,7 @@ public class UnternehmenTest {
                 unternehmen2.getKennzahlen().getHerstellkosten()));
         System.out.println("Umsatz: " + unternehmen2.getKennzahlen().getUmsatz());
         System.out.println("Bekanntheitsgrad: " + unternehmen2.getKennzahlen().getBekanntheitsgrad());
-        System.out.println("Verkaufsrate: " + unternehmen2.getKennzahlen().getVerkaufsrate());
+        System.out.println("Verkaufsrate: " + unternehmen2.getKennzahlen().getAbsatzrate());
 
         // Gewinner ermitteln:
         Game game = new Game(unternehmen1, unternehmen2);

@@ -27,7 +27,7 @@ public class Kennzahlen {
     private double fremdkapital;
     private double eigenkapital;
     private double bekanntheitsgrad;
-    private double verkaufsrate; // Wahrscheinlichkeit, alle seine Produkte zu verkaufen (abhängig von Maßnahmen und zufällige Ereignisse wie z.B. Konjunktur, Werbekampagnen etc.)
+    private double absatzrate; // Wahrscheinlichkeit, alle seine Produkte zu verkaufen (abhängig von Maßnahmen und zufällige Ereignisse wie z.B. Konjunktur, Werbekampagnen etc.)
 
     /**
      * Konstruktor zum Erstellen einen Kennzahlenobjekts eines Unternehmens (wird im Unternehmenskonstruktor aufgerufen)
@@ -38,7 +38,7 @@ public class Kennzahlen {
         // TODO alle Defaultwerte definieren (zumindest solche, die nicht 0 sein sollen)
         this.eigenkapital = eigenkapital;
         this.fremdkapital = fremdkapital;
-        this.verkaufsrate = 0.2;
+        this.absatzrate = 0.2;
     }
 
     // Berechnungen:
@@ -56,9 +56,9 @@ public class Kennzahlen {
     public void verkaufsrateBerechnen(){
         double verkaufsrate = this.getBekanntheitsgrad();
         if(verkaufsrate >= 1){
-            this.setVerkaufsrate(1);
+            this.setAbsatzrate(1);
         }else {
-            this.setVerkaufsrate(verkaufsrate);
+            this.setAbsatzrate(verkaufsrate);
         }
     }
 
@@ -230,15 +230,15 @@ public class Kennzahlen {
         this.eigenkapital = eigenkapital;
     }
 
-    public double getVerkaufsrate() {
-        return verkaufsrate;
+    public double getAbsatzrate() {
+        return absatzrate;
     }
 
-    public void setVerkaufsrate(double verkaufsrate) {
-        if(verkaufsrate >= 1){
-            this.verkaufsrate = 1;
+    public void setAbsatzrate(double absatzrate) {
+        if(absatzrate >= 1){
+            this.absatzrate = 1;
         }else {
-            this.verkaufsrate = verkaufsrate;
+            this.absatzrate = absatzrate;
         }
     }
 }
