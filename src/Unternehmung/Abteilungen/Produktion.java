@@ -34,6 +34,7 @@ public class Produktion extends Abteilung {
      * @param anzahl Anzahl der zu kaufenden Maschinen
      */
     public void maschinenKaufen(String klasse, int anzahl){
+        // TODO Betriebskosten der Maschinen implementieren ?!
         if(klasse.equals("1")){
             if(maschinen.get(klasse) != null){
                 Maschine bestand = maschinen.get(klasse);
@@ -42,6 +43,7 @@ public class Produktion extends Abteilung {
                 Maschine m = new Maschine("1", 500, 10000, anzahl);
                 maschinen.put(m.getKlasse(), m);
             }
+            System.out.println(anzahl + " Maschine(n) der Klasse " + klasse + " gekauft, Kapazität: 500 Stück pro Jahr, Anschaffungskosten: 10000 €");
         } else if (klasse.equals("2")){
             if(maschinen.get(klasse) != null){
                 Maschine bestand = maschinen.get(klasse);
@@ -50,6 +52,7 @@ public class Produktion extends Abteilung {
                 Maschine m = new Maschine("2", 1500, 20000, anzahl);
                 maschinen.put(m.getKlasse(), m);
             }
+            System.out.println(anzahl + " Maschine(n) der Klasse " + klasse + " gekauft, Kapazität: 1500 Stück pro Jahr, Anschaffungskosten: 20000 €");
         } else if (klasse.equals("3")){
             if(maschinen.get(klasse) != null){
                 Maschine bestand = maschinen.get(klasse);
@@ -58,6 +61,7 @@ public class Produktion extends Abteilung {
                 Maschine m = new Maschine("3", 3000, 30000, anzahl);
                 maschinen.put(m.getKlasse(), m);
             }
+            System.out.println(anzahl + " Maschine(n) der Klasse " + klasse + " gekauft, Kapazität: 3000 Stück pro Jahr, Anschaffungskosten: 30000 €");
         }
         super.kennzahlen.addSonstigeKosten(maschinen.get(klasse).getAnschaffungskst() * anzahl);
     }
@@ -86,6 +90,7 @@ public class Produktion extends Abteilung {
             Produkt produkt = new Produkt(name, anzahl, herstellkosten);
             produzierteProdukte.put(produkt.getName(), produkt);
             super.kennzahlen.addHerstellkosten(herstellkosten * anzahl); // laufende Fortschreibung der gesamten Herstellkosten
+            System.out.println(anzahl + " Produkte (" + name + ") produziert.");
         } else {
             System.out.println("ERROR: Es ist nicht genügend Maschinenkapazität vorhanden!");
         }

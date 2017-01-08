@@ -1,8 +1,5 @@
 package Unternehmung;
 
-import Unternehmung.Abteilungen.Produktion;
-import Unternehmung.Abteilungen.Vertrieb;
-
 /**
  * Diese Klasse beinhaltet alle Kennzahlen eines Unternehmens
  * diese werden unterschieden in "weiche" und faktische Kennzahlen
@@ -12,7 +9,7 @@ import Unternehmung.Abteilungen.Vertrieb;
 public class Kennzahlen {
 
     // "weiche" Kennzahlen:
-    private Kennzahl bekanntheitsgrad = new Kennzahl();
+    //private Kennzahl bekanntheitsgrad = new Kennzahl(); // TODO als Kennzahl (statt double) implementieren?!
     private Kennzahl mitarbeiterzufriedenheit = new Kennzahl();
     private Kennzahl kundenzufriedenheit = new Kennzahl();
     private Kennzahl image = new Kennzahl(); // soll sich aus Mitarbeiterzufriedenheit, Reklamationsrate und Kundenzufriedenheit berechnen
@@ -29,6 +26,8 @@ public class Kennzahlen {
     private double reklamationsrate;
     private double fremdkapital;
     private double eigenkapital;
+    private double bekanntheitsgrad;
+    private double verkaufsrate; // Wahrscheinlichkeit, alle seine Produkte zu verkaufen (abhängig von Maßnahmen und zufällige Ereignisse wie z.B. Konjunktur, Werbekampagnen etc.)
 
     /**
      * Konstruktor zum Erstellen einen Kennzahlenobjekts eines Unternehmens (wird im Unternehmenskonstruktor aufgerufen)
@@ -36,16 +35,31 @@ public class Kennzahlen {
      * @param fremdkapital muss bei Gründung des Unternehmens definiert werden
      */
     public Kennzahlen(double eigenkapital, double fremdkapital) {
+        // TODO alle Defaultwerte definieren (zumindest solche, die nicht 0 sein sollen)
         this.eigenkapital = eigenkapital;
         this.fremdkapital = fremdkapital;
+        this.verkaufsrate = 0.2;
     }
 
     // Berechnungen:
     /**
-     * Funktion, die den Gewinn (Jahresüberschuss) berechnet. Wird von addX() ausgeführt (siehe unten)
+     * Methode, die den Gewinn (Jahresüberschuss) berechnet. Wird von addX() ausgeführt (siehe unten)
      */
     public void gewinnBerechnen(){
         this.setGewinn(this.umsatz - (this.herstellkosten + this.sonstigeKosten + this.gehälter));
+    }
+
+    /**
+     * Methode, die die Verkaufsrate berechnet (beeinflusst von Bekanntheitsgrad, Image, Kundenzufriedenheit, Mitarbeiterzufriedenheit, ...)
+     * // TODO weitere Kennzahlen mit einrechnen
+     */
+    public void verkaufsrateBerechnen(){
+        double verkaufsrate = this.getBekanntheitsgrad();
+        if(verkaufsrate >= 1){
+            this.setVerkaufsrate(1);
+        }else {
+            this.setVerkaufsrate(verkaufsrate);
+        }
     }
 
 
@@ -88,12 +102,28 @@ public class Kennzahlen {
 
 
     // Getter und Setter:
+    /*
     public Kennzahl getBekanntheitsgrad() {
         return bekanntheitsgrad;
     }
 
     public void setBekanntheitsgrad(Kennzahl bekanntheitsgrad) {
         this.bekanntheitsgrad = bekanntheitsgrad;
+    }
+    */
+
+    public double getBekanntheitsgrad() {
+        return bekanntheitsgrad;
+    }
+
+    public void setBekanntheitsgrad(double bekanntheitsgrad) {
+        if (bekanntheitsgrad >= 1){
+            this.bekanntheitsgrad = 1;
+            this.verkaufsrateBerechnen();
+        }else {
+            this.bekanntheitsgrad = bekanntheitsgrad;
+            this.verkaufsrateBerechnen();
+        }
     }
 
     public Kennzahl getMitarbeiterzufriedenheit() {
@@ -198,5 +228,17 @@ public class Kennzahlen {
 
     public void setEigenkapital(double eigenkapital) {
         this.eigenkapital = eigenkapital;
+    }
+
+    public double getVerkaufsrate() {
+        return verkaufsrate;
+    }
+
+    public void setVerkaufsrate(double verkaufsrate) {
+        if(verkaufsrate >= 1){
+            this.verkaufsrate = 1;
+        }else {
+            this.verkaufsrate = verkaufsrate;
+        }
     }
 }
