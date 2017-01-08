@@ -43,7 +43,7 @@ public class Game {
             // Bekanntheitsgrad vergleichen:
             if(unternehmen1.getKennzahlen().getBekanntheitsgrad() > unternehmen2.getKennzahlen().getBekanntheitsgrad()){
                 u1++;
-            } else if(unternehmen1.getKennzahlen().getBekanntheitsgrad() > unternehmen2.getKennzahlen().getBekanntheitsgrad()){
+            } else if(unternehmen1.getKennzahlen().getBekanntheitsgrad() < unternehmen2.getKennzahlen().getBekanntheitsgrad()){
                 u2++;
             }
             // Verkaufsrate vergleichen:

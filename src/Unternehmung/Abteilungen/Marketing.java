@@ -22,52 +22,59 @@ public class Marketing extends Abteilung {
      * @param kampagne Art der Kampagne, etwa Plakate, Print, Radio oder TV (unterschiedlich teuer und unterschiedlich effektiv)
      */
     public void marketingKampagne(String kampagne){
-        // Bekanntheitsgrad erhöhen:
+        double impact = 0;
+        int kosten = 0;
         switch (kampagne){
             case "Plakate":
-                this.kennzahlen.setBekanntheitsgrad(this.kennzahlen.getBekanntheitsgrad() + 0.1);
-                this.kennzahlen.addSonstigeKosten(1000);
-                System.out.println("Werbeplakate aufgehängt: Bekanntheitsgrad um 10% gestiegen, Kosten: 1000€");
+                impact = 0.1;
+                kosten = 1000;
                 break;
             case "Print":
-                this.kennzahlen.setBekanntheitsgrad(this.kennzahlen.getBekanntheitsgrad() + 0.2);
-                this.kennzahlen.addSonstigeKosten(2500);
-                System.out.println("Werbung in Printmedien geschaltet: Bekanntheitsgrad um 20% gestiegen, Kosten: 2500€");
+                impact = 0.2;
+                kosten = 2500;
                 break;
             case "Radio":
-                this.kennzahlen.setBekanntheitsgrad(this.kennzahlen.getBekanntheitsgrad() + 0.3);
-                this.kennzahlen.addSonstigeKosten(5000);
-                System.out.println("Radiospot: Bekanntheitsgrad um 30% gestiegen, Kosten: 5000€");
+                impact = 0.3;
+                kosten = 5000;
                 break;
             case "TV":
-                this.kennzahlen.setBekanntheitsgrad(this.kennzahlen.getBekanntheitsgrad() + 0.4);
-                this.kennzahlen.addSonstigeKosten(10000);
-                System.out.println("TV-Spot: Bekanntheitsgrad um 40% gestiegen, Kosten: 10000€");
+                impact = 0.4;
+                kosten = 10000;
                 break;
+        }
+        if (this.kennzahlen.liquiditätVorhanden(kosten, "sonstige Kosten")){
+            this.kennzahlen.setBekanntheitsgrad(this.kennzahlen.getBekanntheitsgrad() + impact);
+            System.out.println("Marketingkampagne \"" + kampagne + "\" gestartet. Kosten: " + kosten + " €, Bekanntheitsgrad steigt um " + impact);
         }
     }
 
     /**
-     * Methode zur Durchführung von Marktforschung
+     * Methode zur Durchführung von Marktforschung. Hierdurch können z.B. besser Zielgruppen angesprochen werden,
+     * wodurch sich Produkte besser verkaufen lassen (Absatzrate steigt)
      * @param umfang drei verschiedene "Größen" mit unterschiedlichen Kosten und Effektivität
      */
     public void marktforschung(int umfang){
+        double impact = 0;
+        int kosten = 0;
         switch (umfang){
             case 1:
-                this.kennzahlen.setAbsatzrate(this.kennzahlen.getAbsatzrate() + 0.1);
-                this.kennzahlen.addSonstigeKosten(2500);
-                System.out.println("Marktforschung durchgeführt: Kosten 2500 €, Erhöhung der Verkaufsrate um 10%");
+                impact = 0.1;
+                kosten = 2500;
                 break;
             case 2:
-                this.kennzahlen.setAbsatzrate(this.kennzahlen.getAbsatzrate() + 0.21);
-                this.kennzahlen.addSonstigeKosten(5000);
-                System.out.println("Marktforschung durchgeführt: Kosten 5000 €, Erhöhung der Verkaufsrate um 21%");
+                impact = 0.21;
+                kosten = 5000;
                 break;
             case 3:
-                this.kennzahlen.setAbsatzrate(this.kennzahlen.getAbsatzrate() + 0.43);
-                this.kennzahlen.addSonstigeKosten(10000);
-                System.out.println("Marktforschung durchgeführt: Kosten 10000 €, Erhöhung der Verkaufsrate um 43%");
+                impact = 0.43;
+                kosten = 10000;
                 break;
+        }
+        if (this.kennzahlen.liquiditätVorhanden(kosten, "sonstige Kosten")) {
+            this.kennzahlen.setAbsatzrate(this.kennzahlen.getAbsatzrate() + impact);
+            System.out.println("Marktforschung durchgeführt: Kosten " + kosten + " €, Erhöhung der Verkaufsrate um " + impact);
+        }else {
+            System.out.println("Nicht genügend Liquidität vorhanden!");
         }
     }
 

@@ -28,6 +28,7 @@ public class Kennzahlen {
     private double eigenkapital;
     private double bekanntheitsgrad;
     private double absatzrate; // Wahrscheinlichkeit, alle seine Produkte zu verkaufen (abhängig von Maßnahmen und zufällige Ereignisse wie z.B. Konjunktur, Werbekampagnen etc.)
+    private double liquideMittel;
 
     /**
      * Konstruktor zum Erstellen einen Kennzahlenobjekts eines Unternehmens (wird im Unternehmenskonstruktor aufgerufen)
@@ -39,6 +40,7 @@ public class Kennzahlen {
         this.eigenkapital = eigenkapital;
         this.fremdkapital = fremdkapital;
         this.absatzrate = 0.2;
+        this.liquideMittel = eigenkapital + fremdkapital;
     }
 
     // Berechnungen:
@@ -60,6 +62,32 @@ public class Kennzahlen {
         }else {
             this.setAbsatzrate(verkaufsrate);
         }
+    }
+
+    /**
+     * wird bei Investitionen aufgerufen und prüft ob genügend Liquidität vorhanden ist und verringert den Kassenbestand (Kennzahlen.cash) entsprechend
+     * @param kosten Kosten einer Maßnahme (z.B. Marketingmaßnahme oder Produktion)
+     * @param posten "Kostenstelle", wo die kosten addiert werden sollen (z.B. Gehälter, Herstellkosten, sonstige Kosten, ...)
+     * @return true, wenn ausreichend Bargeld vorhanden ist; false, wenn nicht
+     */
+    public boolean liquiditätVorhanden(double kosten, String posten){
+        if (this.liquideMittel >= kosten){
+            switch (posten){
+                case "gehälter":
+                    addGehälter((int) kosten);
+                    this.setLiquideMittel(this.getLiquideMittel() - kosten);
+                    return true;
+                case "herstellkosten":
+                    addHerstellkosten(kosten);
+                    this.setLiquideMittel(this.getLiquideMittel() - kosten);
+                    return true;
+                case "sonstige Kosten":
+                    addSonstigeKosten(kosten);
+                    this.setLiquideMittel(this.getLiquideMittel() - kosten);
+                    return true;
+            }
+        }
+        return false;
     }
 
 
@@ -240,5 +268,13 @@ public class Kennzahlen {
         }else {
             this.absatzrate = absatzrate;
         }
+    }
+
+    public double getLiquideMittel() {
+        return liquideMittel;
+    }
+
+    public void setLiquideMittel(double liquideMittel) {
+        this.liquideMittel = liquideMittel;
     }
 }

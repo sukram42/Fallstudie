@@ -33,38 +33,41 @@ public class Produktion extends Abteilung {
      * @param klasse 1, 2 oder 3
      * @param anzahl Anzahl der zu kaufenden Maschinen
      */
-    public void maschinenKaufen(String klasse, int anzahl){
+    public void maschinenKaufen(String klasse, int anzahl) {
         // TODO Betriebskosten der Maschinen implementieren ?!
-        if(klasse.equals("1")){
-            if(maschinen.get(klasse) != null){
-                Maschine bestand = maschinen.get(klasse);
-                bestand.setAnzahl(bestand.getAnzahl() + anzahl);
-            } else {
-                Maschine m = new Maschine("1", 500, 10000, anzahl);
-                maschinen.put(m.getKlasse(), m);
-            }
-            System.out.println(anzahl + " Maschine(n) der Klasse " + klasse + " gekauft, Kapazität: 500 Stück pro Jahr, Anschaffungskosten: 10000 €");
-        } else if (klasse.equals("2")){
-            if(maschinen.get(klasse) != null){
-                Maschine bestand = maschinen.get(klasse);
-                bestand.setAnzahl(bestand.getAnzahl() + anzahl);
-            } else {
-                Maschine m = new Maschine("2", 1500, 20000, anzahl);
-                maschinen.put(m.getKlasse(), m);
-            }
-            System.out.println(anzahl + " Maschine(n) der Klasse " + klasse + " gekauft, Kapazität: 1500 Stück pro Jahr, Anschaffungskosten: 20000 €");
-        } else if (klasse.equals("3")){
-            if(maschinen.get(klasse) != null){
-                Maschine bestand = maschinen.get(klasse);
-                bestand.setAnzahl(bestand.getAnzahl() + anzahl);
-            } else {
-                Maschine m = new Maschine("3", 3000, 30000, anzahl);
-                maschinen.put(m.getKlasse(), m);
-            }
-            System.out.println(anzahl + " Maschine(n) der Klasse " + klasse + " gekauft, Kapazität: 3000 Stück pro Jahr, Anschaffungskosten: 30000 €");
+        int kapazität = 0;
+        int anschaffungskst = 0;
+
+        switch (klasse) {
+            case "1":
+                kapazität = 500;
+                anschaffungskst = 10000;
+                break;
+            case "2":
+                kapazität = 1500;
+                anschaffungskst = 20000;
+                break;
+            case "3":
+                kapazität = 3000;
+                anschaffungskst = 30000;
+                break;
         }
-        super.kennzahlen.addSonstigeKosten(maschinen.get(klasse).getAnschaffungskst() * anzahl);
+
+        if (this.kennzahlen.liquiditätVorhanden(anschaffungskst * anzahl, "sonstige Kosten")) {
+            Maschine bestand = maschinen.get(klasse);
+            if (bestand != null) {
+                bestand.setAnzahl(bestand.getAnzahl() + anzahl);
+            } else {
+                Maschine m = new Maschine(klasse, kapazität, anschaffungskst, anzahl);
+                maschinen.put(m.getKlasse(), m);
+            }
+            System.out.println(anzahl + " Maschine(n) der Klasse " + klasse + " gekauft, Kapazität: " + kapazität +
+                    " Stück pro Jahr, Anschaffungskosten: " + anschaffungskst + " €");
+        } else {
+            System.out.println("Nicht genügend Liquidität vorhanden!");
+        }
     }
+
 
     // TODO noch nicht fertig implementiert
     public void maschineVerkaufen(String klasse, int anzahl){
@@ -86,13 +89,17 @@ public class Produktion extends Abteilung {
      * @param herstellkosten des Produktes pro Stück // TODO feste Vorgabe je nach Produkt oder Auswahl durch den Spieler?
      */
     public void produzieren(String name, int anzahl, int herstellkosten){
+        // TODO anzahl = Kapazitätsgrenze ?!
         if(this.getMaschinenKapazität() >= anzahl) { // Prüfen, ob genügend Maschinenkapazität vorhanden ist
-            Produkt produkt = new Produkt(name, anzahl, herstellkosten);
-            produzierteProdukte.put(produkt.getName(), produkt);
-            super.kennzahlen.addHerstellkosten(herstellkosten * anzahl); // laufende Fortschreibung der gesamten Herstellkosten
-            System.out.println(anzahl + " Produkte (" + name + ") produziert.");
+            if (this.kennzahlen.liquiditätVorhanden(herstellkosten * anzahl, "herstellkosten")) {
+                Produkt produkt = new Produkt(name, anzahl, herstellkosten);
+                produzierteProdukte.put(produkt.getName(), produkt);
+                System.out.println(anzahl + " Produkte (" + name + ") produziert.");
+            } else {
+                System.out.println("Nicht genügend Liquidität vorhanden!");
+            }
         } else {
-            System.out.println("ERROR: Es ist nicht genügend Maschinenkapazität vorhanden!");
+            System.out.println("Nicht genügend Maschinenkapazität vorhanden!");
         }
     }
 
