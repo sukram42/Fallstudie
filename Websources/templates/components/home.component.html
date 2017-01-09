@@ -1,4 +1,6 @@
 <!--modal Human Resources-->
+
+<base href="/">
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -73,50 +75,49 @@
             </div>
             <nav>
                 <ul class="nav">
-                    <li class="active">
-                        <a class="sideBarButton" href="#" data-target="dashboard">
+                    <li routerLink="/dashboard" routerLinkActive="active">
+                        <a class="sideBarButton" >
                             <i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>
-                            <p>Dashboard
-                            </p>
+                            <p>Dashboard</p>
                         </a>
                     </li>
-                    <li>
-                        <a class="sideBarButton" href="#" data-target="marketing">
+                    <li routerLink="/marketing" routerLinkActive="active">
+                        <a class="sideBarButton" >
                             <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
                             <p> Marketing
                             </p>
                         </a>
                     </li>
-                    <li>
-                        <a class="sideBarButton" href="#" data-target="humanresources">
+                    <li routerLink="/human-ressources" routerLinkActive="active">
+                        <a class="sideBarButton" >
                             <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
                             <p> Human Resources
                             </p>
                         </a>
                     </li>
-                    <li>
-                        <a class="sideBarButton" href="#" data-target="produktion">
+                    <li routerLink="/produktion" routerLinkActive="active">
+                        <a class="sideBarButton" >
                             <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
                             <p> Produktion
                             </p>
                         </a>
                     </li>
-                    <li>
-                        <a class="sideBarButton" href="#" data-target="sales">
+                    <li routerLink="/sales" routerLinkActive ="active">
+                        <a class="sideBarButton" >
                             <i class="glyphicon glyphicon-usd" aria-hidden="true"></i>
                             <p> Sales
                             </p>
                         </a>
                     </li>
-                    <li>
-                        <a class="sideBarButton" href="#" data-target="accounts">
+                    <li  routerLink="/accounts" routerLinkActive ="active">
+                        <a class="sideBarButton">
                             <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
                             <p> Accounts
                             </p>
                         </a>
                     </li>
-                    <li>
-                        <a class="sideBarButton" href="#" data-target="research">
+                    <li routerLink="/research" routerLinkActive ="active">
+                        <a class="sideBarButton" >
                             <i class="glyphicon glyphicon-education" aria-hidden="true"></i>
                             <p> Research
                             </p>
@@ -180,6 +181,7 @@
             </div>
         </nav>
         <div class="content" id="content">
+            <router-outlet></router-outlet>
         </div>
         <!----------------------------------------foooter---------------------------------->
         <footer class="footer">

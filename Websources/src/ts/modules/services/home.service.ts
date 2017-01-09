@@ -36,8 +36,8 @@ export class HomeService {
         else return null;
 
 
-            return this.http.get('http://localhost:8080/Fallstudie-0.0.1-SNAPSHOT/rest/auth',{headers})
-                .map(response => response.text());
+        return this.http.get('http://localhost:8080/Fallstudie-0.0.1-SNAPSHOT/rest/auth', {headers})
+            .map(response => response.text());
 //TODO weitermachen !
     }
 }
