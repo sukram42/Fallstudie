@@ -9,7 +9,6 @@ import Unternehmung.Unternehmen;
 public class Game {
 
     private int spieler;
-    private Unternehmen[] companies;
     private Unternehmen unternehmen1;
     private Unternehmen unternehmen2;
     private Unternehmen unternehmen3;
@@ -24,9 +23,6 @@ public class Game {
         this.spieler = 2;
         this.unternehmen1 = unternehmen1;
         this.unternehmen2 = unternehmen2;
-        companies = new Unternehmen[spieler];
-        companies[0] = unternehmen1;
-        companies[1] = unternehmen2;
     }
 
     public Unternehmen gewinnerErmitteln(){
