@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector   : 'home-component',
-    templateUrl: '../../../../templates/components/research.component.html',
+    templateUrl: '../../../../templates/components/home.components/research.component.html',
 
 })
 

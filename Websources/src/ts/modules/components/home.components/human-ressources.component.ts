@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector   : 'human-ressources-component',
-    templateUrl: '../../../../templates/components/human-ressources.component.html',
+    templateUrl: '../../../../templates/components/home.components/human-ressources.component.html',
 
 })
 

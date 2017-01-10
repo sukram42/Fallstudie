@@ -10,10 +10,10 @@ import { Component } from '@angular/core';
 
 @Component({
     selector   : 'home-component',
-    templateUrl: '../../../../templates/components/sales.component.html',
+    templateUrl: '../../../../templates/components/home.components/marketing.component.html',
 
 })
 
-export class SalesComponent {
+export class MarketingComponent {
 
 }

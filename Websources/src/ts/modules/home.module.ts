@@ -9,18 +9,19 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {HttpModule, RequestOptions} from '@angular/http';
 
-import {HomeComponent} from "./components/home.component";
-import {HeaderComponent} from "./components/header.component";
+import {HomeComponent} from "./components/home.components/home.component";
+import {HeaderComponent} from "./components/home.components/header.component";
 import {AuthRequestOptions} from "./services/auth-request-options";
 import {RouterModule} from "@angular/router";
 
-import {DashboardComponent} from "./components/dashboard.component";
-import {SalesComponent} from "./components/sales.component";
-import {ResearchComponent} from "./components/research.component";
-import {ProduktionComponent} from "./components/produktion.component";
-import {MarketingComponent} from "./components/marketing.component";
-import {HumanRessourcesComponent} from "./components/human-ressources.component";
-import {AccountsComponent} from "./components/accounts.component";
+import {DashboardComponent} from "./components/home.components/dashboard.component";
+import {SalesComponent} from "./components/home.components/sales.component";
+import {ResearchComponent} from "./components/home.components/research.component";
+import {ProduktionComponent} from "./components/home.components/produktion.component";
+import {MarketingComponent} from "./components/home.components/marketing.component";
+import {HumanRessourcesComponent} from "./components/home.components/human-ressources.component";
+import {AccountsComponent} from "./components/home.components/accounts.component";
+import {KeyfiguresComponent} from "./components/home.components/dashboard.components/keyfigures.component";
 
 @NgModule({
     imports: [
@@ -68,8 +69,16 @@ import {AccountsComponent} from "./components/accounts.component";
     ],
     declarations: [HomeComponent,
                    HeaderComponent,
-                    DashboardComponent,
-                SalesComponent,ResearchComponent,ProduktionComponent,MarketingComponent,HumanRessourcesComponent,AccountsComponent],
+                   DashboardComponent,
+                   SalesComponent,
+                   ResearchComponent,
+                   ProduktionComponent,
+                   MarketingComponent,
+                   HumanRessourcesComponent,
+                   AccountsComponent,
+                   KeyfiguresComponent
+    ],
+
     bootstrap:    [HomeComponent],
     providers : [
         {provide: RequestOptions, useClass : AuthRequestOptions}

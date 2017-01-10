@@ -7,11 +7,11 @@
  */
 
 import { Component } from '@angular/core';
-import {HomeService} from "../services/home.service";
+import {HomeService} from "../../services/home.service";
 
 @Component({
     selector: 'header-component',
-    templateUrl: '../../../../templates/components/header.component.html',
+    templateUrl: '../../../../templates/components/home.components/header.component.html',
     providers : [HomeService]
 })
 

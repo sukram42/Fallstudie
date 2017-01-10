@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector   : 'home-component',
-    templateUrl: '../../../../templates/components/home.component.html',
+    templateUrl: '../../../../templates/components/home.components/home.component.html',
 
 })
 

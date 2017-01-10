@@ -10,10 +10,10 @@ import {Component} from '@angular/core';
 
 @Component({
     selector: 'home-component',
-    templateUrl: '../../../../templates/components/accounts.component.html',
+    templateUrl: '../../../../templates/components/home.components/dashboard.component.html',
 
 })
 
-export class AccountsComponent {
+export class DashboardComponent {
 
 }
