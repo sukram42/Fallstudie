@@ -1,20 +1,26 @@
 package Unternehmung;
 
+import Unternehmung.Kennzahlen.Kennzahl;
+import Unternehmung.Kennzahlen.Mitarbeiterzufriedenheit;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * Diese Klasse beinhaltet alle Kennzahlen eines Unternehmens
- * diese werden unterschieden in "weiche" und faktische Kennzahlen
- * zur Berechnung weicher Kennzahlen wird die Klasse "Kennzahl" genutzt, faktische Kennzahlen werden in double-Werten gespeichert
+ * Diese Klasse beinhaltet alle Kennzahlensammlung eines Unternehmens
+ * diese werden unterschieden in "weiche" und faktische Kennzahlensammlung
+ * zur Berechnung weicher Kennzahlensammlung wird die Klasse "Kennzahl" genutzt, faktische Kennzahlensammlung werden in double-Werten gespeichert
  * Created by lucadommes on 02.01.2017.
  */
-public class Kennzahlen {
+public class Kennzahlensammlung {
 
-    // "weiche" Kennzahlen:
+    private Unternehmen unternehmen;
+    // "weiche" Kennzahlensammlung:
     //private Kennzahl bekanntheitsgrad = new Kennzahl(); // TODO als Kennzahl (statt double) implementieren?!
-    private Kennzahl mitarbeiterzufriedenheit = new Kennzahl();
-    private Kennzahl kundenzufriedenheit = new Kennzahl();
-    private Kennzahl image = new Kennzahl(); // soll sich aus Mitarbeiterzufriedenheit, Reklamationsrate und Kundenzufriedenheit berechnen
 
-    // faktische Kennzahlen:
+    private Map<String,  Kennzahl> weicheKennzahlen = new HashMap<>();
+
+    // faktische Kennzahlensammlung:
     private double marktanteil;
     private double umsatz; // wird laufend fortgeschrieben (siehe unten addUmsatz())
     private double herstellkosten; // wird laufend fortgeschrieben (siehe unten addHerstellkosten())
@@ -35,15 +41,28 @@ public class Kennzahlen {
      * @param eigenkapital muss bei Gründung des Unternehmens definiert werden
      * @param fremdkapital muss bei Gründung des Unternehmens definiert werden
      */
-    public Kennzahlen(double eigenkapital, double fremdkapital) {
+    public Kennzahlensammlung(Unternehmen unternehmen,double eigenkapital, double fremdkapital) {
         // TODO alle Defaultwerte definieren (zumindest solche, die nicht 0 sein sollen)
         this.eigenkapital = eigenkapital;
         this.fremdkapital = fremdkapital;
         this.absatzrate = 0.2;
         this.liquideMittel = eigenkapital + fremdkapital;
+        this.unternehmen = unternehmen;
+
+        weicheKennzahlen.put("mitarbeiterzufriedenheit",new Mitarbeiterzufriedenheit(unternehmen));
+        weicheKennzahlen.put("bekanntheitsheitsgrad",new Kennzahl(unternehmen));
+        weicheKennzahlen.put("image",new Kennzahl(unternehmen));
     }
 
     // Berechnungen:
+    public void berechnen()
+    {
+        for(Kennzahl kennzahl  : weicheKennzahlen.values())
+        {
+//            kennzahl.berechnen();
+        }
+    }
+
     /**
      * Methode, die den Gewinn (Jahresüberschuss) berechnet. Wird von addX() ausgeführt (siehe unten)
      */
@@ -53,7 +72,7 @@ public class Kennzahlen {
 
     /**
      * Methode, die die Verkaufsrate berechnet (beeinflusst von Bekanntheitsgrad, Image, Kundenzufriedenheit, Mitarbeiterzufriedenheit, ...)
-     * // TODO weitere Kennzahlen mit einrechnen
+     * // TODO weitere Kennzahlensammlung mit einrechnen
      */
     public void verkaufsrateBerechnen(){
         double verkaufsrate = this.getBekanntheitsgrad();
@@ -65,7 +84,7 @@ public class Kennzahlen {
     }
 
     /**
-     * wird bei Investitionen aufgerufen und prüft ob genügend Liquidität vorhanden ist und verringert den Kassenbestand (Kennzahlen.cash) entsprechend
+     * wird bei Investitionen aufgerufen und prüft ob genügend Liquidität vorhanden ist und verringert den Kassenbestand ( cash) entsprechend
      * @param kosten Kosten einer Maßnahme (z.B. Marketingmaßnahme oder Produktion)
      * @param posten "Kostenstelle", wo die kosten addiert werden sollen (z.B. Gehälter, Herstellkosten, sonstige Kosten, ...)
      * @return true, wenn ausreichend Bargeld vorhanden ist; false, wenn nicht
@@ -90,8 +109,7 @@ public class Kennzahlen {
         return false;
     }
 
-
-    // laufende Fortschreibung von Kennzahlen:
+    // laufende Fortschreibung von Kennzahlensammlung:
     /**
      * Funktion, die Herstellkosten fortschreibt. Wird aufgerufen von Produktion.produzieren()
      * @param kosten gesamte Herstellkosten der Neuproduktion, sprich Herstellungskosten pro Stück * Menge
@@ -154,29 +172,29 @@ public class Kennzahlen {
         }
     }
 
-    public Kennzahl getMitarbeiterzufriedenheit() {
-        return mitarbeiterzufriedenheit;
+    public  Kennzahl getMitarbeiterzufriedenheit() {
+        return weicheKennzahlen.get("mitarbeiterzufriedenheit");
     }
 
-    public void setMitarbeiterzufriedenheit(Kennzahl mitarbeiterzufriedenheit) {
-        this.mitarbeiterzufriedenheit = mitarbeiterzufriedenheit;
-    }
+//    public void setMitarbeiterzufriedenheit( Kennzahl mitarbeiterzufriedenheit) {
+//        this.mitarbeiterzufriedenheit = mitarbeiterzufriedenheit;
+//    }
 
-    public Kennzahl getKundenzufriedenheit() {
-        return kundenzufriedenheit;
-    }
+//    public  Kennzahl getKundenzufriedenheit() {
+//        return kundenzufriedenheit;
+//    }
+//
+//    public void setKundenzufriedenheit( Kennzahl kundenzufriedenheit) {
+//        this.kundenzufriedenheit = kundenzufriedenheit;
+//    }
 
-    public void setKundenzufriedenheit(Kennzahl kundenzufriedenheit) {
-        this.kundenzufriedenheit = kundenzufriedenheit;
-    }
+//    public  Kennzahl getImage() {
+//        return image;
+//    }
 
-    public Kennzahl getImage() {
-        return image;
-    }
-
-    public void setImage(Kennzahl image) {
-        this.image = image;
-    }
+//    public void setImage( Kennzahl image) {
+//        this.image = image;
+//    }
 
     public double getMarktanteil() {
         return marktanteil;
@@ -277,4 +295,6 @@ public class Kennzahlen {
     public void setLiquideMittel(double liquideMittel) {
         this.liquideMittel = liquideMittel;
     }
+
+
 }

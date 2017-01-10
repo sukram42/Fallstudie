@@ -1,7 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Unternehmung.Abteilung;
-import Unternehmung.Kennzahlen;
+import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Produkt;
 
 import java.util.HashMap;
@@ -19,10 +19,10 @@ public class Vertrieb extends Abteilung {
 
     /**
      * Konstruktor, zum Erstellen der Abteilung Vertrieb
-     * @param kennzahlen Kennzahlenobjekt wird später benötigt, um Umsatz laufend fortzuschreiben (siehe verkaufen())
+     * @param kennzahlensammlung Kennzahlenobjekt wird später benötigt, um Umsatz laufend fortzuschreiben (siehe verkaufen())
      */
-    public Vertrieb(Kennzahlen kennzahlen, Produktion produktion) {
-        super(kennzahlen);
+    public Vertrieb(Kennzahlensammlung kennzahlensammlung, Produktion produktion) {
+        super(kennzahlensammlung);
         this.produktion = produktion;
     }
 
@@ -40,12 +40,12 @@ public class Vertrieb extends Abteilung {
             double herstellkosten = lager.getHerstellkosten();
             int vorhanden = produzierteProdukte.get(name).getAnzahl();
             // Produkt "verkaufen" (sprich aus Lager (Klasse Produktion) entfernen und zu Map verkaufteProdukte hinzufügen):
-            int anzahl = (int) (vorhanden * this.kennzahlen.getAbsatzrate()); // Anzahl der Produkte, die abgesetzt werden, durch Verkaufsrate berechnen
+            int anzahl = (int) (vorhanden * this.kennzahlensammlung.getAbsatzrate()); // Anzahl der Produkte, die abgesetzt werden, durch Verkaufsrate berechnen
             produktion.bestandVerändern(name, anzahl);
             Produkt verkauft = new Produkt(name, anzahl, herstellkosten, preis);
             verkaufteProdukte.put(name, verkauft);
             // erwirtschafteten Umsatz weitergeben (laufende Fortschreibung):
-            super.kennzahlen.addUmsatz(preis * anzahl);
+            super.kennzahlensammlung.addUmsatz(preis * anzahl);
             System.out.println(anzahl + " von " + vorhanden + " Produkten (" + name + ") verkauft.");
         } else {
             System.out.println("Kein Produkt dieser Art im Lager vorhanden!");

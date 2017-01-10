@@ -2,62 +2,89 @@ package Rules;
 
 import Unternehmung.Unternehmen;
 
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Hilfsklasse, um z.B. den Gewinner eines Spiels festzulegen
  * Created by lucadommes on 08.01.2017.
  */
-public class Game {
+public class Game extends TimerTask{
 
-    private int spieler;
-    private Unternehmen unternehmen1;
-    private Unternehmen unternehmen2;
-    private Unternehmen unternehmen3;
-    private Unternehmen unternehmen4;
+    private final int COUNTER_INTERVALL = 1800000;
+
+    private long counter = 0;
+
+    private static ArrayList<Unternehmen> companies = new ArrayList<>();
 
     /**
      * Konstruktor für ein Spiel mit 2 Spielern
-     * @param unternehmen1
-     * @param unternehmen2
      */
-    public Game(Unternehmen unternehmen1, Unternehmen unternehmen2) {
-        this.spieler = 2;
-        this.unternehmen1 = unternehmen1;
-        this.unternehmen2 = unternehmen2;
+    public Game(){
+//        this.unternehmen1 = unternehmen1;
+//        this.unternehmen2 = unternehmen2;
+
+        Timer timer = new Timer(true);
+        timer.schedule(this,0,COUNTER_INTERVALL);
     }
 
-    public Unternehmen gewinnerErmitteln(){
-        int u1 = 0; // Punktekonto von unternehmen1
-        int u2 = 0; // Punktekonto von unternehmen2
-        Unternehmen gewinner = null;
-        if(this.spieler == 2){
-            // Gewinn vergleichen:
-            if(unternehmen1.getKennzahlen().getGewinn() > unternehmen2.getKennzahlen().getGewinn()){
-                u1++;
-            }else if (unternehmen1.getKennzahlen().getGewinn() < unternehmen2.getKennzahlen().getGewinn()) {
-                u2++;
-            }
-            // Bekanntheitsgrad vergleichen:
-            if(unternehmen1.getKennzahlen().getBekanntheitsgrad() > unternehmen2.getKennzahlen().getBekanntheitsgrad()){
-                u1++;
-            } else if(unternehmen1.getKennzahlen().getBekanntheitsgrad() < unternehmen2.getKennzahlen().getBekanntheitsgrad()){
-                u2++;
-            }
-            // Verkaufsrate vergleichen:
-            if (unternehmen1.getKennzahlen().getAbsatzrate() > unternehmen2.getKennzahlen().getAbsatzrate()){
-                u1++;
-            }else if (unternehmen1.getKennzahlen().getAbsatzrate() < unternehmen2.getKennzahlen().getAbsatzrate()){
-                u2++;
-            }
-            // Punkte vergleichen um Gewinner zu ermitteln:
-            if(u1 > u2){
-                gewinner = unternehmen1;
-            }else if(u1 < u2){
-                gewinner = unternehmen2;
-            }
+//    public Unternehmen gewinnerErmitteln(){
+//        int u1 = 0; // Punktekonto von unternehmen1
+//        int u2 = 0; // Punktekonto von unternehmen2
+//        Unternehmen gewinner = null;
+//        if(this.spieler == 2){
+//            // Gewinn vergleichen:
+//            if(unternehmen1.getKennzahlensammlung().getGewinn() > unternehmen2.getKennzahlensammlung().getGewinn()){
+//                u1++;
+//            }else if (unternehmen1.getKennzahlensammlung().getGewinn() < unternehmen2.getKennzahlensammlung().getGewinn()) {
+//                u2++;
+//            }
+//            // Bekanntheitsgrad vergleichen:
+//            if(unternehmen1.getKennzahlensammlung().getBekanntheitsgrad() > unternehmen2.getKennzahlensammlung().getBekanntheitsgrad()){
+//                u1++;
+//            } else if(unternehmen1.getKennzahlensammlung().getBekanntheitsgrad() < unternehmen2.getKennzahlensammlung().getBekanntheitsgrad()){
+//                u2++;
+//            }
+//            // Verkaufsrate vergleichen:
+//            if (unternehmen1.getKennzahlensammlung().getAbsatzrate() > unternehmen2.getKennzahlensammlung().getAbsatzrate()){
+//                u1++;
+//            }else if (unternehmen1.getKennzahlensammlung().getAbsatzrate() < unternehmen2.getKennzahlensammlung().getAbsatzrate()){
+//                u2++;
+//            }
+//            // Punkte vergleichen um Gewinner zu ermitteln:
+//            if(u1 > u2){
+//                gewinner = unternehmen1;
+//            }else if(u1 < u2){
+//                gewinner = unternehmen2;
+//            }
+//        }
+//        return gewinner;
+//    }
+
+
+    public ArrayList<Unternehmen> getCompanies()
+    {
+        return companies;
+    }
+
+    public Unternehmen getUnternehmenByName(String name) {
+        for (Unternehmen u : companies) {
+            if (name.equals(u.getName()))
+                return u;
         }
-        return gewinner;
+        return null;
     }
 
+    /**
+     * Wird nach jedem Zyklus ausgeführt.
+     */
+    @Override
+    public void run() {
+        counter++;
+        System.out.println("THE TIMER SAIS: " + counter);
+        getCompanies().get(0).getKennzahlensammlung().berechnen();
+    }
 }
 
 

@@ -1,9 +1,12 @@
 package com.fallstudie.Interface;
 
 
+import Rules.Game;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -12,15 +15,13 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
-
 
 @Path("/")
-public class GameInterface {
-    private static Gson gson = new Gson();
-    private static Map<Unternehmen, String> auth = new HashMap<Unternehmen, String>();
+public class GameInterface implements ServletContextListener{
+    private  Gson gson = new Gson();
+    private  static Map<Unternehmen, String> auth = new HashMap<>();
 
-    private static Unternehmen[] companies = new Unternehmen[3];
+    private  Game game;
 
     /**
      * Erstellt eine neue Company
@@ -33,19 +34,17 @@ public class GameInterface {
      */
     @POST
     @Path("companies")
-    public static Response newCompany(String msg) {
+    public  Response newCompany(String msg) {
         System.out.println(gson.toJson(new Unternehmen("district gmbh", "wurst", 1000f)));
-        Unternehmen test = gson.fromJson(msg, Unternehmen.class);
-
-        for (int i = 0; i < companies.length; i++) {
-            if (companies[i] == null) {
-                System.out.println(test);
-                companies[i] = test;
-                return Response.status(200).entity(gson.toJson(test)).build();
+       //jsonCompany ist das Unternehmen, welches mit dem Json file in msg übergeben wird.
+        Unternehmen jsonCompany = gson.fromJson(msg, Unternehmen.class);
+        //in company wird ein neues Unternehmen erstellt.
+        Unternehmen company = new Unternehmen(jsonCompany.getName(),jsonCompany.getPasswort(),1000f);
+            if(!game.getCompanies().contains(company)) {
+                game.getCompanies().add(company);
+                return Response.status(200).entity(gson.toJson(company)).build();
             }
-        }
-
-        return Response.status(218).entity(test.toString()).build();
+        return Response.status(218).entity(company.toString()).build();
     }
 
 //    /**
@@ -55,14 +54,14 @@ public class GameInterface {
 //     */
 //    @GET
 //    @Path("companies")
-//    public static Response getCompaniesPOST() {
+//    public  Response getCompaniesPOST() {
 //        return Response.status(200).entity(gson.toJson(companies)).build();
 //    }
 
     @POST
     @Produces("application/json")
     @Consumes("application/x-www-form-urlencoded")
-    public static Response authenticateUser(@FormParam("username") String companyName, @FormParam("password") String password) {
+    public  Response authenticateUser(@FormParam("username") String companyName, @FormParam("password") String password) {
         try {
             authenticate(companyName, password);
             String token = issueToken(companyName);
@@ -81,12 +80,12 @@ public class GameInterface {
     @Secured
     @Path("companies")
     public Response getCompanies(@Context SecurityContext securityContext) {
-        return Response.status(200).entity(gson.toJson(GameInterface.getUnternehmenByName(securityContext.getUserPrincipal().getName()))).build();
+        return Response.status(200).entity(gson.toJson(game.getUnternehmenByName(securityContext.getUserPrincipal().getName()))).build();
     }
 
     @GET
     @Path("auth")
-    public static Response validate(@HeaderParam("Authorization") String authHeader) {
+    public Response validate(@HeaderParam("Authorization") String authHeader) {
         String tmp_token;
         boolean auth=true;
         System.out.println(authHeader);
@@ -110,13 +109,13 @@ public class GameInterface {
         return Response.status(Response.Status.OK).entity(false).build();
     }
 
-    private static String issueToken(String companyName) throws Exception {
+    private String issueToken(String companyName) throws Exception {
         SecureRandom random = new SecureRandom();
         String token = new BigInteger(130, random).toString(32);
-        Unternehmen u = getUnternehmenByName(companyName);
+        Unternehmen u = game.getUnternehmenByName(companyName);
 
         if (u != null)
-            auth.put(getUnternehmenByName(companyName), token);
+            auth.put(game.getUnternehmenByName(companyName), token);
         else
             throw new Exception("Token could not be created");
 
@@ -124,27 +123,11 @@ public class GameInterface {
 
     }
 
-    private static void authenticate(String companyName, String password) throws Exception {
-        Unternehmen u = getUnternehmenByName(companyName);
+    private void authenticate(String companyName, String password) throws Exception {
+        Unternehmen u = game.getUnternehmenByName(companyName);
         if (u != null && password.equals(u.getPasswort()))
             return;
         throw new Exception("No such User");
-    }
-
-    public static Unternehmen getUnternehmenByName(String name) {
-        for (Unternehmen u : companies) {
-            if (name.equals(u.getName()))
-                return u;
-        }
-        return null;
-    }
-
-    public static Unternehmen[] getCompanies() {
-        return companies;
-    }
-
-    public static void setCompany(int no, Unternehmen u) {
-        companies[no] = u;
     }
 
     public static void validateToken(String token) throws NotAuthorizedException {
@@ -159,6 +142,19 @@ public class GameInterface {
                 return entry.getKey();
         }
         return null;
+    }
+
+    @Override
+    public void contextInitialized(ServletContextEvent servletContextEvent) {
+        if(game == null)
+        {
+            game = new Game();
+        }
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent servletContextEvent) {
+
     }
 }
 

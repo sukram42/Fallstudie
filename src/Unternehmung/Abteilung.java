@@ -17,10 +17,10 @@ import java.util.Map;
 public class Abteilung {
 
 	ArrayList<Mitarbeiter> mitarbeiter = new ArrayList<>();
-	public Kennzahlen kennzahlen;
+	public Kennzahlensammlung kennzahlensammlung;
 
-    public Abteilung(Kennzahlen kennzahlen) {
-        this.kennzahlen = kennzahlen;
+    public Abteilung(Kennzahlensammlung kennzahlensammlung) {
+        this.kennzahlensammlung = kennzahlensammlung;
     }
 
     public void addMitarbeiter(int anzahl, int gehalt) {
@@ -28,7 +28,7 @@ public class Abteilung {
 		String erg = "";
 		String content;
 
-		if (this.kennzahlen.liquiditätVorhanden(gehalt * anzahl, "gehälter")) {
+		if (this.kennzahlensammlung.liquiditätVorhanden(gehalt * anzahl, "gehälter")) {
 
 			try {
 				URL url = new URL("https://randomuser.me/api/?results=" + anzahl + "&inc=name,picture,gender,location");

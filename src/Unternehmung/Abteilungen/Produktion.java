@@ -1,7 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Unternehmung.Abteilung;
-import Unternehmung.Kennzahlen;
+import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Maschine;
 import Unternehmung.Produkt;
 
@@ -20,10 +20,10 @@ public class Produktion extends Abteilung {
 
     /**
      * Konstruktor, zum Erstellen der Abteilung Produktion
-     * @param kennzahlen Kennzahlenobjekt wird später benötigt, um Herstellkosten laufend fortzuschreiben (siehe produzieren())
+     * @param kennzahlensammlung Kennzahlenobjekt wird später benötigt, um Herstellkosten laufend fortzuschreiben (siehe produzieren())
      */
-    public Produktion(Kennzahlen kennzahlen) {
-        super(kennzahlen);
+    public Produktion(Kennzahlensammlung kennzahlensammlung) {
+        super(kennzahlensammlung);
     }
 
     /**
@@ -53,7 +53,7 @@ public class Produktion extends Abteilung {
                 break;
         }
 
-        if (this.kennzahlen.liquiditätVorhanden(anschaffungskst * anzahl, "sonstige Kosten")) {
+        if (this.kennzahlensammlung.liquiditätVorhanden(anschaffungskst * anzahl, "sonstige Kosten")) {
             Maschine bestand = maschinen.get(klasse);
             if (bestand != null) {
                 bestand.setAnzahl(bestand.getAnzahl() + anzahl);
@@ -91,7 +91,7 @@ public class Produktion extends Abteilung {
     public void produzieren(String name, int anzahl, int herstellkosten){
         // TODO anzahl = Kapazitätsgrenze ?!
         if(this.getMaschinenKapazität() >= anzahl) { // Prüfen, ob genügend Maschinenkapazität vorhanden ist
-            if (this.kennzahlen.liquiditätVorhanden(herstellkosten * anzahl, "herstellkosten")) {
+            if (this.kennzahlensammlung.liquiditätVorhanden(herstellkosten * anzahl, "herstellkosten")) {
                 Produkt produkt = new Produkt(name, anzahl, herstellkosten);
                 produzierteProdukte.put(produkt.getName(), produkt);
                 System.out.println(anzahl + " Produkte (" + name + ") produziert.");

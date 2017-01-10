@@ -9,7 +9,7 @@ public class Unternehmen {
 
 	private String passwort;
 	private String name;
-	private Kennzahlen kennzahlen;
+	private Kennzahlensammlung kennzahlensammlung;
 
 	private Map<String,Abteilung> abteilungen = new HashMap<String,Abteilung>();
 
@@ -17,7 +17,7 @@ public class Unternehmen {
 		super();
 		this.passwort = passwort;
 		this.name = name;
-		this.kennzahlen = new Kennzahlen(eigenkapital, fremdkapital);
+		this.kennzahlensammlung = new Kennzahlensammlung(this,eigenkapital, fremdkapital);
 		initDepartments();
 	}
 
@@ -26,12 +26,13 @@ public class Unternehmen {
 	 */
 	public void initDepartments()
 	{
-		abteilungen.put("marketing", new Marketing(kennzahlen));
-		abteilungen.put("finanzen", new Finanzen(kennzahlen));
-		abteilungen.put("FuE",new FuE(kennzahlen));
-		abteilungen.put("produktion", new Produktion(kennzahlen));
-		abteilungen.put("sozialeLeistungen", new SozialeLeistungen(kennzahlen));
-		abteilungen.put("vertrieb", new Vertrieb(kennzahlen, (Produktion) this.getAbteilung("produktion")));
+		abteilungen.put("marketing", new Marketing(kennzahlensammlung));
+		abteilungen.put("finanzen", new Finanzen(kennzahlensammlung));
+		abteilungen.put("FuE",new FuE(kennzahlensammlung));
+		abteilungen.put("produktion", new Produktion(kennzahlensammlung));
+		abteilungen.put("sozialeLeistungen", new SozialeLeistungen(kennzahlensammlung));
+		abteilungen.put("vertrieb", new Vertrieb(kennzahlensammlung, (Produktion) this.getAbteilung("produktion")));
+		abteilungen.put("hr", new HR(this,kennzahlensammlung));
 
 	}
 
@@ -57,7 +58,11 @@ public class Unternehmen {
 	{
 		return abteilungen.get(key);
 	}
-	public Kennzahlen getKennzahlen() {
-		return kennzahlen;
+	public Map<String,Abteilung> getAbteilungen()
+	{
+		return abteilungen;
+	}
+	public Kennzahlensammlung getKennzahlensammlung() {
+		return kennzahlensammlung;
 	}
 }

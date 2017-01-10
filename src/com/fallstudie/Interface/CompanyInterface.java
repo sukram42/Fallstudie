@@ -27,48 +27,11 @@ public class CompanyInterface {
     @Produces("application/json;charset=UTF-8")
     @Path("/{companyno}/{department}/employees/{anzahl}")
     public static Response newEmployee(@PathParam("companyno") int no, @PathParam("department") String department, @PathParam("anzahl") int anzahl) {
-        System.out.println(new String("angèle"));
+
 //        companies[no].getDepartment(department).addMitarbeiter(anzahl);
          return null;
 //        return Response.status(200).entity(new Gson().toJson(companies[no].getDepartment(department).getMitarbeiter())).build();
     }
 
-    /**
-     * Getter Methode für
-     * @param no
-     * @param department
-     *
-     * @return gib eine Response zurück mit Statuswert 200 und gibt JSON zurück
-     */
-    @GET
-    @Produces("application/json;charset=UTF-8")
-    @Path("/{companyno}/{department}/employees")
-    public static Response getEmployee(@PathParam("companyno") int no, @PathParam("department") String department) {
-
-        System.out.println(GameInterface.getCompanies());
-//        String erg = gson.toJson(companies[no].getDepartment(department).getMitarbeiter());
-        return null;
-//        return Response.status(200).entity(erg).build();
-    }
-
-
-
-
-    /**
-     * Löscht ein Unternehmen
-     * @return Response
-     */
-    @DELETE
-    public Response deleteCompany() {
-        int no = 0;
-        System.out.println("halloo" + no);
-        try {
-            GameInterface.setCompany(no,null);
-            return Response.status(200).entity("Unternehmen gelöscht").build();
-
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return Response.status(404).entity("Index zu hoch").build();
-        }
-    }
 
 }
