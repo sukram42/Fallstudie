@@ -13,7 +13,7 @@ public class UnternehmenTest {
 
         // ############################## UNTERNEHMEN 1 ##############################
         // Unternehmen erstellen:
-        Unternehmen unternehmen1 = new Unternehmen("Unternehmen 1", "kennwort", 100000, 100000);
+        Unternehmen unternehmen1 = new Unternehmen("Unternehmen 1", "kennwort", 100000);
 
 
 
@@ -49,7 +49,7 @@ public class UnternehmenTest {
 
         // ############################## UNTERNEHMEN 2 ##############################
         // Unternehmen erstellen:
-        Unternehmen unternehmen2 = new Unternehmen("Unternehmen 2", "kennwort", 100000, 100000);
+        Unternehmen unternehmen2 = new Unternehmen("Unternehmen 2", "kennwort", 100000);
 
         System.out.println("Unternehmen " + unternehmen2.getName() + " mit Eigenkapital in Höhe von " +
                 unternehmen2.getKennzahlensammlung().getEigenkapital() + " und Fremdkapital in Höhe von " +
