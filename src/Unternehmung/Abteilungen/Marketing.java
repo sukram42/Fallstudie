@@ -25,7 +25,7 @@ public class Marketing extends Abteilung {
         double impact = 0;
         int kosten = 0;
         switch (kampagne){
-            case "Plakate":
+            case "Social Media":
                 impact = 0.1;
                 kosten = 1000;
                 break;

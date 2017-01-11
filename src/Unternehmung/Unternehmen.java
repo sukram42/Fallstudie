@@ -13,11 +13,11 @@ public class Unternehmen {
 
 	private Map<String,Abteilung> abteilungen = new HashMap<String,Abteilung>();
 
-	public Unternehmen( String name,String passwort, float fremdkapital, float eigenkapital) {
+	public Unternehmen( String name,String passwort, float eigenkapital) {
 		super();
 		this.passwort = passwort;
 		this.name = name;
-		this.kennzahlensammlung = new Kennzahlensammlung(this,eigenkapital, fremdkapital);
+		this.kennzahlensammlung = new Kennzahlensammlung(this,eigenkapital);
 		initDepartments();
 	}
 
@@ -34,11 +34,6 @@ public class Unternehmen {
 		abteilungen.put("vertrieb", new Vertrieb(kennzahlensammlung, (Produktion) this.getAbteilung("produktion")));
 		abteilungen.put("hr", new HR(this,kennzahlensammlung));
 
-	}
-
-	
-	public Unternehmen(String name, String passwort, float fremdkapital) {
-		this(name,passwort,fremdkapital,10000);
 	}
 
 	// Getter und Setter:

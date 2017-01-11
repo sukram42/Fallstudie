@@ -39,14 +39,12 @@ public class Kennzahlensammlung {
     /**
      * Konstruktor zum Erstellen einen Kennzahlenobjekts eines Unternehmens (wird im Unternehmenskonstruktor aufgerufen)
      * @param eigenkapital muss bei Gründung des Unternehmens definiert werden
-     * @param fremdkapital muss bei Gründung des Unternehmens definiert werden
      */
-    public Kennzahlensammlung(Unternehmen unternehmen,double eigenkapital, double fremdkapital) {
+    public Kennzahlensammlung(Unternehmen unternehmen,double eigenkapital) {
         // TODO alle Defaultwerte definieren (zumindest solche, die nicht 0 sein sollen)
         this.eigenkapital = eigenkapital;
-        this.fremdkapital = fremdkapital;
         this.absatzrate = 0.2;
-        this.liquideMittel = eigenkapital + fremdkapital;
+        this.liquideMittel = eigenkapital;
         this.unternehmen = unternehmen;
 
         weicheKennzahlen.put("mitarbeiterzufriedenheit",new Mitarbeiterzufriedenheit(unternehmen));

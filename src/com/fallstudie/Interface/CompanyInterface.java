@@ -3,7 +3,9 @@ package com.fallstudie.Interface;
 import com.google.gson.Gson;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 
 @Path("/companies/{companyno}")
 public class CompanyInterface {

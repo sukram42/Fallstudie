@@ -90,6 +90,7 @@ public class Produktion extends Abteilung {
      */
     public void produzieren(String name, int anzahl, int herstellkosten){
         // TODO anzahl = Kapazitätsgrenze ?!
+        // TODO Kapazitätsgrenze muss global geprüft werden, sodass die Kapazität nicht durch mehrfaches Aufrufen der Methode ausgetrickst werden kann
         if(this.getMaschinenKapazität() >= anzahl) { // Prüfen, ob genügend Maschinenkapazität vorhanden ist
             if (this.kennzahlensammlung.liquiditätVorhanden(herstellkosten * anzahl, "herstellkosten")) {
                 Produkt produkt = new Produkt(name, anzahl, herstellkosten);
