@@ -9,9 +9,9 @@ public class Unternehmen {
 
 	private String passwort;
 	private String name;
-	private Kennzahlensammlung kennzahlensammlung;
+	private transient Kennzahlensammlung kennzahlensammlung;
 
-	private Map<String,Abteilung> abteilungen = new HashMap<String,Abteilung>();
+	private transient Map<String,Abteilung> abteilungen = new HashMap<String,Abteilung>();
 
 	public Unternehmen( String name,String passwort, float eigenkapital) {
 		super();
