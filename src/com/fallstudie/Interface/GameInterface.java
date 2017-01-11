@@ -8,9 +8,7 @@ import com.google.gson.Gson;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.HashMap;
@@ -66,17 +64,6 @@ public class GameInterface implements ServletContextListener{
         }
     }
 
-    /**
-     * Gibt einzelndes Unternehmen zurück
-     *
-     * @return Unternehmen in JSON Form
-     */
-    @GET
-    @Secured
-    @Path("companies")
-    public Response getCompanies(@Context SecurityContext securityContext) {
-        return Response.status(200).entity(gson.toJson(game.getUnternehmenByName(securityContext.getUserPrincipal().getName()))).build();
-    }
 
     @GET
     @Path("auth")

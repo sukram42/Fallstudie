@@ -68,7 +68,7 @@ public class Game extends TimerTask{
         return companies;
     }
 
-    public Unternehmen getUnternehmenByName(String name) {
+    public static Unternehmen getUnternehmenByName(String name) {
         for (Unternehmen u : companies) {
             if (name.equals(u.getName()))
                 return u;
