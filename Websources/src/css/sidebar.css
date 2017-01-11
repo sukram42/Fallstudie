@@ -63,16 +63,19 @@
 }
 
 .sidebar .sidebar-wrapper {
+    background-image: url("../../../src/img/sidebar-a.png");
+    background-color: rgba(255, 255, 255, 0.2);
     position: relative;
     max-height: none;
     min-height: 100%;
     overflow: hidden;
     width: 260px;
     z-index: 4;
-    box-shadow: inset -1px 0px 0px 0px #1C1D21;
+   box-shadow: none;
 }
 
 .sidebar .sidebar-background {
+
     position: absolute;
     z-index: 1;
     height: 100%;
@@ -136,7 +139,7 @@
 
 .sidebar .nav li.active > a:before,
 .off-canvas-sidebar .nav li.active > a:before {
-    border-right: 17px solid #1C1D21;
+    border-right: 17px solid transparent;
     border-top: 17px solid transparent;
     border-bottom: 17px solid transparent;
     content: "";
