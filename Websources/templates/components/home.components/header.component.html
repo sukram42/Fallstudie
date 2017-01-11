@@ -1,3 +1,41 @@
-<div class="col-md-8">
-    <h3> {{companyName}}<small> Token: {{token}}</small></h3>
-</div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+
+        <!--Responsive-->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+            <h3 class="navbar-brand"> {{companyName}}
+                <small> Token: {{token}}</small>
+            </h3>
+        </div>
+
+        <!--Elemente-->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li style="padding-left: 10px;padding-right: 10px">
+                    <div class="panel panel-default navbar-brand">
+                        <i class="fa fa-database" aria-hidden="true"></i> 6.000/20.000
+                    </div>
+                </li>
+                
+                <li style="padding-left: 10px;padding-right: 10px">
+                    <div class="panel panel-default navbar-brand">
+                        <i class="fa fa-eur" aria-hidden="true"></i> 70.000€
+                    </div>
+                </li>
+
+
+                <li style="padding-left: 10px;padding-right: 10px">
+                    <button type="button" class="btn btn-success navbar-btn navbar-right">
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i> Logout
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
