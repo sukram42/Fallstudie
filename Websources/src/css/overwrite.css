@@ -10,26 +10,31 @@ fieldset[disabled] .btn-primary.focus {
     background-color: #FFAD29;
     border-color: #FFAD29;
 }
+
 .btn-primary .badge {
     color: #FFAD29;
     background-color: #fff;
 }
+
 .btn-success {
     color: #fff;
     background-color: #FFAD29;
     border-color: #FFAD29;
 }
+
 .btn-success:focus,
 .btn-success.focus {
     color: #fff;
     background-color: #FFAD29;
     border-color: #255625;
 }
+
 .btn-success:hover {
     color: #fff;
     background-color: #D69122;
     border-color: #D69122;
 }
+
 .btn-success:active,
 .btn-success.active,
 .open > .dropdown-toggle.btn-success {
@@ -37,6 +42,7 @@ fieldset[disabled] .btn-primary.focus {
     background-color: #FFAD29;
     border-color: #FFAD29;
 }
+
 .btn-success:active:hover,
 .btn-success.active:hover,
 .open > .dropdown-toggle.btn-success:hover,
@@ -50,6 +56,7 @@ fieldset[disabled] .btn-primary.focus {
     background-color: #FFAD29;
     border-color: #255625;
 }
+
 .btn-success.disabled:hover,
 .btn-success[disabled]:hover,
 fieldset[disabled] .btn-success:hover,
@@ -62,6 +69,7 @@ fieldset[disabled] .btn-success.focus {
     background-color: #FFAD29;
     border-color: #FFAD29;
 }
+
 .btn-success .badge {
     color: #FFAD29;
     background-color: #fff;
@@ -125,13 +133,16 @@ fieldset[disabled] .btn-success.focus {
 .label-primary {
     background-color: #FFAD29;
 }
+
 .label-primary[href]:hover,
 .label-primary[href]:focus {
     background-color: #D69122;
 }
+
 .label-success {
     background-color: #FFAD29;
 }
+
 .label-success[href]:hover,
 .label-success[href]:focus {
     background-color: #FFAD29;
@@ -148,6 +159,7 @@ a.thumbnail:focus,
 a.thumbnail.active {
     border-color: #FFAD29;
 }
+
 .progress-bar {
     float: left;
     width: 0;
@@ -163,6 +175,7 @@ a.thumbnail.active {
     -o-transition: width .6s ease;
     transition: width .6s ease;
 }
+
 .progress-bar-success {
     background-color: #FFAD29;
 }
@@ -179,18 +192,22 @@ a.thumbnail.active {
 .panel-primary {
     border-color: #FFAD29;
 }
+
 .panel-primary > .panel-heading {
     color: #fff;
     background-color: #FFAD29;
     border-color: #FFAD29;
 }
+
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
     border-top-color: #FFAD29;
 }
+
 .panel-primary > .panel-heading .badge {
     color: #FFAD29;
     background-color: #fff;
 }
+
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {
     border-bottom-color: #FFAD29;
 }
@@ -200,6 +217,7 @@ a.thumbnail.active {
     background-color: #FFAD29;
     border-color: #ffad29;
 }
+
 .btn-primary:hover {
     color: #fff;
     background-color: #D69122;
@@ -211,6 +229,7 @@ a.thumbnail.active {
     width: auto;
     height: auto;
 }
+
 #carousel-custom .carousel-control {
     color: #FFAD29;
     background-image: none;
@@ -219,13 +238,13 @@ a.thumbnail.active {
     opacity: 1;
 }
 
-
-#carousel-custom .carousel-caption{
+/*#carousel-custom .carousel-caption {
     color: #FFAD29;
     text-shadow: none;
     padding-bottom: 50px;
     opacity: 1;
-}
+}*/
+
 #carousel-custom .carousel-indicators {
     color: #FFAD29;
     background-image: none;
@@ -235,7 +254,6 @@ a.thumbnail.active {
     filter: alpha(opacity=50);
     opacity: 1;
 }
-
 
 #carousel-custom .carousel-indicators li {
     text-indent: 0;
@@ -251,38 +269,53 @@ a.thumbnail.active {
     height: 10px;
     margin: 1px;
     cursor: pointer;
-    background-color: #000\9;
+    background-color: #000 \9;
     border: 0px solid;
 }
-.carousel-indicators .active{
+
+.carousel-indicators .active {
     background-color: transparent;
 }
-#carousel-custom .carousel-indicators li i.off{
+
+#carousel-custom .carousel-indicators li i.off {
     display: none;
 }
 
 #carousel-custom .carousel-indicators li.active i.on {
     display: none;
 }
+
 #carousel-custom .carousel-indicators li.active i.off {
     display: inline-block;
-
 
 }
 
 #carousel-custom .carousel-outer {
-position: relative;
+    position: relative;
 }
-#carousel-icon-left{
-    font-size: 40px;
-    margin-top: 80px;
-}
-#carousel-icon-right{
-    font-size: 40px;
+
+#carousel-icon-left {
     margin-top: 80px;
 }
 
-#loading{
+#carousel-icon-right {
+    margin-top: 80px;
+}
+
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height: auto;
+}
+#loading {
     color: #FFAD29;
     align-content: center;
     text-align: center;
