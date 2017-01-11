@@ -12,7 +12,7 @@ import java.util.TimerTask;
  */
 public class Game extends TimerTask{
 
-    private final int COUNTER_INTERVALL = 1800000;
+    private final int COUNTER_INTERVALL = 6000;//1800000; //halbe Stunde
 
     private long counter = 0;
 
@@ -22,8 +22,8 @@ public class Game extends TimerTask{
      * Konstruktor für ein Spiel mit 2 Spielern
      */
     public Game(){
-//        this.unternehmen1 = unternehmen1;
-//        this.unternehmen2 = unternehmen2;
+
+        System.out.println("Ein Neues Spiel wird erstellt");
 
         Timer timer = new Timer(true);
         timer.schedule(this,0,COUNTER_INTERVALL);
@@ -83,7 +83,15 @@ public class Game extends TimerTask{
     public void run() {
         counter++;
         System.out.println("THE TIMER SAIS: " + counter);
-        getCompanies().get(0).getKennzahlensammlung().berechnen();
+    }
+
+    /**
+     * Methode zum Zurückgeben des aktuellen Timervalues
+     * @return Counter value
+     */
+    public long getTime()
+    {
+        return counter;
     }
 }
 

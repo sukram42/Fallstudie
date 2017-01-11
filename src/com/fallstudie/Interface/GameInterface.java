@@ -21,7 +21,7 @@ public class GameInterface implements ServletContextListener{
     private  Gson gson = new Gson();
     private  static Map<Unternehmen, String> auth = new HashMap<>();
 
-    private  Game game;
+    private static Game game;
 
     /**
      * Erstellt eine neue Company
@@ -35,28 +35,23 @@ public class GameInterface implements ServletContextListener{
     @POST
     @Path("companies")
     public  Response newCompany(String msg) {
-        System.out.println(gson.toJson(new Unternehmen("district gmbh", "wurst", 1000f)));
        //jsonCompany ist das Unternehmen, welches mit dem Json file in msg übergeben wird.
         Unternehmen jsonCompany = gson.fromJson(msg, Unternehmen.class);
         //in company wird ein neues Unternehmen erstellt.
         Unternehmen company = new Unternehmen(jsonCompany.getName(),jsonCompany.getPasswort(),1000f);
             if(!game.getCompanies().contains(company)) {
                 game.getCompanies().add(company);
-                return Response.status(200).entity(gson.toJson(company)).build();
+                return Response.status(200).entity(company.toString()).build();
             }
         return Response.status(218).entity(company.toString()).build();
     }
 
-//    /**
-//     * Gibt alle Unternehmen zurück.
-//     *
-//     * @return Unternehmen als Array in JSON Form
-//     */
-//    @GET
-//    @Path("companies")
-//    public  Response getCompaniesPOST() {
-//        return Response.status(200).entity(gson.toJson(companies)).build();
-//    }
+    @GET
+    @Path("time")
+    public String getTimer()
+    {
+        return "" + game.getTime();
+    }
 
     @POST
     @Produces("application/json")
@@ -146,6 +141,7 @@ public class GameInterface implements ServletContextListener{
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+        System.out.println("Spiel wird generiert");
         if(game == null)
         {
             game = new Game();
@@ -154,7 +150,8 @@ public class GameInterface implements ServletContextListener{
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-
+        System.out.println("Und bam kaputt");
+        game = null;
     }
 }
 

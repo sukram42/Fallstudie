@@ -9,7 +9,7 @@ import Unternehmung.Unternehmen;
  */
 public class Kennzahl {
 
-    protected Unternehmen unternehmen;
+    protected transient Unternehmen unternehmen;
     private float basiswert; // Grundwert zur Berechnung (z.B. Vergleich mit Industriedurchschnitt
     private float modifier; // Variable zum Erhöhen (z.B. durch Investition) oder Verringern (z.B. durch längere Zeit nichts tun) der Kennzahl
                             // bei (z.B. nichtmonetären) Kennzahlensammlung, die keinen modifier haben sollen diesen einfach auf 0 setzen
