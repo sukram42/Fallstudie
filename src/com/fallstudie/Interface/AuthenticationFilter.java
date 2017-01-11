@@ -4,8 +4,6 @@ package com.fallstudie.Interface;
 
 
 
-import Unternehmung.Unternehmen;
-
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.NotAuthorizedException;
