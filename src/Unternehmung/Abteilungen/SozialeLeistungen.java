@@ -1,7 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Unternehmung.Abteilung;
-import Unternehmung.Kennzahlen;
+import Unternehmung.Kennzahlensammlung;
 
 /**
  * Klasse, die eine Abteilung repräsentiert, die für soziale Leistungen verantwortlich ist
@@ -11,10 +11,10 @@ public class SozialeLeistungen extends Abteilung {
 
     /**
      * Konstruktor, zum Erstellen der Abteilung für soziale Leistungen
-     * @param kennzahlen Kennzahlenobjekt wird später benötigt, um Kennzahlen laufend fortzuschreiben / zu berechnen
+     * @param kennzahlensammlung Kennzahlenobjekt wird später benötigt, um Kennzahlensammlung laufend fortzuschreiben / zu berechnen
      */
-    public SozialeLeistungen(Kennzahlen kennzahlen) {
-        super(kennzahlen);
+    public SozialeLeistungen(Kennzahlensammlung kennzahlensammlung) {
+        super(kennzahlensammlung);
     }
 
     /**

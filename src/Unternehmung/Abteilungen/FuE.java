@@ -1,7 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Unternehmung.Abteilung;
-import Unternehmung.Kennzahlen;
+import Unternehmung.Kennzahlensammlung;
 
 /**
  * Klasse, die die Abteilung Forschung und Entwicklung repräsentiert
@@ -11,9 +11,9 @@ public class FuE extends Abteilung {
 
     /**
      * Konstruktor, zum Erstellen der Abteilung Forschung & Entwicklung
-     * @param kennzahlen Kennzahlenobjekt wird später benötigt, um Kennzahlen laufend fortzuschreiben / zu berechnen
+     * @param kennzahlensammlung Kennzahlenobjekt wird später benötigt, um Kennzahlensammlung laufend fortzuschreiben / zu berechnen
      */
-    public FuE(Kennzahlen kennzahlen) {
-        super(kennzahlen);
+    public FuE(Kennzahlensammlung kennzahlensammlung) {
+        super(kennzahlensammlung);
     }
 }

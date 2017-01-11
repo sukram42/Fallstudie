@@ -1,7 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Unternehmung.Abteilung;
-import Unternehmung.Kennzahlen;
+import Unternehmung.Kennzahlensammlung;
 
 /**
  * Klasse, die die Abteilung Marketing repräsentiert
@@ -11,10 +11,10 @@ public class Marketing extends Abteilung {
 
     /**
      * Konstruktor, zum Erstellen der Abteilung Marketing
-     * @param kennzahlen Kennzahlenobjekt wird später benötigt, um Kennzahlen laufend fortzuschreiben / zu berechnen
+     * @param kennzahlensammlung Kennzahlenobjekt wird später benötigt, um Kennzahlensammlung laufend fortzuschreiben / zu berechnen
      */
-    public Marketing(Kennzahlen kennzahlen) {
-        super(kennzahlen);
+    public Marketing(Kennzahlensammlung kennzahlensammlung) {
+        super(kennzahlensammlung);
     }
 
     /**
@@ -42,8 +42,8 @@ public class Marketing extends Abteilung {
                 kosten = 10000;
                 break;
         }
-        if (this.kennzahlen.liquiditätVorhanden(kosten, "sonstige Kosten")){
-            this.kennzahlen.setBekanntheitsgrad(this.kennzahlen.getBekanntheitsgrad() + impact);
+        if (this.kennzahlensammlung.liquiditätVorhanden(kosten, "sonstige Kosten")){
+            this.kennzahlensammlung.setBekanntheitsgrad(this.kennzahlensammlung.getBekanntheitsgrad() + impact);
             System.out.println("Marketingkampagne \"" + kampagne + "\" gestartet. Kosten: " + kosten + " €, Bekanntheitsgrad steigt um " + impact);
         }
     }
@@ -70,8 +70,8 @@ public class Marketing extends Abteilung {
                 kosten = 10000;
                 break;
         }
-        if (this.kennzahlen.liquiditätVorhanden(kosten, "sonstige Kosten")) {
-            this.kennzahlen.setAbsatzrate(this.kennzahlen.getAbsatzrate() + impact);
+        if (this.kennzahlensammlung.liquiditätVorhanden(kosten, "sonstige Kosten")) {
+            this.kennzahlensammlung.setAbsatzrate(this.kennzahlensammlung.getAbsatzrate() + impact);
             System.out.println("Marktforschung durchgeführt: Kosten " + kosten + " €, Erhöhung der Verkaufsrate um " + impact);
         }else {
             System.out.println("Nicht genügend Liquidität vorhanden!");

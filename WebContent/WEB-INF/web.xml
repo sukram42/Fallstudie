@@ -28,4 +28,7 @@
         <servlet-name>jersey-serlvet</servlet-name>
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
+    <listener>
+        <listener-class>com.fallstudie.Interface.GameInterface</listener-class>
+    </listener>
 </web-app>

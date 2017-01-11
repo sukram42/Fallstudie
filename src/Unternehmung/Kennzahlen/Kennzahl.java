@@ -1,25 +1,28 @@
-package Unternehmung;
+package Unternehmung.Kennzahlen;
+
+import Unternehmung.Unternehmen;
 
 /**
- * Klasse, die eine Kennzahl darstellt - hauptsächlich für "weiche" Kennzahlen gedacht
+ * Klasse, die eine Kennzahl darstellt - hauptsächlich für "weiche" Kennzahlensammlung gedacht
  * für jede Kennzahl wird ein Objekt dieser Klasse erstellt
  * Created by lucadommes on 29.12.2016.
  */
 public class Kennzahl {
 
+    protected Unternehmen unternehmen;
     private float basiswert; // Grundwert zur Berechnung (z.B. Vergleich mit Industriedurchschnitt
     private float modifier; // Variable zum Erhöhen (z.B. durch Investition) oder Verringern (z.B. durch längere Zeit nichts tun) der Kennzahl
-                            // bei (z.B. nichtmonetären) Kennzahlen, die keinen modifier haben sollen diesen einfach auf 0 setzen
+                            // bei (z.B. nichtmonetären) Kennzahlensammlung, die keinen modifier haben sollen diesen einfach auf 0 setzen
     private float wert; // finaler Wert der Kennzahl
 
     /**
      * Standardkonstruktor
      */
-    public Kennzahl(){
-        // TODO Defaultwerte definieren ?! (z.B. 0?)
-        this.setBasiswert((float) 0.01);
-        this.setModifier(0);
-        wertBerechnen(this.getBasiswert(), this.getModifier());
+    public Kennzahl(Unternehmen unternehmen){
+        System.out.println("UNTERNEHMEN : " + unternehmen  );
+        this.unternehmen = unternehmen;
+        this.basiswert = 0;
+        this.modifier = 0;
     }
 
     /**
@@ -30,26 +33,22 @@ public class Kennzahl {
     public Kennzahl(float basiswert, float modifier){
         this.basiswert = basiswert;
         this.modifier = modifier;
-        wertBerechnen(basiswert, modifier);
+        berechnen();
     }
 
     /**
      * Funktion zur Neuberechnung des finalen Wertes der Kennzahl
      * soll bei Bedarf von Subklassen überschrieben werden
-     * @param basiswert siehe oben
-     * @param modifier siehe oben
      * @return finaler Wert der Kennzahl
      */
-    public void wertBerechnen(float basiswert, float modifier){
-        this.setBasiswert(basiswert);
-        this.setModifier(modifier);
-        if (basiswert * modifier >= 1) {
-            this.setWert((float) 1);
+    public float berechnen(){
+
+        if (basiswert + modifier >= 1) {
+            wert = (float) 1;
         }
-        this.setWert(basiswert * modifier);
+        wert  = (float)(basiswert + modifier);
+        return getWert();
     }
-
-
 
     // Getter und Setter:
     public float getBasiswert() {
@@ -64,15 +63,15 @@ public class Kennzahl {
         return modifier;
     }
 
-    public void setModifier(float modifier) {
-        this.modifier = modifier;
+    public void addModifier(float x)
+    {
+        modifier +=x;
     }
 
     public float getWert() {
-        return wert;
+        return (float)(0.5*Math.tanh(4 * wert - 2) + 0.5);
     }
 
-    public void setWert(float wert) {
-        this.wert = wert;
-    }
+
+
 }
