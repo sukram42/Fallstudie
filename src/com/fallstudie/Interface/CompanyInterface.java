@@ -6,7 +6,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-²
+//² // <- TODO wie kommt das da hin? ein Versehen? hat einen Error ausgelöst ;)
 @Path("/companies/{companyno}")
 public class CompanyInterface {
 
