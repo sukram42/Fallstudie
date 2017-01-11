@@ -3070,3 +3070,28 @@ body > .navbar-collapse[data-color="purple"]:after {
     -webkit-overflow-scrolling: touch;
   }
 }
+/* Button */
+.right{
+  float:right;
+  display: block;
+  padding-left: 5px;
+
+}
+.left{
+  float:left;
+  display: block;
+}
+
+.mid{
+  display: block;
+  position: absolute;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+h6{
+  padding-bottom: 5px;
+}
+h4{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

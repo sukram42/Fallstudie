@@ -13,26 +13,22 @@
 	<meta name="viewport" content="width=device-width" />
 
 	<!--JQuery-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script	src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
 	<!--Bootstrap-->
-	<link href="src/css/overwrite.css" rel="stylesheet" />
-
-	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
 
 	<!--Own Styles-->
-	<link href="src/css/light-dashboard.css" rel="stylesheet" />
-	<link href="src/css/sidebar.css" rel="stylesheet" />
-	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css' />
-	<link href="src/css/landingpage.css" rel="stylesheet" />
-
-	<!--FontAwsome-->
+	<link href="src/css/light-dashboard.css" rel="stylesheet"/>
+	<link href="src/css/sidebar.css" rel="stylesheet"/>
+	<link href="src/css/overwrite.css" rel="stylesheet"/>
+	<link href="src/css/landingpage.css" rel="stylesheet"/>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'/>
+	<link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One|Rubik+One" rel="stylesheet"/>
 	<script src="https://use.fontawesome.com/8573f20f3e.js"></script>
-
 
 
 
@@ -48,6 +44,10 @@
 	<script src="node_modules/@angular/http/bundles/http.umd.js"></script>
 
 
+	<!--Own Scripts-->
+	<script type="text/javascript" src="src/js/script.js"></script>
+	<script type="text/javascript" src="src/js/formatter.js"></script>
+	<script type="text/javascript" src="src/js/light-dashboard.js"></script>
 	<script src="systemjs.config.js"></script>
 	<script>
         System.import('app').catch(function (err) {
@@ -60,9 +60,17 @@
 
 <body>
     <start-component>
-		<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-		<span class="sr-only">Loading...</span>
+		<div id="loading">
+			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+			<span class="sr-only">Loading...</span>
+		</div>
+
 	</start-component>
+	<script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+	</script>
 </body>
 
 

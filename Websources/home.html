@@ -18,6 +18,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
 
+
 	<!--Own Styles-->
 	<link href="src/css/light-dashboard.css" rel="stylesheet"/>
 	<link href="src/css/sidebar.css" rel="stylesheet"/>
@@ -48,9 +49,16 @@
 
 <body>
 	<home-component>
-		<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-		<span class="sr-only">Loading...</span>
+		<div id="loading">
+			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+			<span class="sr-only">Loading...</span>
+		</div>
 	</home-component>
+	<script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+	</script>
 </body>
 
 </html>
