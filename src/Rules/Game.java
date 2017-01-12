@@ -16,6 +16,8 @@ public class Game extends TimerTask{
 
     private static long counter = 0;
 
+    private static int day,mounth,quarter,year = 1;
+
     private static ArrayList<Unternehmen> companies = new ArrayList<>();
 
     /**
@@ -81,8 +83,34 @@ public class Game extends TimerTask{
      */
     @Override
     public void run() {
-        counter++;
+        updateCounter();
         System.out.println("THE TIMER SAIS: " + counter);
+    }
+
+    public void updateCounter() {
+
+        counter++;
+        if(mounth % 3 ==0){
+            if(mounth == 12){
+                mounth = 1;
+                year++;
+            }else{
+                quarter++;
+            }
+        }
+        if(mounth % 2 != 0){
+            if(day == 30){
+                day = 1;
+                mounth++;
+            }
+        }else{
+            if(day == 31){
+                day = 1;
+                mounth++;
+            }
+        }
+        day++;
+        System.out.println(day +" "+ mounth +" "+ quarter+" "+year);
     }
 
     /**
@@ -93,6 +121,11 @@ public class Game extends TimerTask{
     {
         return counter;
     }
+
+    public static void main(String[] args){
+        new Game();
+    }
+
 }
 
 
