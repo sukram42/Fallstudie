@@ -10,6 +10,7 @@ import javax.servlet.ServletContextListener;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.HashMap;
@@ -23,12 +24,11 @@ public class GameInterface implements ServletContextListener{
     private static Game game;
 
 
-
     @GET
     @Path("time")
-    public String getTimer()
+    public Response getTimer()
     {
-        return "" + game.getTime();
+        return Response.ok(game.getTimeString()).build();
     }
 
     @POST
@@ -43,7 +43,6 @@ public class GameInterface implements ServletContextListener{
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
     }
-
 
     @GET
     @Path("auth")

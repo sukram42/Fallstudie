@@ -1,9 +1,12 @@
 package com.fallstudie.Interface;
 
 import Rules.Game;
+import Unternehmung.Abteilung;
 import Unternehmung.Kennzahlen.Kennzahl;
+import Unternehmung.Mitarbeiter;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -51,6 +54,25 @@ public class CompanyInterface {
         return Response.status(200).entity(gson.toJson(getCompanyFromContext(securityContext))).build();
     }
 
+    @POST
+    @Secured
+    @Path("employees")
+    public Response createEmployee(@Context SecurityContext context, String data)
+    {
+        JsonObject object = gson.fromJson(data, JsonObject.class);
+
+        Unternehmen unternehmen = getCompanyFromContext(context);
+        Abteilung abteilung1 = unternehmen.getAbteilung(object.get("abteilung").getAsString());
+        if(abteilung1 != null)
+        {
+            abteilung1.addMitarbeiter(object.get("anzahl").getAsInt(),object.get("gehalt").getAsInt());
+        }
+        else
+            return Response.serverError().build();
+
+        return Response.ok().build();
+    }
+
     @GET
     @Secured
     @Path("keyfigures/soft/{keyfigure}")
@@ -68,7 +90,8 @@ public class CompanyInterface {
 
 
     private Unternehmen getCompanyFromContext(SecurityContext context) {
-        return Game.getUnternehmenByName(context.getUserPrincipal().getName());
+
+        return context!=null?Game.getUnternehmenByName(context.getUserPrincipal().getName()):null;
     }
 
 }

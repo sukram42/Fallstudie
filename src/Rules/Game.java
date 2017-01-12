@@ -2,9 +2,8 @@ package Rules;
 
 import Unternehmung.Unternehmen;
 
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Hilfsklasse, um z.B. den Gewinner eines Spiels festzulegen
@@ -12,9 +11,10 @@ import java.util.TimerTask;
  */
 public class Game extends TimerTask{
 
-    private final int COUNTER_INTERVALL = 6000;//1800000; //halbe Stunde
-
+    private static final int COUNTER_INTERVALL = 1000;//1800000; //halbe Stunde
     private static long counter = 0;
+
+    private static Calendar gameCalendar = new GregorianCalendar(2010,1,1);
 
     private static int day,mounth,quarter,year = 1;
 
@@ -83,34 +83,12 @@ public class Game extends TimerTask{
      */
     @Override
     public void run() {
+        counter++;
         updateCounter();
-        System.out.println("THE TIMER SAIS: " + counter);
     }
 
     public void updateCounter() {
-
-        counter++;
-        if(mounth % 3 ==0){
-            if(mounth == 12){
-                mounth = 1;
-                year++;
-            }else{
-                quarter++;
-            }
-        }
-        if(mounth % 2 != 0){
-            if(day == 30){
-                day = 1;
-                mounth++;
-            }
-        }else{
-            if(day == 31){
-                day = 1;
-                mounth++;
-            }
-        }
-        day++;
-        System.out.println(day +" "+ mounth +" "+ quarter+" "+year);
+        gameCalendar.add(Calendar.DAY_OF_MONTH, 1);
     }
 
     /**
@@ -120,6 +98,12 @@ public class Game extends TimerTask{
     public static long getTime()
     {
         return counter;
+    }
+
+    public static String getTimeString()
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
+        return sdf.format(gameCalendar.getTime());
     }
 
     public static void main(String[] args){

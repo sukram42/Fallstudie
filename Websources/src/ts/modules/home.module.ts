@@ -22,6 +22,7 @@ import {MarketingComponent} from "./components/home.components/marketing.compone
 import {HumanRessourcesComponent} from "./components/home.components/human-ressources.component";
 import {AccountsComponent} from "./components/home.components/accounts.component";
 import {KeyfiguresComponent} from "./components/home.components/dashboard.components/keyfigures.component";
+import {NewEmployeeComponent} from "./components/home.components/human-ressources.component/new-employee.component";
 
 @NgModule({
     imports: [
@@ -76,7 +77,8 @@ import {KeyfiguresComponent} from "./components/home.components/dashboard.compon
                    MarketingComponent,
                    HumanRessourcesComponent,
                    AccountsComponent,
-                   KeyfiguresComponent
+                   KeyfiguresComponent,
+                   NewEmployeeComponent
     ],
 
     bootstrap:    [HomeComponent],
