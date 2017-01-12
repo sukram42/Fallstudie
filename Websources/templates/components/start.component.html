@@ -1,3 +1,43 @@
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="meinModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#login" aria-controls="login" role="tab" data-toggle="tab"
+                                   color="green">Login</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#registrierung" aria-controls="registrierung" role="tab"
+                                   data-toggle="tab">Registrierung</a>
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+
+                            <!--LOGIN TAB-->
+                            <div id="login" role="tabpanel" class="tab-pane active">
+                                <login-formular>Lade Login</login-formular>
+                            </div>
+                            <!-- REGISTRIERUNG -->
+                            <div role="tabpanel" class="tab-pane" id="registrierung">
+                                <register-formular>Load Login</register-formular>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Schließen"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="content">
     <div class="background-wrap">
         <video id="video-bg-elem" preload="auto" autoplay="true" loop="loop" muted="muted">
@@ -5,6 +45,37 @@
             Video not supported
         </video>
     </div>
+
+
+    <nav class="navbar navbar-default navbar-fixed-top" id="headerlandingpage">
+        <div class="container-fluid">
+            <!--Responsive-->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <!--Elemente-->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <button type="button" class="btn btn-success navbar-btn navbar-right">
+                            <i class="fa fa-users" aria-hidden="true"></i> Spieler
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-success navbar-btn navbar-right">
+                            <i class="fa fa-th-list" aria-hidden="true"></i> Highscores
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
     <div class="content">
         <!--<img class="displayed" src="assets/img/logo.png" />--->
         <div id="heading">
@@ -16,47 +87,11 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
 
-                        <button class="btn btn-warning" type="button" data-toggle="collapse"
-                                data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Jetzt Loslegen!
-                        </button>
-                        <!--COLLAPSE-->
-                    <div class="collapse" id="collapseExample">
-                        <!--PANEL-->
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-10">
-                                        <!-- Nav tabs -->
-                                        <ul class="nav nav-tabs" role="tablist">
-                                            <li role="presentation" class="active">
-                                                <a href="#login" aria-controls="login" role="tab" data-toggle="tab"
-                                                   color="green">Login</a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a href="#registrierung" aria-controls="registrierung" role="tab"
-                                                   data-toggle="tab">Registrierung</a>
-                                            </li>
-                                        </ul>
-                                        <!-- Tab panes -->
-                                        <div class="tab-content">
+                    <!-- Button, der das Modal aufruft -->
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">
+                        Jetzt Loslegen!
+                    </button>
 
-                                            <!--LOGIN TAB-->
-                                            <div id="login" role="tabpanel" class="tab-pane active">
-                                                <login-formular>Lade Login</login-formular>
-                                            </div>
-                                            <!-- REGISTRIERUNG -->
-                                            <div role="tabpanel" class="tab-pane" id="registrierung">
-                                                <register-formular>Load Login</register-formular>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-md-4">
                 </div>

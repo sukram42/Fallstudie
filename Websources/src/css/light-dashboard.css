@@ -3095,3 +3095,27 @@ h4{
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+
+#header{
+  position: fixed;
+  top: 0px;
+  right:0px;
+  left: 260px;
+
+}
+.footer{
+  position: fixed;
+  bottom: 0px;
+  right:0px;
+  left: 260px;
+  margin-top: 10px;
+}
+#headerlandingpage{
+  background-color: transparent;
+  border: transparent;
+}
+#headerlandingpage .btn{
+  background-color: transparent;
+  border: 3px;
+}
