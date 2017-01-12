@@ -17,7 +17,7 @@ import {HomeService} from "../../services/home.service";
 
 export class HeaderComponent {
     companyName;
-    token;
+    time;
 
 
     constructor(private homeService : HomeService){
@@ -26,11 +26,10 @@ export class HeaderComponent {
 
     init()
     {
-        this.token = this.homeService.getToken();
+        this.homeService.getTime().subscribe(data=>this.time = data);
         this.homeService.getCompany()
             .subscribe(data => this.companyName = data.name,
                 err => alert(err));
-
     }
 
 }

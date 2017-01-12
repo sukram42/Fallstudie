@@ -20,7 +20,7 @@ export class RegisterFormularService {
         var params = {name: companyname, passwort: password};
         var headers = new Headers();
         // headers.append('Content-Type','application/x-www-form-urlencoded');
-        return this.http.post('http://localhost:8080/Fallstudie-0.0.1-SNAPSHOT/rest/companies', params, {headers})
+        return this.http.post('http://localhost:8080/rest/companies', params, {headers})
             .map(response => response.text());
     }
 

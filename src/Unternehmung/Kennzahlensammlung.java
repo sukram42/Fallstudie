@@ -107,6 +107,10 @@ public class Kennzahlensammlung {
         return false;
     }
 
+    public Kennzahl getWeicheKennzahl(String kennzahl){
+            return weicheKennzahlen.containsKey(kennzahl)?weicheKennzahlen.get(kennzahl):null;
+    }
+
     // laufende Fortschreibung von Kennzahlensammlung:
     /**
      * Funktion, die Herstellkosten fortschreibt. Wird aufgerufen von Produktion.produzieren()
