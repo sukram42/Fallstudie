@@ -5,9 +5,10 @@
  * Created by boebel on 04.01.2017.
  */
 import {Injectable} from '@angular/core';
-import 'rxjs/add/operator/map';
 import {Http, Headers} from "@angular/http";
 
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 @Injectable()
 export class HomeService {
@@ -17,10 +18,22 @@ export class HomeService {
 
     getCompany() {
         let data;
-        return this.http.get('http://localhost:8080/Fallstudie-0.0.1-SNAPSHOT/rest/companies')
+        return this.http.get('http://localhost:8080/rest/companies')
             .map(response => response.json());
-
     }
+
+
+    getKeyFigure(name:string)
+    {
+        return  Observable.interval(10000).flatMap(()=>this.http.get('http://localhost:8080/rest/companies/keyfigures/soft/' + name)
+            .map(response => response.json()));
+    }
+
+    getTime()
+    {
+        return Observable.interval(5000).flatMap(()=>this.http.get('http://localhost:8080/rest/time').map(response => response.text()));
+    }
+
 
     getToken() {
         console.log("Der Token ist : ")
@@ -35,9 +48,8 @@ export class HomeService {
             headers.append("Authorization", "Bearer " + this.getToken());
         else return null;
 
-
-        return this.http.get('http://localhost:8080/Fallstudie-0.0.1-SNAPSHOT/rest/auth', {headers})
+        return this.http.get('http://localhost:8080/rest/auth', {headers})
             .map(response => response.text());
-//TODO weitermachen !
     }
+
 }

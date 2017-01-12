@@ -14,7 +14,7 @@ public class Game extends TimerTask{
 
     private final int COUNTER_INTERVALL = 6000;//1800000; //halbe Stunde
 
-    private long counter = 0;
+    private static long counter = 0;
 
     private static ArrayList<Unternehmen> companies = new ArrayList<>();
 
@@ -63,7 +63,7 @@ public class Game extends TimerTask{
 //    }
 
 
-    public ArrayList<Unternehmen> getCompanies()
+    public static ArrayList<Unternehmen> getCompanies()
     {
         return companies;
     }
@@ -89,7 +89,7 @@ public class Game extends TimerTask{
      * Methode zum Zurückgeben des aktuellen Timervalues
      * @return Counter value
      */
-    public long getTime()
+    public static long getTime()
     {
         return counter;
     }

@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -21,28 +22,7 @@ public class GameInterface implements ServletContextListener{
 
     private static Game game;
 
-    /**
-     * Erstellt eine neue Company
-     * Erwartet einen JSON Code
-     * <p>
-     * TODO Umschreiben in verschiedene Parameter
-     *
-     * @param msg JSON Code
-     * @return
-     */
-    @POST
-    @Path("companies")
-    public  Response newCompany(String msg) {
-       //jsonCompany ist das Unternehmen, welches mit dem Json file in msg übergeben wird.
-        Unternehmen jsonCompany = gson.fromJson(msg, Unternehmen.class);
-        //in company wird ein neues Unternehmen erstellt.
-        Unternehmen company = new Unternehmen(jsonCompany.getName(),jsonCompany.getPasswort(),1000f);
-            if(!game.getCompanies().contains(company)) {
-                game.getCompanies().add(company);
-                return Response.status(200).entity(company.toString()).build();
-            }
-        return Response.status(218).entity(company.toString()).build();
-    }
+
 
     @GET
     @Path("time")
