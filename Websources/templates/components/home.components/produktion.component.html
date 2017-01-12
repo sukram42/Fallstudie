@@ -36,7 +36,7 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                            <i class="fa fa-database" aria-hidden="true"></i>
+                                            <i class="fa fa-building" aria-hidden="true"></i>
                                             Warenlager
                                         </h4>
                                     </div>
@@ -64,6 +64,7 @@
                                     <div class="panel panel-default">
                                         <div class="panel-heading" role="tab" id="headingOne">
                                             <h4 class="panel-title">
+
                                                 <a role="button" data-toggle="collapse" data-parent="#accordion"
                                                    href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                     <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
@@ -75,6 +76,7 @@
                                              aria-labelledby="headingOne">
                                             <div class="panel-body">
                                                 <h4>Produktionsmaschine für Rucksäcke</h4>
+                                                <br>
                                                 <h6>Produktion:</h6>
                                                 <p>5.000 Rucksäcke pro Periode</p>
                                                 <h6>Leistung:</h6>
@@ -100,99 +102,109 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="panel panel-default">
-                                    <div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+                                    <div id='carousel-custom' class='carousel slide' data-ride='carousel' data-interval="false">
                                         <div class='carousel-outer'>
                                             <!-- Wrapper for slides -->
                                             <div class='carousel-inner'>
-                                                <div class='item active'>
+                                                <div class='item active' style="padding-left: 20px;padding-right: 15px;padding-top: 3px">
                                                     <img src="../../../src/img/produkte/rucksack.png"/>
-                                                    <div class="content table-responsive table-full-width">
-                                                        <table id="rucksackTable"
-                                                               class="table table-hover table-striped">
-                                                            <thead>
-                                                            <tr>
-                                                                <th data-field="imagelink"
-                                                                    data-formatter="imageFormatter">Image
-                                                                </th>
-                                                                <th data-field="vorname">Vorname</th>
-                                                                <th data-field="name">Name</th>
-                                                                <th data-field="adresse">Adresse</th>
-                                                                <th data-field="gender">Gender</th>
-                                                                <th data-formatter="tablebuttonFormatter"></th>
-                                                            </tr>
-                                                            </thead>
-                                                        </table>
-                                                    </div>
-                                                    <div class="carousel-caption">
-                                                        <h3>Rucksäcke</h3>
+
+                                                    <div class="panel panel-default">
+                                                        <!-- Standard-Panel-Inhalt -->
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <i class="fa fa-table" aria-hidden="true"></i> Rucksäcke
+                                                            </h4>
+                                                        </div>
+                                                        <!-- Tabelle -->
+                                                        <div class="content table-responsive table-full-width">
+                                                            <table id="rucksackTable" class="table table-hover table-striped">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th data-field="imagelink" data-formatter="imageFormatter">Bild</th>
+                                                                    <th data-field="vorname">Vorname</th>
+                                                                    <th data-field="name">Name</th>
+                                                                    <th data-field="gehalt">Gehalt</th>
+                                                                    <th data-field="gender">Abteilung</th>
+                                                                </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class='item'>
+                                                <div class='item' style="padding-left: 20px;padding-right: 15px;padding-top: 3px">
                                                     <img src="../../../src/img/produkte/technisch.png"/>
-                                                    <div class="content table-responsive table-full-width">
-                                                        <table id="rucksackTechTable"
-                                                               class="table table-hover table-striped">
-                                                            <thead>
-                                                            <tr>
-                                                                <th data-field="imagelink"
-                                                                    data-formatter="imageFormatter">Image
-                                                                </th>
-                                                                <th data-field="vorname">Vorname</th>
-                                                                <th data-field="name">Name</th>
-                                                                <th data-field="adresse">Adresse</th>
-                                                                <th data-field="gender">Gender</th>
-                                                                <th data-formatter="tablebuttonFormatter"></th>
-                                                            </tr>
-                                                            </thead>
-                                                        </table>
-                                                    </div>
-                                                    <div class="carousel-caption">
-                                                        <h3>Technische Rucksäcke</h3>
+                                                    <div class="panel panel-default">
+                                                        <!-- Standard-Panel-Inhalt -->
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <i class="fa fa-table" aria-hidden="true"></i> Technische Rucksäcke
+                                                            </h4>
+                                                        </div>
+                                                        <!-- Tabelle -->
+                                                        <div class="content table-responsive table-full-width">
+                                                            <table id="rucksackTechTable" class="table table-hover table-striped">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th data-field="imagelink" data-formatter="imageFormatter">Bild</th>
+                                                                    <th data-field="vorname">Vorname</th>
+                                                                    <th data-field="name">Name</th>
+                                                                    <th data-field="gehalt">Gehalt</th>
+                                                                    <th data-field="gender">Abteilung</th>
+                                                                </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class='item'>
+                                                <div class='item' style="padding-left: 20px;padding-right: 15px;padding-top: 3px">
                                                     <img src="../../../src/img/produkte/duffel.png"/>
-                                                    <div class="content table-responsive table-full-width">
-                                                        <table id="duffelTable" class="table table-hover table-striped">
-                                                            <thead>
-                                                            <tr>
-                                                                <th data-field="imagelink"
-                                                                    data-formatter="imageFormatter">Image
-                                                                </th>
-                                                                <th data-field="vorname">Vorname</th>
-                                                                <th data-field="name">Name</th>
-                                                                <th data-field="adresse">Adresse</th>
-                                                                <th data-field="gender">Gender</th>
-                                                                <th data-formatter="tablebuttonFormatter"></th>
-                                                            </tr>
-                                                            </thead>
-                                                        </table>
-                                                    </div>
-                                                    <div class="carousel-caption">
-                                                        <h3>Duffels</h3>
+                                                    <div class="panel panel-default">
+                                                        <!-- Standard-Panel-Inhalt -->
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <i class="fa fa-table" aria-hidden="true"></i> Duffels
+                                                            </h4>
+                                                        </div>
+                                                        <!-- Tabelle -->
+                                                        <div class="content table-responsive table-full-width">
+                                                            <table id="duffelTable" class="table table-hover table-striped">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th data-field="imagelink" data-formatter="imageFormatter">Bild</th>
+                                                                    <th data-field="vorname">Vorname</th>
+                                                                    <th data-field="name">Name</th>
+                                                                    <th data-field="gehalt">Gehalt</th>
+                                                                    <th data-field="gender">Abteilung</th>
+                                                                </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class='item'>
+                                                <div class='item' style="padding-left: 20px;padding-right: 15px;padding-top: 3px">
                                                     <img src="../../../src/img/produkte/gepaeck.png"/>
-                                                    <div class="carousel-caption">
-                                                        <h3>Gepäcktaschen</h3>
-                                                    </div>
-                                                    <div class="content table-responsive table-full-width">
-                                                        <table id="gepaeckTable"
-                                                               class="table table-hover table-striped">
-                                                            <thead>
-                                                            <tr>
-                                                                <th data-field="imagelink"
-                                                                    data-formatter="imageFormatter">Image
-                                                                </th>
-                                                                <th data-field="vorname">Vorname</th>
-                                                                <th data-field="name">Name</th>
-                                                                <th data-field="adresse">Adresse</th>
-                                                                <th data-field="gender">Gender</th>
-                                                                <th data-formatter="tablebuttonFormatter"></th>
-                                                            </tr>
-                                                            </thead>
-                                                        </table>
+                                                    <div class="panel panel-default">
+                                                        <!-- Standard-Panel-Inhalt -->
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <i class="fa fa-table" aria-hidden="true"></i> Gepäcktaschen
+                                                            </h4>
+                                                        </div>
+                                                        <!-- Tabelle -->
+                                                        <div class="content table-responsive table-full-width">
+                                                            <table id="gepaeckTable" class="table table-hover table-striped">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th data-field="imagelink" data-formatter="imageFormatter">Bild</th>
+                                                                    <th data-field="vorname">Vorname</th>
+                                                                    <th data-field="name">Name</th>
+                                                                    <th data-field="gehalt">Gehalt</th>
+                                                                    <th data-field="gender">Abteilung</th>
+                                                                </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
                                                     </div>
 
                                                 </div>
