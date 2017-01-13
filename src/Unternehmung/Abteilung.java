@@ -28,7 +28,7 @@ public class Abteilung {
 		String erg = "";
 		String content;
 
-		if (this.kennzahlensammlung.liquiditätVorhanden(gehalt * anzahl, "gehälter")) {
+//		if (this.kennzahlensammlung.liquiditätVorhanden(gehalt * anzahl, "gehälter")) {
 
 			try {
 				URL url = new URL("https://randomuser.me/api/?results=" + anzahl + "&inc=name,picture,gender,location");
@@ -61,12 +61,16 @@ public class Abteilung {
 				mitarbeiter.add(m);
 
 			}
-		}else{
-			System.out.println("Nicht genügend Liquidität vorhanden!");
-		}
+//		}else{
+//			System.out.println("Nicht genügend Liquidität vorhanden!");
+//		}
 	}
 
 	public ArrayList<Mitarbeiter> getMitarbeiter() {
 		return mitarbeiter;
+	}
+	public int getMitarbeiterAnzahl()
+	{
+		return mitarbeiter.size();
 	}
 }

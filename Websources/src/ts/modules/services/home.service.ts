@@ -52,4 +52,16 @@ export class HomeService {
             .map(response => response.text());
     }
 
+    addEmployees(values)
+    {
+
+        console.log('hallo');
+        this.http.post('http://localhost:8080/rest/companies/employees',values).subscribe();
+    }
+    getEmployeeCount()
+    {
+        return Observable.interval(5000).flatMap(()=>this.http.get('http://localhost:8080/rest/companies/employees/count')
+            .map(response => response.text()));
+    }
+
 }

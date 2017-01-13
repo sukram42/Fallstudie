@@ -7,34 +7,57 @@ package Unternehmung;
 public class Produkt {
 
     private String name; // Produktbezeichnung (z.B. Rucksack)
-    private int anzahl; // wie oft dieses Produkt im Lager vorhanden ist
+    private char qualitätsstufe; // A-, B- oder C-Produkt
     private double herstellkosten; // Herstellkosten eines Produktes
-    private double preis; // Verkaufspreis
+    //private double preis; // Verkaufspreis
 
     /**
-     * Konstruktor, der beim Produzieren verwendet wird (noch kein Preis benötigt / vorhanden)
+     * Konstruktor zum Erstellen eines noch nicht produzierten Produktes (also einer noch nicht vorhandenen Kombination von name und qualitätsstufe)
+     * herstellkosten werden generiert
      * @param name Produktname (z.B. Rucksack?!)
-     * @param anzahl der herzustellenden Stücke
-     * @param herstellkosten eines Produktes
+     * @param qualitätsstufe A, B oder C
      */
-    public Produkt(String name, int anzahl, double herstellkosten) {
+    public Produkt(String name, char qualitätsstufe) {
         this.name = name;
-        this.anzahl = anzahl;
-        this.herstellkosten = herstellkosten;
+        this.qualitätsstufe = qualitätsstufe;
+        this.herstellkosten = findHerstellkosten(name, qualitätsstufe);
     }
 
     /**
-     * Konstruktor, der beim Verkaufen eines Produktes verwendet wird
-     * @param name Produktname (z.B. Rucksack?!)
-     * @param anzahl der herzustellenden Stücke
-     * @param herstellkosten eines Produktes
-     * @param preis Verkaufspreis
+     * Methode zum Bestimmen der Herstellkosten basierend auf
+     * @param name dem Produkt (z.B. Rucksack) und
+     * @param qualitätsstufe der Qualitätsstufe (z.B. A-Produkt)
+     * @return Herstellkosten des Produktes
      */
-    public Produkt(String name, int anzahl, double herstellkosten, double preis) {
-        this.name = name;
-        this.anzahl = anzahl;
-        this.herstellkosten = herstellkosten;
-        this.preis = preis;
+    private double findHerstellkosten(String name, char qualitätsstufe){
+        switch (name) {
+            // TODO realistische / zum Spiel passende Zahlen einsetzen
+            case "Rucksack":
+                switch (qualitätsstufe){
+                    case 'A': return 20;
+                    case 'B': return 15;
+                    case 'C': return 10;
+                }
+            case "Rucksack tech":
+                switch (qualitätsstufe){
+                    case 'A': return 330;
+                    case 'B': return 20;
+                    case 'C': return 15;
+                }
+            case "Duffel":
+                switch (qualitätsstufe){
+                    case 'A': return 25;
+                    case 'B': return 20;
+                    case 'C': return 15;
+                }
+            case "Reisetasche":
+                switch (qualitätsstufe){
+                    case 'A': return 35;
+                    case 'B': return 30;
+                    case 'C': return 20;
+                }
+        }
+        return -1;
     }
 
     // Getter und Setter:
@@ -46,20 +69,12 @@ public class Produkt {
         this.name = name;
     }
 
-    public double getPreis() {
-        return preis;
+    public char getQualitätsstufe() {
+        return qualitätsstufe;
     }
 
-    public void setPreis(double preis) {
-        this.preis = preis;
-    }
-
-    public int getAnzahl() {
-        return anzahl;
-    }
-
-    public void setAnzahl(int anzahl) {
-        this.anzahl = anzahl;
+    public void setQualitätsstufe(char qualitätsstufe) {
+        this.qualitätsstufe = qualitätsstufe;
     }
 
     public double getHerstellkosten() {

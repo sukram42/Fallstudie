@@ -9,6 +9,9 @@ public class Mitarbeiter {
 	private Abteilung department;
 	private char gender;
 	private int gehalt; // Jahresgehalt
+	private int prodLeistung; // Produktionsleistung eines Mitarbeiters (wie viele Produkte kann ein Mitarbeitern pro Monat produzieren?)
+								// nur relevant für Mitarbeiter, die in der Abteilung Produktion eingestellt sind
+								// ist abhängig von der Mitarbeiterzufriedenheit
 	
 	
 	
@@ -24,6 +27,8 @@ public class Mitarbeiter {
 		this.imagelink = imagelink;
 		this.gender = gender;
 		this.gehalt = gehalt;
+		// TODO realistische / zum Spiel passende Zahlen einsetzen
+		this.prodLeistung = 200;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -64,4 +69,12 @@ public class Mitarbeiter {
     public void setGehalt(int gehalt) {
         this.gehalt = gehalt;
     }
+
+	public int getProdLeistung() {
+		return prodLeistung;
+	}
+
+	public void setProdLeistung(int prodLeistung) {
+		this.prodLeistung = prodLeistung;
+	}
 }
