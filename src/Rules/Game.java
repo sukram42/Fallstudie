@@ -85,6 +85,12 @@ public class Game extends TimerTask{
     public void run() {
         counter++;
         updateCounter();
+
+        for(Unternehmen u: companies)
+        {
+            u.getKennzahlensammlung().getMitarbeiterzufriedenheit().berechnen();
+        }
+
     }
 
     public void updateCounter() {

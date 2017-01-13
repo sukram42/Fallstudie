@@ -6,7 +6,7 @@
 
 import {NgModule}      from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule, RequestOptions} from '@angular/http';
 
 import {HomeComponent} from "./components/home.components/home.component";
@@ -28,6 +28,7 @@ import {NewEmployeeComponent} from "./components/home.components/human-ressource
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
         RouterModule.forRoot([
 

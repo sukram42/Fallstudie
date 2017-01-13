@@ -2,6 +2,7 @@ package com.fallstudie.Interface;
 
 import Rules.Game;
 import Unternehmung.Abteilung;
+import Unternehmung.Abteilungen.HR;
 import Unternehmung.Kennzahlen.Kennzahl;
 import Unternehmung.Mitarbeiter;
 import Unternehmung.Unternehmen;
@@ -59,10 +60,11 @@ public class CompanyInterface {
     @Path("employees")
     public Response createEmployee(@Context SecurityContext context, String data)
     {
+        System.err.println("halo");
         JsonObject object = gson.fromJson(data, JsonObject.class);
 
         Unternehmen unternehmen = getCompanyFromContext(context);
-        Abteilung abteilung1 = unternehmen.getAbteilung(object.get("abteilung").getAsString());
+        Abteilung abteilung1 = unternehmen.getAbteilung(object.get("abteilung").getAsString().toLowerCase());
         if(abteilung1 != null)
         {
             abteilung1.addMitarbeiter(object.get("anzahl").getAsInt(),object.get("gehalt").getAsInt());
@@ -70,7 +72,18 @@ public class CompanyInterface {
         else
             return Response.serverError().build();
 
+        System.err.println(object.get("anzahl") + " Mitarbeiter erstellt ");
         return Response.ok().build();
+    }
+
+    @GET
+    @Secured
+    @Path("/employees/count")
+    public Response getEmployeeCount(@Context SecurityContext context)
+    {
+        Unternehmen unternehmen = getCompanyFromContext(context);
+        int anzahl = ((HR)unternehmen.getAbteilung("hr")).getTotalMitarbeiterCount();
+        return Response.ok(anzahl).build();
     }
 
     @GET
