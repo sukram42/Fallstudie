@@ -11,6 +11,8 @@ public class Unternehmen {
 	private String name;
 	private transient Kennzahlensammlung kennzahlensammlung;
 
+	private transient Bilanz bilanz;
+
 	private transient Map<String,Abteilung> abteilungen = new HashMap<String,Abteilung>();
 
 	public Unternehmen( String name,String passwort, float eigenkapital) {
