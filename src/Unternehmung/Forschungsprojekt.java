@@ -40,7 +40,7 @@ public class Forschungsprojekt {
         if(herstellkosten){
             double produktKosten = forschungsobjekt.getHerstellkosten();
           //  produktKosten = produktKosten * abbruchFaktor * (Game.getTime() - beginn) * mitarbeiterAnzahl * irgendeinFaktor;
-            this.kennzahlensammlung.
+           // this.kennzahlensammlung.
             forschungsobjekt.setHerstellkosten(produktKosten);
         }else{
             //Kundenzufriedenheit erhöhen

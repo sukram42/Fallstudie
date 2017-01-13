@@ -15,6 +15,8 @@ import java.util.Map;
 public class Kennzahlensammlung {
 
     private transient Unternehmen unternehmen;
+    //keine Ahnung wofür transient steht aber egal
+    private transient Bilanz bilanz;
     // "weiche" Kennzahlensammlung:
     //private Kennzahl bekanntheitsgrad = new Kennzahl(); // TODO als Kennzahl (statt double) implementieren?!
 
