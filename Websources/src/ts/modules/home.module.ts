@@ -6,7 +6,7 @@
 
 import {NgModule}      from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule, RequestOptions} from '@angular/http';
 
 import {HomeComponent} from "./components/home.components/home.component";
@@ -22,11 +22,13 @@ import {MarketingComponent} from "./components/home.components/marketing.compone
 import {HumanRessourcesComponent} from "./components/home.components/human-ressources.component";
 import {AccountsComponent} from "./components/home.components/accounts.component";
 import {KeyfiguresComponent} from "./components/home.components/dashboard.components/keyfigures.component";
+import {NewEmployeeComponent} from "./components/home.components/human-ressources.component/new-employee.component";
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
         RouterModule.forRoot([
 
@@ -76,7 +78,8 @@ import {KeyfiguresComponent} from "./components/home.components/dashboard.compon
                    MarketingComponent,
                    HumanRessourcesComponent,
                    AccountsComponent,
-                   KeyfiguresComponent
+                   KeyfiguresComponent,
+                   NewEmployeeComponent
     ],
 
     bootstrap:    [HomeComponent],

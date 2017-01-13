@@ -13,7 +13,7 @@ public class UnternehmenTest {
 
         // ############################## UNTERNEHMEN 1 ##############################
         // Unternehmen erstellen:
-        Unternehmen unternehmen1 = new Unternehmen("Unternehmen 1", "kennwort", 100000);
+        Unternehmen unternehmen1 = new Unternehmen("Unternehmen 1", "kennwort", 1000000);
 
 
 
@@ -27,14 +27,18 @@ public class UnternehmenTest {
 
         // Mitarbeiter einstellen:
         unternehmen1.getAbteilung("produktion").addMitarbeiter(1, 25000);
-        unternehmen1.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
+        //unternehmen1.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
+
+        // Produktions- und Lagerhalle kaufen:
+        Produktion produktion1 = (Produktion) unternehmen1.getAbteilung("produktion");
+        produktion1.produktionshalleKaufen(1);
+        produktion1.lagerhalleKaufen(2);
 
         // Maschinen kaufen:
-        Produktion produktion1 = (Produktion) unternehmen1.getAbteilung("produktion");
-        produktion1.maschinenKaufen("3", 1);
+        produktion1.maschinenKaufen(3, 1);
 
         // Rucksäcke produzieren:
-        produktion1.produzieren("Rucksack", 3000, 10);
+        produktion1.produzieren("Rucksack", 'C', 10, 12);
 
         // Marketingkampagne und Marktforschung:
         Marketing marketing1 = (Marketing) unternehmen1.getAbteilung("marketing");
@@ -43,13 +47,13 @@ public class UnternehmenTest {
         marketing1.marktforschung(2);
 
         // Rucksäcke verkaufen:
-        Vertrieb vertrieb1 = (Vertrieb) unternehmen1.getAbteilung("vertrieb");
-        vertrieb1.verkaufen("Rucksack", 55);
+        //Vertrieb vertrieb1 = (Vertrieb) unternehmen1.getAbteilung("vertrieb");
+        //vertrieb1.verkaufen("Rucksack", 55);
 
 
         // ############################## UNTERNEHMEN 2 ##############################
         // Unternehmen erstellen:
-        Unternehmen unternehmen2 = new Unternehmen("Unternehmen 2", "kennwort", 100000);
+        Unternehmen unternehmen2 = new Unternehmen("Unternehmen 2", "kennwort", 1000000);
 
         System.out.println("Unternehmen " + unternehmen2.getName() + " mit Eigenkapital in Höhe von " +
                 unternehmen2.getKennzahlensammlung().getEigenkapital() + " und Fremdkapital in Höhe von " +
@@ -57,14 +61,18 @@ public class UnternehmenTest {
 
         // Mitarbeiter einstellen:
         unternehmen2.getAbteilung("produktion").addMitarbeiter(1, 25000);
-        unternehmen2.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
+        //unternehmen2.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
+
+        // Produktions- und Lagerhalle kaufen:
+        Produktion produktion2 = (Produktion) unternehmen1.getAbteilung("produktion");
+        produktion2.produktionshalleKaufen(1);
+        produktion2.lagerhalleKaufen(2);
 
         // Maschinen kaufen:
-        Produktion produktion2 = (Produktion) unternehmen2.getAbteilung("produktion");
-        produktion2.maschinenKaufen("2", 1);
+        produktion2.maschinenKaufen(3, 1);
 
         // Rucksäcke produzieren:
-        produktion2.produzieren("Rucksack", 1500, 5);
+        produktion2.produzieren("Rucksack", 'C', 10, 12);
 
         // Marketingkampagne und Marktforschung:
         Marketing marketing2 = (Marketing) unternehmen2.getAbteilung("marketing");
@@ -73,8 +81,8 @@ public class UnternehmenTest {
         marketing2.marktforschung(2);
 
         // Rucksäcke verkaufen:
-        Vertrieb vertrieb2 = (Vertrieb) unternehmen2.getAbteilung("vertrieb");
-        vertrieb2.verkaufen("Rucksack", 40);
+        //Vertrieb vertrieb2 = (Vertrieb) unternehmen2.getAbteilung("vertrieb");
+        //vertrieb2.verkaufen("Rucksack", 40);
 
 
         // ############################## JAHRESENDE ##############################

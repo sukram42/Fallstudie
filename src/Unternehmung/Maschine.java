@@ -6,25 +6,70 @@ package Unternehmung;
  */
 public class Maschine {
 
-    private String klasse; // etwa 1, 2, 3 -> unterschiedliche Kapazität, Anschaffungskosten, Halbwertszeit
-    private int kapazität; // kann maximal so viele Produkte pro Jahr produzieren
-    private int anschaffungskst;
-    private int anzahl; // Anzahl der Maschinen einer Klasse
-    // TODO Halbwertszeit implementieren -> Maschine geht nach x Jahren kapputt
-    // TODO Alter und Wiederverkaufswert der Maschine implementieren
+    private int klasse; // etwa 1, 2, 3 -> unterschiedliche Kapazität, Anschaffungskosten, Halbwertszeit
+    private int kapazität; // kann maximal so viele Produkte pro Monat produzieren. abhängig von klasse
+    private int anschaffungskst; // abhängig von klasse
+    private int energiekosten; // pro Monat, bei jeder Maschinenklasse gleich
+    private double status; // sinkt jeden Monat um X, kann durch Reparaturen wieder hochgesetzt werden
 
 
-    public Maschine(String klasse, int kapazität, int anschaffungskst, int anzahl) {
+    public Maschine(int klasse) {
         this.klasse = klasse;
-        this.kapazität = kapazität;
-        this.anschaffungskst = anschaffungskst;
-        this.anzahl = anzahl;
+        this.energiekosten = 500; // <- TODO realistischen / zum Spiel passenden Wert für Energiekosten einsetzen
+        this.status = 1;
+        findKapazitätUndAnschaffungskst(klasse);
     }
 
+    /**
+     * Methode zum reparieren einer Maschine (setzt status wieder auf 1)
+     * @param currentStatus Ausgangsstatus der Maschine, um Kosten zu berechnen
+     */
+    public void reparieren(double currentStatus, Kennzahlensammlung kennzahlensammlung){
+        this.status = 1;
+        // TODO realistisch / zum Spiel passende Werte einsetzen
+        if (currentStatus < 0.1){
+            kennzahlensammlung.addSonstigeKosten(1400);
+        } else if (currentStatus < 0.2){
+            kennzahlensammlung.addHerstellkosten(1200);
+        } else if (currentStatus < 0.3){
+            kennzahlensammlung.addHerstellkosten(1000);
+        } else if (currentStatus < 0.4){
+            kennzahlensammlung.addHerstellkosten(900);
+        } else if (currentStatus < 0.5){
+            kennzahlensammlung.addHerstellkosten(800);
+        } else if (currentStatus < 0.6){
+            kennzahlensammlung.addHerstellkosten(700);
+        } else if (currentStatus < 0.7){
+            kennzahlensammlung.addHerstellkosten(600);
+        } else if (currentStatus < 0.8){
+            kennzahlensammlung.addHerstellkosten(500);
+        } else if (currentStatus < 0.9){
+            kennzahlensammlung.addHerstellkosten(400);
+        } else if (currentStatus < 1){
+            kennzahlensammlung.addHerstellkosten(300);
+        }
+    }
 
+    private void findKapazitätUndAnschaffungskst(int klasse){
+        switch (klasse){
+            // TODO realistisch / zum Spiel passende Werte einsetzen
+            case 1:
+                this.kapazität = 300;
+                this.anschaffungskst = 7500;
+                break;
+            case 2:
+                this.kapazität = 600;
+                this.anschaffungskst = 15000;
+                break;
+            case 3:
+                this.kapazität = 1200;
+                this.anschaffungskst = 30000;
+                break;
+        }
+    }
 
     // Getter und Setter:
-    public String getKlasse() {
+    public int getKlasse() {
         return klasse;
     }
 
@@ -36,11 +81,11 @@ public class Maschine {
         return anschaffungskst;
     }
 
-    public int getAnzahl() {
-        return anzahl;
+    public double getStatus() {
+        return status;
     }
 
-    public void setAnzahl(int anzahl) {
-        this.anzahl = anzahl;
+    public void setStatus(double status) {
+        this.status = status;
     }
 }
