@@ -33,10 +33,17 @@ public class HR extends Abteilung {
             for (Mitarbeiter arbeiter : abteilung.getMitarbeiter()) {
                 anzahl++;
                 gehalt += (float) arbeiter.getGehalt();
-                System.err.println("Gehalt : "+ gehalt + " | Anzahl :" + anzahl);
             }
         }
         if(anzahl==0)return -1;
         return (gehalt / anzahl);
+    }
+    public int getTotalMitarbeiterCount()
+    {
+        int count = 0;
+        for (Abteilung abteilung : unternehmen.getAbteilungen().values()) {
+            count+=abteilung.getMitarbeiterAnzahl();
+        }
+        return count;
     }
 }
