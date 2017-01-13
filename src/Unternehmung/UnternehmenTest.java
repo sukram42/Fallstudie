@@ -27,7 +27,7 @@ public class UnternehmenTest {
 
         // Mitarbeiter einstellen:
         unternehmen1.getAbteilung("produktion").addMitarbeiter(1, 25000);
-        unternehmen1.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
+        //unternehmen1.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
 
         // Produktions- und Lagerhalle kaufen:
         Produktion produktion1 = (Produktion) unternehmen1.getAbteilung("produktion");
@@ -61,7 +61,7 @@ public class UnternehmenTest {
 
         // Mitarbeiter einstellen:
         unternehmen2.getAbteilung("produktion").addMitarbeiter(1, 25000);
-        unternehmen2.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
+        //unternehmen2.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
 
         // Produktions- und Lagerhalle kaufen:
         Produktion produktion2 = (Produktion) unternehmen1.getAbteilung("produktion");
