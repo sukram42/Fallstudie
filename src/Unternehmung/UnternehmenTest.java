@@ -27,7 +27,7 @@ public class UnternehmenTest {
 
         // Mitarbeiter einstellen:
         unternehmen1.getAbteilung("produktion").addMitarbeiter(1, 25000);
-        unternehmen1.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
+        //unternehmen1.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
 
         // Produktions- und Lagerhalle kaufen:
         Produktion produktion1 = (Produktion) unternehmen1.getAbteilung("produktion");
@@ -47,8 +47,8 @@ public class UnternehmenTest {
         marketing1.marktforschung(2);
 
         // Rucksäcke verkaufen:
-        Vertrieb vertrieb1 = (Vertrieb) unternehmen1.getAbteilung("vertrieb");
-        vertrieb1.verkaufen("Rucksack", 55);
+        //Vertrieb vertrieb1 = (Vertrieb) unternehmen1.getAbteilung("vertrieb");
+        //vertrieb1.verkaufen("Rucksack", 55);
 
 
         // ############################## UNTERNEHMEN 2 ##############################
@@ -61,7 +61,7 @@ public class UnternehmenTest {
 
         // Mitarbeiter einstellen:
         unternehmen2.getAbteilung("produktion").addMitarbeiter(1, 25000);
-        unternehmen2.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
+        //unternehmen2.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
 
         // Produktions- und Lagerhalle kaufen:
         Produktion produktion2 = (Produktion) unternehmen1.getAbteilung("produktion");
@@ -81,8 +81,8 @@ public class UnternehmenTest {
         marketing2.marktforschung(2);
 
         // Rucksäcke verkaufen:
-        Vertrieb vertrieb2 = (Vertrieb) unternehmen2.getAbteilung("vertrieb");
-        vertrieb2.verkaufen("Rucksack", 40);
+        //Vertrieb vertrieb2 = (Vertrieb) unternehmen2.getAbteilung("vertrieb");
+        //vertrieb2.verkaufen("Rucksack", 40);
 
 
         // ############################## JAHRESENDE ##############################
