@@ -6,6 +6,8 @@ import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Mitarbeiter;
 import Unternehmung.Unternehmen;
 
+import java.util.ArrayList;
+
 /**
  * Abteilung Human Resources
  */
@@ -21,7 +23,7 @@ public class HR extends Abteilung {
      * @param kennzahlensammlung Kennzahlenobjekt wird später benötigt, um Kennzahlensammlung laufend fortzuschreiben / zu berechnen
      */
     public HR(Unternehmen unternehmen, Kennzahlensammlung kennzahlensammlung) {
-        super(kennzahlensammlung);
+        super("Human-Resources" ,kennzahlensammlung);
 
         this.unternehmen = unternehmen;
     }
@@ -45,5 +47,13 @@ public class HR extends Abteilung {
             count+=abteilung.getMitarbeiterAnzahl();
         }
         return count;
+    }
+    public ArrayList<Mitarbeiter> getTotalMitarbeiter()
+    {
+        ArrayList<Mitarbeiter> erg = new ArrayList<>();
+        for (Abteilung abteilung : unternehmen.getAbteilungen().values()) {
+            erg.addAll(abteilung.getMitarbeiter());
+        }
+        return erg;
     }
 }

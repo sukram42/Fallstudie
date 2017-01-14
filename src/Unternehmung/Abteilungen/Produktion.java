@@ -24,7 +24,7 @@ public class Produktion extends Abteilung {
      * @param kennzahlensammlung Kennzahlenobjekt wird später benötigt, um Herstellkosten laufend fortzuschreiben (siehe produzieren())
      */
     public Produktion(Kennzahlensammlung kennzahlensammlung) {
-        super(kennzahlensammlung);
+        super("Produktion" , kennzahlensammlung);
     }
 
     /**

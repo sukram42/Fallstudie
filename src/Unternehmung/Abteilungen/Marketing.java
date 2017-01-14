@@ -14,7 +14,7 @@ public class Marketing extends Abteilung {
      * @param kennzahlensammlung Kennzahlenobjekt wird später benötigt, um Kennzahlensammlung laufend fortzuschreiben / zu berechnen
      */
     public Marketing(Kennzahlensammlung kennzahlensammlung) {
-        super(kennzahlensammlung);
+        super("Marketing",kennzahlensammlung);
     }
 
     /**

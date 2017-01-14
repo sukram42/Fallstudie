@@ -28,7 +28,7 @@ public class Forschung extends Abteilung{
     private ArrayList<Forschungsprojekt> Projekte = new ArrayList<>();
 
     public Forschung(Kennzahlensammlung kennzahlensammlung) {
-          super(kennzahlensammlung);
+          super("Forschung",kennzahlensammlung);
     }
 
     public void starteProjekt(Produkt forschungsobjekt, int mitarbeiterAnzahl, long dauer, boolean herstellkosten, Kennzahlensammlung kennzahlensammlung){
