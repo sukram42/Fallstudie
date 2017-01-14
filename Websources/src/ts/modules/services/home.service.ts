@@ -4,7 +4,7 @@
 /**
  * Created by boebel on 04.01.2017.
  */
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Headers} from "@angular/http";
 
 import { Observable } from 'rxjs/Observable';
@@ -16,17 +16,12 @@ export class HomeService {
         this.http = http;
     }
 
+
+
     getCompany() {
         let data;
         return this.http.get('http://localhost:8080/rest/companies')
             .map(response => response.json());
-    }
-
-
-    getKeyFigure(name:string)
-    {
-        return  Observable.interval(10000).flatMap(()=>this.http.get('http://localhost:8080/rest/companies/keyfigures/soft/' + name)
-            .map(response => response.json()));
     }
 
     getTime()
@@ -50,18 +45,6 @@ export class HomeService {
 
         return this.http.get('http://localhost:8080/rest/auth', {headers})
             .map(response => response.text());
-    }
-
-    addEmployees(values)
-    {
-
-        console.log('hallo');
-        this.http.post('http://localhost:8080/rest/companies/employees',values).subscribe();
-    }
-    getEmployeeCount()
-    {
-        return Observable.interval(5000).flatMap(()=>this.http.get('http://localhost:8080/rest/companies/employees/count')
-            .map(response => response.text()));
     }
 
 }

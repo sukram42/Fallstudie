@@ -15,7 +15,7 @@ import java.util.Map;
 public class Vertrieb extends Abteilung {
 
     public Vertrieb(Kennzahlensammlung kennzahlensammlung) {
-        super(kennzahlensammlung);
+        super("Vertrieb",kennzahlensammlung);
     }
 
     // TODO implement this

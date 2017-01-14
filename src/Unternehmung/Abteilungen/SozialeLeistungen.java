@@ -14,7 +14,7 @@ public class SozialeLeistungen extends Abteilung {
      * @param kennzahlensammlung Kennzahlenobjekt wird später benötigt, um Kennzahlensammlung laufend fortzuschreiben / zu berechnen
      */
     public SozialeLeistungen(Kennzahlensammlung kennzahlensammlung) {
-        super(kennzahlensammlung);
+        super("Soziale Leistungen",kennzahlensammlung);
     }
 
     /**

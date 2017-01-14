@@ -14,6 +14,6 @@ public class Finanzen extends Abteilung {
      * @param kennzahlensammlung Kennzahlenobjekt wird später benötigt, um Kennzahlensammlung laufend fortzuschreiben / zu berechnen
      */
     public Finanzen(Kennzahlensammlung kennzahlensammlung) {
-        super(kennzahlensammlung);
+        super("Finanzen",kennzahlensammlung);
     }
 }

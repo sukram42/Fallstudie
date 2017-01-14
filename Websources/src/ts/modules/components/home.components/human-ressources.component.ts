@@ -11,9 +11,8 @@ import { Component } from '@angular/core';
 @Component({
     selector   : 'human-ressources-component',
     templateUrl: '../../../../templates/components/home.components/human-ressources.component.html',
-
 })
 
-export class HumanRessourcesComponent {
+export class HRComponent {
 
 }

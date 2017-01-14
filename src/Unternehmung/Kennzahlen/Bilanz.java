@@ -1,4 +1,6 @@
-package Unternehmung;
+package Unternehmung.Kennzahlen;
+
+import Unternehmung.Unternehmen;
 
 /**
  * Created by oehlersj on 13.01.2017.
@@ -18,20 +20,26 @@ public class Bilanz {
     private double fremdkapital;
 
 
-    public Bilanz(Unternehmen unternehmen) {
+    public Bilanz() {
 
         this.guv = new GuV();
         this.eigenkapital = 100000;
         this.liquideMittel=100000;
 
         //muss am Ende jeder Periode ausgeführt werden
-        this.guv.jahresUeberschuss=this.guv.jahresUeberschussBerechnen();
+
        //eigentlich wird beim richtigen Bilanzabschluss Jahresüberschuss mit EK verrechnet, machen wir aber sowieso durchgehend?
         // addEigenkapital(this.guv.jahresUeberschuss);
         // addLiquideMittel(this.guv.jahresUeberschuss);
 
 
     }
+
+    public void berechnen()
+    {
+        this.guv.jahresUeberschussBerechnen();
+    }
+
     public void addEigenkapital(double jahresueberschuss){
         this.setEigenkapital(this.eigenkapital + jahresueberschuss);
     }

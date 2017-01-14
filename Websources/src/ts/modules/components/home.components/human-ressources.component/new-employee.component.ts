@@ -10,13 +10,12 @@
  */
 
 import {Component} from '@angular/core';
-import {HomeService} from "../../../services/home.service";
 import {FormControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {HRService} from "../../../services/hr.service";
 
 @Component({
     selector: 'new-employee-modal',
     templateUrl: '../../../../templates/components/home.components/human-ressources.component/new-employee.component.html',
-    providers: [HomeService]
 
 })
 
@@ -24,7 +23,7 @@ export class NewEmployeeComponent {
 
     newEmployee:FormGroup;
 
-    constructor(private homeService : HomeService, private fb :FormBuilder){
+    constructor(private hrService : HRService, private fb :FormBuilder){
 
         this.newEmployee = fb.group({
             // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
@@ -36,7 +35,7 @@ export class NewEmployeeComponent {
     }
 
     submitForm(value: any){
-        this.homeService.addEmployees({anzahl:value.anzahl,gehalt:value.gehalt,abteilung:value.abteilung});
+        this.hrService.addEmployees({anzahl:value.anzahl,gehalt:value.gehalt,abteilung:value.abteilung});
     }
 
 

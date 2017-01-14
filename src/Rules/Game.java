@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class Game extends TimerTask{
 
-    private static final int COUNTER_INTERVALL = 1000;//1800000; //halbe Stunde
+    private static final int COUNTER_INTERVALL = 16*1000*60;//16 Minuten
     private static long counter = 0;
 
     private static Calendar gameCalendar = new GregorianCalendar(2010,1,1);
@@ -27,7 +27,7 @@ public class Game extends TimerTask{
 
         System.out.println("Ein Neues Spiel wird erstellt");
 
-        Timer timer = new Timer(true);
+        Timer timer = new Timer();
         timer.schedule(this,0,COUNTER_INTERVALL);
     }
 
@@ -88,6 +88,7 @@ public class Game extends TimerTask{
 
         for(Unternehmen u: companies)
         {
+            u.update();
             u.getKennzahlensammlung().getMitarbeiterzufriedenheit().berechnen();
         }
 

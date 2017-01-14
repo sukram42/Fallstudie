@@ -16,11 +16,13 @@ import java.util.Map;
 
 public class Abteilung {
 
-	ArrayList<Mitarbeiter> mitarbeiter = new ArrayList<>();
-	public Kennzahlensammlung kennzahlensammlung;
+	protected transient ArrayList<Mitarbeiter> mitarbeiter = new ArrayList<>();
+	protected transient Kennzahlensammlung kennzahlensammlung;
+	public String name;
 
-    public Abteilung(Kennzahlensammlung kennzahlensammlung) {
+    public Abteilung(String name, Kennzahlensammlung kennzahlensammlung) {
         this.kennzahlensammlung = kennzahlensammlung;
+        this.name = name;
     }
 
     public void addMitarbeiter(int anzahl, int gehalt) {
@@ -56,6 +58,7 @@ public class Abteilung {
 				Mitarbeiter m = new Mitarbeiter(name.get("last").getAsString(), name.get("first").getAsString(),
 						address.get("street").getAsString() + " " + address.get("city").getAsString(),
 						picture.get("medium").getAsString(), 'w', gehalt);
+				m.setDepartment(this);
 				System.out.println(m.getVorname() + " " + m.getName());
 
 				mitarbeiter.add(m);
@@ -64,6 +67,11 @@ public class Abteilung {
 //		}else{
 //			System.out.println("Nicht genügend Liquidität vorhanden!");
 //		}
+	}
+
+	public void update()
+	{
+
 	}
 
 	public ArrayList<Mitarbeiter> getMitarbeiter() {

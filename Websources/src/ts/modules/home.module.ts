@@ -8,21 +8,25 @@ import {NgModule}      from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule, RequestOptions} from '@angular/http';
+import {RouterModule} from "@angular/router";
+
 
 import {HomeComponent} from "./components/home.components/home.component";
 import {HeaderComponent} from "./components/home.components/header.component";
 import {AuthRequestOptions} from "./services/auth-request-options";
-import {RouterModule} from "@angular/router";
 
 import {DashboardComponent} from "./components/home.components/dashboard.component";
 import {SalesComponent} from "./components/home.components/sales.component";
 import {ResearchComponent} from "./components/home.components/research.component";
 import {ProduktionComponent} from "./components/home.components/produktion.component";
 import {MarketingComponent} from "./components/home.components/marketing.component";
-import {HumanRessourcesComponent} from "./components/home.components/human-ressources.component";
+import {HRComponent} from "./components/home.components/human-ressources.component";
 import {AccountsComponent} from "./components/home.components/accounts.component";
 import {KeyfiguresComponent} from "./components/home.components/dashboard.components/keyfigures.component";
 import {NewEmployeeComponent} from "./components/home.components/human-ressources.component/new-employee.component";
+import {EmployeeListComponent} from "./components/home.components/human-ressources.component/employee-list.component";
+import {HRService} from "./services/hr.service";
+
 
 @NgModule({
     imports: [
@@ -55,7 +59,7 @@ import {NewEmployeeComponent} from "./components/home.components/human-ressource
             },
             {
                 path: 'human-ressources',
-                component: HumanRessourcesComponent
+                component: HRComponent
             },
             {
                 path: 'accounts',
@@ -76,14 +80,15 @@ import {NewEmployeeComponent} from "./components/home.components/human-ressource
                    ResearchComponent,
                    ProduktionComponent,
                    MarketingComponent,
-                   HumanRessourcesComponent,
+                   HRComponent,
                    AccountsComponent,
                    KeyfiguresComponent,
-                   NewEmployeeComponent
+                   NewEmployeeComponent,
+                   EmployeeListComponent
     ],
 
     bootstrap:    [HomeComponent],
-    providers : [
+    providers : [HRService,
         {provide: RequestOptions, useClass : AuthRequestOptions}
     ]
 })
