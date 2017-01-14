@@ -12,6 +12,7 @@ public class Produktlinie {
     private Produkt produkt; // zu produzierendes Produkt
     private int menge; // in der Produktion: zu produzierende Menge pro Periode | im Lager: vorhandene Produkte
     private int laufzeit; // Anzahl der Perioden in denen das Produkt produziert werden soll
+    private double forschungsbonus; // kann zwischen 0 und 0,25 sein (-> bis zu 25% niedrigere Herstellkosten)
 
     /**
      * Konstruktor, der beim Erstellen eines neuen Produktionsauftrags verwendet wird
@@ -69,5 +70,13 @@ public class Produktlinie {
 
     public void setLaufzeit(int laufzeit) {
         this.laufzeit = laufzeit;
+    }
+
+    public double getForschungsbonus() {
+        return forschungsbonus;
+    }
+
+    public void setForschungsbonus(double forschungsbonus) {
+        this.forschungsbonus = forschungsbonus;
     }
 }

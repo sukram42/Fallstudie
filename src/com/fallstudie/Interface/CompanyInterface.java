@@ -69,7 +69,7 @@ public class CompanyInterface {
     @POST
     @Secured
     @Path("employees")
-    public Response createEmployee(@Context SecurityContext context, String data)
+    public Response addEmployee(@Context SecurityContext context, String data)
     {
         JsonObject object = gson.fromJson(data, JsonObject.class);
 
@@ -80,7 +80,7 @@ public class CompanyInterface {
             abteilung1.addMitarbeiter(object.get("anzahl").getAsInt(),object.get("gehalt").getAsInt());
         }
         else
-            return Response.serverError().build();
+            return Response.serverError().entity("Abteilung nicht vorhanden").build();
 
         System.err.println(object.get("anzahl") + " Mitarbeiter erstellt ");
         return Response.ok().build();
