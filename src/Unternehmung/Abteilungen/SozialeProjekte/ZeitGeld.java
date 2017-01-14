@@ -2,6 +2,7 @@ package Unternehmung.Abteilungen.SozialeProjekte;
 
 import Rules.Game;
 import Unternehmung.Abteilungen.HR;
+import Unternehmung.Unternehmen;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -15,9 +16,9 @@ public class ZeitGeld extends SozialProjekt{
 
     private final int month;
 
-    public ZeitGeld(String name, float laufendeKosten, float impact, int month,HR hr)
+    public ZeitGeld(String name, float laufendeKosten, float impact, int month, Unternehmen unternehmen)
     {
-        super(name,0,laufendeKosten,impact,hr);
+        super(name,0,laufendeKosten,impact,unternehmen);
         this.month = month;
     }
 
