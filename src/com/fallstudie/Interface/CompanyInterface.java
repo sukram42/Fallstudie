@@ -13,6 +13,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.util.ArrayList;
 
 @Path("/companies")
 public class CompanyInterface {
@@ -32,7 +33,6 @@ public class CompanyInterface {
     @POST
     public Response newCompany(String msg) {
         //jsonCompany ist das Unternehmen, welches mit dem Json file in msg übergeben wird.
-        System.out.println("hallo");
         Unternehmen jsonCompany = gson.fromJson(msg, Unternehmen.class);
         //In company wird ein neues Unternehmen erstellt.
         Unternehmen company = new Unternehmen(jsonCompany.getName(), jsonCompany.getPasswort(), 1000f);
@@ -55,12 +55,22 @@ public class CompanyInterface {
         return Response.status(200).entity(gson.toJson(getCompanyFromContext(securityContext))).build();
     }
 
+    @GET
+    @Secured
+    @Path("employees")
+    public Response getEmployees(@Context SecurityContext context)
+    {
+        Unternehmen unternehmen = getCompanyFromContext(context);
+        ArrayList<Mitarbeiter> mitarbeiter = ((HR)unternehmen.getAbteilung("hr")).getTotalMitarbeiter();
+//        Mitarbeiter[] array = mitarbeiter.toArray(new Mitarbeiter[mitarbeiter.size()]);
+        return Response.ok(gson.toJson(mitarbeiter)).build();
+    }
+
     @POST
     @Secured
     @Path("employees")
     public Response createEmployee(@Context SecurityContext context, String data)
     {
-        System.err.println("halo");
         JsonObject object = gson.fromJson(data, JsonObject.class);
 
         Unternehmen unternehmen = getCompanyFromContext(context);
