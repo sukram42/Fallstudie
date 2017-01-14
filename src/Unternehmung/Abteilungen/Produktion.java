@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * Klasse, die die Produktionsabteilung repräsentiert
- * die Map produzierteProdukte kann als Lager angesehen werden
+ * hier werden Maschinen, Produktions- und Lagerhallen gekauft und Produkte produziert
  * Created by lucadommes on 29.12.2016.
  */
 public class Produktion extends Abteilung {
@@ -18,6 +18,7 @@ public class Produktion extends Abteilung {
     private ArrayList<Halle> lagerhallen = new ArrayList<Halle>();
     private Map<String, Produktlinie> aufträge = new HashMap<String, Produktlinie>(); // Produktionsaufträge
     private Map<String, Produktlinie> lager = new HashMap<String, Produktlinie>(); // Lagerbestand
+    private Map<String, Double> produktlinien = new HashMap<String, Double>(); // Verzeichnis über alle je produzierten Produktlinien, um zu prüfen, ob an einer Produktlinie bereits geforscht wurde oder nicht
 
     /**
      * Konstruktor, zum Erstellen der Abteilung Produktion
@@ -37,9 +38,11 @@ public class Produktion extends Abteilung {
     public void produzieren(String name, char qualitätsstufe, int menge, int laufzeit){
         Produktlinie produktlinie = new Produktlinie(new Produkt(name, qualitätsstufe), menge, laufzeit);
         // prüfen, ob genügend Mitarbeiter, Maschinen und Liquidität vorhanden ist:
-        if (menge <= calcMaxProdMenge() && this.kennzahlensammlung.liquiditätVorhanden(produktlinie.getProdukt().getHerstellkosten(), "herstellkosten")){
-            // prüfen, ob Produktlinie bereits vorhanden:
-            // TODO auch Lager prüfen!
+        if (menge <= getMaxProdMenge() && this.kennzahlensammlung.liquiditätVorhanden(produktlinie.getProdukt().getHerstellkosten(), "herstellkosten")){
+            // Herstellkosten, falls an dem Produkt bereits geforscht wurde, senken:
+            double forschungsbonus = getForschungsbonusById(produktlinie.getId());
+            produktlinie.getProdukt().setHerstellkosten(produktlinie.getProdukt().getHerstellkosten() * forschungsbonus);
+            // Produktion in Auftrag geben:
             if (this.aufträge.get(produktlinie.getId()) == null){
                 this.aufträge.put(produktlinie.getId(), produktlinie);
                 System.out.println("Neue Produktlinie (" + produktlinie.getId() + ") in Auftrag gegeben.");
@@ -64,13 +67,7 @@ public class Produktion extends Abteilung {
         // prüfen, ob genügend Liquidität vorhanden (falls ja Maschine von oben und alle weiteren zum Maschinenpark hinzufügen):
         if (this.kennzahlensammlung.liquiditätVorhanden(anschaffungskst * anzahl, "sonstige Kosten")) {
             // prüfen, ob genügend Fläche (= Produktionshalle) für neue Maschine(n) vorhanden ist:
-            int maschinenPlaetze = 0;
-            for (Halle halle : this.produktionshallen){
-                maschinenPlaetze += halle.getKapazität();
-            }
-            int anzVorhandeneMasch = this.maschinen.size();
-            int freiePlaetze = maschinenPlaetze - anzVorhandeneMasch;
-            if (freiePlaetze >= anzahl) {
+            if (getFreienMaschinenPlatz() >= anzahl) {
                 maschinen.add(m);
                 for (int i = 1; i < anzahl; i++) {
                     Maschine n = new Maschine(klasse);
@@ -110,10 +107,14 @@ public class Produktion extends Abteilung {
      * Methode, die von Game.run() beim Erhöhen des Timers ausgeführt wird
      */
     public void update(){
+        this.kennzahlensammlung.addSonstigeKosten(getTaeglicheEnergiekosten());
+        this.kennzahlensammlung.addHerstellkosten(getTaeglicheHerstellkosten());
         produkteFertigstellen();
-        // TODO periodische Kosten (Energie- und Herstellkosten) an kennzahlensammlung weitergeben
     }
 
+
+
+    // sämtliche Hilfsmethoden:
     /**
      * wird bei jedem timer count ausgeführt und legt die pro timer count produzierten Produkte im Lager ab
      */
@@ -121,7 +122,7 @@ public class Produktion extends Abteilung {
         for (Map.Entry<String, Produktlinie> auftrag : aufträge.entrySet()){
             String id = auftrag.getValue().getId();
             int laufzeit = auftrag.getValue().getLaufzeit();
-            if (auftrag.getValue().getMenge() <= calcLagerPlatz()) { // prüfen, ob genügend Lagerplatz vorhanden ist, falls nicht gehen die Produkte verloren
+            if (auftrag.getValue().getMenge() <= getFreienLagerPlatz()) { // prüfen, ob genügend Lagerplatz vorhanden ist, falls nicht gehen die Produkte verloren
                 if (lager.get(id) == null) { // falls Produktlinie noch nicht im Lager vorhanden
                     // erstelle neue Produktlinie in Lager:
                     Produktlinie neuePL = new Produktlinie(auftrag.getValue().getProdukt(), auftrag.getValue().getMenge());
@@ -143,10 +144,42 @@ public class Produktion extends Abteilung {
     }
 
     /**
+     * Methode zum Ermitteln des Forschungsstatus und somit -bonus eines Produkts / einer Produktlinie
+     * falls keine Produktlinie gefunden wird bedeutet dies, dass diese Kombination noch nicht produziert wurde, es wir ein neuer Eintrag in die Map produktlinien gemacht
+     * @param id Kombination aus Produktname und Qualitätsstufe
+     * @return double Forschungsbonus zu o.g. Produktlinie
+     */
+    public double getForschungsbonusById(String id){
+        for (Map.Entry<String, Double> produktlinie : this.produktlinien.entrySet()){
+            if (produktlinie.getKey().startsWith(id)){
+                return produktlinie.getValue();
+            }
+        }
+        this.produktlinien.put(id, 1.0);
+        return 1.0;
+    }
+
+    public float getTaeglicheEnergiekosten(){
+        float energiekosten = 0;
+        for (Maschine maschine : maschinen){
+            energiekosten += maschine.getEnergiekosten();
+        }
+        return energiekosten;
+    }
+
+    public float getTaeglicheHerstellkosten(){
+        float herstellkosten = 0;
+        for (Map.Entry<String, Produktlinie> produktlinie : aufträge.entrySet()){
+            herstellkosten += produktlinie.getValue().getMenge() * produktlinie.getValue().getProdukt().getHerstellkosten();
+        }
+        return herstellkosten;
+    }
+
+    /**
      * Methode, die die maximal zu produzierende Menge berechnet
      * @return MIN(Maschinenkapazität, Mitarbeiterkapazität)
      */
-    public int calcMaxProdMenge(){
+    public int getMaxProdMenge(){
         int maschKapazität = 0;
         int mitarbeiterKapazität = 0;
         for (int i = 0; i < this.maschinen.size(); i++){
@@ -165,7 +198,7 @@ public class Produktion extends Abteilung {
      * ermittelt verfügbaren Lagerplatz
      * @return Anzahl an Produkten, die noch in das/die Lager passen
      */
-    public int calcLagerPlatz(){
+    public int getFreienLagerPlatz(){
         int lagerplatz = 0;
         int produkte = 0;
         for (Halle halle : lagerhallen){
@@ -177,4 +210,21 @@ public class Produktion extends Abteilung {
         return lagerplatz - produkte;
     }
 
+    /**
+     * @return Anzahl verfügbare Stellplätze für Maschinen
+     */
+    public int getFreienMaschinenPlatz(){
+        int maschinenPlaetze = 0;
+        for (Halle halle : this.produktionshallen){
+            maschinenPlaetze += halle.getKapazität();
+        }
+        return maschinenPlaetze - this.maschinen.size();
+    }
+
+
+
+    // Getter und Setter:
+    public Map<String, Double> getProduktlinien() {
+        return produktlinien;
+    }
 }

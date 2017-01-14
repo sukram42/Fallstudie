@@ -9,13 +9,13 @@ public class Maschine {
     private int klasse; // etwa 1, 2, 3 -> unterschiedliche Kapazität, Anschaffungskosten, Halbwertszeit
     private int kapazität; // kann maximal so viele Produkte pro Monat produzieren. abhängig von klasse
     private int anschaffungskst; // abhängig von klasse
-    private int energiekosten; // pro Monat, bei jeder Maschinenklasse gleich
+    private int energiekosten; // pro Tag, bei jeder Maschinenklasse gleich
     private double status; // sinkt jeden Monat um X, kann durch Reparaturen wieder hochgesetzt werden
 
 
     public Maschine(int klasse) {
         this.klasse = klasse;
-        this.energiekosten = 500; // <- TODO realistischen / zum Spiel passenden Wert für Energiekosten einsetzen
+        this.energiekosten = 100; // <- TODO realistischen / zum Spiel passenden Wert für Energiekosten einsetzen
         this.status = 1;
         findKapazitätUndAnschaffungskst(klasse);
     }
@@ -87,5 +87,9 @@ public class Maschine {
 
     public void setStatus(double status) {
         this.status = status;
+    }
+
+    public int getEnergiekosten() {
+        return energiekosten;
     }
 }
