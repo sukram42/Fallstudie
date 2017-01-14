@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Abteilung Human Resources
  */
 public class HR extends Abteilung {
-    private final Unternehmen unternehmen;
+    private transient Unternehmen unternehmen;
 
     // TODO was soll hier passieren? - Ist es nicht besser Funktionen wie "Mitarbeiter entlassen", "Mitarbeiter von
     // TODO Abteilung X in Abteilung Y verschieben" oder "Gehalt bearbeiten" in der Klasse Mitarbeiter zu implementieren?
@@ -24,19 +24,22 @@ public class HR extends Abteilung {
      */
     public HR(Unternehmen unternehmen, Kennzahlensammlung kennzahlensammlung) {
         super("Human-Resources" ,kennzahlensammlung);
-
         this.unternehmen = unternehmen;
     }
 
-    public float getDurchschnittlichesGehalt() {
+    public float getTotalGehalt()
+    {
         float gehalt = 0;
-        float anzahl = 0;
         for (Abteilung abteilung : unternehmen.getAbteilungen().values()) {
             for (Mitarbeiter arbeiter : abteilung.getMitarbeiter()) {
-                anzahl++;
                 gehalt += (float) arbeiter.getGehalt();
             }
         }
+        return gehalt;
+    }
+    public float getDurchschnittlichesGehalt() {
+        float anzahl = getTotalMitarbeiterCount();
+        float gehalt = getTotalGehalt();
         if(anzahl==0)return -1;
         return (gehalt / anzahl);
     }
@@ -55,5 +58,11 @@ public class HR extends Abteilung {
             erg.addAll(abteilung.getMitarbeiter());
         }
         return erg;
+    }
+
+
+    @Override
+    public void update() {
+
     }
 }

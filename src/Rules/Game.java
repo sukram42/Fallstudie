@@ -112,6 +112,10 @@ public class Game extends TimerTask{
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
         return sdf.format(gameCalendar.getTime());
     }
+    public static Calendar getCalendar()
+    {
+        return gameCalendar;
+    }
 
     public static void main(String[] args){
         new Game();

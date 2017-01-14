@@ -33,9 +33,9 @@ public class Unternehmen {
 		abteilungen.put("finanzen", new Finanzen(kennzahlensammlung));
 		abteilungen.put("forschung",new Forschung(kennzahlensammlung));
 		abteilungen.put("produktion", new Produktion(kennzahlensammlung));
-		abteilungen.put("sozialeLeistungen", new SozialeLeistungen(kennzahlensammlung));
-		//abteilungen.put("vertrieb", new Vertrieb(kennzahlensammlung, (Produktion) this.getAbteilung("produktion")));
+		abteilungen.put("vertrieb", new Vertrieb(kennzahlensammlung));
 		abteilungen.put("hr", new HR(this,kennzahlensammlung));
+		abteilungen.put("sozialeLeistungen", new SozialeLeistungen(kennzahlensammlung,(HR)abteilungen.get("hr")));
 
 	}
 
@@ -45,7 +45,6 @@ public class Unternehmen {
 		{
 			abteilungen.get(key).update();
 		}
-
 		kennzahlensammlung.update();
 	}
 

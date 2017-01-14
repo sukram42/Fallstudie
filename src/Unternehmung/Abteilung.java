@@ -14,10 +14,12 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Abteilung {
+public abstract class Abteilung {
 
 	protected transient ArrayList<Mitarbeiter> mitarbeiter = new ArrayList<>();
 	protected transient Kennzahlensammlung kennzahlensammlung;
+	protected transient float aktKosten = 0 ;
+
 	public String name;
 
     public Abteilung(String name, Kennzahlensammlung kennzahlensammlung) {
@@ -69,10 +71,6 @@ public class Abteilung {
 //		}
 	}
 
-	public void update()
-	{
-
-	}
 
 	public ArrayList<Mitarbeiter> getMitarbeiter() {
 		return mitarbeiter;
@@ -80,5 +78,32 @@ public class Abteilung {
 	public int getMitarbeiterAnzahl()
 	{
 		return mitarbeiter.size();
+	}
+
+
+	public abstract void update();
+
+
+	/**
+	 * @return Gibt die aktuellen Kosten der Abteilung zurück;
+	 */
+	public float getKosten()
+	{
+		return aktKosten;
+	}
+
+	/**
+	 * Berechnet die Mitarbeiterkosten
+	 * @return Mitarbeiterkosten
+	 */
+	public float getMitarbeiterKosten()
+	{
+		float mitarbeiterKosten = 0 ;
+		for(Mitarbeiter m : mitarbeiter)
+		{
+			mitarbeiterKosten +=m.getGehalt();
+		}
+
+		return mitarbeiterKosten;
 	}
 }

@@ -1,68 +1,87 @@
 package Unternehmung.Kennzahlen;
 
+import Unternehmung.Abteilungen.HR;
+import Unternehmung.Unternehmen;
+
 /**
  * Created by oehlersj on 13.01.2017.
  */
 public class GuV {
 
+    private transient Unternehmen unternehmen;
+
     //Aufwendungen
-    private double aufwendungenFürRohstoffe; //alle Produktionskosten
-    private double aufwendungenFürWerbung;
-    private double aufwendungenFürGehaelter;
-    private double aufwendungenFürEnergie;
+    private float aufwendungenFuerRohstoffe; //alle Produktionskosten
+    private float aufwendungenFuerWerbung;
+    private float aufwendungenFuerGehaelter;
+    private float aufwendungenFuerEnergie;
+    private float aufwendungenFuerSozialeLeistungen;
 
     //Erlöse
-    private double umsatzErlöse;
+    private float umsatzErlöse;
 
-    private double jahresUeberschuss;
+    private float jahresUeberschuss;
 
-    public GuV() {
+
+
+    public GuV(Unternehmen unternehmen) {
+        this.unternehmen = unternehmen;
     }
 
-    public double jahresUeberschussBerechnen(){
-        this.jahresUeberschuss=(this.umsatzErlöse - (this.aufwendungenFürEnergie + this.aufwendungenFürGehaelter + this.aufwendungenFürRohstoffe + this.aufwendungenFürWerbung));
+    public float jahresUeberschussBerechnen(){
+        this.jahresUeberschuss=(this.umsatzErlöse - (this.aufwendungenFuerEnergie + this.aufwendungenFuerGehaelter + this.aufwendungenFuerRohstoffe + this.aufwendungenFuerWerbung));
         return jahresUeberschuss;
     }
+
+    public void importAufwand()
+    {
+        aufwendungenFuerWerbung +=  unternehmen.getAbteilung("marketing").getKosten();
+        aufwendungenFuerGehaelter += ((HR)unternehmen.getAbteilung("hr")).getTotalGehalt();
+        aufwendungenFuerSozialeLeistungen +=unternehmen.getAbteilung("sozialeLeistungen").getKosten();
+
+        //TODO den Rest noch
+    }
+
 
     //getter und setter
 
-    public double getAufwendungenFürWerbung() {
-        return aufwendungenFürWerbung;
+    public float getAufwendungenFuerWerbung() {
+        return aufwendungenFuerWerbung;
     }
 
-    public void setAufwendungenFürWerbung(double aufwendungenFürWerbung) {
-        this.aufwendungenFürWerbung = aufwendungenFürWerbung;
+    public void setAufwendungenFuerWerbung(float aufwendungenFuerWerbung) {
+        this.aufwendungenFuerWerbung = aufwendungenFuerWerbung;
     }
 
-    public double getAufwendungenFürGehaelter() {
-        return aufwendungenFürGehaelter;
+    public float getAufwendungenFuerGehaelter() {
+        return aufwendungenFuerGehaelter;
     }
 
-    public void setAufwendungenFürGehaelter(double aufwendungenFürGehaelter) {
-        this.aufwendungenFürGehaelter = aufwendungenFürGehaelter;
+    public void setAufwendungenFuerGehaelter(float aufwendungenFuerGehaelter) {
+        this.aufwendungenFuerGehaelter = aufwendungenFuerGehaelter;
     }
 
-    public double getAufwendungenFürEnergie() {
-        return aufwendungenFürEnergie;
+    public float getAufwendungenFuerEnergie() {
+        return aufwendungenFuerEnergie;
     }
 
-    public void setAufwendungenFürEnergie(double aufwendungenFürEnergie) {
-        this.aufwendungenFürEnergie = aufwendungenFürEnergie;
+    public void setAufwendungenFuerEnergie(float aufwendungenFuerEnergie) {
+        this.aufwendungenFuerEnergie = aufwendungenFuerEnergie;
     }
 
-    public double getUmsatzErlöse() {
+    public float getUmsatzErlöse() {
         return umsatzErlöse;
     }
 
-    public void setUmsatzErlöse(double umsatzErlöse) {
+    public void setUmsatzErlöse(float umsatzErlöse) {
         this.umsatzErlöse = umsatzErlöse;
     }
 
-    public double getJahresUeberschuss() {
+    public float getJahresUeberschuss() {
         return jahresUeberschuss;
     }
 
-    public void setJahresUeberschuss(double jahresUeberschuss) {
+    public void setJahresUeberschuss(float jahresUeberschuss) {
         jahresUeberschuss = jahresUeberschuss;
     }
 }
