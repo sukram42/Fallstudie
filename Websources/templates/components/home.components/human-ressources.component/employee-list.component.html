@@ -15,12 +15,12 @@
         </thead>
         <tbody>
             <tr *ngFor="let mitarbeiter of mitarbeiterList">
-                <td><img style="border-radius: 50%;" [src]="mitarbeiter.imagelink"/></td>
+                <td><img style="border-radius: 50%; width: 50px;" [src]="mitarbeiter.imagelink"/></td>
                 <td>{{mitarbeiter.vorname}}</td>
                 <td>{{mitarbeiter.name}}</td>
-                <td>{{mitarbeiter.gehalt}}</td>
+                <td>{{mitarbeiter.gehalt}} €</td>
                 <td>{{mitarbeiter.department.name}}</td>
-                <td><button  class ="btn btn-primary">Klick mich</button></td>
+                <td><button  class ="btn btn-default btn-xs">Edit</button></td>
             </tr>
         </tbody>
 
