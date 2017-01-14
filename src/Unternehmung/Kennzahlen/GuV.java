@@ -1,4 +1,4 @@
-package Unternehmung;
+package Unternehmung.Kennzahlen;
 
 /**
  * Created by oehlersj on 13.01.2017.
@@ -6,56 +6,56 @@ package Unternehmung;
 public class GuV {
 
     //Aufwendungen
-    private double AufwendungenFürRohstoffe; //alle Produktionskosten
-    private double AufwendungenFürWerbung;
-    private double AufwendungenFürGehaelter;
-    private double AufwendungenFürEnergie;
+    private double aufwendungenFürRohstoffe; //alle Produktionskosten
+    private double aufwendungenFürWerbung;
+    private double aufwendungenFürGehaelter;
+    private double aufwendungenFürEnergie;
 
     //Erlöse
-    private double UmsatzErlöse;
+    private double umsatzErlöse;
 
-    public double jahresUeberschuss;
+    private double jahresUeberschuss;
 
     public GuV() {
     }
 
     public double jahresUeberschussBerechnen(){
-        this.jahresUeberschuss=(this.UmsatzErlöse - (this.AufwendungenFürEnergie + this.AufwendungenFürGehaelter + this.AufwendungenFürRohstoffe + this.AufwendungenFürWerbung));
+        this.jahresUeberschuss=(this.umsatzErlöse - (this.aufwendungenFürEnergie + this.aufwendungenFürGehaelter + this.aufwendungenFürRohstoffe + this.aufwendungenFürWerbung));
         return jahresUeberschuss;
     }
 
     //getter und setter
 
     public double getAufwendungenFürWerbung() {
-        return AufwendungenFürWerbung;
+        return aufwendungenFürWerbung;
     }
 
     public void setAufwendungenFürWerbung(double aufwendungenFürWerbung) {
-        AufwendungenFürWerbung = aufwendungenFürWerbung;
+        this.aufwendungenFürWerbung = aufwendungenFürWerbung;
     }
 
     public double getAufwendungenFürGehaelter() {
-        return AufwendungenFürGehaelter;
+        return aufwendungenFürGehaelter;
     }
 
     public void setAufwendungenFürGehaelter(double aufwendungenFürGehaelter) {
-        AufwendungenFürGehaelter = aufwendungenFürGehaelter;
+        this.aufwendungenFürGehaelter = aufwendungenFürGehaelter;
     }
 
     public double getAufwendungenFürEnergie() {
-        return AufwendungenFürEnergie;
+        return aufwendungenFürEnergie;
     }
 
     public void setAufwendungenFürEnergie(double aufwendungenFürEnergie) {
-        AufwendungenFürEnergie = aufwendungenFürEnergie;
+        this.aufwendungenFürEnergie = aufwendungenFürEnergie;
     }
 
     public double getUmsatzErlöse() {
-        return UmsatzErlöse;
+        return umsatzErlöse;
     }
 
     public void setUmsatzErlöse(double umsatzErlöse) {
-        UmsatzErlöse = umsatzErlöse;
+        this.umsatzErlöse = umsatzErlöse;
     }
 
     public double getJahresUeberschuss() {

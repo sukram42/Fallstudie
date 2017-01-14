@@ -69,6 +69,11 @@ public class Abteilung {
 //		}
 	}
 
+	public void update()
+	{
+
+	}
+
 	public ArrayList<Mitarbeiter> getMitarbeiter() {
 		return mitarbeiter;
 	}

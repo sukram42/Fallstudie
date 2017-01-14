@@ -1,5 +1,6 @@
 package Unternehmung;
 
+import Unternehmung.Kennzahlen.Bilanz;
 import Unternehmung.Kennzahlen.Kennzahl;
 import Unternehmung.Kennzahlen.Mitarbeiterzufriedenheit;
 
@@ -15,8 +16,6 @@ import java.util.Map;
 public class Kennzahlensammlung {
 
     private transient Unternehmen unternehmen;
-    //keine Ahnung wofür transient steht aber egal
-    private transient Bilanz bilanz;
     // "weiche" Kennzahlensammlung:
     //private Kennzahl bekanntheitsgrad = new Kennzahl(); // TODO als Kennzahl (statt double) implementieren?!
 
@@ -37,6 +36,8 @@ public class Kennzahlensammlung {
     private double bekanntheitsgrad;
     private double absatzrate; // Wahrscheinlichkeit, alle seine Produkte zu verkaufen (abhängig von Maßnahmen und zufällige Ereignisse wie z.B. Konjunktur, Werbekampagnen etc.)
     private double liquideMittel;
+
+    private Bilanz bilanz = new Bilanz();
 
     /**
      * Konstruktor zum Erstellen einen Kennzahlenobjekts eines Unternehmens (wird im Unternehmenskonstruktor aufgerufen)
@@ -59,9 +60,19 @@ public class Kennzahlensammlung {
     {
         for(Kennzahl kennzahl  : weicheKennzahlen.values())
         {
-//            kennzahl.berechnen();
+            kennzahl.berechnen();
         }
+        gewinnBerechnen();
+        verkaufsrateBerechnen();
+        bilanz.berechnen();
+
     }
+
+    public void update()
+    {
+        berechnen();
+    }
+
 
     /**
      * Methode, die den Gewinn (Jahresüberschuss) berechnet. Wird von addX() ausgeführt (siehe unten)

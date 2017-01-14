@@ -1,6 +1,7 @@
 package Unternehmung;
 
 import Unternehmung.Abteilungen.*;
+import Unternehmung.Kennzahlen.Bilanz;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +37,16 @@ public class Unternehmen {
 		//abteilungen.put("vertrieb", new Vertrieb(kennzahlensammlung, (Produktion) this.getAbteilung("produktion")));
 		abteilungen.put("hr", new HR(this,kennzahlensammlung));
 
+	}
+
+	public void update()
+	{
+		for(String key : abteilungen.keySet())
+		{
+			abteilungen.get(key).update();
+		}
+
+		kennzahlensammlung.update();
 	}
 
 	// Getter und Setter:
