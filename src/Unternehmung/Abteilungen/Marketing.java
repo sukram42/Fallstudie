@@ -76,6 +76,18 @@ public class Marketing extends Abteilung {
         // TODO impact weitergeben
     }
 
+    @Override
+    public float getKosten(){
+        float taeglichKosten = 0;
+        for (Map.Entry<String, Marketingkampagne> kampagne : this.kampagnen.entrySet()) {
+            taeglichKosten += kampagne.getValue().getKosten();
+        }
+        for (Map.Entry<Integer, Marktforschung> mafo : this.mafos.entrySet()){
+            taeglichKosten += mafo.getValue().getKosten();
+        }
+        return taeglichKosten;
+    }
+
     // Hilfsmethoden:
     /**
      * zählt die verbleibende Laufzeit runter und löscht Projekt, wenn Laufzeit vorbei
@@ -103,17 +115,6 @@ public class Marketing extends Abteilung {
                 this.mafos.remove(mafo.getKey());
             }
         }
-    }
-
-    public float getTaeglicheKosten(){
-        float taeglichKosten = 0;
-        for (Map.Entry<String, Marketingkampagne> kampagne : this.kampagnen.entrySet()) {
-            taeglichKosten += kampagne.getValue().getKosten();
-        }
-        for (Map.Entry<Integer, Marktforschung> mafo : this.mafos.entrySet()){
-            taeglichKosten += mafo.getValue().getKosten();
-        }
-        return taeglichKosten;
     }
 
 }

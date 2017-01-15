@@ -1,6 +1,7 @@
 package Unternehmung.Kennzahlen;
 
 import Unternehmung.Abteilungen.HR;
+import Unternehmung.Abteilungen.Produktion;
 import Unternehmung.Unternehmen;
 
 /**
@@ -33,13 +34,33 @@ public class GuV {
         return jahresUeberschuss;
     }
 
-    public void importAufwand()
+    public void importAufwandUndErlös()
     {
         aufwendungenFuerWerbung +=  unternehmen.getAbteilung("marketing").getKosten();
         aufwendungenFuerGehaelter += ((HR)unternehmen.getAbteilung("hr")).getTotalGehalt();
         aufwendungenFuerSozialeLeistungen +=unternehmen.getAbteilung("sozialeLeistungen").getKosten();
+        Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
+        aufwendungenFuerRohstoffe += produktion.getTaeglicheHerstellkosten();
+        aufwendungenFuerEnergie += produktion.getTaeglicheEnergiekosten();
 
-        //TODO den Rest noch
+        // TODO Umsatz ergänzen, wenn Sales-Klasse steht:
+        //umsatzErlöse += ;
+    }
+
+    public float getTaeglicheLiquiditätsveränderung(){
+        float kosten = 0;
+
+        float umsatz = 0; // TODO Umsatz ergänzen, wenn Sales-Klasse steht:
+
+        float werbekosten =  unternehmen.getAbteilung("marketing").getKosten();
+        float gehälter = ((HR)unternehmen.getAbteilung("hr")).getTotalGehalt();
+        float sozialeLeistungen =unternehmen.getAbteilung("sozialeLeistungen").getKosten();
+        Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
+        float herstellkosten = produktion.getTaeglicheHerstellkosten();
+        float energiekosten = produktion.getTaeglicheEnergiekosten();
+        kosten = werbekosten + gehälter + sozialeLeistungen + herstellkosten + energiekosten;
+
+        return umsatz - kosten;
     }
 
 

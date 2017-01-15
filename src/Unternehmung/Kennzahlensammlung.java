@@ -1,5 +1,6 @@
 package Unternehmung;
 
+import Exceptions.BankruptException;
 import Unternehmung.Kennzahlen.Bilanz;
 import Unternehmung.Kennzahlen.Kennzahl;
 import Unternehmung.Kennzahlen.Mitarbeiterzufriedenheit;
@@ -35,9 +36,9 @@ public class Kennzahlensammlung {
     private double eigenkapital;
     private double bekanntheitsgrad;
     private double absatzrate; // Wahrscheinlichkeit, alle seine Produkte zu verkaufen (abhängig von Maßnahmen und zufällige Ereignisse wie z.B. Konjunktur, Werbekampagnen etc.)
-    private double liquideMittel;
+    private float liquideMittel;
 
-    private Bilanz bilanz = new Bilanz();
+    private Bilanz bilanz = new Bilanz(unternehmen);
 
     /**
      * Konstruktor zum Erstellen einen Kennzahlenobjekts eines Unternehmens (wird im Unternehmenskonstruktor aufgerufen)
@@ -47,7 +48,7 @@ public class Kennzahlensammlung {
         // TODO alle Defaultwerte definieren (zumindest solche, die nicht 0 sein sollen)
         this.eigenkapital = eigenkapital;
         this.absatzrate = 0.2;
-        this.liquideMittel = eigenkapital;
+        this.liquideMittel = (float) eigenkapital;
         this.unternehmen = unternehmen;
 
         weicheKennzahlen.put("mitarbeiterzufriedenheit",new Mitarbeiterzufriedenheit(unternehmen));
@@ -71,6 +72,12 @@ public class Kennzahlensammlung {
     public void update()
     {
         berechnen();
+        bilanz.getGuv().importAufwandUndErlös(); // GuV updaten
+        try {
+            this.liquiditätAnpassen(bilanz.getGuv().getTaeglicheLiquiditätsveränderung());
+        } catch (BankruptException e){
+            e.printStackTrace();
+        }
     }
 
 
@@ -95,29 +102,16 @@ public class Kennzahlensammlung {
     }
 
     /**
-     * wird bei Investitionen aufgerufen und prüft ob genügend Liquidität vorhanden ist und verringert den Kassenbestand ( cash) entsprechend
-     * @param kosten Kosten einer Maßnahme (z.B. Marketingmaßnahme oder Produktion)
-     * @param posten "Kostenstelle", wo die kosten addiert werden sollen (z.B. Gehälter, Herstellkosten, sonstige Kosten, ...)
-     * @return true, wenn ausreichend Bargeld vorhanden ist; false, wenn nicht
+     * passt zu jedem Timer Count die liquidität entsprechend an (wirft bei Zahlungsunfähigkeit eine BankruptException)
+     * wird außerdem aufgerufen, wenn einmalige Liquiditätsveränderungen statt finden (z.B. Kauf einer Maschine oder einmaliger Umsatzerlös)
+     * @param liquiditätsVeränderung berechnet von GuV.getTaeglicheLiquiditätsveränderung
      */
-    public boolean liquiditätVorhanden(double kosten, String posten){
-        if (this.liquideMittel >= kosten){
-            switch (posten){
-                case "gehälter":
-                    addGehälter((int) kosten);
-                    this.setLiquideMittel(this.getLiquideMittel() - kosten);
-                    return true;
-                case "herstellkosten":
-                    addHerstellkosten(kosten);
-                    this.setLiquideMittel(this.getLiquideMittel() - kosten);
-                    return true;
-                case "sonstige Kosten":
-                    addSonstigeKosten(kosten);
-                    this.setLiquideMittel(this.getLiquideMittel() - kosten);
-                    return true;
-            }
+    public void liquiditätAnpassen(float liquiditätsVeränderung) throws BankruptException {
+        if (this.liquideMittel * -1 <= liquiditätsVeränderung){
+            this.setLiquideMittel(this.liquideMittel + liquiditätsVeränderung);
+        } else {
+            throw new BankruptException(unternehmen);
         }
-        return false;
     }
 
     public Kennzahl getWeicheKennzahl(String kennzahl){
@@ -307,7 +301,7 @@ public class Kennzahlensammlung {
         return liquideMittel;
     }
 
-    public void setLiquideMittel(double liquideMittel) {
+    public void setLiquideMittel(float liquideMittel) {
         this.liquideMittel = liquideMittel;
     }
 

@@ -1,5 +1,6 @@
 package Unternehmung.Abteilungen;
 
+import Exceptions.BankruptException;
 import Unternehmung.*;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class Produktion extends Abteilung {
     public void produzieren(String name, char qualitätsstufe, int menge, int laufzeit){
         Produktlinie produktlinie = new Produktlinie(new Produkt(name, qualitätsstufe), menge, laufzeit);
         // prüfen, ob genügend Mitarbeiter, Maschinen und Liquidität vorhanden ist:
-        if (menge <= getMaxProdMenge() && this.kennzahlensammlung.liquiditätVorhanden(produktlinie.getProdukt().getHerstellkosten(), "herstellkosten")){
+        if (menge <= getMaxProdMenge()){
             // Herstellkosten, falls an dem Produkt bereits geforscht wurde, senken:
             double forschungsbonus = getForschungsbonusById(produktlinie.getId());
             produktlinie.getProdukt().setHerstellkosten(produktlinie.getProdukt().getHerstellkosten() * forschungsbonus);
@@ -64,10 +65,10 @@ public class Produktion extends Abteilung {
     public void maschinenKaufen(int klasse, int anzahl) {
         Maschine m = new Maschine(klasse); // eine Maschine erstellen, um Anschaffungskosten zu erfahren
         int anschaffungskst = m.getAnschaffungskst();
-        // prüfen, ob genügend Liquidität vorhanden (falls ja Maschine von oben und alle weiteren zum Maschinenpark hinzufügen):
-        if (this.kennzahlensammlung.liquiditätVorhanden(anschaffungskst * anzahl, "sonstige Kosten")) {
-            // prüfen, ob genügend Fläche (= Produktionshalle) für neue Maschine(n) vorhanden ist:
-            if (getFreienMaschinenPlatz() >= anzahl) {
+        // prüfen, ob genügend Fläche (= Produktionshalle) für neue Maschine(n) vorhanden ist:
+        if (getFreienMaschinenPlatz() >= anzahl) {
+            try {
+                kennzahlensammlung.liquiditätAnpassen(anschaffungskst * anzahl);
                 maschinen.add(m);
                 for (int i = 1; i < anzahl; i++) {
                     Maschine n = new Maschine(klasse);
@@ -75,37 +76,40 @@ public class Produktion extends Abteilung {
                 }
                 System.out.println(anzahl + " Maschine(n) der Klasse " + klasse + " gekauft, Kapazität: " + m.getKapazität() +
                         " Stück pro Jahr, Anschaffungskosten: " + anschaffungskst + " €");
-            } else {
-                System.out.println("Nicht genügend Maschinenstellplätze vorhanden!");
+            } catch (BankruptException e) {
+                e.printStackTrace();
             }
         } else {
-            System.out.println("Nicht genügend Liquidität vorhanden!");
+            System.out.println("Nicht genügend Maschinenstellplätze vorhanden!");
         }
     }
 
     public void produktionshalleKaufen(int größe){
         Halle halle = new Halle("Produktionshalle", größe);
-        if (this.kennzahlensammlung.liquiditätVorhanden(halle.getPreis(), "sonstige Kosten")){
+        try{
+            kennzahlensammlung.liquiditätAnpassen((float) halle.getPreis());
             this.produktionshallen.add(halle);
             System.out.println("Produktionshalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
-        } else {
-            System.out.println("Nicht genügend Liquidität vorhanden!");
+        } catch (BankruptException e) {
+            e.printStackTrace();
         }
     }
 
     public void lagerhalleKaufen(int größe){
         Halle halle = new Halle("Produktionshalle", größe);
-        if (this.kennzahlensammlung.liquiditätVorhanden(halle.getPreis(), "sonstige Kosten")){
+        try{
+            kennzahlensammlung.liquiditätAnpassen((float) halle.getPreis());
             this.lagerhallen.add(halle);
             System.out.println("Lagerhalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
-        } else {
-            System.out.println("Nicht genügend Liquidität vorhanden!");
+        } catch (BankruptException e) {
+            e.printStackTrace();
         }
     }
 
     /**
      * Methode, die von Game.run() beim Erhöhen des Timers ausgeführt wird
      */
+    @Override
     public void update(){
         this.kennzahlensammlung.addSonstigeKosten(getTaeglicheEnergiekosten());
         this.kennzahlensammlung.addHerstellkosten(getTaeglicheHerstellkosten());
