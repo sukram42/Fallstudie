@@ -35,7 +35,7 @@ public class Unternehmen {
 		abteilungen.put("produktion", new Produktion(kennzahlensammlung));
 		abteilungen.put("vertrieb", new Vertrieb(kennzahlensammlung));
 		abteilungen.put("hr", new HR(this,kennzahlensammlung));
-		abteilungen.put("sozialeLeistungen", new SozialeLeistungen(kennzahlensammlung,(HR)abteilungen.get("hr")));
+		abteilungen.put("sozialeLeistungen", new SozialeLeistungen(this));
 
 	}
 

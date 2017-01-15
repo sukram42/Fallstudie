@@ -20,9 +20,9 @@ public class Bilanz {
     private double fremdkapital;
 
 
-    public Bilanz() {
+    public Bilanz(Unternehmen unternehmen) {
 
-        this.guv = new GuV();
+        this.guv = new GuV(unternehmen);
         this.eigenkapital = 100000;
         this.liquideMittel=100000;
 
