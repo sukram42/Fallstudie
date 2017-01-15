@@ -67,6 +67,7 @@ public ArrayList<Produktlinie> getVerfügbareProdukte() {
         return verfügbareProdukte;
 }
 
+
 public void update() {
     for (Forschungsprojekt projekt : projekte) {
         if ((projekt.getBeginn() + projekt.getDauer()) <= Game.getTime()) { //Wurde das Projekt abgeschlossen?

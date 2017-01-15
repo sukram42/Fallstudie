@@ -55,6 +55,7 @@ public class Forschungsprojekt {
         }
     }
 
+
     public long getDauer() {
         return dauer;
     }
