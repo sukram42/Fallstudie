@@ -7,16 +7,10 @@ import Rules.Game;
  */
 public class Forschungsprojekt {
 
-    /*
-    Je weiter das Forschungsprojekt forangeschritten ist, desto effektiver können die Mitarbeiter darin arbeiten.
-    Deshalb ist der Malus, verglichen zur übrigen Zeit, höher, wenn man gegen Ende abbricht, als wenn man es am Anfang macht.
-     */
-
-
     public final double abbruchFaktor = 0.7;
 
     private int mitarbeiterAnzahl;
-        private Produkt forschungsobjekt;
+    private Produktlinie forschungsobjekt;
     private long dauer;
     private long beginn;
     private boolean herstellkosten; //Indikator, ob Kostenreduzierung oder Image gewählt wurde
@@ -25,7 +19,7 @@ public class Forschungsprojekt {
 
     //Effektivität über Mitarbeiterzufriedenheit
 
-    public Forschungsprojekt(Produkt forschungsobjekt, int mitarbeiterAnzahl, long dauer, boolean herstellkosten){
+    public Forschungsprojekt(Produktlinie forschungsobjekt, int mitarbeiterAnzahl, long dauer, boolean herstellkosten){
     beginn = Game.getTime();
     this.mitarbeiterAnzahl = mitarbeiterAnzahl;
     this.forschungsobjekt = forschungsobjekt;
@@ -34,14 +28,13 @@ public class Forschungsprojekt {
 
     //  this.kennzahlensammlung.setBekanntheitsgrad(this.kennzahlensammlung.getBekanntheitsgrad() + impact);
 
-
     public void abbrechen(){
-        //time
         if(herstellkosten){
-            double produktKosten = forschungsobjekt.getHerstellkosten();
-          //  produktKosten = produktKosten * abbruchFaktor * (Game.getTime() - beginn) * mitarbeiterAnzahl * irgendeinFaktor;
+            double bonus = forschungsobjekt.getForschungsbonus();
+          //  forschungsbonus = abbruchFaktor * (Game.getTime() - beginn) * mitarbeiterAnzahl * mitarbeiterZufriedenheit * irgendeinFaktor;
          //  this.kennzahlensammlung.
-            forschungsobjekt.setHerstellkosten(produktKosten);
+            forschungsobjekt.setForschungsbonus(bonus);
+
         }else{
             //Kundenzufriedenheit erhöhen
 
@@ -51,9 +44,10 @@ public class Forschungsprojekt {
 
     public void abschließen(){
         if(herstellkosten){
-            double produktKosten = forschungsobjekt.getHerstellkosten();
+            double bonus = forschungsobjekt.getForschungsbonus();
             //  produktKosten = produktKosten * (Game.getTime() - beginn) * mitarbeiterAnzahl * irgendeinFaktor;
-            forschungsobjekt.setHerstellkosten(produktKosten);
+            // forschungsobjekt.setHerstellkosten(produktKosten);
+            forschungsobjekt.setForschungsbonus(bonus);
         }else{
         //Kundenzufriedenheit erhöhen
 
@@ -69,7 +63,7 @@ public class Forschungsprojekt {
         return beginn;
     }
 
-    public Produkt getForschungsobjekt() {
+    public Produktlinie getForschungsobjekt() {
         return forschungsobjekt;
     }
 
