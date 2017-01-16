@@ -17,6 +17,7 @@ public class GuV {
     private float aufwendungenFuerGehaelter;
     private float aufwendungenFuerEnergie;
     private float aufwendungenFuerSozialeLeistungen;
+    private float zinsaufwendungen;
 
     //Erlöse
     private float umsatzErlöse;
@@ -30,7 +31,8 @@ public class GuV {
     }
 
     public float jahresUeberschussBerechnen(){
-        this.jahresUeberschuss=(this.umsatzErlöse - (this.aufwendungenFuerEnergie + this.aufwendungenFuerGehaelter + this.aufwendungenFuerRohstoffe + this.aufwendungenFuerWerbung));
+        this.jahresUeberschuss=(this.umsatzErlöse - (this.aufwendungenFuerEnergie + this.aufwendungenFuerGehaelter +
+                this.aufwendungenFuerRohstoffe + this.aufwendungenFuerWerbung + this.zinsaufwendungen));
         return jahresUeberschuss;
     }
 
@@ -63,6 +65,10 @@ public class GuV {
         return umsatz - kosten;
     }
 
+    // add-Methoden:
+    public void addZinsaufwendungen(float zinsaufwendungen){
+        this.zinsaufwendungen += zinsaufwendungen;
+    }
 
     //getter und setter
 
@@ -104,5 +110,13 @@ public class GuV {
 
     public void setJahresUeberschuss(float jahresUeberschuss) {
         jahresUeberschuss = jahresUeberschuss;
+    }
+
+    public float getZinsaufwendungen() {
+        return zinsaufwendungen;
+    }
+
+    public void setZinsaufwendungen(float zinsaufwendungen) {
+        this.zinsaufwendungen = zinsaufwendungen;
     }
 }

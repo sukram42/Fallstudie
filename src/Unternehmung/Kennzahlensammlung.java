@@ -18,7 +18,6 @@ public class Kennzahlensammlung {
 
     private transient Unternehmen unternehmen;
     // "weiche" Kennzahlensammlung:
-    //private Kennzahl bekanntheitsgrad = new Kennzahl(); // TODO als Kennzahl (statt double) implementieren?!
 
     private Map<String,  Kennzahl> weicheKennzahlen = new HashMap<>();
 
@@ -28,7 +27,6 @@ public class Kennzahlensammlung {
     private double herstellkosten; // wird laufend fortgeschrieben (siehe unten addHerstellkosten())
     private double sonstigeKosten; // wird laufend fortgeschrieben (siehe unten addSonstigeKosten)
     private int gehälter; // wird laufend fortgeschrieben (siehe unten addGehälter)
-            // TODO Fortzahlung der Gehälter im nächsten Geschäftsjahr implementieren
     private double gewinn; // wird bei Änderungen von Umsatz oder Kosten automatisch aktualisiert (siehe unten gewinnBerechnen())
     private double ausschussrate;
     private double reklamationsrate;
@@ -157,16 +155,6 @@ public class Kennzahlensammlung {
 
 
     // Getter und Setter:
-    /*
-    public Kennzahl getBekanntheitsgrad() {
-        return bekanntheitsgrad;
-    }
-
-    public void setBekanntheitsgrad(Kennzahl bekanntheitsgrad) {
-        this.bekanntheitsgrad = bekanntheitsgrad;
-    }
-    */
-
     public double getBekanntheitsgrad() {
         return bekanntheitsgrad;
     }
@@ -305,5 +293,11 @@ public class Kennzahlensammlung {
         this.liquideMittel = liquideMittel;
     }
 
+    public double getVerschuldungsgrad(){
+        return this.fremdkapital / this.eigenkapital;
+    }
 
+    public Bilanz getBilanz() {
+        return bilanz;
+    }
 }
