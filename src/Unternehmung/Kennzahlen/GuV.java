@@ -33,7 +33,14 @@ public class GuV {
     public float jahresUeberschussBerechnen(){
         this.jahresUeberschuss=(this.umsatzErlöse - (this.aufwendungenFuerEnergie + this.aufwendungenFuerGehaelter +
                 this.aufwendungenFuerRohstoffe + this.aufwendungenFuerWerbung + this.zinsaufwendungen));
-        return jahresUeberschuss;
+        float x = jahresUeberschuss;
+        this.setAufwendungenFuerEnergie(0);
+        this.setAufwendungenFuerGehaelter(0);
+        this.setAufwendungenFuerWerbung(0);
+        this.setJahresUeberschuss(0);
+        this.setUmsatzErlöse(0);
+        this.setZinsaufwendungen(0);
+        return x;
     }
 
     public void importAufwandUndErlös()
