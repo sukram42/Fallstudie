@@ -18,8 +18,8 @@ public class UnternehmenTest {
 
 
         System.out.println("Unternehmen " + unternehmen1.getName() + " mit Eigenkapital in Höhe von " +
-                unternehmen1.getKennzahlensammlung().getEigenkapital() + " und Fremdkapital in Höhe von " +
-                unternehmen1.getKennzahlensammlung().getFremdkapital() + " gegründet.");
+                unternehmen1.getKennzahlensammlung().getBilanz().getEigenkapital() + " und Fremdkapital in Höhe von " +
+                unternehmen1.getKennzahlensammlung().getBilanz().getFremdkapital() + " gegründet.");
 
 
         unternehmen1.getAbteilung("hr").addMitarbeiter(2,5000);
@@ -56,8 +56,8 @@ public class UnternehmenTest {
         Unternehmen unternehmen2 = new Unternehmen("Unternehmen 2", "kennwort", 1000000);
 
         System.out.println("Unternehmen " + unternehmen2.getName() + " mit Eigenkapital in Höhe von " +
-                unternehmen2.getKennzahlensammlung().getEigenkapital() + " und Fremdkapital in Höhe von " +
-                unternehmen2.getKennzahlensammlung().getFremdkapital() + " gegründet.");
+                unternehmen2.getKennzahlensammlung().getBilanz().getEigenkapital() + " und Fremdkapital in Höhe von " +
+                unternehmen2.getKennzahlensammlung().getBilanz().getFremdkapital() + " gegründet.");
 
         // Mitarbeiter einstellen:
         unternehmen2.getAbteilung("produktion").addMitarbeiter(1, 25000);
@@ -88,19 +88,19 @@ public class UnternehmenTest {
         // ############################## JAHRESENDE ##############################
         // Unternehmen 1:
         System.out.println("Das Unternehmen " + unternehmen1.getName() + " hat in diesem Geschäftsjahr ein Ergebnis von " +
-                unternehmen1.getKennzahlensammlung().getGewinn() + " € erzielt.");
-        System.out.println("Kosten: " + (unternehmen1.getKennzahlensammlung().getSonstigeKosten() + unternehmen1.getKennzahlensammlung().getGehälter() +
-                unternehmen1.getKennzahlensammlung().getHerstellkosten()));
-        System.out.println("Umsatz: " + unternehmen1.getKennzahlensammlung().getUmsatz());
+                unternehmen1.getKennzahlensammlung().getBilanz().getGuv().jahresUeberschussBerechnen() + " € erzielt.");
+        //System.out.println("Kosten: " + (unternehmen1.getKennzahlensammlung().getSonstigeKosten() + unternehmen1.getKennzahlensammlung().getGehälter() +
+                //unternehmen1.getKennzahlensammlung().getHerstellkosten()));
+        //System.out.println("Umsatz: " + unternehmen1.getKennzahlensammlung().getBilanz().getGuv().getUmsatz());
         System.out.println("Bekanntheitsgrad: " + unternehmen1.getKennzahlensammlung().getBekanntheitsgrad());
         System.out.println("Verkaufsrate: " + unternehmen1.getKennzahlensammlung().getAbsatzrate());
 
         // Unternehmen 2:
         System.out.println("Das Unternehmen " + unternehmen2.getName() + " hat in diesem Geschäftsjahr ein Ergebnis von " +
-                unternehmen2.getKennzahlensammlung().getGewinn() + " € erzielt.");
-        System.out.println("Kosten: " + (unternehmen2.getKennzahlensammlung().getSonstigeKosten() + unternehmen1.getKennzahlensammlung().getGehälter() +
-                unternehmen2.getKennzahlensammlung().getHerstellkosten()));
-        System.out.println("Umsatz: " + unternehmen2.getKennzahlensammlung().getUmsatz());
+                unternehmen2.getKennzahlensammlung().getBilanz().getGuv().jahresUeberschussBerechnen() + " € erzielt.");
+        //System.out.println("Kosten: " + (unternehmen2.getKennzahlensammlung().getSonstigeKosten() + unternehmen1.getKennzahlensammlung().getGehälter() +
+                //unternehmen2.getKennzahlensammlung().getHerstellkosten()));
+        //System.out.println("Umsatz: " + unternehmen2.getKennzahlensammlung().getUmsatz());
         System.out.println("Bekanntheitsgrad: " + unternehmen2.getKennzahlensammlung().getBekanntheitsgrad());
         System.out.println("Verkaufsrate: " + unternehmen2.getKennzahlensammlung().getAbsatzrate());
 
