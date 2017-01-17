@@ -30,10 +30,10 @@ public class Forschungsprojekt {
 
     public void abbrechen(){
         if(herstellkosten){
-            double bonus = forschungsobjekt.getForschungsbonus();
+            double bonus = forschungsobjekt.getProdukt().getForschungsbonus();
           //  forschungsbonus = abbruchFaktor * (Game.getTime() - beginn) * mitarbeiterAnzahl * mitarbeiterZufriedenheit * irgendeinFaktor;
          //  this.kennzahlensammlung.
-            forschungsobjekt.setForschungsbonus(bonus);
+            forschungsobjekt.getProdukt().setForschungsbonus(bonus);
 
         }else{
             //Kundenzufriedenheit erhöhen
@@ -44,10 +44,10 @@ public class Forschungsprojekt {
 
     public void abschließen(){
         if(herstellkosten){
-            double bonus = forschungsobjekt.getForschungsbonus();
+            double bonus = forschungsobjekt.getProdukt().getForschungsbonus();
             //  produktKosten = produktKosten * (Game.getTime() - beginn) * mitarbeiterAnzahl * irgendeinFaktor;
             // forschungsobjekt.setHerstellkosten(produktKosten);
-            forschungsobjekt.setForschungsbonus(bonus);
+            forschungsobjekt.getProdukt().setForschungsbonus(bonus);
         }else{
         //Kundenzufriedenheit erhöhen
 

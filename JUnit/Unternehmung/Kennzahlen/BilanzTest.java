@@ -50,7 +50,7 @@ assertSame(testBilanz.getGuv(), guv);
 
     @Test
     public void getTaMaschWert() throws Exception {
-        double neuerTaMaschWert = 30500;
+        float neuerTaMaschWert = 30500;
         testBilanz.setTaMaschWert(neuerTaMaschWert);
 assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert);
     }
@@ -60,7 +60,7 @@ assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert);
 
     @Test
     public void getGebäudeWert() throws Exception {
-        double neuerGebäudeWert = 100000;
+        float neuerGebäudeWert = 100000;
         testBilanz.setGebäudeWert(neuerGebäudeWert);
         assertEquals(testBilanz.getGebäudeWert(), neuerGebäudeWert);
     }
@@ -70,7 +70,7 @@ assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert);
 
     @Test
     public void getFEWert() throws Exception {
-        double neuerFEWert = 30500;
+        float neuerFEWert = 30500;
         testBilanz.setFEWert(neuerFEWert);
         assertEquals(testBilanz.getFEWert(), neuerFEWert);
     }
@@ -80,7 +80,7 @@ assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert);
 
     @Test
     public void getLiquideMittel() throws Exception {
-        double neueLiquideMittel = 30500;
+        float neueLiquideMittel = 30500;
         testBilanz.setLiquideMittel(neueLiquideMittel);
         assertEquals(testBilanz.getLiquideMittel(), neueLiquideMittel);
     }
@@ -90,7 +90,7 @@ assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert);
 
     @Test
     public void getEigenkapital() throws Exception {
-        double neuesEigenkapital = 30500;
+        float neuesEigenkapital = 30500;
         testBilanz.setEigenkapital(neuesEigenkapital);
         assertEquals(testBilanz.getEigenkapital(), neuesEigenkapital);
     }
@@ -100,7 +100,7 @@ assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert);
 
     @Test
     public void getFremdkapital() throws Exception {
-        double neuesFremdkapital = 30500;
+        float neuesFremdkapital = 30500;
         testBilanz.setFremdkapital(neuesFremdkapital);
         assertEquals(testBilanz.getFremdkapital(), neuesFremdkapital);
     }
