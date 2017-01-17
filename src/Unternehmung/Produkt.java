@@ -9,6 +9,7 @@ public class Produkt {
     private String name; // Produktbezeichnung (z.B. Rucksack)
     private char qualitätsstufe; // A-, B- oder C-Produkt
     private double herstellkosten; // Herstellkosten eines Produktes
+    private double forschungsbonus; // kann zwischen 0 und 0,25 sein (-> bis zu 25% niedrigere Herstellkosten)
     //private double preis; // Verkaufspreis
 
     /**
@@ -17,10 +18,11 @@ public class Produkt {
      * @param name Produktname (z.B. Rucksack?!)
      * @param qualitätsstufe A, B oder C
      */
-    public Produkt(String name, char qualitätsstufe) {
+    public Produkt(String name, char qualitätsstufe, double forschungsbonus) {
         this.name = name;
         this.qualitätsstufe = qualitätsstufe;
-        this.herstellkosten = findHerstellkosten(name, qualitätsstufe);
+        this.forschungsbonus = forschungsbonus;
+        this.herstellkosten = findHerstellkosten(name, qualitätsstufe) * forschungsbonus;
     }
 
     /**
@@ -83,5 +85,13 @@ public class Produkt {
 
     public void setHerstellkosten(double herstellkosten) {
         this.herstellkosten = herstellkosten;
+    }
+
+    public double getForschungsbonus() {
+        return forschungsbonus;
+    }
+
+    public void setForschungsbonus(double forschungsbonus) {
+        this.forschungsbonus = forschungsbonus;
     }
 }

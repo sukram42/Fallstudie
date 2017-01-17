@@ -17,9 +17,11 @@ public class Produktion extends Abteilung {
     private ArrayList<Maschine> maschinen = new ArrayList<Maschine>(); // Maschinenpark
     private ArrayList<Halle> produktionshallen = new ArrayList<Halle>();
     private ArrayList<Halle> lagerhallen = new ArrayList<Halle>();
-    private Map<String, Produktlinie> aufträge = new HashMap<String, Produktlinie>(); // Produktionsaufträge
-    private Map<String, Produktlinie> lager = new HashMap<String, Produktlinie>(); // Lagerbestand
-    private Map<String, Double> produktlinien = new HashMap<String, Double>(); // Verzeichnis über alle je produzierten Produktlinien, um zu prüfen, ob an einer Produktlinie bereits geforscht wurde oder nicht
+    //private Map<String, Produktlinie> aufträge = new HashMap<String, Produktlinie>(); // Produktionsaufträge
+    //private Map<String, Produktlinie> lager = new HashMap<String, Produktlinie>(); // Lagerbestand
+    private ArrayList<Produktlinie> aufträge = new ArrayList<Produktlinie>(); // Produktionsaufträge
+    private ArrayList<Produktlinie> lager = new ArrayList<Produktlinie>(); // Lagerbestand
+    private Map<String, Double> forschungsboni = new HashMap<String, Double>(); // Verzeichnis über alle Produktlinien und ihrer Forschungsboni
 
     /**
      * Konstruktor, zum Erstellen der Abteilung Produktion
@@ -27,6 +29,7 @@ public class Produktion extends Abteilung {
      */
     public Produktion(Kennzahlensammlung kennzahlensammlung) {
         super("Produktion" , kennzahlensammlung);
+        initForschungsboni();
     }
 
     /**
@@ -37,21 +40,21 @@ public class Produktion extends Abteilung {
      * @param laufzeit ...so viel Zeit produziert werden (in (Spiel-)Wochen
      */
     public void produzieren(String name, char qualitätsstufe, int menge, int laufzeit){
-        Produktlinie produktlinie = new Produktlinie(new Produkt(name, qualitätsstufe), menge, laufzeit);
+        Produktlinie produktlinie = new Produktlinie(
+                new Produkt(name, qualitätsstufe, this.getForschungsbonusById(name + qualitätsstufe)), menge, laufzeit);
         // prüfen, ob genügend Mitarbeiter, Maschinen und Liquidität vorhanden ist:
         if (menge <= getMaxProdMenge()){
-            // Herstellkosten, falls an dem Produkt bereits geforscht wurde, senken:
-            double forschungsbonus = getForschungsbonusById(produktlinie.getId());
-            produktlinie.getProdukt().setHerstellkosten(produktlinie.getProdukt().getHerstellkosten() * forschungsbonus);
             // Produktion in Auftrag geben:
-            if (this.aufträge.get(produktlinie.getId()) == null){
-                this.aufträge.put(produktlinie.getId(), produktlinie);
-                System.out.println("Neue Produktlinie (" + produktlinie.getId() + ") in Auftrag gegeben.");
-            } else {
-                int bisherigeMenge = this.aufträge.get(produktlinie.getId()).getMenge();
-                this.aufträge.get(produktlinie.getId()).setMenge(bisherigeMenge + menge);
-                System.out.println("Auftrag für Produktlinie " + produktlinie.getId() + " aufgestockt.");
+            for (Produktlinie auftrag : this.aufträge){
+                if (auftrag.getId().equals(produktlinie.getId())) {
+                    int bisherigeMenge = auftrag.getMenge();
+                    auftrag.setMenge(bisherigeMenge + menge);
+                    System.out.println("Auftrag für Produktlinie " + produktlinie.getId() + " aufgestockt.");
+                    return;
+                }
             }
+            aufträge.add(produktlinie);
+            System.out.println("Neue Produktlinie (" + produktlinie.getId() + ") in Auftrag gegeben.");
         } else {
             System.out.println("Nicht genügend Maschinen und/oder Mitarbeiter zum Produzieren vorhanden!");
         }
@@ -114,6 +117,7 @@ public class Produktion extends Abteilung {
         this.kennzahlensammlung.addSonstigeKosten(getTaeglicheEnergiekosten());
         this.kennzahlensammlung.addHerstellkosten(getTaeglicheHerstellkosten());
         produkteFertigstellen();
+        updateForschungsboni();
     }
 
 
@@ -123,44 +127,41 @@ public class Produktion extends Abteilung {
      * wird bei jedem timer count ausgeführt und legt die pro timer count produzierten Produkte im Lager ab
      */
     private void produkteFertigstellen () {
-        for (Map.Entry<String, Produktlinie> auftrag : aufträge.entrySet()){
-            String id = auftrag.getValue().getId();
-            int laufzeit = auftrag.getValue().getLaufzeit();
-            if (auftrag.getValue().getMenge() <= getFreienLagerPlatz()) { // prüfen, ob genügend Lagerplatz vorhanden ist, falls nicht gehen die Produkte verloren
-                if (lager.get(id) == null) { // falls Produktlinie noch nicht im Lager vorhanden
-                    // erstelle neue Produktlinie in Lager:
-                    Produktlinie neuePL = new Produktlinie(auftrag.getValue().getProdukt(), auftrag.getValue().getMenge());
-                    lager.put(id, neuePL);
-                    // Laufzeit herunter setzen:
-                    auftrag.getValue().setLaufzeit(laufzeit - 1);
-                } else { // falls Produktlinie im Lager vorhanden Menge hochsetzen:
-                    lager.get(id).setMenge(lager.get(id).getMenge() + auftrag.getValue().getMenge());
-                    // Laufzeit herunter setzen:
-                    auftrag.getValue().setLaufzeit(laufzeit - 1);
-                }
-                if (laufzeit == 0) {
-                    aufträge.remove(id);
+        for (Produktlinie auftrag : this.aufträge){
+            if (auftrag.getMenge() <= this.getFreienLagerPlatz()){ // genügend Lagerplatz verfügbar?
+                Produktlinie produktlinie = new Produktlinie(auftrag.getProdukt(), auftrag.getMenge()); // neue Produktlinie
+                for (Produktlinie bestand : this.lager) {
+                    // falls Produkte mit derselben id und herstellkosten schon vorhanden ist wird die Menge hochgesetzt:
+                    if (produktlinie.getId().equals(bestand.getId()) &&
+                            (produktlinie.getProdukt().getHerstellkosten() == bestand.getProdukt().getHerstellkosten())){
+                        bestand.setMenge(bestand.getMenge() + auftrag.getMenge());
+                        break;
+                    } else { // ansonsten wird die Produktlinie als neuer Posten im Lager hinzugefügt:
+                        this.lager.add(produktlinie);
+                    }
                 }
             } else {
                 System.out.println("Nicht genügend Lagerfläche vorhanden. Die Produkte gehen verloren.");
+            }
+            auftrag.setLaufzeit(auftrag.getLaufzeit() - 1); // Laufzeit herunter setzen
+            if (auftrag.getLaufzeit() == 0){ // falls Laufzeit == 0 Auftrag beenden
+                this.aufträge.remove(auftrag);
             }
         }
     }
 
     /**
      * Methode zum Ermitteln des Forschungsstatus und somit -bonus eines Produkts / einer Produktlinie
-     * falls keine Produktlinie gefunden wird bedeutet dies, dass diese Kombination noch nicht produziert wurde, es wir ein neuer Eintrag in die Map produktlinien gemacht
      * @param id Kombination aus Produktname und Qualitätsstufe
      * @return double Forschungsbonus zu o.g. Produktlinie
      */
     public double getForschungsbonusById(String id){
-        for (Map.Entry<String, Double> produktlinie : this.produktlinien.entrySet()){
-            if (produktlinie.getKey().startsWith(id)){
-                return produktlinie.getValue();
+        for (Map.Entry<String, Double> forschungsbonus : this.forschungsboni.entrySet()){
+            if (forschungsbonus.getKey().equals(id)){
+                return forschungsbonus.getValue();
             }
         }
-        this.produktlinien.put(id, 1.0);
-        return 1.0;
+        return 1;
     }
 
     public float getTaeglicheEnergiekosten(){
@@ -173,8 +174,8 @@ public class Produktion extends Abteilung {
 
     public float getTaeglicheHerstellkosten(){
         float herstellkosten = 0;
-        for (Map.Entry<String, Produktlinie> produktlinie : aufträge.entrySet()){
-            herstellkosten += produktlinie.getValue().getMenge() * produktlinie.getValue().getProdukt().getHerstellkosten();
+        for (Produktlinie auftrag : this.aufträge){
+            herstellkosten += auftrag.getProdukt().getHerstellkosten();
         }
         return herstellkosten;
     }
@@ -208,8 +209,8 @@ public class Produktion extends Abteilung {
         for (Halle halle : lagerhallen){
             lagerplatz += halle.getKapazität();
         }
-        for (Map.Entry<String, Produktlinie> produktlinie : lager.entrySet()){
-            produkte += produktlinie.getValue().getMenge();
+        for (Produktlinie bestand : this.lager){
+            produkte += bestand.getMenge();
         }
         return lagerplatz - produkte;
     }
@@ -225,10 +226,51 @@ public class Produktion extends Abteilung {
         return maschinenPlaetze - this.maschinen.size();
     }
 
+    /**
+     * initialisiert Forschungsboni mit 1, wenn geforscht wird wird dieser entsprechend hochgesetzt
+     */
+    private void initForschungsboni(){
+        this.forschungsboni.put("RucksackA",(double) 1);
+        this.forschungsboni.put("RucksackB",(double) 1);
+        this.forschungsboni.put("RucksackC",(double) 1);
+        this.forschungsboni.put("RucksacktechA",(double) 1);
+        this.forschungsboni.put("RucksacktechB",(double) 1);
+        this.forschungsboni.put("RucksacktechC",(double) 1);
+        this.forschungsboni.put("DuffelA",(double) 1);
+        this.forschungsboni.put("DuffelB",(double) 1);
+        this.forschungsboni.put("DuffelC",(double) 1);
+        this.forschungsboni.put("TascheA",(double) 1);
+        this.forschungsboni.put("TascheB",(double) 1);
+        this.forschungsboni.put("TascheC",(double) 1);
+    }
+
+    /**
+     * Schnittstelle für Forschung: setzt einen neuen Forschungsbonus
+     * @param id Produktbezeichnung
+     * @param neuerForschungsbonus (durch Forschung) veränderter Forschungsbonus
+     */
+    public void setForschungsbonus (String id, double neuerForschungsbonus){
+        for (Map.Entry<String, Double> alterForschungsbonus : this.forschungsboni.entrySet()){
+            if (alterForschungsbonus.getKey().equals(id)){
+                alterForschungsbonus.setValue(neuerForschungsbonus);
+            }
+        }
+    }
+
+    /**
+     * prüft bei jedem Timer Count, ob Forschungsboni noch aktuell sind und passt sie ggf. an
+     */
+    private void updateForschungsboni(){
+        for (Produktlinie auftrag : this.aufträge){
+            double forschungsbonus = this.getForschungsbonusById(auftrag.getId());
+            auftrag.getProdukt().setForschungsbonus(forschungsbonus);
+            auftrag.getProdukt().setHerstellkosten(auftrag.getProdukt().getHerstellkosten() * forschungsbonus);
+        }
+    }
 
 
     // Getter und Setter:
-    public Map<String, Double> getProduktlinien() {
-        return produktlinien;
+    public Map<String, Double> getForschungsboni() {
+        return forschungsboni;
     }
 }

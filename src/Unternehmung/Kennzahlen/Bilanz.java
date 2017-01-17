@@ -10,14 +10,14 @@ public class Bilanz {
     private transient GuV guv;
 
     //Aktiva
-    private double TaMaschWert;
-    private double GebäudeWert;
-    private double FEWert;
-    private double liquideMittel;
+    private float TaMaschWert;
+    private float GebäudeWert;
+    private float FEWert;
+    private float liquideMittel;
 
     //Passiva
-    private double eigenkapital;
-    private double fremdkapital;
+    private float eigenkapital;
+    private float fremdkapital;
 
 
     public Bilanz(Unternehmen unternehmen) {
@@ -26,27 +26,25 @@ public class Bilanz {
         this.eigenkapital = 100000;
         this.liquideMittel=100000;
 
-        //muss am Ende jeder Periode ausgeführt werden
 
-       //eigentlich wird beim richtigen Bilanzabschluss Jahresüberschuss mit EK verrechnet, machen wir aber sowieso durchgehend?
-        // addEigenkapital(this.guv.jahresUeberschuss);
-        // addLiquideMittel(this.guv.jahresUeberschuss);
+
 
 
     }
-
+    //muss am Ende jedes Jahres ausgeführt werden
     public void berechnen()
     {
-        this.guv.jahresUeberschussBerechnen();
+       addEigenkapital(this.guv.jahresUeberschussBerechnen());
+
     }
 
-    public void addEigenkapital(double jahresueberschuss){
+    public void addEigenkapital(float jahresueberschuss){
         this.setEigenkapital(this.eigenkapital + jahresueberschuss);
     }
 
-    public void addLiquideMittel(double jahresueberschuss){
-        this.setLiquideMittel(this.liquideMittel + jahresueberschuss);
-    }
+   // public void addLiquideMittel(float jahresueberschuss){
+     //   this.setLiquideMittel(this.liquideMittel + jahresueberschuss);
+  //  }
 
 
 
@@ -58,51 +56,51 @@ public class Bilanz {
         this.guv = guv;
     }
 
-    public double getTaMaschWert() {
+    public float getTaMaschWert() {
         return TaMaschWert;
     }
 
-    public void setTaMaschWert(double taMaschWert) {
+    public void setTaMaschWert(float taMaschWert) {
         TaMaschWert = taMaschWert;
     }
 
-    public double getGebäudeWert() {
+    public float getGebäudeWert() {
         return GebäudeWert;
     }
 
-    public void setGebäudeWert(double gebäudeWert) {
+    public void setGebäudeWert(float gebäudeWert) {
         GebäudeWert = gebäudeWert;
     }
 
-    public double getFEWert() {
+    public float getFEWert() {
         return FEWert;
     }
 
-    public void setFEWert(double FEWert) {
+    public void setFEWert(float FEWert) {
         this.FEWert = FEWert;
     }
 
-    public double getLiquideMittel() {
+    public float getLiquideMittel() {
         return liquideMittel;
     }
 
-    public void setLiquideMittel(double liquideMittel) {
+    public void setLiquideMittel(float liquideMittel) {
         this.liquideMittel = liquideMittel;
     }
 
-    public double getEigenkapital() {
+    public float getEigenkapital() {
         return eigenkapital;
     }
 
-    public void setEigenkapital(double eigenkapital) {
+    public void setEigenkapital(float eigenkapital) {
         this.eigenkapital = eigenkapital;
     }
 
-    public double getFremdkapital() {
+    public float getFremdkapital() {
         return fremdkapital;
     }
 
-    public void setFremdkapital(double fremdkapital) {
+    public void setFremdkapital(float fremdkapital) {
         this.fremdkapital = fremdkapital;
     }
 }
