@@ -23,7 +23,7 @@ public class UnternehmenTest extends TestCase {
 
     private transient Map<String,Abteilung> abteilungen = new HashMap<String,Abteilung>();
 
-    public void setup(){
+    public void setUp(){
 passwort = "12345";
 name = "Test_Unternehmen";
 eigenkapital = 500000;
@@ -67,17 +67,17 @@ assertEquals(testUnternehmen.getPasswort(), 12345);
 
     @Test
     public void getAbteilung() throws Exception {
-       // assertEquals(testUnternehmen.getAbteilung());
+        assertNotNull(testUnternehmen.getAbteilung("produktion"));
     }
 
     @Test
     public void getAbteilungen() throws Exception {
-       // assertEquals(testUnternehmen.getAbteilungen());
+        assertNotNull(testUnternehmen.getAbteilungen());
     }
 
     @Test
     public void getKennzahlensammlung() throws Exception {
-        assertEquals(testUnternehmen.getKennzahlensammlung(), this.kennzahlensammlung);
+        assertNotNull(testUnternehmen.getKennzahlensammlung());
     }
 
 }

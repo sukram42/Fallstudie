@@ -13,10 +13,9 @@ public class MitarbeiterTest extends TestCase{
     private String vorname;
     private String adresse;
     private String imagelink;
-    private Abteilung department;
     private char gender;
     private int gehalt;
-    private int prodLeistung;
+    private Unternehmen unternehmen;
 
     private Mitarbeiter testMitarbeiter;
 
@@ -25,7 +24,6 @@ public void setUp(){
     vorname = "Hans";
     adresse = "Humugstraße 12, 12470 Warstadt";
     imagelink = "erster Bildpfad";
-  //  department = ;
     gender = 'm';
     gehalt = 60000;
 }
@@ -88,12 +86,14 @@ assertEquals(testMitarbeiter.getImagelink(), neuerImagelink);
 
     @Test
     public void getDepartment() throws Exception {
-        assertEquals( testMitarbeiter.getDepartment(), department);
+        assertNull( testMitarbeiter.getDepartment());
     }
 
     @Test
     public void setDepartment() throws Exception {
-//Abteilung neuesDepartment = ;
+         unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
+        testMitarbeiter.setDepartment(unternehmen.getAbteilung("produktion"));
+        assertEquals(testMitarbeiter.getDepartment(), unternehmen.getAbteilung("produktion"));
     }
 
     @Test
@@ -122,7 +122,7 @@ assertEquals(testMitarbeiter.getGehalt(), neuesGehalt);
 
     @Test
     public void getProdLeistung() throws Exception {
-assertEquals(testMitarbeiter.getProdLeistung(), prodLeistung);
+assertEquals(testMitarbeiter.getProdLeistung(), 200);
     }
 
     @Test
