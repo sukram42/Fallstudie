@@ -8,11 +8,9 @@ public class Produktlinie {
 
     private String id; // zur Identifikation der Produktlinie in der Map in der Klasse Produktion
                         // setzt sich zusammen aus Produktname und Qualitätsstufe
-                        // bei Herabsetzung der Herstellkosten (durch Forschung) wird die id modifiziert
     private Produkt produkt; // zu produzierendes Produkt
     private int menge; // in der Produktion: zu produzierende Menge pro Periode | im Lager: vorhandene Produkte
     private int laufzeit; // Anzahl der Perioden in denen das Produkt produziert werden soll
-    private double forschungsbonus; // kann zwischen 0 und 0,25 sein (-> bis zu 25% niedrigere Herstellkosten)
 
     /**
      * Konstruktor, der beim Erstellen eines neuen Produktionsauftrags verwendet wird
@@ -70,13 +68,5 @@ public class Produktlinie {
 
     public void setLaufzeit(int laufzeit) {
         this.laufzeit = laufzeit;
-    }
-
-    public double getForschungsbonus() {
-        return forschungsbonus;
-    }
-
-    public void setForschungsbonus(double forschungsbonus) {
-        this.forschungsbonus = forschungsbonus;
     }
 }
