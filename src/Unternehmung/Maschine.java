@@ -32,7 +32,7 @@ public class Maschine {
         try {
             // TODO realistisch / zum Spiel passende Werte einsetzen
             if (currentStatus < 0.1) {
-
+                kosten = 1500;
             } else if (currentStatus < 0.2) {
                 kosten = 1200;
             } else if (currentStatus < 0.3) {
