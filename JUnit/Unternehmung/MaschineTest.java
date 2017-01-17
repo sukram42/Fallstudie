@@ -10,50 +10,52 @@ import org.junit.Test;
 
 public class MaschineTest extends TestCase{
 
-    private Maschine testMaschine;
-    private String name = "bezeichnung";
-    private int anzahl = 1;
-    private int kapazität = 4;
-    private int anschaffungskosten = 10000;
 
-    public void setUp(){
-        name = "bezeichnung";
-        anzahl = 1;
-        kapazität = 4;
-        anschaffungskosten = 10000;
-    }
+    private Maschine testMaschine;
 
     @Before
     public void testCreateMaschine() {
-       // testMaschine = new Maschine( name, kapazität, anschaffungskosten, anzahl);
+        testMaschine = new Maschine( 2);
         org.junit.Assert.assertNotNull(testMaschine);
     }
 
     @Test
     public void testGetKlasse(){
-        org.junit.Assert.assertEquals( testMaschine.getKlasse(), name);
+        org.junit.Assert.assertEquals( testMaschine.getKlasse(), 2);
     }
 
     @Test
     public void testGetKapazität(){
-        org.junit.Assert.assertEquals( testMaschine.getKlasse(), kapazität);
+        org.junit.Assert.assertEquals( testMaschine.getKapazität(), 600);
     }
 
     @Test
     public void testGetAnschaffungskst(){
-        org.junit.Assert.assertEquals( testMaschine.getKlasse(), anschaffungskosten);
+        org.junit.Assert.assertEquals( testMaschine.getAnschaffungskst(), 15000);
     }
 
     @Test
-    public void testGetAnzahl(){
-      //  org.junit.Assert.assertEquals( testMaschine.getAnzahl(), anzahl);
+    public void reparieren() throws Exception {
+        Unternehmen Unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
+        Kennzahlensammlung kennzahlensammlung = Unternehmen.getKennzahlensammlung();
+       // testMaschine.setStatus(0.5);
+       // testMaschine.reparieren(kenn);
     }
 
     @Test
-    public void testSetAnzahl(){
-        int neueAnzahl = 1;
-       // testMaschine.setAnzahl(neueAnzahl);
-       // org.junit.Assert.assertEquals( testMaschine.getAnzahl(), neueAnzahl);
+    public void getStatus() throws Exception {
+    assertEquals(testMaschine.getStatus(), 1);
+    }
+
+    @Test
+    public void setStatus() throws Exception {
+        testMaschine.setStatus(0.5);
+        assertEquals(testMaschine.getStatus(), 0.5);
+    }
+
+    @Test
+    public void getEnergiekosten() throws Exception {
+assertEquals(testMaschine.getEnergiekosten(), 100);
     }
 
     public void tearDown(){

@@ -24,18 +24,20 @@ public class BilanzTest extends TestCase{
 
     @Test
     public void berechnen() throws Exception {
-
+testBilanz.getGuv().jahresUeberschussBerechnen();
     }
 
     @Test
     public void addEigenkapital() throws Exception {
-
+        testBilanz.addEigenkapital(1000);
+        assertEquals(testBilanz.getEigenkapital(), 100000 + 1000);
     }
 
-    @Test
-    public void addLiquideMittel() throws Exception {
-
-    }
+   // @Test
+   // public void addLiquideMittel() throws Exception {
+   //     testBilanz.add(1000);
+   //     assertEquals(testBilanz.getLiquideMittel(), 100000 + 1000);
+   // }
 
     @Test
     public void getGuv() throws Exception {
@@ -55,8 +57,12 @@ assertSame(testBilanz.getGuv(), guv);
 assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert);
     }
 
-  //  @Test
-    //  public void setTaMaschWert() throws Exception {    }
+    @Test
+      public void setTaMaschWert() throws Exception {
+        float neuerTaMaschWert = 30500;
+        testBilanz.setTaMaschWert(neuerTaMaschWert);
+        assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert);
+    }
 
     @Test
     public void getGebäudeWert() throws Exception {
@@ -65,8 +71,12 @@ assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert);
         assertEquals(testBilanz.getGebäudeWert(), neuerGebäudeWert);
     }
 
-  //  @Test
- //   public void setGebäudeWert() throws Exception {    }
+    @Test
+    public void setGebäudeWert() throws Exception {
+        float neuerGebäudeWert = 100000;
+        testBilanz.setGebäudeWert(neuerGebäudeWert);
+        assertEquals(testBilanz.getGebäudeWert(), neuerGebäudeWert);
+    }
 
     @Test
     public void getFEWert() throws Exception {
@@ -75,8 +85,12 @@ assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert);
         assertEquals(testBilanz.getFEWert(), neuerFEWert);
     }
 
- //   @Test
-   // public void setFEWert() throws Exception {}
+    @Test
+    public void setFEWert() throws Exception {
+        float neuerFEWert = 30500;
+        testBilanz.setFEWert(neuerFEWert);
+        assertEquals(testBilanz.getFEWert(), neuerFEWert);
+    }
 
     @Test
     public void getLiquideMittel() throws Exception {
@@ -85,8 +99,12 @@ assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert);
         assertEquals(testBilanz.getLiquideMittel(), neueLiquideMittel);
     }
 
- //   @Test
-   // public void setLiquideMittel() throws Exception {}
+    @Test
+    public void setLiquideMittel() throws Exception {
+        float neueLiquideMittel = 30500;
+        testBilanz.setLiquideMittel(neueLiquideMittel);
+        assertEquals(testBilanz.getLiquideMittel(), neueLiquideMittel);
+    }
 
     @Test
     public void getEigenkapital() throws Exception {
@@ -95,8 +113,12 @@ assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert);
         assertEquals(testBilanz.getEigenkapital(), neuesEigenkapital);
     }
 
-   // @Test
-    //public void setEigenkapital() throws Exception {}
+    @Test
+    public void setEigenkapital() throws Exception {
+        float neuesEigenkapital = 30500;
+        testBilanz.setEigenkapital(neuesEigenkapital);
+        assertEquals(testBilanz.getEigenkapital(), neuesEigenkapital);
+    }
 
     @Test
     public void getFremdkapital() throws Exception {
@@ -105,7 +127,11 @@ assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert);
         assertEquals(testBilanz.getFremdkapital(), neuesFremdkapital);
     }
 
-  //  @Test
-   // public void setFremdkapital() throws Exception {}
+    @Test
+    public void setFremdkapital() throws Exception {
+        float neuesFremdkapital = 30500;
+        testBilanz.setFremdkapital(neuesFremdkapital);
+        assertEquals(testBilanz.getFremdkapital(), neuesFremdkapital);
+    }
 
 }
