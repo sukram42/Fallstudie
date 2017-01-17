@@ -114,8 +114,11 @@ public class Produktion extends Abteilung {
      */
     @Override
     public void update(){
-        this.kennzahlensammlung.addSonstigeKosten(getTaeglicheEnergiekosten());
-        this.kennzahlensammlung.addHerstellkosten(getTaeglicheHerstellkosten());
+        try {
+            this.kennzahlensammlung.liquiditätAnpassen(getTaeglicheEnergiekosten() + getTaeglicheHerstellkosten());
+        } catch (BankruptException e){
+            e.printStackTrace();
+        }
         produkteFertigstellen();
         updateForschungsboni();
     }
@@ -227,7 +230,7 @@ public class Produktion extends Abteilung {
     }
 
     /**
-     * initialisiert Forschungsboni mit 1, wenn geforscht wird wird dieser entsprechend hochgesetzt
+     * initialisiert Forschungsboni mit 1, wenn geforscht wird wird dieser entsprechend runtergesetzt
      */
     private void initForschungsboni(){
         this.forschungsboni.put("RucksackA",(double) 1);

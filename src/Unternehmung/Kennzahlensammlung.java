@@ -23,15 +23,8 @@ public class Kennzahlensammlung {
 
     // faktische Kennzahlensammlung:
     private double marktanteil;
-    private double umsatz; // wird laufend fortgeschrieben (siehe unten addUmsatz())
-    private double herstellkosten; // wird laufend fortgeschrieben (siehe unten addHerstellkosten())
-    private double sonstigeKosten; // wird laufend fortgeschrieben (siehe unten addSonstigeKosten)
-    private int gehälter; // wird laufend fortgeschrieben (siehe unten addGehälter)
-    private double gewinn; // wird bei Änderungen von Umsatz oder Kosten automatisch aktualisiert (siehe unten gewinnBerechnen())
     private double ausschussrate;
     private double reklamationsrate;
-    private double fremdkapital;
-    private double eigenkapital;
     private double bekanntheitsgrad;
     private double absatzrate; // Wahrscheinlichkeit, alle seine Produkte zu verkaufen (abhängig von Maßnahmen und zufällige Ereignisse wie z.B. Konjunktur, Werbekampagnen etc.)
     private float liquideMittel;
@@ -42,11 +35,11 @@ public class Kennzahlensammlung {
      * Konstruktor zum Erstellen einen Kennzahlenobjekts eines Unternehmens (wird im Unternehmenskonstruktor aufgerufen)
      * @param eigenkapital muss bei Gründung des Unternehmens definiert werden
      */
-    public Kennzahlensammlung(Unternehmen unternehmen,double eigenkapital) {
+    public Kennzahlensammlung(Unternehmen unternehmen,float eigenkapital) {
         // TODO alle Defaultwerte definieren (zumindest solche, die nicht 0 sein sollen)
-        this.eigenkapital = eigenkapital;
+        this.getBilanz().setEigenkapital(eigenkapital);
         this.absatzrate = 0.2;
-        this.liquideMittel = (float) eigenkapital;
+        this.liquideMittel = eigenkapital;
         this.unternehmen = unternehmen;
 
         weicheKennzahlen.put("mitarbeiterzufriedenheit",new Mitarbeiterzufriedenheit(unternehmen));
@@ -61,7 +54,6 @@ public class Kennzahlensammlung {
         {
             kennzahl.berechnen();
         }
-        gewinnBerechnen();
         verkaufsrateBerechnen();
         bilanz.berechnen();
 
@@ -76,14 +68,6 @@ public class Kennzahlensammlung {
         } catch (BankruptException e){
             e.printStackTrace();
         }
-    }
-
-
-    /**
-     * Methode, die den Gewinn (Jahresüberschuss) berechnet. Wird von addX() ausgeführt (siehe unten)
-     */
-    public void gewinnBerechnen(){
-        this.setGewinn(this.umsatz - (this.herstellkosten + this.sonstigeKosten + this.gehälter));
     }
 
     /**
@@ -114,43 +98,6 @@ public class Kennzahlensammlung {
 
     public Kennzahl getWeicheKennzahl(String kennzahl){
             return weicheKennzahlen.containsKey(kennzahl)?weicheKennzahlen.get(kennzahl):null;
-    }
-
-    // laufende Fortschreibung von Kennzahlensammlung:
-    /**
-     * Funktion, die Herstellkosten fortschreibt. Wird aufgerufen von Produktion.produzieren()
-     * @param kosten gesamte Herstellkosten der Neuproduktion, sprich Herstellungskosten pro Stück * Menge
-     */
-    public void addHerstellkosten(double kosten){
-        this.setHerstellkosten(this.herstellkosten + kosten);
-        this.gewinnBerechnen();
-    }
-
-    /**
-     * Funktion, die sonstigeKosten fortschreibt. Muss von allen Funktion aufgerufen werden, von denen "Geld ausgegeben wird"
-     * @param kosten Kosten z.B. einer Werbekampagne
-     */
-    public void addSonstigeKosten(double kosten){
-        this.setSonstigeKosten(this.herstellkosten + kosten);
-        this.gewinnBerechnen();
-    }
-
-    /**
-     * Funktion, die Gehälter fortschreibt. Wird von Abteilung.addMitarbeiter() aufgerufen
-     * @param gehalt = Anzahl neu eingestellter Mitarbeiter * Jahresgehalt pro Mitarbeiter
-     */
-    public void addGehälter(int gehalt){
-        this.setGehälter(this.gehälter + gehalt);
-        this.gewinnBerechnen();
-    }
-
-    /**
-     * Funktion, die Umsatz fortschreibt. Wird von Vertrieb.verkaufen() aufgerufen
-     * @param umsatz erwirtschafteter Umsatz, sprich Verkaufspreis * Menge
-     */
-    public void addUmsatz(double umsatz){
-        this.setUmsatz(this.umsatz + umsatz);
-        this.gewinnBerechnen();
     }
 
 
@@ -201,46 +148,6 @@ public class Kennzahlensammlung {
         this.marktanteil = marktanteil;
     }
 
-    public double getUmsatz() {
-        return umsatz;
-    }
-
-    public void setUmsatz(double umsatz) {
-        this.umsatz = umsatz;
-    }
-
-    public double getHerstellkosten() {
-        return herstellkosten;
-    }
-
-    public void setHerstellkosten(double herstellkosten) {
-        this.herstellkosten = herstellkosten;
-    }
-
-    public double getSonstigeKosten() {
-        return sonstigeKosten;
-    }
-
-    public void setSonstigeKosten(double sonstigeKosten) {
-        this.sonstigeKosten = sonstigeKosten;
-    }
-
-    public int getGehälter() {
-        return gehälter;
-    }
-
-    public void setGehälter(int gehälter) {
-        this.gehälter = gehälter;
-    }
-
-    public double getGewinn() {
-        return gewinn;
-    }
-
-    public void setGewinn(double gewinn) {
-        this.gewinn = gewinn;
-    }
-
     public double getAusschussrate() {
         return ausschussrate;
     }
@@ -255,22 +162,6 @@ public class Kennzahlensammlung {
 
     public void setReklamationsrate(double reklamationsrate) {
         this.reklamationsrate = reklamationsrate;
-    }
-
-    public double getFremdkapital() {
-        return fremdkapital;
-    }
-
-    public void setFremdkapital(double fremdkapital) {
-        this.fremdkapital = fremdkapital;
-    }
-
-    public double getEigenkapital() {
-        return eigenkapital;
-    }
-
-    public void setEigenkapital(double eigenkapital) {
-        this.eigenkapital = eigenkapital;
     }
 
     public double getAbsatzrate() {
@@ -291,10 +182,6 @@ public class Kennzahlensammlung {
 
     public void setLiquideMittel(float liquideMittel) {
         this.liquideMittel = liquideMittel;
-    }
-
-    public double getVerschuldungsgrad(){
-        return this.fremdkapital / this.eigenkapital;
     }
 
     public Bilanz getBilanz() {

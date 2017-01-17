@@ -18,6 +18,7 @@ public class GuV {
     private float aufwendungenFuerEnergie;
     private float aufwendungenFuerSozialeLeistungen;
     private float zinsaufwendungen;
+    private float fremdinstandhaltung;
 
     //Erlöse
     private float umsatzErlöse;
@@ -32,7 +33,7 @@ public class GuV {
 
     public float jahresUeberschussBerechnen(){
         this.jahresUeberschuss=(this.umsatzErlöse - (this.aufwendungenFuerEnergie + this.aufwendungenFuerGehaelter +
-                this.aufwendungenFuerRohstoffe + this.aufwendungenFuerWerbung + this.zinsaufwendungen));
+                this.aufwendungenFuerRohstoffe + this.aufwendungenFuerWerbung + this.zinsaufwendungen + this.fremdinstandhaltung));
         float x = jahresUeberschuss;
         this.setAufwendungenFuerEnergie(0);
         this.setAufwendungenFuerGehaelter(0);
@@ -40,9 +41,13 @@ public class GuV {
         this.setJahresUeberschuss(0);
         this.setUmsatzErlöse(0);
         this.setZinsaufwendungen(0);
+        this.setFremdinstandhaltung(0);
         return x;
     }
 
+    /**
+     * holt sich die täglichen Kosten von den einzelnen Abteilungen und fügt sie der GuV hinzu
+     */
     public void importAufwandUndErlös()
     {
         aufwendungenFuerWerbung +=  unternehmen.getAbteilung("marketing").getKosten();
@@ -56,6 +61,10 @@ public class GuV {
         //umsatzErlöse += ;
     }
 
+    /**
+     * wird von der update()-Methode der Kennzahlensammlung aufgerufen
+     * @return tägliche Liquiditätsveränderung
+     */
     public float getTaeglicheLiquiditätsveränderung(){
         float kosten = 0;
 
@@ -72,10 +81,15 @@ public class GuV {
         return umsatz - kosten;
     }
 
-    // add-Methoden:
+    // add-Methoden (werden bei Zahlungen aufgerufen -> Alternative zu Abteilung.getKosten()):
     public void addZinsaufwendungen(float zinsaufwendungen){
         this.zinsaufwendungen += zinsaufwendungen;
     }
+
+    public void addFremdinstandhaltung(float fremdinstandhaltung){
+        this.fremdinstandhaltung += fremdinstandhaltung;
+    }
+
 
     //getter und setter
 
@@ -125,5 +139,13 @@ public class GuV {
 
     public void setZinsaufwendungen(float zinsaufwendungen) {
         this.zinsaufwendungen = zinsaufwendungen;
+    }
+
+    public float getFremdinstandhaltung() {
+        return fremdinstandhaltung;
+    }
+
+    public void setFremdinstandhaltung(float fremdinstandhaltung) {
+        this.fremdinstandhaltung = fremdinstandhaltung;
     }
 }

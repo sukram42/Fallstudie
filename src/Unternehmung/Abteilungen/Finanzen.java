@@ -30,7 +30,8 @@ public class Finanzen extends Abteilung {
      * @param laufzeit vom Spieler gewählt
      */
     public void kreditAufnehmen(int hoehe, int laufzeit){
-        double neuerVerschuldungsgrad = (kennzahlensammlung.getFremdkapital() + hoehe) / kennzahlensammlung.getEigenkapital();
+        double neuerVerschuldungsgrad = (kennzahlensammlung.getBilanz().getFremdkapital() + hoehe) /
+                kennzahlensammlung.getBilanz().getEigenkapital();
         double zinssatz = 0;
         if (neuerVerschuldungsgrad <= 0.25){
             zinssatz = 0.02;
@@ -78,7 +79,7 @@ public class Finanzen extends Abteilung {
             this.kennzahlensammlung.getBilanz().getGuv().addZinsaufwendungen((float) zinsen);
             // liquide Mittel und FK anpassen:
             this.kennzahlensammlung.liquiditätAnpassen((float) -(tilgung + zinsen));
-            this.kennzahlensammlung.setFremdkapital(this.kennzahlensammlung.getFremdkapital() - tilgung);
+            this.kennzahlensammlung.getBilanz().setFremdkapital(this.kennzahlensammlung.getBilanz().getFremdkapital() - (float) tilgung);
         } catch (BankruptException e){
             e.printStackTrace();
         }

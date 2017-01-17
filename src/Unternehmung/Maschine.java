@@ -1,5 +1,7 @@
 package Unternehmung;
 
+import Exceptions.BankruptException;
+
 /**
  * repräsentiert eine Maschine
  * Created by lucadommes on 07.01.2017.
@@ -22,31 +24,39 @@ public class Maschine {
 
     /**
      * Methode zum reparieren einer Maschine (setzt status wieder auf 1)
-     * @param currentStatus Ausgangsstatus der Maschine, um Kosten zu berechnen
+     * @param kennzahlensammlung Ausgangsstatus der Maschine, um Kosten zu berechnen
      */
-    public void reparieren(double currentStatus, Kennzahlensammlung kennzahlensammlung){
-        this.status = 1;
-        // TODO realistisch / zum Spiel passende Werte einsetzen
-        if (currentStatus < 0.1){
-            kennzahlensammlung.addSonstigeKosten(1400);
-        } else if (currentStatus < 0.2){
-            kennzahlensammlung.addHerstellkosten(1200);
-        } else if (currentStatus < 0.3){
-            kennzahlensammlung.addHerstellkosten(1000);
-        } else if (currentStatus < 0.4){
-            kennzahlensammlung.addHerstellkosten(900);
-        } else if (currentStatus < 0.5){
-            kennzahlensammlung.addHerstellkosten(800);
-        } else if (currentStatus < 0.6){
-            kennzahlensammlung.addHerstellkosten(700);
-        } else if (currentStatus < 0.7){
-            kennzahlensammlung.addHerstellkosten(600);
-        } else if (currentStatus < 0.8){
-            kennzahlensammlung.addHerstellkosten(500);
-        } else if (currentStatus < 0.9){
-            kennzahlensammlung.addHerstellkosten(400);
-        } else if (currentStatus < 1){
-            kennzahlensammlung.addHerstellkosten(300);
+    public void reparieren(Kennzahlensammlung kennzahlensammlung){
+        double currentStatus = this.status; // Ausgangsstatus der Maschine
+        float kosten = 0;
+        try {
+            // TODO realistisch / zum Spiel passende Werte einsetzen
+            if (currentStatus < 0.1) {
+
+            } else if (currentStatus < 0.2) {
+                kosten = 1200;
+            } else if (currentStatus < 0.3) {
+                kosten = 1000;
+            } else if (currentStatus < 0.4) {
+                kosten = 900;
+            } else if (currentStatus < 0.5) {
+                kosten = 800;
+            } else if (currentStatus < 0.6) {
+                kosten = 700;
+            } else if (currentStatus < 0.7) {
+                kosten = 600;
+            } else if (currentStatus < 0.8) {
+                kosten = 500;
+            } else if (currentStatus < 0.9) {
+                kosten = 400;
+            } else if (currentStatus < 1) {
+                kosten = 300;
+            }
+            kennzahlensammlung.getBilanz().getGuv().addFremdinstandhaltung(kosten);
+            kennzahlensammlung.liquiditätAnpassen(kosten);
+            this.status = 1; // nach Reparatur wieder 100%
+        } catch (BankruptException e){
+            e.printStackTrace();
         }
     }
 
