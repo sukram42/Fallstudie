@@ -21,7 +21,4 @@ public class Mitarbeiterzufriedenheit extends Kennzahl{
         return super.berechnen();
     }
 
-
-
-
 }

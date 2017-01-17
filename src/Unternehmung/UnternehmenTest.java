@@ -42,9 +42,9 @@ public class UnternehmenTest {
 
         // Marketingkampagne und Marktforschung:
         Marketing marketing1 = (Marketing) unternehmen1.getAbteilung("marketing");
-        marketing1.marketingKampagne("Print");
-        marketing1.marketingKampagne("TV");
-        marketing1.marktforschung(2);
+//        marketing1.marketingKampagne("Print");
+//        marketing1.marketingKampagne("TV");
+//        marketing1.marktforschung(2);
 
         // Rucksäcke verkaufen:
         //Vertrieb vertrieb1 = (Vertrieb) unternehmen1.getAbteilung("vertrieb");
@@ -76,9 +76,9 @@ public class UnternehmenTest {
 
         // Marketingkampagne und Marktforschung:
         Marketing marketing2 = (Marketing) unternehmen2.getAbteilung("marketing");
-        marketing2.marketingKampagne("Plakate");
-        marketing2.marketingKampagne("Radio");
-        marketing2.marktforschung(2);
+//        marketing2.marketingKampagne("Plakate");
+//        marketing2.marketingKampagne("Radio");
+//        marketing2.marktforschung(2);
 
         // Rucksäcke verkaufen:
         //Vertrieb vertrieb2 = (Vertrieb) unternehmen2.getAbteilung("vertrieb");

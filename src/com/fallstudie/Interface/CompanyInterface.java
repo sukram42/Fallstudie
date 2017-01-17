@@ -3,6 +3,8 @@ package com.fallstudie.Interface;
 import Rules.Game;
 import Unternehmung.Abteilung;
 import Unternehmung.Abteilungen.HR;
+import Unternehmung.Abteilungen.SozialeLeistungen;
+import Unternehmung.Abteilungen.SozialeProjekte.SozialProjekt;
 import Unternehmung.Kennzahlen.Kennzahl;
 import Unternehmung.Mitarbeiter;
 import Unternehmung.Unternehmen;
@@ -14,6 +16,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.ArrayList;
+import java.util.List;
 
 @Path("/companies")
 public class CompanyInterface {
@@ -115,6 +118,45 @@ public class CompanyInterface {
     private Unternehmen getCompanyFromContext(SecurityContext context) {
 
         return context!=null?Game.getUnternehmenByName(context.getUserPrincipal().getName()):null;
+    }
+
+    @PUT
+    @Secured
+    @Path("/employees/socialprojects")
+    public Response startSocialProject(@Context SecurityContext securityContext,String name)
+    {
+        Unternehmen unternehmen = getCompanyFromContext(securityContext);
+        SozialeLeistungen sl = (SozialeLeistungen) unternehmen.getAbteilung("sozialeLeistungen");
+        try {
+            sl.stopProjekt(name);
+            return Response.ok("started").build();
+        } catch (Exception e) {
+            return Response.serverError().entity("Project could not be started").build();
+        }
+    }
+
+    @DELETE
+    @Secured
+    @Path("/employees/socialprojects")
+    public Response stopSocialProject(@Context SecurityContext securityContext,String name) {
+        Unternehmen unternehmen = getCompanyFromContext(securityContext);
+        SozialeLeistungen sl = (SozialeLeistungen) unternehmen.getAbteilung("sozialeLeistungen");
+        try {
+            sl.stopProjekt(name);
+            return Response.ok("stopped").build();
+        } catch (Exception e) {
+            return Response.serverError().entity("Project could not be stopped").build();
+        }
+    }
+
+    @GET
+    @Secured
+    @Path("/employees/socialprojects")
+    public Response getSocialProjects(@Context SecurityContext securityContext)
+    {
+        Unternehmen unternehmen = getCompanyFromContext(securityContext);
+        List<SozialProjekt> projects = ((SozialeLeistungen)unternehmen.getAbteilung("sozialeLeistungen")).getProjects();
+        return Response.ok(gson.toJson(projects)).build();
     }
 
 }

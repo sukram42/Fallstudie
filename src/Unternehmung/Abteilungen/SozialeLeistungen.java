@@ -19,8 +19,6 @@ public class SozialeLeistungen extends Abteilung {
     private transient Unternehmen unternehmen;
     public List<SozialProjekt> projekte = new ArrayList<>();
 
-
-
     /**
      * Konstruktor, zum Erstellen der Abteilung für soziale Leistungen
      *
@@ -28,8 +26,8 @@ public class SozialeLeistungen extends Abteilung {
      * */
     public SozialeLeistungen(Unternehmen unternehmen) {
         super("Soziale Leistungen", unternehmen.getKennzahlensammlung());
-        initProjects();
         this.unternehmen = unternehmen;
+        initProjects();
     }
 
     public void initProjects() {
@@ -59,8 +57,16 @@ public class SozialeLeistungen extends Abteilung {
     }
     public void startProjekt(String name)
     {
-        getProjektByName(name);
+        getProjektByName(name).start();
     }
+    public void stopProjekt(String name) {
+        getProjektByName(name).stop();
+    }
+    public List<SozialProjekt> getProjects()
+    {
+        return projekte;
+    }
+
 
     private SozialProjekt getProjektByName(String name)
     {
@@ -69,6 +75,7 @@ public class SozialeLeistungen extends Abteilung {
                                      .findFirst().get();
         }else return null;
     }
+
 
 
 

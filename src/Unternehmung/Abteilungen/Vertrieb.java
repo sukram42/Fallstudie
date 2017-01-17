@@ -18,6 +18,11 @@ public class Vertrieb extends Abteilung {
         super("Vertrieb",kennzahlensammlung);
     }
 
+    @Override
+    public void update() {
+
+    }
+
     // TODO implement this
 
 }
