@@ -2,6 +2,7 @@ package Unternehmung;
 
 import Unternehmung.Abteilungen.Marketing;
 import Unternehmung.Abteilungen.Produktion;
+import Unternehmung.Abteilungen.SozialeLeistungen;
 import Unternehmung.Abteilungen.Vertrieb;
 
 /**
@@ -22,8 +23,12 @@ public class UnternehmenTest {
                 unternehmen1.getKennzahlensammlung().getBilanz().getFremdkapital() + " gegründet.");
 
 
-        unternehmen1.getAbteilung("hr").addMitarbeiter(2,5000);
+        unternehmen1.getAbteilung("hr").addMitarbeiter(2,2500);
         System.out.println("Mitarbeiterzufriedenheit : " + unternehmen1.getKennzahlensammlung().getMitarbeiterzufriedenheit().berechnen());
+
+        ((SozialeLeistungen)unternehmen1.getAbteilung("sozialeLeistungen")).startProjekt("kantine");
+        System.out.println("Mitarbeiterzufriedenheit mit Kantine: " + unternehmen1.getKennzahlensammlung().getMitarbeiterzufriedenheit().berechnen());
+
 
         // Mitarbeiter einstellen:
         unternehmen1.getAbteilung("produktion").addMitarbeiter(1, 25000);

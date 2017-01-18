@@ -16,6 +16,7 @@ import {Observable} from "rxjs/Observable";
 export class HRService {
 
     private empSubject = new Subject<any>();
+    private socialProjectsSubject = new Subject<any>();
 
     constructor(private http: Http) {
     }
@@ -29,9 +30,22 @@ export class HRService {
         return this.http.get('http://localhost:8080/rest/companies/employees').map(res => res.json());
     }
 
-
     getEmployeeSubject(): Observable<any> {
         return this.empSubject.asObservable();
+    }
+
+    getSocialProjectSubject():Observable<any>
+    {
+        return this.socialProjectsSubject.asObservable();
+    }
+    getSocialProject()
+    {
+        return this.http.get('http://localhost:8080/rest/companies/employees/socialprojects').map(res => res.json());
+    }
+
+    changeProjectActivity(name)
+    {
+        return this.http.put('http://localhost:8080/rest/companies/employees/socialprojects/',name).map(res => res.text()).subscribe(data=>{},err=>{console.log(err)},()=>this.socialProjectsSubject.next(name));
     }
 
 }

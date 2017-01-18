@@ -69,6 +69,7 @@ public abstract class Abteilung {
 //		}else{
 //			System.out.println("Nicht genügend Liquidität vorhanden!");
 //		}
+		this.kennzahlensammlung.berechnen();
 	}
 
 

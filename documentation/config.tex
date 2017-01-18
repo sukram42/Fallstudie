@@ -1,0 +1,108 @@
+% !TEX root =  master.tex
+% 		HYPERREF
+%
+%%%%%]{hyperref}
+
+%		FONT AND INPUT ENCODING 
+%
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\onehalfspacing
+
+
+%		CALCULATIONS 
+%
+\usepackage{calc} % Used for extra space below footsepline
+
+%		LANGUAGE SETTINGS
+%
+\usepackage[ngerman]{babel} 	% German language 
+\usepackage[german=quotes]{csquotes} 	% correct quotes using \enquote{}  
+
+%\usepackage[english]{babel}   % For english language
+%\usepackage{csquotes} 	% Richtiges Setzen der Anführungszeichen mit \enquote{}  
+
+
+%		BIBLIOGRAPHY SETTINGS
+%
+ \usepackage[backend=biber, autocite=footnote, style=authoryear-icomp, dashed=false]{biblatex} 	%Use Author-Year-Cites with footnotes 
+% \usepackage[backend=biber, autocite=inline, style=ieee]{biblatex} 	% Use IEEE-Style (e.g. [1]) 
+%\usepackage[backend=biber, autocite=inline, style=alphabetic]{biblatex} 	% Use alphabetic style (e.g. [TGK12]) 
+% \usepackage[backend=biber, autocite=inline, style=authoryear, dashed=false]{biblatex} 	% Harvard-Style
+
+
+\DefineBibliographyStrings{ngerman}{  %Change u.a. to et al. (german only!)
+	andothers = {{et\,al\adddot}},             
+} 
+
+\setlength{\bibparsep}{\parskip}		%add some space between biblatex entries in the bibliography
+\addbibresource{bibliography.bib}	%Add file bibliography.bib as biblatex resource 
+
+
+%	ACRONYMS
+%%% 
+%%% WICHTIG: Installieren Sie das neueste Acronyms-Paket!!! 
+%%% 
+\makeatletter
+\usepackage[printonlyused]{acronym}
+\@ifpackagelater{acronym}{2015/03/20}
+  {%
+    \renewcommand*{\aclabelfont}[1]{\textbf{\textsf{\acsfont{#1}}}}  
+  }%
+  {%
+  }%
+\makeatother 
+
+
+
+%		LISTINGS
+\usepackage{listings}	%Format Listings properly 
+\renewcommand{\lstlistlistingname}{Quelltextverzeichnis}
+\lstset{numbers=left,
+	numberstyle=\tiny,
+	captionpos=b,
+	basicstyle=\ttfamily\small}
+
+
+%		EXTRA PACKAGES 
+\usepackage{lipsum}    %Blindtext
+\usepackage{graphicx} % use various graphics formats  
+\usepackage[german]{varioref} 	% nicer references \vref
+\usepackage{caption}	%better Captions 
+\usepackage{booktabs} %nicer Tabs
+
+
+
+%		ALGORITHMS 
+\usepackage{algorithm}  
+\usepackage{algpseudocode}
+\renewcommand{\listalgorithmname}{Algorithmenverzeichnis }
+\floatname{algorithm}{Algorithmus}
+
+
+%		FONT SELECTION: Entweder Latin Modern oder Times / Helvetica
+\usepackage{lmodern} %Latin modern font 
+%\usepackage{mathptmx}  %Helvetica / Times New Roman fonts (2 lines)
+%\usepackage[scaled=.92]{helvet} %Helvetica / Times New Roman fonts (2 lines)
+
+%		PAGE HEADER / FOOTER 
+%	    Warning: There are some redefinitions throughout the master.tex-file!  
+\RequirePackage[automark,headsepline,footsepline]{scrpage2}
+\pagestyle{scrheadings}
+\renewcommand*{\pnumfont}{\upshape\sffamily}
+\renewcommand*{\headfont}{\upshape\sffamily}
+\renewcommand*{\footfont}{\upshape\sffamily}
+\renewcommand{\chaptermarkformat}{}
+
+\clearscrheadfoot
+
+\ifoot[\rule{0pt}{\ht\strutbox+\dp\strutbox}DHBW Mannheim]{\rule{0pt}{\ht\strutbox+\dp\strutbox}DHBW Mannheim}
+\ofoot[\rule{0pt}{\ht\strutbox+\dp\strutbox}\pagemark]{\rule{0pt}{\ht\strutbox+\dp\strutbox}\pagemark}
+
+\ohead{\headmark}
+
+
+
+
+

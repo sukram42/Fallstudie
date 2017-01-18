@@ -20,9 +20,9 @@ import {HRService} from "../../../services/hr.service";
 export class KeyfiguresComponent implements OnInit{
   
 
-   // @Input('progress') progress: number;
     progress = 50;
     @Input('title') title: string
+    @Input('progress')
     newTitle;
 
 
@@ -36,7 +36,6 @@ export class KeyfiguresComponent implements OnInit{
             .replace("ö","oe")
             .replace("ß","ss");
         this.init();
-
     }
 
     public init()

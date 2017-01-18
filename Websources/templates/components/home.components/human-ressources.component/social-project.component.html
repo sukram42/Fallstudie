@@ -1,0 +1,47 @@
+<!-- Listengruppe -->
+<ul class="list-group">
+    <li class="list-group-item" *ngIf="socialProjects">
+        <span class="badge">{{socialProjects[0].active?'aktiv':'inaktiv'}}</span>
+        <h6><i class="fa fa-cutlery" aria-hidden="true"></i> Kantine <small>Kosten: 30.000 im Monat</small></h6>
+        <div class="btn-group btn-group-xs">
+            <button type="button" class="btn btn-default" (click) = "changeProjectProject('kantine')">{{socialProjects[0].active?'Deaktivieren':'Aktivieren'}}</button>
+        </div>
+    </li>
+    <li class="list-group-item" *ngIf="socialProjects">
+        <span class="badge">{{socialProjects[1].active?'aktiv':'inaktiv'}}</span>
+        <h6><i class="fa fa-wifi" aria-hidden="true"></i> Free-Wifi <small>Kosten: 30.000 im Monat</small></h6>
+        <div class="btn-group btn-group-xs">
+            <button type="button" class="btn btn-default" (click) = "changeProjectProject('wifi')">{{socialProjects[1].active?'Deaktivieren':'Aktivieren'}}</button>
+        </div>
+    </li>
+    <li class="list-group-item" *ngIf="socialProjects">
+        <span class="badge">{{socialProjects[2].active?'aktiv':'inaktiv'}}</span>
+        <h6><i class="fa fa-plane" aria-hidden="true"></i> Urlaubsgeld <small>Kosten: 30.000 im Monat</small></h6>
+        <div class="btn-group btn-group-xs">
+            <button type="button" class="btn btn-default" (click) = "changeProjectProject('urlaubsgeld')">{{socialProjects[2].active?'Deaktivieren':'Aktivieren'}}</button>
+        </div>
+    </li>
+    <li class="list-group-item" *ngIf="socialProjects">
+        <span class="badge">{{socialProjects[3].active?'aktiv':'inaktiv'}}</span>
+        <h6><i class="fa fa-tree" aria-hidden="true"></i> Weihnachtsgeld <small>Kosten: 30.000 im Monat</small></h6>
+        <div class="btn-group btn-group-xs">
+            <button type="button" class="btn btn-default" (click) = "changeProjectProject('weihnachtsgeld')">{{socialProjects[3].active?'Deaktivieren':'Aktivieren'}}</button>
+        </div>
+    </li>
+    <li class="list-group-item" *ngIf="socialProjects">
+        <span class="badge">{{socialProjects[4].active?'aktiv':'inaktiv'}}</span>
+        <h6><i class="fa fa-child" aria-hidden="true"></i> Kindergarten <small>Kosten: 30.000 im Monat</small></h6>
+        <div class="btn-group btn-group-xs">
+            <button type="button" class="btn btn-default" (click) = "changeProjectProject('kindergarten')">{{socialProjects[4].active?'Deaktivieren':'Aktivieren'}}</button>
+        </div>
+    </li>
+    <!--
+    <li class="list-group-item" *ngIf="socialProjects">
+        <span class="badge">aktiv</span>
+        <h6><i class="fa fa-bed" aria-hidden="true"></i> Pausenraum <small>Kosten: 30.000 im Monat</small></h6>
+        <div class="btn-group btn-group-xs">
+            <button type="button" class="btn btn-default">Aktivieren</button>
+            <button type="button" class="btn btn-default">Deaktivieren</button>
+        </div>
+    </li>-->
+</ul>

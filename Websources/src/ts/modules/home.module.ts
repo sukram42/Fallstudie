@@ -26,6 +26,7 @@ import {KeyfiguresComponent} from "./components/home.components/dashboard.compon
 import {NewEmployeeComponent} from "./components/home.components/human-ressources.component/new-employee.component";
 import {EmployeeListComponent} from "./components/home.components/human-ressources.component/employee-list.component";
 import {HRService} from "./services/hr.service";
+import {SozialeLeistungenComponent} from "./components/home.components/human-ressources.component/soziale-leistungen.component";
 
 
 @NgModule({
@@ -84,7 +85,8 @@ import {HRService} from "./services/hr.service";
                    AccountsComponent,
                    KeyfiguresComponent,
                    NewEmployeeComponent,
-                   EmployeeListComponent
+                   EmployeeListComponent,
+                   SozialeLeistungenComponent
     ],
 
     bootstrap:    [HomeComponent],

@@ -32,10 +32,10 @@ public class SozialeLeistungen extends Abteilung {
 
     public void initProjects() {
         HR hr = (HR)unternehmen.getAbteilung("hr");
-        projekte.add(new ZeitGeld("urlaubsgeld", (hr.getTotalGehalt() * 0.5f), 0.2f, Calendar.JULY, unternehmen));
-        projekte.add(new ZeitGeld("weihnachtsgeld", (hr.getTotalGehalt() * 0.3f), 0.3f, Calendar.DECEMBER, unternehmen));
         projekte.add(new SozialProjekt("kantine", 10000, 100, 0.2f,unternehmen ));
         projekte.add(new SozialProjekt("wifi", 10000, 100, 0.2f, unternehmen));
+        projekte.add(new ZeitGeld("urlaubsgeld", (hr.getTotalGehalt() * 0.5f), 0.2f, Calendar.JULY, unternehmen));
+        projekte.add(new ZeitGeld("weihnachtsgeld", (hr.getTotalGehalt() * 0.3f), 0.3f, Calendar.DECEMBER, unternehmen));
         projekte.add(new SozialProjekt("kindergarten", 10000, 100, 0.2f, unternehmen));
 
         // TODO Mitarbeiterzufriedenheit erhöhen
@@ -62,10 +62,26 @@ public class SozialeLeistungen extends Abteilung {
     public void stopProjekt(String name) {
         getProjektByName(name).stop();
     }
+
+   public void changeProjectActivity(String name)
+   {
+       SozialProjekt sp =getProjektByName(name);
+       if(sp.isActive())
+       {
+           stopProjekt(name);
+       }else
+       {
+           startProjekt(name);
+       }
+   }
+
+
     public List<SozialProjekt> getProjects()
     {
         return projekte;
     }
+
+
 
 
     private SozialProjekt getProjektByName(String name)

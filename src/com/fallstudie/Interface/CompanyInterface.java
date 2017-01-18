@@ -123,31 +123,18 @@ public class CompanyInterface {
     @PUT
     @Secured
     @Path("/employees/socialprojects")
-    public Response startSocialProject(@Context SecurityContext securityContext,String name)
+    public Response changeSocialProject(@Context SecurityContext securityContext,String name)
     {
         Unternehmen unternehmen = getCompanyFromContext(securityContext);
         SozialeLeistungen sl = (SozialeLeistungen) unternehmen.getAbteilung("sozialeLeistungen");
         try {
-            sl.stopProjekt(name);
+            sl.changeProjectActivity(name);
             return Response.ok("started").build();
         } catch (Exception e) {
             return Response.serverError().entity("Project could not be started").build();
         }
     }
 
-    @DELETE
-    @Secured
-    @Path("/employees/socialprojects")
-    public Response stopSocialProject(@Context SecurityContext securityContext,String name) {
-        Unternehmen unternehmen = getCompanyFromContext(securityContext);
-        SozialeLeistungen sl = (SozialeLeistungen) unternehmen.getAbteilung("sozialeLeistungen");
-        try {
-            sl.stopProjekt(name);
-            return Response.ok("stopped").build();
-        } catch (Exception e) {
-            return Response.serverError().entity("Project could not be stopped").build();
-        }
-    }
 
     @GET
     @Secured
