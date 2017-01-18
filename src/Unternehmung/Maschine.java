@@ -52,7 +52,7 @@ public class Maschine {
             } else if (currentStatus < 1) {
                 kosten = 300;
             }
-            kennzahlensammlung.getBilanz().getGuv().addFremdinstandhaltung(kosten);
+            kennzahlensammlung.getGuv().addFremdinstandhaltung(kosten);
             kennzahlensammlung.liquiditätAnpassen(kosten);
             this.status = 1; // nach Reparatur wieder 100%
         } catch (BankruptException e){

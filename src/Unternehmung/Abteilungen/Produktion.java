@@ -276,4 +276,8 @@ public class Produktion extends Abteilung {
     public Map<String, Double> getForschungsboni() {
         return forschungsboni;
     }
+
+    public ArrayList<Produktlinie> getLager() {
+        return lager;
+    }
 }

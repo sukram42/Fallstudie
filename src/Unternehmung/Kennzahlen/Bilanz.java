@@ -7,8 +7,6 @@ import Unternehmung.Unternehmen;
  */
 public class Bilanz {
 
-    private transient GuV guv;
-
     //Aktiva
     private float TaMaschWert;
     private float GebäudeWert;
@@ -22,7 +20,6 @@ public class Bilanz {
 
     public Bilanz(Unternehmen unternehmen) {
 
-        this.guv = new GuV(unternehmen);
         this.eigenkapital = 100000;
         this.liquideMittel=100000;
 
@@ -31,10 +28,11 @@ public class Bilanz {
 
 
     }
+
     //muss am Ende jedes Jahres ausgeführt werden
     public void berechnen()
     {
-       addEigenkapital(this.guv.jahresUeberschussBerechnen());
+       // addEigenkapital(this.guv.jahresUeberschussBerechnen()); -> verschoben in Kennzahlensammlung, weil dort nun die GuV liegt
 
     }
 
@@ -47,14 +45,6 @@ public class Bilanz {
   //  }
 
 
-
-    public GuV getGuv() {
-        return guv;
-    }
-
-    public void setGuv(GuV guv) {
-        this.guv = guv;
-    }
 
     public float getTaMaschWert() {
         return TaMaschWert;
