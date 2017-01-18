@@ -3080,6 +3080,7 @@ body > .navbar-collapse[data-color="purple"]:after {
 .left{
   float:left;
   display: block;
+  margin-bottom: 5px;
 }
 
 .mid{
