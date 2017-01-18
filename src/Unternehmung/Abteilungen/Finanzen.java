@@ -76,7 +76,7 @@ public class Finanzen extends Abteilung {
         }
         try {
             // Zinsen an GuV weitergeben:
-            this.kennzahlensammlung.getBilanz().getGuv().addZinsaufwendungen((float) zinsen);
+            this.kennzahlensammlung.getGuv().addZinsaufwendungen((float) zinsen);
             // liquide Mittel und FK anpassen:
             this.kennzahlensammlung.liquiditätAnpassen((float) -(tilgung + zinsen));
             this.kennzahlensammlung.getBilanz().setFremdkapital(this.kennzahlensammlung.getBilanz().getFremdkapital() - (float) tilgung);

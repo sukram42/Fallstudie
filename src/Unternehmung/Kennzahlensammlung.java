@@ -2,6 +2,7 @@ package Unternehmung;
 
 import Exceptions.BankruptException;
 import Unternehmung.Kennzahlen.Bilanz;
+import Unternehmung.Kennzahlen.GuV;
 import Unternehmung.Kennzahlen.Kennzahl;
 import Unternehmung.Kennzahlen.Mitarbeiterzufriedenheit;
 
@@ -30,6 +31,7 @@ public class Kennzahlensammlung {
     private float liquideMittel;
 
     private Bilanz bilanz = new Bilanz(unternehmen);
+    private transient GuV guv;
 
     /**
      * Konstruktor zum Erstellen einen Kennzahlenobjekts eines Unternehmens (wird im Unternehmenskonstruktor aufgerufen)
@@ -37,6 +39,7 @@ public class Kennzahlensammlung {
      */
     public Kennzahlensammlung(Unternehmen unternehmen,float eigenkapital) {
         // TODO alle Defaultwerte definieren (zumindest solche, die nicht 0 sein sollen)
+        this.guv = new GuV(unternehmen);
         this.getBilanz().setEigenkapital(eigenkapital);
         this.absatzrate = 0.2;
         this.liquideMittel = eigenkapital;
@@ -54,6 +57,7 @@ public class Kennzahlensammlung {
         {
             kennzahl.berechnen();
         }
+        this.bilanz.addEigenkapital(this.guv.jahresUeberschussBerechnen());
         verkaufsrateBerechnen();
         bilanz.berechnen();
 
@@ -62,9 +66,9 @@ public class Kennzahlensammlung {
     public void update()
     {
         berechnen();
-        bilanz.getGuv().importAufwandUndErlös(); // GuV updaten
+       this.guv.importAufwandUndErlös(); // GuV updaten
         try {
-            this.liquiditätAnpassen(bilanz.getGuv().getTaeglicheLiquiditätsveränderung());
+            this.liquiditätAnpassen(this.guv.getTaeglicheLiquiditätsveränderung());
         } catch (BankruptException e){
             e.printStackTrace();
         }
@@ -186,5 +190,13 @@ public class Kennzahlensammlung {
 
     public Bilanz getBilanz() {
         return bilanz;
+    }
+
+    public GuV getGuv() {
+        return guv;
+    }
+
+    public void setGuv(GuV guv) {
+        this.guv = guv;
     }
 }

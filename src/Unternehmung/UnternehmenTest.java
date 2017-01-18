@@ -93,7 +93,7 @@ public class UnternehmenTest {
         // ############################## JAHRESENDE ##############################
         // Unternehmen 1:
         System.out.println("Das Unternehmen " + unternehmen1.getName() + " hat in diesem Geschäftsjahr ein Ergebnis von " +
-                unternehmen1.getKennzahlensammlung().getBilanz().getGuv().jahresUeberschussBerechnen() + " € erzielt.");
+                unternehmen1.getKennzahlensammlung().getGuv().jahresUeberschussBerechnen() + " € erzielt.");
         //System.out.println("Kosten: " + (unternehmen1.getKennzahlensammlung().getSonstigeKosten() + unternehmen1.getKennzahlensammlung().getGehälter() +
                 //unternehmen1.getKennzahlensammlung().getHerstellkosten()));
         //System.out.println("Umsatz: " + unternehmen1.getKennzahlensammlung().getBilanz().getGuv().getUmsatz());
@@ -102,7 +102,7 @@ public class UnternehmenTest {
 
         // Unternehmen 2:
         System.out.println("Das Unternehmen " + unternehmen2.getName() + " hat in diesem Geschäftsjahr ein Ergebnis von " +
-                unternehmen2.getKennzahlensammlung().getBilanz().getGuv().jahresUeberschussBerechnen() + " € erzielt.");
+                unternehmen2.getKennzahlensammlung().getGuv().jahresUeberschussBerechnen() + " € erzielt.");
         //System.out.println("Kosten: " + (unternehmen2.getKennzahlensammlung().getSonstigeKosten() + unternehmen1.getKennzahlensammlung().getGehälter() +
                 //unternehmen2.getKennzahlensammlung().getHerstellkosten()));
         //System.out.println("Umsatz: " + unternehmen2.getKennzahlensammlung().getUmsatz());

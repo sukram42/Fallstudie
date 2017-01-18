@@ -21,11 +21,12 @@ public class BilanzTest extends TestCase{
         assertNotNull(testBilanz);
     }
 
-
+/*
     @Test
     public void berechnen() throws Exception {
 testBilanz.getGuv().jahresUeberschussBerechnen();
     }
+   */
 
     @Test
     public void addEigenkapital() throws Exception {
@@ -38,7 +39,7 @@ testBilanz.getGuv().jahresUeberschussBerechnen();
    //     testBilanz.add(1000);
    //     assertEquals(testBilanz.getLiquideMittel(), 100000 + 1000);
    // }
-
+/*
     @Test
     public void getGuv() throws Exception {
 assertEquals(testBilanz.getGuv(), guv);
@@ -49,7 +50,7 @@ assertEquals(testBilanz.getGuv(), guv);
         testBilanz.setGuv(guv);
 assertSame(testBilanz.getGuv(), guv);
     }
-
+*/
     @Test
     public void getTaMaschWert() throws Exception {
         float neuerTaMaschWert = 30500;
