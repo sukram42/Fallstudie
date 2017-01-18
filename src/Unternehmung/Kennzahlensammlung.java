@@ -1,9 +1,7 @@
 package Unternehmung;
 
 import Exceptions.BankruptException;
-import Unternehmung.Kennzahlen.Bilanz;
-import Unternehmung.Kennzahlen.Kennzahl;
-import Unternehmung.Kennzahlen.Mitarbeiterzufriedenheit;
+import Unternehmung.Kennzahlen.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,8 +41,9 @@ public class Kennzahlensammlung {
         this.unternehmen = unternehmen;
 
         weicheKennzahlen.put("mitarbeiterzufriedenheit",new Mitarbeiterzufriedenheit(unternehmen));
-        weicheKennzahlen.put("bekanntheitsheitsgrad",new Kennzahl(unternehmen));
-        weicheKennzahlen.put("image",new Kennzahl(unternehmen));
+        weicheKennzahlen.put("kundenzufriedenheit",new Kundenzufriedenheit(unternehmen));
+        weicheKennzahlen.put("image",new Image(unternehmen));
+        weicheKennzahlen.put("produktqualität",new Produktqualität(unternehmen));
     }
 
     // Berechnungen:
