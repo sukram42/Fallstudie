@@ -32,6 +32,12 @@
                     <div class="header">
                         <h4 class="title">Nicht monetäre Kennzahlen</h4>
                         <p class="category">Werte der letzden Periode</p>
+
+                        <br>
+                        <h6>Gewinn:</h6>
+                        <p>5.000 €</p>
+                        <h6>Umsatz:</h6>
+                        <p>300.500 €</p>
                     </div>
                     <div class="content">
 
@@ -45,6 +51,8 @@
                         <p class="category">Werte der letzden Periode</p>
                     </div>
                     <div class="content">
+                        <!-- Radar Chart -->
+                        <chart [type]="type" [data]="data" [options]="options"></chart>
                     </div>
                 </div>
             </div>

@@ -28,6 +28,7 @@ import {EmployeeListComponent} from "./components/home.components/human-ressourc
 import {HRService} from "./services/hr.service";
 import {SozialeLeistungenComponent} from "./components/home.components/human-ressources.component/soziale-leistungen.component";
 
+import { ChartModule } from 'angular2-chartjs';
 
 @NgModule({
     imports: [
@@ -35,6 +36,7 @@ import {SozialeLeistungenComponent} from "./components/home.components/human-res
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
+        ChartModule,
         RouterModule.forRoot([
 
             {

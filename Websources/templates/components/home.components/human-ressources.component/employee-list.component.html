@@ -16,8 +16,8 @@
         <tbody>
             <tr *ngFor="let mitarbeiter of mitarbeiterList">
                 <td><img style="border-radius: 50%; width: 50px;" [src]="mitarbeiter.imagelink"/></td>
-                <td>{{mitarbeiter.vorname}}</td>
-                <td>{{mitarbeiter.name}}</td>
+                <td style="text-transform: capitalize;">{{mitarbeiter.vorname}}</td>
+                <td style="text-transform: capitalize;">{{mitarbeiter.name}}</td>
                 <td>{{mitarbeiter.gehalt}} €</td>
                 <td>{{mitarbeiter.department.name}}</td>
                 <td><button  class ="btn btn-default btn-xs">Edit</button></td>
