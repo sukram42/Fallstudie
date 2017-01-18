@@ -356,7 +356,12 @@ h4, .h4 {
     line-height: 22px;
     margin-top: 0px;
     margin-bottom: 0px;
+
 }
 #content{
     padding-top: 80px;
+}
+
+.mitarbeiter{
+    padding-top: 5px;
 }

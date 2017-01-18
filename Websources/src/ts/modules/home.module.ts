@@ -26,7 +26,7 @@ import {KeyfiguresComponent} from "./components/home.components/dashboard.compon
 import {NewEmployeeComponent} from "./components/home.components/human-ressources.component/new-employee.component";
 import {EmployeeListComponent} from "./components/home.components/human-ressources.component/employee-list.component";
 import {HRService} from "./services/hr.service";
-
+import { ChartModule } from 'angular2-chartjs';
 
 @NgModule({
     imports: [
@@ -34,6 +34,7 @@ import {HRService} from "./services/hr.service";
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
+        ChartModule,
         RouterModule.forRoot([
 
             {

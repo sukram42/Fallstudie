@@ -12,7 +12,11 @@
     map: {
       // our app is within the app folder
       app: 'app',
-      // angular bundles
+        //chartjs
+        'angular2-chartjs': 'npm:angular2-chartjs',
+        'chart.js': 'npm:chart.js/dist/Chart.bundle.js',
+
+        // angular bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
       '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
@@ -31,13 +35,18 @@
         main: './js/ts/home.js',
         defaultExtension: 'js'
       },
-      rxjs: {
+        'angular2-chartjs': {
+            main: './dist/index.js',
+            defaultExtension: 'js'
+        },
+
+        rxjs: {
         defaultExtension: 'js'
       },
       'angular2-in-memory-web-api': {
         main: './index.js',
         defaultExtension: 'js'
-      }
+      },
     }
   });
 })(this);
