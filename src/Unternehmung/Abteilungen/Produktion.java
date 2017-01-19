@@ -17,8 +17,6 @@ public class Produktion extends Abteilung {
     private ArrayList<Maschine> maschinen = new ArrayList<Maschine>(); // Maschinenpark
     private ArrayList<Halle> produktionshallen = new ArrayList<Halle>();
     private ArrayList<Halle> lagerhallen = new ArrayList<Halle>();
-    //private Map<String, Produktlinie> aufträge = new HashMap<String, Produktlinie>(); // Produktionsaufträge
-    //private Map<String, Produktlinie> lager = new HashMap<String, Produktlinie>(); // Lagerbestand
     private ArrayList<Produktlinie> aufträge = new ArrayList<Produktlinie>(); // Produktionsaufträge
     private ArrayList<Produktlinie> lager = new ArrayList<Produktlinie>(); // Lagerbestand
     private Map<String, Double> forschungsboni = new HashMap<String, Double>(); // Verzeichnis über alle Produktlinien und ihrer Forschungsboni
@@ -43,7 +41,7 @@ public class Produktion extends Abteilung {
         Produktlinie produktlinie = new Produktlinie(
                 new Produkt(name, qualitätsstufe, this.getForschungsbonusById(name + qualitätsstufe)), menge, laufzeit);
         // prüfen, ob genügend Mitarbeiter, Maschinen und Liquidität vorhanden ist:
-        if (menge <= getMaxProdMenge()){
+        if (menge <= this.getMaxProdMenge(name)){
             // Produktion in Auftrag geben:
             for (Produktlinie auftrag : this.aufträge){
                 if (auftrag.getId().equals(produktlinie.getId())) {
@@ -62,11 +60,12 @@ public class Produktion extends Abteilung {
 
     /**
      * Funktion zum Kaufen von Maschinen (die Anschaffungskosten werden direkt weitergegeben (siehe addSonstigeKosten()))
+     * @param produkt das Produkt, das mit der Maschine erzeugt werden soll
      * @param klasse 1, 2 oder 3
      * @param anzahl Anzahl der zu kaufenden Maschinen
      */
-    public void maschinenKaufen(int klasse, int anzahl) {
-        Maschine m = new Maschine(klasse); // eine Maschine erstellen, um Anschaffungskosten zu erfahren
+    public void maschinenKaufen(String produkt, int klasse, int anzahl) {
+        Maschine m = new Maschine(produkt, klasse); // eine Maschine erstellen, um Anschaffungskosten zu erfahren
         int anschaffungskst = m.getAnschaffungskst();
         // prüfen, ob genügend Fläche (= Produktionshalle) für neue Maschine(n) vorhanden ist:
         if (getFreienMaschinenPlatz() >= anzahl) {
@@ -74,7 +73,7 @@ public class Produktion extends Abteilung {
                 kennzahlensammlung.liquiditätAnpassen(anschaffungskst * anzahl);
                 maschinen.add(m);
                 for (int i = 1; i < anzahl; i++) {
-                    Maschine n = new Maschine(klasse);
+                    Maschine n = new Maschine(produkt, klasse);
                     maschinen.add(n);
                 }
                 System.out.println(anzahl + " Maschine(n) der Klasse " + klasse + " gekauft, Kapazität: " + m.getKapazität() +
@@ -184,17 +183,20 @@ public class Produktion extends Abteilung {
     }
 
     /**
-     * Methode, die die maximal zu produzierende Menge berechnet
+     * berechnet die maximal zu produzierende Menge eines Produkts, also abhängig von der Anzahl der produktspezifischen Maschinen
+     * @param produkt, das produziert werden soll
      * @return MIN(Maschinenkapazität, Mitarbeiterkapazität)
      */
-    public int getMaxProdMenge(){
+    public int getMaxProdMenge(String produkt){
         int maschKapazität = 0;
         int mitarbeiterKapazität = 0;
-        for (int i = 0; i < this.maschinen.size(); i++){
-            maschKapazität += this.maschinen.get(i).getKapazität();
+        for (Maschine maschine : this.maschinen){
+            if (maschine.getProdukt().equals(produkt)){
+                maschKapazität += maschine.getKapazität();
+            }
         }
-        for (int i = 0; i < this.getMitarbeiter().size(); i++){
-            mitarbeiterKapazität += this.getMitarbeiter().get(i).getProdLeistung();
+        for (Mitarbeiter mitarbeiter : this.mitarbeiter){
+            mitarbeiterKapazität += mitarbeiter.getProdLeistung();
         }
         if (maschKapazität >= mitarbeiterKapazität){
             return maschKapazität;
@@ -242,9 +244,9 @@ public class Produktion extends Abteilung {
         this.forschungsboni.put("DuffelA",(double) 1);
         this.forschungsboni.put("DuffelB",(double) 1);
         this.forschungsboni.put("DuffelC",(double) 1);
-        this.forschungsboni.put("TascheA",(double) 1);
-        this.forschungsboni.put("TascheB",(double) 1);
-        this.forschungsboni.put("TascheC",(double) 1);
+        this.forschungsboni.put("ReisetascheA",(double) 1);
+        this.forschungsboni.put("ReisetascheB",(double) 1);
+        this.forschungsboni.put("ReisetascheC",(double) 1);
     }
 
     /**

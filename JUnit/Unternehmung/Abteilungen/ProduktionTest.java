@@ -25,19 +25,19 @@ public class ProduktionTest extends TestCase{
     @Test
     public void produzieren() throws Exception {
         testProduktion.produktionshalleKaufen(2);
-        testProduktion.maschinenKaufen(1, 1);
+        testProduktion.maschinenKaufen("Rucksack",1, 1);
         testProduktion.addMitarbeiter(2, 10000);
         testProduktion.produzieren("Rucksack", 'A', 100, 50000);
-        assertEquals(testProduktion.getMaxProdMenge(), (300 - 100));
+        assertEquals(testProduktion.getMaxProdMenge("Rucksack"), (300 - 100));
     }
 
     @Test
     public void maschinenKaufen() throws Exception {
         testProduktion.produktionshalleKaufen(2);
-        testProduktion.maschinenKaufen(1, 1);
+        testProduktion.maschinenKaufen("Rucksack",1, 1);
         testProduktion.addMitarbeiter(2, 10000); //Wird das Gehalt mit Erstellen der Mitarbeiter schon den liquiden Kosten abgezogen? hier nicht!
         assertEquals(kennzahlensammlung.getLiquideMittel(), 500000 - 65000 - 7500);
-        assertEquals(testProduktion.getMaxProdMenge(), 300); //Kapazität der einzelnen Maschine
+        assertEquals(testProduktion.getMaxProdMenge("Rucksack"), 300); //Kapazität der einzelnen Maschine
     }
 
     @Test
@@ -57,7 +57,7 @@ public class ProduktionTest extends TestCase{
     @Test
     public void update() throws Exception {
         testProduktion.produktionshalleKaufen(2);
-        testProduktion.maschinenKaufen(1, 1);
+        testProduktion.maschinenKaufen("Rucksack",1, 1);
         testProduktion.addMitarbeiter(2, 10000);
         testProduktion.produzieren("Rucksack", 'A', 100, 50000); //Herstellungskosten sind 20
         testProduktion.update();
@@ -72,14 +72,14 @@ public class ProduktionTest extends TestCase{
     @Test
     public void getTaeglicheEnergiekosten() throws Exception {
         testProduktion.produktionshalleKaufen(2);
-        testProduktion.maschinenKaufen(1, 1);
+        testProduktion.maschinenKaufen("Rucksack",1, 1);
         assertEquals(testProduktion.getTaeglicheEnergiekosten(), 100);
     }
 
     @Test
     public void getTaeglicheHerstellkosten() throws Exception {
         testProduktion.produktionshalleKaufen(2);
-        testProduktion.maschinenKaufen(1, 1);
+        testProduktion.maschinenKaufen("Rucksack",1, 1);
         testProduktion.addMitarbeiter(2, 10000);
         testProduktion.produzieren("Rucksack", 'A', 100, 50000); //Herstellungskosten sind 20
         assertEquals(testProduktion.getTaeglicheHerstellkosten(), 20 * 100);
@@ -88,7 +88,7 @@ public class ProduktionTest extends TestCase{
     @Test
     public void getMaxProdMenge() throws Exception {
         testProduktion.produktionshalleKaufen(2);
-        testProduktion.maschinenKaufen(1, 1);
+        testProduktion.maschinenKaufen("Rucksack",1, 1);
     }
 
     @Test

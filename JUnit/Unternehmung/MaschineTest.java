@@ -15,7 +15,7 @@ public class MaschineTest extends TestCase{
 
     @Before
     public void testCreateMaschine() {
-        testMaschine = new Maschine( 2);
+        testMaschine = new Maschine("Rucksack", 2);
         org.junit.Assert.assertNotNull(testMaschine);
     }
 

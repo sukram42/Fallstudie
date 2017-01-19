@@ -6,7 +6,7 @@ package Unternehmung;
  */
 public class Produkt {
 
-    private String name; // Produktbezeichnung (z.B. Rucksack)
+    private String name; // Produktbezeichnung ("Rucksack", "Rucksacktech", "Duffel" oder "Reisetasche")
     private char qualitätsstufe; // A-, B- oder C-Produkt
     private double herstellkosten; // Herstellkosten eines Produktes
     private double forschungsbonus; // kann zwischen 0 und 0,25 sein (-> bis zu 25% niedrigere Herstellkosten)
@@ -15,7 +15,7 @@ public class Produkt {
     /**
      * Konstruktor zum Erstellen eines noch nicht produzierten Produktes (also einer noch nicht vorhandenen Kombination von name und qualitätsstufe)
      * herstellkosten werden generiert
-     * @param name Produktname (z.B. Rucksack?!)
+     * @param name Produktname: "Rucksack", "Rucksacktech", "Duffel" oder "Reisetasche"
      * @param qualitätsstufe A, B oder C
      */
     public Produkt(String name, char qualitätsstufe, double forschungsbonus) {

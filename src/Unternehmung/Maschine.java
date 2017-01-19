@@ -13,9 +13,15 @@ public class Maschine {
     private int anschaffungskst; // abhängig von klasse
     private int energiekosten; // pro Tag, bei jeder Maschinenklasse gleich
     private double status; // sinkt jeden Monat um X, kann durch Reparaturen wieder hochgesetzt werden
+    private String produkt; // das Produkt, das mit dieser Maschine produziert wird ("Rucksack", "Rucksacktech", "Duffel" oder "Reisetasche")
 
-
-    public Maschine(int klasse) {
+    /**
+     * Maschinen-Konstruktor
+     * @param produkt Produktname: "Rucksack", "Rucksacktech", "Duffel" oder "Reisetasche"
+     * @param klasse 1, 2 oder 3 (unterschiedliche Ausbringungsmengen und Anschaffungskosten)
+     */
+    public Maschine(String produkt, int klasse) {
+        this.produkt = produkt;
         this.klasse = klasse;
         this.energiekosten = 100; // <- TODO realistischen / zum Spiel passenden Wert für Energiekosten einsetzen
         this.status = 1;
@@ -101,5 +107,9 @@ public class Maschine {
 
     public int getEnergiekosten() {
         return energiekosten;
+    }
+
+    public String getProdukt() {
+        return produkt;
     }
 }

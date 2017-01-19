@@ -40,7 +40,7 @@ public class UnternehmenTest {
         produktion1.lagerhalleKaufen(2);
 
         // Maschinen kaufen:
-        produktion1.maschinenKaufen(3, 1);
+        produktion1.maschinenKaufen("Rucksack",3, 1);
 
         // Rucksäcke produzieren:
         produktion1.produzieren("Rucksack", 'C', 10, 12);
@@ -74,7 +74,7 @@ public class UnternehmenTest {
         produktion2.lagerhalleKaufen(2);
 
         // Maschinen kaufen:
-        produktion2.maschinenKaufen(3, 1);
+        produktion2.maschinenKaufen("Rucksack", 3, 1);
 
         // Rucksäcke produzieren:
         produktion2.produzieren("Rucksack", 'C', 10, 12);
