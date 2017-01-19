@@ -17,6 +17,9 @@ public class Produktion extends Abteilung {
     private ArrayList<Maschine> maschinen = new ArrayList<Maschine>(); // Maschinenpark
     private ArrayList<Halle> produktionshallen = new ArrayList<Halle>();
     private ArrayList<Halle> lagerhallen = new ArrayList<Halle>();
+
+
+
     private ArrayList<Produktlinie> aufträge = new ArrayList<Produktlinie>(); // Produktionsaufträge
     private ArrayList<Produktlinie> lager = new ArrayList<Produktlinie>(); // Lagerbestand
     private Map<String, Double> forschungsboni = new HashMap<String, Double>(); // Verzeichnis über alle Produktlinien und ihrer Forschungsboni
@@ -135,7 +138,7 @@ public class Produktion extends Abteilung {
                 for (Produktlinie bestand : this.lager) {
                     // falls Produkte mit derselben id und herstellkosten schon vorhanden ist wird die Menge hochgesetzt:
                     if (produktlinie.getId().equals(bestand.getId()) &&
-                            (produktlinie.getProdukt().getHerstellkosten() == bestand.getProdukt().getHerstellkosten())){
+                             (produktlinie.getProdukt().getHerstellkosten() == bestand.getProdukt().getHerstellkosten())){
                         bestand.setMenge(bestand.getMenge() + auftrag.getMenge());
                         break;
                     } else { // ansonsten wird die Produktlinie als neuer Posten im Lager hinzugefügt:
@@ -281,5 +284,9 @@ public class Produktion extends Abteilung {
 
     public ArrayList<Produktlinie> getLager() {
         return lager;
+    }
+
+    public ArrayList<Produktlinie> getAufträge() {
+        return aufträge;
     }
 }
