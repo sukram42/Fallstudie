@@ -1,6 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Exceptions.BankruptException;
+import Exceptions.ZuWenigMaschinenstellplatzException;
 import Exceptions.ZuWenigMitarbeiterOderMaschinenException;
 import Unternehmung.*;
 
@@ -68,7 +69,7 @@ public class Produktion extends Abteilung {
      * @param klasse 1, 2 oder 3
      * @param anzahl Anzahl der zu kaufenden Maschinen
      */
-    public void maschinenKaufen(String produkt, int klasse, int anzahl) {
+    public void maschinenKaufen(String produkt, int klasse, int anzahl) throws ZuWenigMaschinenstellplatzException {
         Maschine m = new Maschine(produkt, klasse); // eine Maschine erstellen, um Anschaffungskosten zu erfahren
         int anschaffungskst = m.getAnschaffungskst();
         // prüfen, ob genügend Fläche (= Produktionshalle) für neue Maschine(n) vorhanden ist:
@@ -86,7 +87,7 @@ public class Produktion extends Abteilung {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Nicht genügend Maschinenstellplätze vorhanden!");
+            throw new ZuWenigMaschinenstellplatzException();
         }
     }
 

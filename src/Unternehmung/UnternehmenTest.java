@@ -1,5 +1,7 @@
 package Unternehmung;
 
+import Exceptions.ZuWenigMaschinenstellplatzException;
+import Exceptions.ZuWenigMitarbeiterOderMaschinenException;
 import Unternehmung.Abteilungen.Marketing;
 import Unternehmung.Abteilungen.Produktion;
 import Unternehmung.Abteilungen.SozialeLeistungen;
@@ -44,10 +46,18 @@ public class UnternehmenTest {
         produktion1.lagerhalleKaufen(2);
 
         // Maschinen kaufen:
-        produktion1.maschinenKaufen("Rucksack",3, 1);
+        try {
+            produktion1.maschinenKaufen("Rucksack", 3, 1);
+        } catch (ZuWenigMaschinenstellplatzException e){
+            e.printStackTrace();
+        }
 
         // Rucksäcke produzieren:
-        produktion1.produzieren("Rucksack", 'C', 10, 12);
+        try{
+            produktion1.produzieren("Rucksack", 'C', 10, 12);
+        } catch (ZuWenigMitarbeiterOderMaschinenException e) {
+            e.printStackTrace();
+        }
 
         // Marketingkampagne und Marktforschung:
         Marketing marketing1 = (Marketing) unternehmen1.getAbteilung("marketing");
@@ -78,10 +88,18 @@ public class UnternehmenTest {
         produktion2.lagerhalleKaufen(2);
 
         // Maschinen kaufen:
-        produktion2.maschinenKaufen("Rucksack", 3, 1);
+        try {
+            produktion2.maschinenKaufen("Rucksack", 3, 1);
+        } catch (ZuWenigMaschinenstellplatzException e){
+            e.printStackTrace();
+        }
 
         // Rucksäcke produzieren:
-        produktion2.produzieren("Rucksack", 'C', 10, 12);
+        try{
+            produktion2.produzieren("Rucksack", 'C', 10, 12);
+        } catch (ZuWenigMitarbeiterOderMaschinenException e){
+            e.printStackTrace();
+        }
 
         // Marketingkampagne und Marktforschung:
         Marketing marketing2 = (Marketing) unternehmen2.getAbteilung("marketing");
