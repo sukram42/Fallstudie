@@ -29,6 +29,8 @@ import {HRService} from "./services/hr.service";
 import {SozialeLeistungenComponent} from "./components/home.components/human-ressources.component/soziale-leistungen.component";
 
 import { ChartModule } from 'angular2-chartjs';
+import {ProduktionService} from "./services/produktion.service";
+import {NewProductLineComponent} from "./components/home.components/produktion.component/new-product-line.component";
 
 @NgModule({
     imports: [
@@ -88,12 +90,13 @@ import { ChartModule } from 'angular2-chartjs';
                    KeyfiguresComponent,
                    NewEmployeeComponent,
                    EmployeeListComponent,
-                   SozialeLeistungenComponent
+                   SozialeLeistungenComponent,
+                   NewProductLineComponent
     ],
 
     bootstrap:    [HomeComponent],
-    providers : [HRService,
-        {provide: RequestOptions, useClass : AuthRequestOptions}
+    providers : [HRService,{provide: RequestOptions, useClass : AuthRequestOptions},
+        ProduktionService
     ]
 })
 export class HomeModule {

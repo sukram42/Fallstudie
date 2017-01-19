@@ -1,6 +1,7 @@
 package Unternehmung;
 
 import Exceptions.BankruptException;
+import Unternehmung.Kennzahlen.*;
 import Unternehmung.Kennzahlen.Bilanz;
 import Unternehmung.Kennzahlen.GuV;
 import Unternehmung.Kennzahlen.Kennzahl;
@@ -46,8 +47,9 @@ public class Kennzahlensammlung {
         this.unternehmen = unternehmen;
 
         weicheKennzahlen.put("mitarbeiterzufriedenheit",new Mitarbeiterzufriedenheit(unternehmen));
-        weicheKennzahlen.put("bekanntheitsheitsgrad",new Kennzahl(unternehmen));
-        weicheKennzahlen.put("image",new Kennzahl(unternehmen));
+        weicheKennzahlen.put("kundenzufriedenheit",new Kundenzufriedenheit(unternehmen));
+        weicheKennzahlen.put("image",new Image(unternehmen));
+        weicheKennzahlen.put("produktqualität",new Produktqualität(unternehmen));
     }
 
     // Berechnungen:
@@ -57,7 +59,6 @@ public class Kennzahlensammlung {
         {
             kennzahl.berechnen();
         }
-        this.bilanz.addEigenkapital(this.guv.jahresUeberschussBerechnen());
         verkaufsrateBerechnen();
         bilanz.berechnen();
 

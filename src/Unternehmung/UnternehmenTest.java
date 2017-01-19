@@ -28,6 +28,10 @@ public class UnternehmenTest {
 
         ((SozialeLeistungen)unternehmen1.getAbteilung("sozialeLeistungen")).startProjekt("kantine");
         System.out.println("Mitarbeiterzufriedenheit mit Kantine: " + unternehmen1.getKennzahlensammlung().getMitarbeiterzufriedenheit().berechnen());
+        System.out.println("Kundenzufriedenheit: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("kundenzufriedenheit").berechnen());
+        System.out.println("Image: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("image").berechnen());
+        System.out.println("Produktqualität: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("produktqualität").berechnen());
+
 
 
         // Mitarbeiter einstellen:
