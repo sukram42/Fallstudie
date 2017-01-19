@@ -1,6 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Exceptions.BankruptException;
+import Exceptions.ZuHochVerschuldetException;
 import Rules.Game;
 import Unternehmung.Abteilung;
 import Unternehmung.Kennzahlensammlung;
@@ -29,7 +30,7 @@ public class Finanzen extends Abteilung {
      * @param hoehe vom Spieler gewählt
      * @param laufzeit vom Spieler gewählt
      */
-    public void kreditAufnehmen(int hoehe, int laufzeit){
+    public void kreditAufnehmen(int hoehe, int laufzeit) throws ZuHochVerschuldetException{
         double neuerVerschuldungsgrad = (kennzahlensammlung.getBilanz().getFremdkapital() + hoehe) /
                 kennzahlensammlung.getBilanz().getEigenkapital();
         double zinssatz = 0;
@@ -50,8 +51,7 @@ public class Finanzen extends Abteilung {
         } else if (neuerVerschuldungsgrad <= 2){
             zinssatz = 0.06;
         } else {
-            System.out.println("Zu hoch verschuldet, es ist keine Kreditaufnahme mehr möglich!");
-            return;
+            throw new ZuHochVerschuldetException();
         }
         Kredit kredit = new Kredit(hoehe, laufzeit, zinssatz);
         kredite.add(kredit);

@@ -1,6 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Exceptions.BankruptException;
+import Exceptions.ZuWenigMitarbeiterOderMaschinenException;
 import Unternehmung.*;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class Produktion extends Abteilung {
      * @param menge Größe des Auftrags -> so viele Produkte sollen in...
      * @param laufzeit ...so viel Zeit produziert werden (in (Spiel-)Wochen
      */
-    public void produzieren(String name, char qualitätsstufe, int menge, int laufzeit){
+    public void produzieren(String name, char qualitätsstufe, int menge, int laufzeit) throws ZuWenigMitarbeiterOderMaschinenException{
         Produktlinie produktlinie = new Produktlinie(
                 new Produkt(name, qualitätsstufe, this.getForschungsbonusById(name + qualitätsstufe)), menge, laufzeit);
         // prüfen, ob genügend Mitarbeiter, Maschinen und Liquidität vorhanden ist:
@@ -57,7 +58,7 @@ public class Produktion extends Abteilung {
             aufträge.add(produktlinie);
             System.out.println("Neue Produktlinie (" + produktlinie.getId() + ") in Auftrag gegeben.");
         } else {
-            System.out.println("Nicht genügend Maschinen und/oder Mitarbeiter zum Produzieren vorhanden!");
+            throw new ZuWenigMitarbeiterOderMaschinenException(name);
         }
     }
 
@@ -147,6 +148,7 @@ public class Produktion extends Abteilung {
                 }
             } else {
                 System.out.println("Nicht genügend Lagerfläche vorhanden. Die Produkte gehen verloren.");
+                // TODO Exception notwendig?
             }
             auftrag.setLaufzeit(auftrag.getLaufzeit() - 1); // Laufzeit herunter setzen
             if (auftrag.getLaufzeit() == 0){ // falls Laufzeit == 0 Auftrag beenden

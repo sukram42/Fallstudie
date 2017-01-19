@@ -14,9 +14,6 @@ import java.util.ArrayList;
 public class HR extends Abteilung {
     private transient Unternehmen unternehmen;
 
-    // TODO was soll hier passieren? - Ist es nicht besser Funktionen wie "Mitarbeiter entlassen", "Mitarbeiter von
-    // TODO Abteilung X in Abteilung Y verschieben" oder "Gehalt bearbeiten" in der Klasse Mitarbeiter zu implementieren?
-
     /**
      * Konstruktor, zum Erstellen der Abteilung Human Resources
      *

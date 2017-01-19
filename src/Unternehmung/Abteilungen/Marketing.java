@@ -57,6 +57,7 @@ public class Marketing extends Abteilung {
             this.mafos.put(umfang, new Marktforschung(umfang));
         } else {
             System.out.println("Martforschung Stufe " + umfang + " läuft bereits.");
+            // TODO Exception notwendig?
         }
     }
 
