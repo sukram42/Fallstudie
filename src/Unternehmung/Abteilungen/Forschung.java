@@ -1,33 +1,70 @@
 package Unternehmung.Abteilungen;
 
 import Rules.Game;
-import Unternehmung.*;
+import Unternehmung.Abteilung;
+import Unternehmung.Forschungsprojekt;
+import Unternehmung.Kennzahlensammlung;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by D064018 on 11.01.2017.
  */
 
-/* ich muss von hier an die Produkreihen gelangen
-   max
- */
-
 public class Forschung extends Abteilung{
 
-    private ArrayList<Produktlinie> verfügbareProdukte = new ArrayList<>(); //um bereits beforschte Produkte reduzieren
-    private ArrayList<Produktlinie> beforschteProdukte = new ArrayList<>();
+    private Map<String, Double> imageBoni = new HashMap<>();
+    private ArrayList<String> verfügbareProdukte; //um bereits beforschte Produkte reduzieren
+    private ArrayList<String> beforschteProdukte = new ArrayList<>();
     private int verfügbareMitarbeiter;
     private ArrayList<Forschungsprojekt> projekte = new ArrayList<>();
+    private Produktion produktion;
 
-    public Forschung(Kennzahlensammlung kennzahlensammlung) {
+    public Forschung(Kennzahlensammlung kennzahlensammlung, Abteilung produktion) {
           super("Forschung",kennzahlensammlung);
+          initImageBoni();
+          verfügbareProdukte = new ArrayList<>(imageBoni.keySet());
+          this.produktion = (Produktion)produktion;
     }
 
-    public void starteProjekt(Produktlinie forschungsobjekt, int mitarbeiterAnzahl, long dauer, boolean herstellkosten, Kennzahlensammlung kennzahlensammlung){
+    private void initImageBoni(){
+        this.imageBoni.put("RucksackA",(double) 0);
+        this.imageBoni.put("RucksackB",(double) 0);
+        this.imageBoni.put("RucksackC",(double) 0);
+        this.imageBoni.put("RucksacktechA",(double) 0);
+        this.imageBoni.put("RucksacktechB",(double) 0);
+        this.imageBoni.put("RucksacktechC",(double) 0);
+        this.imageBoni.put("DuffelA",(double) 0);
+        this.imageBoni.put("DuffelB",(double) 0);
+        this.imageBoni.put("DuffelC",(double) 0);
+        this.imageBoni.put("ReisetascheA",(double) 0);
+        this.imageBoni.put("ReisetascheB",(double) 0);
+        this.imageBoni.put("ReisetascheC",(double) 0);
+    }
+
+    public void setImagebonus (String id, double neuerImagebonus){
+        for (Map.Entry<String, Double> alterImagebonus : this.imageBoni.entrySet()){
+            if (alterImagebonus.getKey().equals(id)){
+                alterImagebonus.setValue(neuerImagebonus);
+            }
+        }
+    }
+
+    public double getImagebonusById(String id) {
+        for (Map.Entry<String, Double> imageBoni : this.imageBoni.entrySet()) {
+            if (imageBoni.getKey().equals(id)) {
+                return imageBoni.getValue();
+            }
+        }
+        return 0;
+    }
+
+    public void starteProjekt(Produktion produktion, Forschung forschung, String forschungsobjekt, int mitarbeiterAnzahl, long dauer, boolean herstellkosten, Kennzahlensammlung kennzahlensammlung){
         if((verfügbareMitarbeiter -= mitarbeiterAnzahl) >= 0) { //Überprüfung, ob es genügend Mitarbeiter gibt
             verfügbareMitarbeiter -= mitarbeiterAnzahl;
-            Forschungsprojekt forschungsprojekt = new Forschungsprojekt(forschungsobjekt, mitarbeiterAnzahl, dauer, herstellkosten);
+            Forschungsprojekt forschungsprojekt = new Forschungsprojekt(produktion, forschung, forschungsobjekt, mitarbeiterAnzahl, dauer, herstellkosten);
             beforschteProdukte.add(forschungsobjekt);
             projekte.add(forschungsprojekt);
         }else{
@@ -57,11 +94,9 @@ public ArrayList<Forschungsprojekt> getProjekte(){
         }
                 }
 
-public ArrayList<Produktlinie> getVerfügbareProdukte() {
-
+public ArrayList<String> getVerfügbareProdukte() {
         //Produkte, an denen bereits geforscht wird, aussondern
-       // verfügbareProdukte = Produktreihe.getProduktreihen().getProdukt();
-        for(Produktlinie produkt : beforschteProdukte){
+        for(String produkt : beforschteProdukte){
         verfügbareProdukte.remove(produkt);
         }
         return verfügbareProdukte;

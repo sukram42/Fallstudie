@@ -25,8 +25,8 @@ public class MaschineTest extends TestCase{
     }
 
     @Test
-    public void testGetKapazität(){
-        org.junit.Assert.assertEquals( testMaschine.getKapazität(), 600);
+    public void testgetKapazitaet(){
+        org.junit.Assert.assertEquals( testMaschine.getKapazitaet(), 600);
     }
 
     @Test

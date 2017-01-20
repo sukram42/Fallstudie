@@ -43,7 +43,7 @@ public class ProduktionTest extends TestCase{
     @Test
     public void produktionshalleKaufen() throws Exception {
         testProduktion.produktionshalleKaufen(2);
-        assertEquals(testProduktion.getFreienMaschinenPlatz(), 50);
+        assertEquals(testProduktion.getFreienProduktionshallenPlatz(), 50);
         assertEquals(kennzahlensammlung.getLiquideMittel(), (500000 - 65000));
     }
 
@@ -100,7 +100,7 @@ public class ProduktionTest extends TestCase{
     @Test
     public void getFreienMaschinenPlatz() throws Exception {
         testProduktion.produktionshalleKaufen(2);
-        assertEquals(testProduktion.getFreienMaschinenPlatz(), 50);
+        assertEquals(testProduktion.getFreienProduktionshallenPlatz(), 50);
     }
 
     @Test

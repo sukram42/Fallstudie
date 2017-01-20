@@ -31,8 +31,8 @@ public class Unternehmen {
 	{
 		abteilungen.put("marketing", new Marketing(kennzahlensammlung));
 		abteilungen.put("finanzen", new Finanzen(kennzahlensammlung));
-		abteilungen.put("forschung",new Forschung(kennzahlensammlung));
 		abteilungen.put("produktion", new Produktion(kennzahlensammlung));
+		abteilungen.put("forschung",new Forschung(kennzahlensammlung, abteilungen.get("produktion")));
 		abteilungen.put("vertrieb", new Vertrieb(kennzahlensammlung));
 		abteilungen.put("hr", new HR(this,kennzahlensammlung));
 		abteilungen.put("sozialeLeistungen", new SozialeLeistungen(this));
