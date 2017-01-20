@@ -81,7 +81,7 @@ public class Produktion extends Abteilung {
                     Maschine n = new Maschine(produkt, klasse);
                     maschinen.add(n);
                 }
-                System.out.println(anzahl + " Maschine(n) der Klasse " + klasse + " gekauft, Kapazität: " + m.getKapazität() +
+                System.out.println(anzahl + " Maschine(n) der Klasse " + klasse + " gekauft, Kapazität: " + m.getKapazitaet() +
                         " Stück pro Jahr, Anschaffungskosten: " + anschaffungskst + " €");
             } catch (BankruptException e) {
                 e.printStackTrace();
@@ -198,7 +198,7 @@ public class Produktion extends Abteilung {
         int mitarbeiterKapazität = 0;
         for (Maschine maschine : this.maschinen){
             if (maschine.getProdukt().equals(produkt)){
-                maschKapazität += maschine.getKapazität();
+                maschKapazität += maschine.getKapazitaet();
             }
         }
         for (Mitarbeiter mitarbeiter : this.mitarbeiter){
@@ -299,4 +299,6 @@ public class Produktion extends Abteilung {
     public ArrayList<Produktlinie> getAufträge() {
         return aufträge;
     }
+
+    public ArrayList<Maschine> getMaschinen(){return maschinen;};
 }

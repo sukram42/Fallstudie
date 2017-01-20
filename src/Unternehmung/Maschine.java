@@ -9,7 +9,7 @@ import Exceptions.BankruptException;
 public class Maschine {
 
     private int klasse; // etwa 1, 2, 3 -> unterschiedliche Kapazität, Anschaffungskosten, Halbwertszeit
-    private int kapazität; // kann maximal so viele Produkte pro Monat produzieren. abhängig von klasse
+    private int kapazitaet; // kann maximal so viele Produkte pro Monat produzieren. abhängig von klasse
     private int anschaffungskst; // abhängig von klasse
     private int energiekosten; // pro Tag, bei jeder Maschinenklasse gleich
     private double status; // sinkt jeden Monat um X, kann durch Reparaturen wieder hochgesetzt werden
@@ -70,15 +70,15 @@ public class Maschine {
         switch (klasse){
             // TODO realistisch / zum Spiel passende Werte einsetzen
             case 1:
-                this.kapazität = 300;
+                this.kapazitaet = 300;
                 this.anschaffungskst = 7500;
                 break;
             case 2:
-                this.kapazität = 600;
+                this.kapazitaet = 600;
                 this.anschaffungskst = 15000;
                 break;
             case 3:
-                this.kapazität = 1200;
+                this.kapazitaet = 1200;
                 this.anschaffungskst = 30000;
                 break;
         }
@@ -89,8 +89,8 @@ public class Maschine {
         return klasse;
     }
 
-    public int getKapazität() {
-        return kapazität;
+    public int getKapazitaet() {
+        return kapazitaet;
     }
 
     public int getAnschaffungskst() {

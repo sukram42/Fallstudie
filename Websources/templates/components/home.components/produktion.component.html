@@ -7,7 +7,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="title">Produktion <i class="fa fa-users" aria-hidden="true"></i> 12</h4>
+                                <h4 class="title">Produktion <i class="fa fa-users" aria-hidden="true"></i><span *ngIf="employees">{{employees}}</span></h4>
                                 <p class="category">Liste aller möglichen Produktlinien in ihrem Unternehmen</p>
                             </div>
                             <div class="col-md-6">
@@ -32,45 +32,7 @@
                             <div class="col-md-6">
                                 <new-warehouse-component>Loading</new-warehouse-component>
                                 <new-production-hall-component>Loading</new-production-hall-component>
-                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="headingOne">
-                                            <h4 class="panel-title">
-
-                                                <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                                   href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
-                                                    Produktionsmaschine 1
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel"
-                                             aria-labelledby="headingOne">
-                                            <div class="panel-body">
-                                                <h4>Produktionsmaschine für Rucksäcke</h4>
-                                                <br>
-                                                <h6>Produktion:</h6>
-                                                <p>5.000 Rucksäcke pro Periode</p>
-                                                <h6>Leistung:</h6>
-                                                <a role="button" class="btn btn-default btn-xs right" data-toggle="modal"
-                                                   data-target="#">
-                                                    <i class="fa fa-wrench" aria-hidden="true"></i>
-                                                    Reparieren
-                                                </a>
-                                                <div class="progress">
-                                                    <div class="progress-bar progress-bar-striped active"
-                                                         role="progressbar"
-                                                         aria-valuenow="40" aria-valuemin="0"
-                                                         aria-valuemax="100"
-                                                         style="width:40%">
-                                                        40%
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                <machine-list-component></machine-list-component>
                             </div>
                             <div class="col-md-6">
                                 <div class="panel panel-default">

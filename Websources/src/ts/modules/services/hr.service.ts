@@ -25,6 +25,11 @@ export class HRService {
         return this.http.get('http://localhost:8080/rest/companies/employees').map(res => res.json());
     }
 
+    getEmployeesProduktion()
+    {
+         return this.http.get('http://localhost:8080/rest/companies/employees/production').map(res => res.text());
+    }
+
     getEmployeeSubject(): Observable<any> {
         return this.empSubject.asObservable();
     }

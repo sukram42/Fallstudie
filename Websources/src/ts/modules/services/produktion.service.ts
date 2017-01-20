@@ -14,10 +14,12 @@ export class ProduktionService {
 
 
     private productlinesSubject = new Subject<any>();
+    private machinesSubject = new Subject<any>();
 
     constructor(private http: Http) {
         this.http = http;
     }
+
 
 
     produzieren(data)
@@ -31,6 +33,11 @@ export class ProduktionService {
     getProductlinesSubject()
     {
         return this.productlinesSubject.asObservable();
+    }
+
+    getMachinesSubject()
+    {
+        return this.machinesSubject;
     }
     kaufeMaschine(data)
     {
@@ -55,7 +62,15 @@ export class ProduktionService {
     getProduktlinien()
     {
         return this.http.get('http://localhost:8080/rest/companies/production/productlines').map(res=>res.json());
+    }
+    getMachines()
+    {
+        return this.http.get('http://localhost:8080/rest/companies/production/machines').map(res=>res.json());
+    }
 
+    repairMachines(index)
+    {
+        return this.http.put('http://localhost:8080/rest/companies/production/machines',index).map(res=>res.text());
     }
 
 }

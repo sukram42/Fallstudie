@@ -36,6 +36,7 @@ import {NewMachineComponent} from "./components/home.components/produktion.compo
 import {NewWarehouseComponent} from "./components/home.components/produktion.component/new-warehouse.component";
 import {NewProductionHallComponent} from "./components/home.components/produktion.component/new-production-hall.component";
 import {ProductLineComponent} from "./components/home.components/produktion.component/productline-list.component";
+import {MachineListComponent} from "./components/home.components/produktion.component/machine-list.component";
 
 @NgModule({
     imports: [
@@ -100,7 +101,8 @@ import {ProductLineComponent} from "./components/home.components/produktion.comp
                    NewMachineComponent,
                    NewWarehouseComponent,
                    NewProductionHallComponent,
-                   ProductLineComponent
+                   ProductLineComponent,
+                   MachineListComponent
     ],
 
     bootstrap:    [HomeComponent],

@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -172,6 +173,41 @@ public class ProduktionInterface {
             object.put("gesamt", gesamt);
 
             return Response.ok(object.toJSONString()).build();
+
+        } catch (Exception e) {
+            return Response.serverError().entity(e.toString()).build();
+        }
+    }
+
+
+    @GET
+    @Path("machines")
+    @Secured
+    public Response getMachines(@Context SecurityContext securityContext) {
+        try {
+            Unternehmen unternehmen = CompanyInterface.getCompanyFromContext(securityContext);
+            Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
+
+            return Response.ok(gson.toJson(produktion.getMaschinen())).build();
+
+        } catch (Exception e) {
+            return Response.serverError().entity(e.toString()).build();
+        }
+    }
+
+
+    @PUT
+    @Path("machines")
+    @Secured
+    public Response repairMachines(@Context SecurityContext securityContext,String number) {
+        try {
+            Unternehmen unternehmen = CompanyInterface.getCompanyFromContext(securityContext);
+            Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
+
+            int index = Integer.parseInt(number);
+            produktion.getMaschinen().get(index).reparieren(unternehmen.getKennzahlensammlung());
+
+            return Response.ok("Maschine repariert").build();
 
         } catch (Exception e) {
             return Response.serverError().entity(e.toString()).build();

@@ -67,8 +67,18 @@ public class CompanyInterface {
     {
         Unternehmen unternehmen = getCompanyFromContext(context);
         ArrayList<Mitarbeiter> mitarbeiter = ((HR)unternehmen.getAbteilung("hr")).getTotalMitarbeiter();
-//        Mitarbeiter[] array = mitarbeiter.toArray(new Mitarbeiter[mitarbeiter.size()]);
         return Response.ok(gson.toJson(mitarbeiter)).build();
+    }
+
+
+    @Secured
+    @GET
+    @Path("employees/production")
+    public Response getEmployeeCountInProduction(@Context SecurityContext context)
+    {
+        Unternehmen unternehmen = getCompanyFromContext(context);
+        int anzahl = unternehmen.getAbteilung("produktion").getMitarbeiterAnzahl();
+        return Response.ok(anzahl).build();
     }
 
     @POST

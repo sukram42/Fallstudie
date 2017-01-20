@@ -8,6 +8,7 @@
 
 import { Component } from '@angular/core';
 import {ProduktionService} from "../../services/produktion.service";
+import {HRService} from "../../services/hr.service";
 
 @Component({
     selector   : 'home-component',
@@ -16,10 +17,12 @@ import {ProduktionService} from "../../services/produktion.service";
 })
 
 export class ProduktionComponent {
-
-    constructor(private proService:ProduktionService)
+    employees;
+    constructor(private hrService:HRService)
     {
-
+        hrService.getEmployeesProduktion().subscribe(
+            data=>{this.employees = data,console.log(data)}
+            );
     }
 
 

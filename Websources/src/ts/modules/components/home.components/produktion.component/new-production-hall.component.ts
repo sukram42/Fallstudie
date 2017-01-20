@@ -20,6 +20,7 @@ export class NewProductionHallComponent {
 
     constructor(private proService: ProduktionService) {
         this.getHallCapacity();
+        proService.getMachinesSubject().asObservable().subscribe(data=>this.getHallCapacity());
     }
 
     kaufeHalle(size) {
