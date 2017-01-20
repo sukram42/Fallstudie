@@ -89,7 +89,15 @@ public class Game extends TimerTask{
         for(Unternehmen u: companies)
         {
             u.update();
-            u.getKennzahlensammlung().getMitarbeiterzufriedenheit().berechnen();
+            u.getKennzahlensammlung().berechnen();
+        }
+
+        if((getCalendar().get(Calendar.MONTH) == Calendar.DECEMBER ) && getCalendar().get(Calendar.DAY_OF_MONTH)== 30)
+        {
+            for(Unternehmen u: companies)
+            {
+                u.updateYearly();
+            }
         }
 
     }

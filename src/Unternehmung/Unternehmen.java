@@ -47,6 +47,10 @@ public class Unternehmen {
 		}
 		kennzahlensammlung.update();
 	}
+	public void updateYearly()
+	{
+
+	}
 
 	// Getter und Setter:
 	public String getPasswort() {
