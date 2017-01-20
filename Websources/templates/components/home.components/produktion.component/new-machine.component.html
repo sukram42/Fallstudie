@@ -1,0 +1,72 @@
+<!--Modal Machines-->
+<base href="/">
+<div class="modal fade" id="machineModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabe2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="form-horizontal" [formGroup]="newMachine" (ngSubmit)="submitForm(newMachine.value)">
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-10">
+                            <h4 class="modal-title" id="myModalLabe2"> Maschinendetails</h4>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <p>Für jede Produktionsmachine gelten monatliche Energiekosten von ???. Je nach Größe der
+                                jeweiligen Machine fallen nötige Arbeitsplätze an!</p>
+
+                            <div class="form-group">
+                                <label for="machineType" class="col-sm-2 control-label">Produkttyp</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="machineType"  [formControl]="newMachine.controls['product']">
+                                        <option disabled selected>Auswählen...</option>
+                                        <option value="Rucksack">Rucksäcke</option>
+                                        <option value="Rucksacktech">Technische Rucksäcke</option>
+                                        <option value="Duffel">Duffels</option>
+                                        <option value="Reisetasche">Gepäcktaschen</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="machineClass" class="col-sm-2 control-label">Kapazität</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="machineClass"  [formControl]="newMachine.controls['klasse']">
+                                        <option disabled selected>Auswählen...</option>
+                                        <option value="1">300 pro Periode / 7500€</option>
+                                        <option value="2">600 pro Periode/15000€</option>
+                                        <option value="3">1200 pro Periode/30000€</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <button type="submit" class="btn btn-success right" id="maschinePost"
+                                    [disabled]="!newMachine.valid"
+                                    data-dismiss="modal"
+                                    onclick="$('#machineModal').modal('toggle');"
+                            ><i class="fa fa-cart-plus" aria-hidden="true"></i> Kaufen
+                            </button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -7,6 +7,7 @@
  */
 
 import { Component } from '@angular/core';
+import {ProduktionService} from "../../services/produktion.service";
 
 @Component({
     selector   : 'home-component',
@@ -15,5 +16,11 @@ import { Component } from '@angular/core';
 })
 
 export class ProduktionComponent {
+
+    constructor(private proService:ProduktionService)
+    {
+
+    }
+
 
 }

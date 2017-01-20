@@ -1,12 +1,7 @@
 /**
  * Created by boebel on 13.01.2017.
  */
-/**
- * Created by boebel on 04.01.2017.
- */
-/**
- * Created by boebel on 04.01.2017.
- */
+
 import {Injectable} from '@angular/core';
 import {Http} from "@angular/http"
 import {Subject} from "rxjs/Subject";

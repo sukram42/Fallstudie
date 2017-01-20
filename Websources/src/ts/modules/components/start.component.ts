@@ -11,7 +11,7 @@ import {HomeService} from "../services/home.service";
     providers : [HomeService]
 })
 
-export class StartComponent implements OnInit{
+export class StartComponent{
 
     homeService;
 
@@ -32,21 +32,5 @@ export class StartComponent implements OnInit{
         }
     }
 
-    ngOnInit(): void {
-
-        var validateToken = this.homeService.validateToken();
-
-        if(validateToken)
-            {
-                validateToken.subscribe(data=> {
-                        console.log("Data |" + data + "|");
-                        if (data.trim() == "true") {
-                            window.location.href = "home.html";
-                            console.log("na los");
-                        }
-                    }
-                    ),err =>{console.log("Error")};
-            }
-    }
 
 }

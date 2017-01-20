@@ -50,7 +50,8 @@
                                 <label for="anzahlMitarbeiter" class="col-sm-2 control-label">Abteilung</label>
                                 <div class="col-sm-10"
                                      [ngClass]="{'has-error':!newEmployee.controls['abteilung'].valid}">
-                                    <select class="form-control" name="abteilungMitarbeiter" id="abteilungMitarbeiter"
+                                    <select class="form-control" name="abteilungMitarbeiter"
+                                            id="abteilungMitarbeiter"
                                             [formControl]="newEmployee.controls['abteilung']">
                                         <option disabled selected value>Abteilung</option>
                                         <option value="hr">Human Resources</option>

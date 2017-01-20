@@ -6,10 +6,12 @@ import Unternehmung.Abteilungen.HR;
 import Unternehmung.Abteilungen.SozialeLeistungen;
 import Unternehmung.Abteilungen.SozialeProjekte.SozialProjekt;
 import Unternehmung.Kennzahlen.Kennzahl;
+import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Mitarbeiter;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.json.simple.JSONObject;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -114,8 +116,21 @@ public class CompanyInterface {
                 return Response.ok(-1).build();
     }
 
+    @GET
+    @Secured
+    @Path("keyfigures/soft")
+    public Response getKeyFigures(@Context SecurityContext securityContext)
+    {
+       Unternehmen unternehmen = getCompanyFromContext(securityContext);
+        JSONObject object = new JSONObject();
+        Kennzahlensammlung ks = unternehmen.getKennzahlensammlung();
+        object.put("mitarbeiterzufriedenheit",ks.getWeicheKennzahl("mitarbeiterzufriedenheit").berechnen()*100f);
+        object.put("image",ks.getWeicheKennzahl("image").berechnen()*100f);
+        object.put("kundenzufriedenheit",ks.getWeicheKennzahl("kundenzufriedenheit").berechnen()*100f);
+       return Response.ok().entity(gson.toJson(object)).build();
+    }
 
-    private Unternehmen getCompanyFromContext(SecurityContext context) {
+    public static Unternehmen getCompanyFromContext(SecurityContext context) {
 
         return context!=null?Game.getUnternehmenByName(context.getUserPrincipal().getName()):null;
     }

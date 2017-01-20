@@ -73,7 +73,7 @@ public class Produktion extends Abteilung {
         Maschine m = new Maschine(produkt, klasse); // eine Maschine erstellen, um Anschaffungskosten zu erfahren
         int anschaffungskst = m.getAnschaffungskst();
         // prüfen, ob genügend Fläche (= Produktionshalle) für neue Maschine(n) vorhanden ist:
-        if (getFreienMaschinenPlatz() >= anzahl) {
+        if (getFreienProduktionshallenPlatz() >= anzahl) {
             try {
                 kennzahlensammlung.liquiditätAnpassen(anschaffungskst * anzahl);
                 maschinen.add(m);
@@ -103,7 +103,7 @@ public class Produktion extends Abteilung {
     }
 
     public void lagerhalleKaufen(int größe){
-        Halle halle = new Halle("Produktionshalle", größe);
+        Halle halle = new Halle("Lagerhalle", größe);
         try{
             kennzahlensammlung.liquiditätAnpassen((float) halle.getPreis());
             this.lagerhallen.add(halle);
@@ -204,7 +204,7 @@ public class Produktion extends Abteilung {
         for (Mitarbeiter mitarbeiter : this.mitarbeiter){
             mitarbeiterKapazität += mitarbeiter.getProdLeistung();
         }
-        if (maschKapazität >= mitarbeiterKapazität){
+        if (maschKapazität <= mitarbeiterKapazität){
             return maschKapazität;
         }
         return mitarbeiterKapazität;
@@ -215,26 +215,33 @@ public class Produktion extends Abteilung {
      * @return Anzahl an Produkten, die noch in das/die Lager passen
      */
     public int getFreienLagerPlatz(){
-        int lagerplatz = 0;
         int produkte = 0;
-        for (Halle halle : lagerhallen){
-            lagerplatz += halle.getKapazität();
-        }
         for (Produktlinie bestand : this.lager){
             produkte += bestand.getMenge();
         }
-        return lagerplatz - produkte;
+        return getGesamtenLagerPlatz() - produkte;
+    }
+    public int getGesamtenLagerPlatz(){
+        int lagerplatz = 0;
+        for (Halle halle : lagerhallen){
+            lagerplatz += halle.getKapazität();
+        }
+        return lagerplatz;
     }
 
     /**
      * @return Anzahl verfügbare Stellplätze für Maschinen
      */
-    public int getFreienMaschinenPlatz(){
+    public int getFreienProduktionshallenPlatz(){
+        return getGesamtenProduktionshallenPlatz() - this.maschinen.size();
+    }
+    public int getGesamtenProduktionshallenPlatz()
+    {
         int maschinenPlaetze = 0;
         for (Halle halle : this.produktionshallen){
             maschinenPlaetze += halle.getKapazität();
         }
-        return maschinenPlaetze - this.maschinen.size();
+        return maschinenPlaetze;
     }
 
     /**

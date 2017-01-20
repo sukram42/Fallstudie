@@ -24,6 +24,12 @@ export class KeyFiguresService {
         return  Observable.interval(10000).flatMap(()=>this.http.get('http://localhost:8080/rest/companies/keyfigures/soft/' + name)
             .map(response => response.json()));
     }
+    getKeyFigures()
+    {
+        return  Observable.interval(1000).flatMap(()=>this.http.get('http://localhost:8080/rest/companies/keyfigures/soft')
+        .map(response => response.json()));
+    }
+
 
     getEmployeeCount()
     {

@@ -1,0 +1,97 @@
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabe3">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="form-horizontal" [formGroup]="newProduktLinie" (ngSubmit)="submitForm(newProduktLinie.value)">
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-10">
+                            <h4 class="modal-title" id="myModalLabe3"> Produktdetails</h4>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <p>Für jede Produktionsmachine gelten monatliche Energiekosten von ???.
+                                Je nach Größe der jeweiligen Machine fallen nötige Arbeitsplätze an!</p>
+                            <div class="form-group">
+                                <label for="produkt" class="col-sm-2 control-label">Produkttyp</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="produkt"
+                                            [formControl]="newProduktLinie.controls['produkt']">
+                                        <option disabled selected>Auswählen...</option>
+                                        <option value="Rucksack">Rucksäcke</option>
+                                        <option value="Rucksacktech">Technische Rucksäcke</option>
+                                        <option value="Duffel">Duffels</option>
+                                        <option value="Tasche">Gepäcktaschen</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="quality" class="col-sm-2 control-label">Qualitat</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="quality"
+                                            [formControl]="newProduktLinie.controls['quality']">
+                                        <option disabled selected>Auswählen...</option>
+                                        <option value="A">Luxury: Herrstellkosten von 30€ pro Stück</option>
+                                        <option value="B">Ordinary: Herstellkosten von ???</option>
+                                        <option value="C">Cheesy</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="produktionsMenge" class="col-sm-2 control-label">Menge</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group"
+                                         [ngClass]="{'has-error':!newProduktLinie.controls['menge'].valid}">
+                                        <input type="text" class="form-control .has-error"
+                                               name="produktionsMenge"
+                                               id="produktionsMenge"
+                                               [formControl]="newProduktLinie.controls['menge']"
+                                               placeholder="Menge in Stück pro Tag">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="produktionsLaufzeit" class="col-sm-2 control-label">Laufzeit</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group"
+                                         [ngClass]="{'has-error':!newProduktLinie.controls['laufzeit'].valid}">
+                                        <input type="text" class="form-control .has-error"
+                                               name="produktionsLaufzeit"
+                                               id="produktionsLaufzeit"
+                                               [formControl]="newProduktLinie.controls['laufzeit']"
+                                               placeholder="Laufzeit in Tagen">
+                                        <div class="input-group-addon">Tage</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <button type="submit" class="btn btn-success right" id="maschinePost"
+                                    [disabled]="!newProduktLinie.valid"
+                                    data-dismiss="modal" onclick="$('#productModal').modal('toggle');">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i> Erstellen
+                            </button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

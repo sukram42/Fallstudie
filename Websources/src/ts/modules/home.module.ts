@@ -31,6 +31,11 @@ import {SozialeLeistungenComponent} from "./components/home.components/human-res
 import { ChartModule } from 'angular2-chartjs';
 import {ProduktionService} from "./services/produktion.service";
 import {NewProductLineComponent} from "./components/home.components/produktion.component/new-product-line.component";
+import {KeyFiguresService} from "./services/keyfigures.service";
+import {NewMachineComponent} from "./components/home.components/produktion.component/new-machine.component";
+import {NewWarehouseComponent} from "./components/home.components/produktion.component/new-warehouse.component";
+import {NewProductionHallComponent} from "./components/home.components/produktion.component/new-production-hall.component";
+import {ProductLineComponent} from "./components/home.components/produktion.component/productline-list.component";
 
 @NgModule({
     imports: [
@@ -91,12 +96,16 @@ import {NewProductLineComponent} from "./components/home.components/produktion.c
                    NewEmployeeComponent,
                    EmployeeListComponent,
                    SozialeLeistungenComponent,
-                   NewProductLineComponent
+                   NewProductLineComponent,
+                   NewMachineComponent,
+                   NewWarehouseComponent,
+                   NewProductionHallComponent,
+                   ProductLineComponent
     ],
 
     bootstrap:    [HomeComponent],
     providers : [HRService,{provide: RequestOptions, useClass : AuthRequestOptions},
-        ProduktionService
+        ProduktionService,KeyFiguresService
     ]
 })
 export class HomeModule {

@@ -22,7 +22,7 @@ public class Produktlinie {
         this.produkt = produkt;
         this.menge = menge;
         this.laufzeit = laufzeit;
-        this.id = produkt.getName() + produkt.getQualitätsstufe();
+        this.id = produkt.getName() + produkt.getQualitaetsstufe();
     }
 
     /**
@@ -34,7 +34,7 @@ public class Produktlinie {
         this.id = id;
         this.produkt = produkt;
         this.menge = menge;
-        this.id = produkt.getName() + produkt.getQualitätsstufe();
+        this.id = produkt.getName() + produkt.getQualitaetsstufe();
     }
 
     // Getter und Setter;

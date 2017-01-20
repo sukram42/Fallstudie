@@ -53,6 +53,28 @@
             console.error(err);
         });
 	</script>
+	<script>
+        var token = window.localStorage.getItem("auth_key");
+        if (token) {
+            var header = "Bearer " + token;
+            $.ajax
+            ({
+                type: "GET",
+                url: "http://localhost:8080/rest/auth",
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader("Authorization", "Bearer " +token );
+                },
+                dataType: 'text',
+                success: function (data){
+                    console.log("Data |" + data + "|");
+                    if (data.trim() == "true") {
+                        window.location.href = "home.html";
+                        console.log("na los");
+                    }
+                }
+            });
+        }
+	</script>
 
 
 </head>

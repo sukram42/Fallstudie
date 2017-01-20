@@ -6,7 +6,8 @@
  * Created by boebel on 04.01.2017.
  */
 
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {KeyFiguresService} from "../../services/keyfigures.service";
 
 @Component({
     selector: 'home-component',
@@ -14,30 +15,18 @@ import {Component} from '@angular/core';
 
 })
 
-export class DashboardComponent {
+export class DashboardComponent implements OnInit
+{
+
+    keyfigures;
     type = 'radar';
-    data = {
-        labels: ["Mitarbeiterzufriedenheit", "Kundenzufriedenheit", "Bekanntheitsgrad","Image","Produktqualität"],
-        datasets: [
-            {
-                label: "Kennzahlen",
-                backgroundColor: "rgba(255,173,41,0.7)",
-                borderColor: "rgba(255,173,41,1)",
-                data: [65, 59, 80, 81, 50]
-            },
-            {
-                label: "kennzahlen des letzten Geschäftsjahres",
-                backgroundColor: "rgba(49,53,61,0.7)",
-                borderColor: "rgba(49,53,61,1)",
-                data: [40, 60, 55, 31,35]
-            }
-        ]
-    };
+    data;
     options = {
         responsive: true,
         maintainAspectRatio: false,
         defaultFontSize: 100,
     };
+
 
     type2 = 'bar';
     data2 = {
@@ -80,4 +69,40 @@ export class DashboardComponent {
         maintainAspectRatio: false,
         defaultFontSize: 100,
     };
+
+
+
+    constructor(private keyFigures : KeyFiguresService)
+    {
+        keyFigures.getKeyFigures()
+            .subscribe(content=>{
+                if(!this.data) {
+                    this.data = {
+                        labels: ["Mitarbeiterzufriedenheit", "Kundenzufriedenheit", "Bekanntheitsgrad", "Image", "Produktqualität"],
+                        datasets: [
+                            {
+                                label: "Kennzahlen",
+                                backgroundColor: "rgba(255,173,41,0.7)",
+                                borderColor: "rgba(255,173,41,1)",
+                                data: [content.mitarbeiterzufriedenheit, content.kundenzufriedenheit, 0, content.image, 0]
+                            }//,
+                            // {
+                            //     label: "kennzahlen des letzten Geschäftsjahres",
+                            //     backgroundColor: "rgba(49,53,61,0.7)",
+                            //     borderColor: "rgba(49,53,61,1)",
+                            //     data: [0, 0, 0, 0,0]
+                            // }
+                        ]
+                    };
+                }else
+                {
+                    this.data.datasets[0].data[0] =content.mitarbeiterzufriedenheit ;
+                    this.data.datasets[0].data[1] =content.kundenzufriedenheit;
+                    this.data.datasets[0].data[3] =content.image ;
+                }
+
+          });
+    }
+    ngOnInit(): void {
+    }
 }

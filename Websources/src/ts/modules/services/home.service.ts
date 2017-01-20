@@ -28,7 +28,6 @@ export class HomeService {
 
 
     getToken() {
-        console.log("Der Token ist : ")
         return window.localStorage.getItem("auth_key");
     }
 
