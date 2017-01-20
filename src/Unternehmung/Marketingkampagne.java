@@ -11,7 +11,7 @@ import java.util.Calendar;
 public class Marketingkampagne {
 
     private String art; // Social Media, Print, Radio oder TV
-    private double impact; // Einfluss auf Bekanntheitsgrad (pro Tag / timer count)
+    private float impact; // Einfluss auf Bekanntheitsgrad (pro Tag / timer count)
     private float kosten; // pro Tag (timer count)
     //private int laufzeit;
     private Calendar beginn;
@@ -32,19 +32,19 @@ public class Marketingkampagne {
     private void setKostenUndImpactByArt(String art){
         switch (art){
             case "Social Media":
-                this.impact = 0.001;
+                this.impact = 0.001f;
                 this.kosten = 10;
                 break;
             case "Print":
-                this.impact = 0.002;
+                this.impact = 0.002f;
                 this.kosten = 50;
                 break;
             case "Radio":
-                this.impact = 0.004;
+                this.impact = 0.004f;
                 this.kosten = 100;
                 break;
             case "TV":
-                this.impact = 0.02;
+                this.impact = 0.02f;
                 this.kosten = 500;
                 break;
         }
@@ -60,11 +60,11 @@ public class Marketingkampagne {
         this.art = art;
     }
 
-    public double getImpact() {
+    public float getImpact() {
         return impact;
     }
 
-    public void setImpact(double impact) {
+    public void setImpact(float impact) {
         this.impact = impact;
     }
 

@@ -75,20 +75,18 @@ public class Marketing extends Abteilung {
     public void update(){
         updateMarketingkampagnen();
         updateMafos();
-        // TODO Kosten weitergeben
-        // TODO impact weitergeben
     }
 
     @Override
     public float getKosten(){
-        float taeglichKosten = 0;
+        float taeglicheKosten = 0;
         for (Map.Entry<String, Marketingkampagne> kampagne : this.kampagnen.entrySet()) {
-            taeglichKosten += kampagne.getValue().getKosten();
+            taeglicheKosten += kampagne.getValue().getKosten();
         }
         for (Map.Entry<Integer, Marktforschung> mafo : this.mafos.entrySet()){
-            taeglichKosten += mafo.getValue().getKosten();
+            taeglicheKosten += mafo.getValue().getKosten();
         }
-        return taeglichKosten;
+        return taeglicheKosten;
     }
 
     // Hilfsmethoden:
@@ -97,8 +95,8 @@ public class Marketing extends Abteilung {
      */
     private void updateMarketingkampagnen() {
         for (Map.Entry<String, Marketingkampagne> kampagne : this.kampagnen.entrySet()) {
+            this.kennzahlensammlung.getBekanntheitsgrad().addModifier(kampagne.getValue().getImpact()); // impact weitergeben
             if (kampagne.getValue().getEnd() == Game.getCalendar()) {
-                // TODO impact weitergeben
                 this.kampagnen.remove(kampagne.getKey());
             }
         }
@@ -110,7 +108,7 @@ public class Marketing extends Abteilung {
     private void updateMafos(){
         for (Map.Entry<Integer, Marktforschung> mafo : this.mafos.entrySet()){
             if (mafo.getValue().getEnd() == Game.getCalendar()){
-                // TODO impact weitergeben
+                this.kennzahlensammlung.getVerkaufswahrscheinlichkeit().addModifier(mafo.getValue().getImpact());
                 this.mafos.remove(mafo.getKey());
             }
         }

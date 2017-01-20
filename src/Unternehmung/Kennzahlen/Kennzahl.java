@@ -50,6 +50,16 @@ public class Kennzahl {
         return getWert();
     }
 
+    /**
+     * setzt den Modifier um den Wert x hoch
+     * @param x zu addierender Wert (z.B. impact einer Marketingkampagne)
+     */
+    public void addModifier(float x) {
+        modifier += x;
+    }
+
+
+
     // Getter und Setter:
     public float getBasiswert() {
         return basiswert;
@@ -63,15 +73,12 @@ public class Kennzahl {
         return modifier;
     }
 
-    public void addModifier(float x)
-    {
-        modifier +=x;
-    }
-
     public float getWert() {
         return (float)(0.5*Math.tanh(4 * wert - 2) + 0.5);
     }
 
-
+    public void setWert(float wert) {
+        this.wert = wert;
+    }
 
 }

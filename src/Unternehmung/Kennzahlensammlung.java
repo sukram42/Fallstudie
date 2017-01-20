@@ -27,11 +27,11 @@ public class Kennzahlensammlung {
     private double marktanteil;
     private double ausschussrate;
     private double reklamationsrate;
-    private double bekanntheitsgrad;
-    private double absatzrate; // Wahrscheinlichkeit, alle seine Produkte zu verkaufen (abhängig von Maßnahmen und zufällige Ereignisse wie z.B. Konjunktur, Werbekampagnen etc.)
+    private Bekanntheitsgrad bekanntheitsgrad;
+    private Verkaufswahrscheinlichkeit verkaufswahrscheinlichkeit; // Wahrscheinlichkeit, Deals für sich zu gewinnen (abhängig von Maßnahmen
     private float liquideMittel;
 
-    private Bilanz bilanz = new Bilanz(unternehmen);
+    private Bilanz bilanz;
     private transient GuV guv;
 
     /**
@@ -41,15 +41,11 @@ public class Kennzahlensammlung {
     public Kennzahlensammlung(Unternehmen unternehmen,float eigenkapital) {
         // TODO alle Defaultwerte definieren (zumindest solche, die nicht 0 sein sollen)
         this.guv = new GuV(unternehmen);
+        this.bilanz = new Bilanz(unternehmen);
         this.getBilanz().setEigenkapital(eigenkapital);
-        this.absatzrate = 0.2;
         this.liquideMittel = eigenkapital;
         this.unternehmen = unternehmen;
-
-        weicheKennzahlen.put("mitarbeiterzufriedenheit",new Mitarbeiterzufriedenheit(unternehmen));
-        weicheKennzahlen.put("kundenzufriedenheit",new Kundenzufriedenheit(unternehmen));
-        weicheKennzahlen.put("image",new Image(unternehmen));
-        weicheKennzahlen.put("produktqualität",new Produktqualität(unternehmen));
+        this.bekanntheitsgrad = new Bekanntheitsgrad(unternehmen);
     }
 
     // Berechnungen:
@@ -59,7 +55,6 @@ public class Kennzahlensammlung {
         {
             kennzahl.berechnen();
         }
-        verkaufsrateBerechnen();
         bilanz.berechnen();
     }
 
@@ -71,19 +66,6 @@ public class Kennzahlensammlung {
             this.liquiditätAnpassen(this.guv.getTaeglicheLiquiditätsveränderung());
         } catch (BankruptException e){
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * Methode, die die Verkaufsrate berechnet (beeinflusst von Bekanntheitsgrad, Image, Kundenzufriedenheit, Mitarbeiterzufriedenheit, ...)
-     * // TODO weitere Kennzahlensammlung mit einrechnen
-     */
-    public void verkaufsrateBerechnen(){
-        double verkaufsrate = this.getBekanntheitsgrad();
-        if(verkaufsrate >= 1){
-            this.setAbsatzrate(1);
-        }else {
-            this.setAbsatzrate(verkaufsrate);
         }
     }
 
@@ -100,24 +82,22 @@ public class Kennzahlensammlung {
         }
     }
 
+    public void initWeicheKennzahlen(){
+        weicheKennzahlen.put("mitarbeiterzufriedenheit",new Mitarbeiterzufriedenheit(unternehmen));
+        weicheKennzahlen.put("kundenzufriedenheit",new Kundenzufriedenheit(unternehmen));
+        weicheKennzahlen.put("image",new Image(unternehmen));
+        weicheKennzahlen.put("produktqualität",new Produktqualität(unternehmen));
+        weicheKennzahlen.put("verkaufswahrscheinlichkeit", new Verkaufswahrscheinlichkeit(unternehmen));
+    }
+
     public Kennzahl getWeicheKennzahl(String kennzahl){
             return weicheKennzahlen.containsKey(kennzahl)?weicheKennzahlen.get(kennzahl):null;
     }
 
 
     // Getter und Setter:
-    public double getBekanntheitsgrad() {
+    public Bekanntheitsgrad getBekanntheitsgrad() {
         return bekanntheitsgrad;
-    }
-
-    public void setBekanntheitsgrad(double bekanntheitsgrad) {
-        if (bekanntheitsgrad >= 1){
-            this.bekanntheitsgrad = 1;
-            this.verkaufsrateBerechnen();
-        }else {
-            this.bekanntheitsgrad = bekanntheitsgrad;
-            this.verkaufsrateBerechnen();
-        }
     }
 
     public  Kennzahl getMitarbeiterzufriedenheit() {
@@ -148,16 +128,8 @@ public class Kennzahlensammlung {
         this.reklamationsrate = reklamationsrate;
     }
 
-    public double getAbsatzrate() {
-        return absatzrate;
-    }
-
-    public void setAbsatzrate(double absatzrate) {
-        if(absatzrate >= 1){
-            this.absatzrate = 1;
-        }else {
-            this.absatzrate = absatzrate;
-        }
+    public Verkaufswahrscheinlichkeit getVerkaufswahrscheinlichkeit() {
+        return verkaufswahrscheinlichkeit;
     }
 
     public double getLiquideMittel() {

@@ -10,7 +10,8 @@ public class Image extends Kennzahl{
 
     public Image(Unternehmen unternehmen) {
         super(unternehmen);
-        setBasiswert(0.1f);
+        this.setBasiswert(0.1f);
+        this.setWert(this.getWert());
     }
     @Override
     public float berechnen() {

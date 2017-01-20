@@ -141,7 +141,6 @@ public class Produktion extends Abteilung {
                     if (produktlinie.getId().equals(bestand.getId()) &&
                              (produktlinie.getProdukt().getHerstellkosten() == bestand.getProdukt().getHerstellkosten())){
                         bestand.setMenge(bestand.getMenge() + auftrag.getMenge());
-                        break;
                     } else { // ansonsten wird die Produktlinie als neuer Posten im Lager hinzugefügt:
                         this.lager.add(produktlinie);
                     }

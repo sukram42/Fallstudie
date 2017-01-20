@@ -12,7 +12,7 @@ public class Marktforschung {
 
     private int umfang; // drei verschieden Stufen
     private float kosten; // pro Tag, je nach umfang (werden pro timer count gezahlt)
-    private double impact; // je nach umfang (wird am Ende der dauer verrechnet)
+    private float impact; // je nach umfang (wird am Ende der dauer verrechnet)
     private Calendar beginn;
     private Calendar end;
 
@@ -26,22 +26,22 @@ public class Marktforschung {
      * @param umfang Auf Basis des Umfangs werden impact, kosten (und dauer) gesetzt
      */
     private void setParamsByUmfang(int umfang){
-        double impact = 0;
+        float impact = 0;
         int kosten = 0;
         int dauer = 0;
         switch (umfang){
             case 1:
-                impact = 0.05;
+                impact = 0.05f;
                 kosten = 50; // pro Tag -> 4500 insgesamt (sind bei jedem Umfang gleich, ein größerer Umfang lohnt sich dadurch, dass der impact am Ende größer ist)
                 dauer = 90; // -> ein Quartal
                 break;
             case 2:
-                impact = 0.12;
+                impact = 0.12f;
                 kosten = 50;
                 dauer = 180;
                 break;
             case 3:
-                impact = 0.30;
+                impact = 0.30f;
                 kosten = 50;
                 dauer = 270;
                 break;
@@ -70,11 +70,11 @@ public class Marktforschung {
         this.kosten = kosten;
     }
 
-    public double getImpact() {
+    public float getImpact() {
         return impact;
     }
 
-    public void setImpact(double impact) {
+    public void setImpact(float impact) {
         this.impact = impact;
     }
 

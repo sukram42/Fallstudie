@@ -49,9 +49,9 @@ public class Game extends TimerTask{
 //                u2++;
 //            }
 //            // Verkaufsrate vergleichen:
-//            if (unternehmen1.getKennzahlensammlung().getAbsatzrate() > unternehmen2.getKennzahlensammlung().getAbsatzrate()){
+//            if (unternehmen1.getKennzahlensammlung().getVerkaufswahrscheinlichkeit() > unternehmen2.getKennzahlensammlung().getVerkaufswahrscheinlichkeit()){
 //                u1++;
-//            }else if (unternehmen1.getKennzahlensammlung().getAbsatzrate() < unternehmen2.getKennzahlensammlung().getAbsatzrate()){
+//            }else if (unternehmen1.getKennzahlensammlung().getVerkaufswahrscheinlichkeit() < unternehmen2.getKennzahlensammlung().getVerkaufswahrscheinlichkeit()){
 //                u2++;
 //            }
 //            // Punkte vergleichen um Gewinner zu ermitteln:
@@ -76,6 +76,30 @@ public class Game extends TimerTask{
                 return u;
         }
         return null;
+    }
+
+    /**
+     * Methode zum Zurückgeben des aktuellen Timervalues
+     * @return Counter value
+     */
+    public static long getTime()
+    {
+        return counter;
+    }
+
+    public static String getTimeString()
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
+        return sdf.format(gameCalendar.getTime());
+    }
+
+    public static Calendar getCalendar()
+    {
+        return gameCalendar;
+    }
+
+    public static void main(String[] args){
+        new Game();
     }
 
     /**
@@ -104,29 +128,6 @@ public class Game extends TimerTask{
 
     public void updateCounter() {
         gameCalendar.add(Calendar.DAY_OF_MONTH, 1);
-    }
-
-    /**
-     * Methode zum Zurückgeben des aktuellen Timervalues
-     * @return Counter value
-     */
-    public static long getTime()
-    {
-        return counter;
-    }
-
-    public static String getTimeString()
-    {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
-        return sdf.format(gameCalendar.getTime());
-    }
-    public static Calendar getCalendar()
-    {
-        return gameCalendar;
-    }
-
-    public static void main(String[] args){
-        new Game();
     }
 
 }

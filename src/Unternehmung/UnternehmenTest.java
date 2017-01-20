@@ -5,7 +5,6 @@ import Exceptions.ZuWenigMitarbeiterOderMaschinenException;
 import Unternehmung.Abteilungen.Marketing;
 import Unternehmung.Abteilungen.Produktion;
 import Unternehmung.Abteilungen.SozialeLeistungen;
-import Unternehmung.Abteilungen.Vertrieb;
 
 /**
  * nur eine Testklasse!
@@ -118,7 +117,7 @@ public class UnternehmenTest {
                 //unternehmen1.getKennzahlensammlung().getHerstellkosten()));
         //System.out.println("Umsatz: " + unternehmen1.getKennzahlensammlung().getBilanz().getGuv().getUmsatz());
         System.out.println("Bekanntheitsgrad: " + unternehmen1.getKennzahlensammlung().getBekanntheitsgrad());
-        System.out.println("Verkaufsrate: " + unternehmen1.getKennzahlensammlung().getAbsatzrate());
+        System.out.println("Verkaufsrate: " + unternehmen1.getKennzahlensammlung().getVerkaufswahrscheinlichkeit());
 
         // Unternehmen 2:
         System.out.println("Das Unternehmen " + unternehmen2.getName() + " hat in diesem Geschäftsjahr ein Ergebnis von " +
@@ -127,7 +126,7 @@ public class UnternehmenTest {
                 //unternehmen2.getKennzahlensammlung().getHerstellkosten()));
         //System.out.println("Umsatz: " + unternehmen2.getKennzahlensammlung().getUmsatz());
         System.out.println("Bekanntheitsgrad: " + unternehmen2.getKennzahlensammlung().getBekanntheitsgrad());
-        System.out.println("Verkaufsrate: " + unternehmen2.getKennzahlensammlung().getAbsatzrate());
+        System.out.println("Verkaufsrate: " + unternehmen2.getKennzahlensammlung().getVerkaufswahrscheinlichkeit());
 
         // Gewinner ermitteln:
 //        Game game = new Game(unternehmen1, unternehmen2);

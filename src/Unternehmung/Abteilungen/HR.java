@@ -29,7 +29,7 @@ public class HR extends Abteilung {
         float gehalt = 0;
         for (Abteilung abteilung : unternehmen.getAbteilungen().values()) {
             for (Mitarbeiter arbeiter : abteilung.getMitarbeiter()) {
-                gehalt += (float) arbeiter.getGehalt();
+                gehalt += (float) arbeiter.getGehalt() / 12;
             }
         }
         return gehalt;
