@@ -8,6 +8,7 @@ import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Kredit;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Klasse, die die Abteilung Finanzen repräsentiert
@@ -65,7 +66,9 @@ public class Finanzen extends Abteilung {
         double tilgung = 0;
         double zinsen = 0;
         for (Kredit kredit : kredite){
-            if (Game.getTime() == kredit.getBeginn() + 360) { // einmal jährlich
+            if (Game.getCalendar().get(Calendar.MONTH) == kredit.getBeginn().get(Calendar.MONTH) &&
+                    Game.getCalendar().get(Calendar.DAY_OF_MONTH) == kredit.getBeginn().get(Calendar.DAY_OF_MONTH) &&
+                    Game.getCalendar().get(Calendar.YEAR) > kredit.getBeginn().get(Calendar.YEAR)){ // einmal im Jahr Zinsen und Tilgung zahlen
                 kredit.update();
                 tilgung += kredit.getTilgung();
                 zinsen += kredit.getZinsen();

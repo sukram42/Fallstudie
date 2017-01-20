@@ -2,20 +2,23 @@ package Unternehmung;
 
 import Rules.Game;
 
+import java.util.Calendar;
+
 /**
  * Tilgungskredit, der über die Abteilung Finanzen aufgenommen werden kann
  * Created by lucadommes on 16.01.2017.
  */
 public class Kredit {
 
-    int laufzeit;
-    int hoehe;
-    double restwert;
-    double zinssatz;
-    double zinsen;
-    double tilgung;
-    double annuität;
-    long beginn;
+    private int laufzeit;
+    private int hoehe;
+    private double restwert;
+    private double zinssatz;
+    private double zinsen;
+    private double tilgung;
+    private double annuität;
+    private Calendar beginn;
+    private Calendar end;
 
     /**
      * Spieler wählt Laufzeit und Höhe des Kredits aus, der Rest wird vorgegeben
@@ -31,7 +34,9 @@ public class Kredit {
         this.zinsen = zinssatz * this.restwert;
         this.tilgung = this.hoehe / this.laufzeit;
         this.annuität = this.tilgung + this.zinsen;
-        this.beginn = Game.getTime();
+        this.beginn = Game.getCalendar();
+        this.end = this.beginn;
+        this.end.add(Calendar.DAY_OF_MONTH, laufzeit);
     }
 
     public void update() {
@@ -95,7 +100,11 @@ public class Kredit {
         return zinsen;
     }
 
-    public long getBeginn() {
+    public Calendar getBeginn() {
         return beginn;
+    }
+
+    public Calendar getEnd() {
+        return end;
     }
 }

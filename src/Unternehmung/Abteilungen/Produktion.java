@@ -3,6 +3,7 @@ package Unternehmung.Abteilungen;
 import Exceptions.BankruptException;
 import Exceptions.ZuWenigMaschinenstellplatzException;
 import Exceptions.ZuWenigMitarbeiterOderMaschinenException;
+import Rules.Game;
 import Unternehmung.*;
 
 import java.util.ArrayList;
@@ -19,8 +20,6 @@ public class Produktion extends Abteilung {
     private ArrayList<Maschine> maschinen = new ArrayList<Maschine>(); // Maschinenpark
     private ArrayList<Halle> produktionshallen = new ArrayList<Halle>();
     private ArrayList<Halle> lagerhallen = new ArrayList<Halle>();
-
-
 
     private ArrayList<Produktlinie> aufträge = new ArrayList<Produktlinie>(); // Produktionsaufträge
     private ArrayList<Produktlinie> lager = new ArrayList<Produktlinie>(); // Lagerbestand
@@ -151,8 +150,7 @@ public class Produktion extends Abteilung {
                 System.out.println("Nicht genügend Lagerfläche vorhanden. Die Produkte gehen verloren.");
                 // TODO Exception notwendig?
             }
-            auftrag.setLaufzeit(auftrag.getLaufzeit() - 1); // Laufzeit herunter setzen
-            if (auftrag.getLaufzeit() == 0){ // falls Laufzeit == 0 Auftrag beenden
+            if (auftrag.getEnd() == Game.getCalendar()){ // falls Laufzeit == 0 Auftrag beenden
                 this.aufträge.remove(auftrag);
             }
         }

@@ -1,10 +1,12 @@
 package Unternehmung.Abteilungen;
 
+import Rules.Game;
 import Unternehmung.Abteilung;
 import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Marketingkampagne;
 import Unternehmung.Marktforschung;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +39,7 @@ public class Marketing extends Abteilung {
             System.out.println("Marketingkampagne \"" + art + "\" gestartet. Kosten: " + kampagne.getKosten()
                     + " € pro Tag, Bekanntheitsgrad steigt um " + kampagne.getImpact());
         } else {
-            this.kampagnen.get(art).setLaufzeit(this.kampagnen.get(art).getLaufzeit() + laufzeit);
+            this.kampagnen.get(art).getEnd().add(Calendar.DAY_OF_MONTH, laufzeit);
             System.out.println("Marketingkampagne \"" + art + "\" wurde verlängert.");
         }
     }
@@ -95,9 +97,7 @@ public class Marketing extends Abteilung {
      */
     private void updateMarketingkampagnen() {
         for (Map.Entry<String, Marketingkampagne> kampagne : this.kampagnen.entrySet()) {
-            int bisherigeLaufzeit = kampagne.getValue().getLaufzeit();
-            kampagne.getValue().setLaufzeit(bisherigeLaufzeit - 1);
-            if (kampagne.getValue().getLaufzeit() == 0) {
+            if (kampagne.getValue().getEnd() == Game.getCalendar()) {
                 // TODO impact weitergeben
                 this.kampagnen.remove(kampagne.getKey());
             }
@@ -109,9 +109,7 @@ public class Marketing extends Abteilung {
      */
     private void updateMafos(){
         for (Map.Entry<Integer, Marktforschung> mafo : this.mafos.entrySet()){
-            int dauer = mafo.getValue().getDauer();
-            mafo.getValue().setDauer(dauer - 1);
-            if (mafo.getValue().getDauer() == 0){
+            if (mafo.getValue().getEnd() == Game.getCalendar()){
                 // TODO impact weitergeben
                 this.mafos.remove(mafo.getKey());
             }

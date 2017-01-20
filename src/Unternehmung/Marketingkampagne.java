@@ -1,19 +1,28 @@
 package Unternehmung;
 
+import Rules.Game;
+
+import java.util.Calendar;
+
 /**
  * Marketingkampagne zum Steigern des Bekanntheitsgrads
  * Created by lucadommes on 15.01.2017.
  */
 public class Marketingkampagne {
 
-    String art; // Social Media, Print, Radio oder TV
-    double impact; // Einfluss auf Bekanntheitsgrad (pro Tag / timer count)
-    float kosten; // pro Tag (timer count)
-    int laufzeit; // in Tagen (timer counts)
+    private String art; // Social Media, Print, Radio oder TV
+    private double impact; // Einfluss auf Bekanntheitsgrad (pro Tag / timer count)
+    private float kosten; // pro Tag (timer count)
+    //private int laufzeit;
+    private Calendar beginn;
+    private Calendar end;
 
     public Marketingkampagne(String art, int laufzeit) {
         this.art = art;
-        this.laufzeit = laufzeit;
+        //this.laufzeit = laufzeit;
+        this.beginn = Game.getCalendar();
+        this.end = this.beginn;
+        this.end.add(Calendar.DAY_OF_MONTH, laufzeit);
         setKostenUndImpactByArt(art);
     }
 
@@ -67,11 +76,15 @@ public class Marketingkampagne {
         this.kosten = kosten;
     }
 
-    public int getLaufzeit() {
-        return laufzeit;
+    public Calendar getBeginn() {
+        return beginn;
     }
 
-    public void setLaufzeit(int laufzeit) {
-        this.laufzeit = laufzeit;
+    public Calendar getEnd() {
+        return end;
+    }
+
+    public void setEnd(Calendar end) {
+        this.end = end;
     }
 }

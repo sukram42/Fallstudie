@@ -1,5 +1,9 @@
 package Unternehmung;
 
+import Rules.Game;
+
+import java.util.Calendar;
+
 /**
  * Klasse die eine Produktlinie repräsentiert
  * Created by lucadommes on 11.01.2017.
@@ -11,6 +15,8 @@ public class Produktlinie {
     private Produkt produkt; // zu produzierendes Produkt
     private int menge; // in der Produktion: zu produzierende Menge pro Periode | im Lager: vorhandene Produkte
     private int laufzeit; // Anzahl der Perioden in denen das Produkt produziert werden soll
+    private Calendar beginn;
+    private Calendar end;
 
     /**
      * Konstruktor, der beim Erstellen eines neuen Produktionsauftrags verwendet wird
@@ -22,6 +28,9 @@ public class Produktlinie {
         this.produkt = produkt;
         this.menge = menge;
         this.laufzeit = laufzeit;
+        this.beginn = Game.getCalendar();
+        this.end = this.beginn;
+        this.end.add(Calendar.DAY_OF_MONTH, laufzeit);
         this.id = produkt.getName() + produkt.getQualitaetsstufe();
     }
 
@@ -68,5 +77,13 @@ public class Produktlinie {
 
     public void setLaufzeit(int laufzeit) {
         this.laufzeit = laufzeit;
+    }
+
+    public Calendar getBeginn() {
+        return beginn;
+    }
+
+    public Calendar getEnd() {
+        return end;
     }
 }

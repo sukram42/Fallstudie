@@ -1,17 +1,23 @@
 package Unternehmung;
 
+import Rules.Game;
+
+import java.util.Calendar;
+
 /**
  * Marktforschungsprojekt
  * Created by lucadommes on 15.01.2017.
  */
 public class Marktforschung {
 
-    int umfang; // drei verschieden Stufen
-    float kosten; // pro Tag, je nach umfang (werden pro timer count gezahlt)
-    double impact; // je nach umfang (wird am Ende der dauer verrechnet)
-    int dauer; // ja nach umfang
+    private int umfang; // drei verschieden Stufen
+    private float kosten; // pro Tag, je nach umfang (werden pro timer count gezahlt)
+    private double impact; // je nach umfang (wird am Ende der dauer verrechnet)
+    private Calendar beginn;
+    private Calendar end;
 
     public Marktforschung(int umfang) {
+        this.beginn = Game.getCalendar();
         this.umfang = umfang;
         setParamsByUmfang(umfang);
     }
@@ -20,23 +26,30 @@ public class Marktforschung {
      * @param umfang Auf Basis des Umfangs werden impact, kosten (und dauer) gesetzt
      */
     private void setParamsByUmfang(int umfang){
+        double impact = 0;
+        int kosten = 0;
+        int dauer = 0;
         switch (umfang){
             case 1:
-                this.impact = 0.05;
-                this.kosten = 50; // pro Tag -> 4500 insgesamt (sind bei jedem Umfang gleich, ein größerer Umfang lohnt sich dadurch, dass der impact am Ende größer ist)
-                this.dauer = 90; // -> ein Quartal
+                impact = 0.05;
+                kosten = 50; // pro Tag -> 4500 insgesamt (sind bei jedem Umfang gleich, ein größerer Umfang lohnt sich dadurch, dass der impact am Ende größer ist)
+                dauer = 90; // -> ein Quartal
                 break;
             case 2:
-                this.impact = 0.12;
-                this.kosten = 50;
-                this.dauer = 180;
+                impact = 0.12;
+                kosten = 50;
+                dauer = 180;
                 break;
             case 3:
-                this.impact = 0.30;
-                this.kosten = 50;
-                this.dauer = 270;
+                impact = 0.30;
+                kosten = 50;
+                dauer = 270;
                 break;
         }
+        this.impact = impact;
+        this.kosten = kosten;
+        this.end = this.beginn;
+        this.end.add(Calendar.DAY_OF_MONTH, dauer);
     }
 
 
@@ -65,11 +78,11 @@ public class Marktforschung {
         this.impact = impact;
     }
 
-    public int getDauer() {
-        return dauer;
+    public Calendar getBeginn() {
+        return beginn;
     }
 
-    public void setDauer(int dauer) {
-        this.dauer = dauer;
+    public Calendar getEnd() {
+        return end;
     }
 }
