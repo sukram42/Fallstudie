@@ -18,7 +18,7 @@ public class UnternehmenTest {
         // Unternehmen erstellen:
         Unternehmen unternehmen1 = new Unternehmen("Unternehmen 1", "kennwort", 1000000);
 
-
+        System.out.println("Liquide Mittel " + unternehmen1.getKennzahlensammlung().getLiquideMittel());
 
         System.out.println("Unternehmen " + unternehmen1.getName() + " mit Eigenkapital in Höhe von " +
                 unternehmen1.getKennzahlensammlung().getBilanz().getEigenkapital() + " und Fremdkapital in Höhe von " +
@@ -79,7 +79,7 @@ public class UnternehmenTest {
                 unternehmen2.getKennzahlensammlung().getBilanz().getFremdkapital() + " gegründet.");
 
         // Mitarbeiter einstellen:
-        unternehmen2.getAbteilung("produktion").addMitarbeiter(1, 25000);
+        unternehmen2.getAbteilung("produktion").addMitarbeiter(10, 25000);
         //unternehmen2.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
 
         // Produktions- und Lagerhalle kaufen:
@@ -134,6 +134,8 @@ public class UnternehmenTest {
         // Gewinner ermitteln:
 //        Game game = new Game(unternehmen1, unternehmen2);
 //        System.out.println(game.gewinnerErmitteln().getName() + " ist der Gewinner!");
+
+        System.out.println("Liquide Mittel " + unternehmen1.getKennzahlensammlung().getLiquideMittel());
 
     }
 }
