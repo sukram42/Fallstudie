@@ -23,17 +23,12 @@ public class Bilanz {
         this.eigenkapital = 100000;
         this.liquideMittel=100000;
 
-
-
-
-
     }
 
     //muss am Ende jedes Jahres ausgeführt werden
     public void berechnen()
     {
        // addEigenkapital(this.guv.jahresUeberschussBerechnen()); -> verschoben in Kennzahlensammlung, weil dort nun die GuV liegt
-
     }
 
     public void addEigenkapital(float jahresueberschuss){

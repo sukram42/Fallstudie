@@ -130,7 +130,7 @@ public class GuV {
     }
 
     public void setJahresUeberschuss(float jahresUeberschuss) {
-        jahresUeberschuss = jahresUeberschuss;
+        this.jahresUeberschuss = jahresUeberschuss;
     }
 
     public float getZinsaufwendungen() {

@@ -85,7 +85,6 @@ public abstract class Abteilung {
 
 	public abstract void update();
 
-
 	/**
 	 * @return Gibt die aktuellen Kosten der Abteilung zurück;
 	 */

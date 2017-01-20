@@ -61,13 +61,12 @@ public class Kennzahlensammlung {
         }
         verkaufsrateBerechnen();
         bilanz.berechnen();
-
     }
 
     public void update()
     {
         berechnen();
-       this.guv.importAufwandUndErlös(); // GuV updaten
+        this.guv.importAufwandUndErlös(); // GuV updaten
         try {
             this.liquiditätAnpassen(this.guv.getTaeglicheLiquiditätsveränderung());
         } catch (BankruptException e){
@@ -124,26 +123,6 @@ public class Kennzahlensammlung {
     public  Kennzahl getMitarbeiterzufriedenheit() {
         return weicheKennzahlen.get("mitarbeiterzufriedenheit");
     }
-
-//    public void setMitarbeiterzufriedenheit( Kennzahl mitarbeiterzufriedenheit) {
-//        this.mitarbeiterzufriedenheit = mitarbeiterzufriedenheit;
-//    }
-
-//    public  Kennzahl getKundenzufriedenheit() {
-//        return kundenzufriedenheit;
-//    }
-//
-//    public void setKundenzufriedenheit( Kennzahl kundenzufriedenheit) {
-//        this.kundenzufriedenheit = kundenzufriedenheit;
-//    }
-
-//    public  Kennzahl getImage() {
-//        return image;
-//    }
-
-//    public void setImage( Kennzahl image) {
-//        this.image = image;
-//    }
 
     public double getMarktanteil() {
         return marktanteil;

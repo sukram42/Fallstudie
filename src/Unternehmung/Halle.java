@@ -9,7 +9,7 @@ public class Halle {
     private String halle; // Art der Halle (Lager- oder Produktionshalle)
     private int größe; // 1, 2 oder 3
     private int kapazität; // abhängig von der Größe (Maschinenkapazität oder Lagerfläche)
-    private double preis; // Kaufpreis, abhängig von der Größe
+    private float preis; // Kaufpreis, abhängig von der Größe
 
     public Halle(String halle, int größe) {
         this.halle = halle;
@@ -64,7 +64,7 @@ public class Halle {
         return kapazität;
     }
 
-    public double getPreis() {
+    public float getPreis() {
         return preis;
     }
 }

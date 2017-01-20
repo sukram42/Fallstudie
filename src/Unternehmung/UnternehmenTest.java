@@ -34,8 +34,6 @@ public class UnternehmenTest {
         System.out.println("Image: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("image").berechnen());
         System.out.println("Produktqualität: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("produktqualität").berechnen());
 
-
-
         // Mitarbeiter einstellen:
         unternehmen1.getAbteilung("produktion").addMitarbeiter(1, 25000);
         //unternehmen1.getAbteilung("vertrieb").addMitarbeiter(1, 35000);

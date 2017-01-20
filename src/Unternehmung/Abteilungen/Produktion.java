@@ -75,7 +75,7 @@ public class Produktion extends Abteilung {
         // prüfen, ob genügend Fläche (= Produktionshalle) für neue Maschine(n) vorhanden ist:
         if (getFreienProduktionshallenPlatz() >= anzahl) {
             try {
-                kennzahlensammlung.liquiditätAnpassen(anschaffungskst * anzahl);
+                kennzahlensammlung.liquiditätAnpassen(-1*(anschaffungskst * anzahl));
                 maschinen.add(m);
                 for (int i = 1; i < anzahl; i++) {
                     Maschine n = new Maschine(produkt, klasse);
@@ -94,7 +94,7 @@ public class Produktion extends Abteilung {
     public void produktionshalleKaufen(int größe){
         Halle halle = new Halle("Produktionshalle", größe);
         try{
-            kennzahlensammlung.liquiditätAnpassen((float) halle.getPreis());
+            kennzahlensammlung.liquiditätAnpassen((-1f)*halle.getPreis());
             this.produktionshallen.add(halle);
             System.out.println("Produktionshalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
         } catch (BankruptException e) {
@@ -105,7 +105,7 @@ public class Produktion extends Abteilung {
     public void lagerhalleKaufen(int größe){
         Halle halle = new Halle("Lagerhalle", größe);
         try{
-            kennzahlensammlung.liquiditätAnpassen((float) halle.getPreis());
+            kennzahlensammlung.liquiditätAnpassen(-1f* halle.getPreis());
             this.lagerhallen.add(halle);
             System.out.println("Lagerhalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
         } catch (BankruptException e) {
@@ -119,7 +119,7 @@ public class Produktion extends Abteilung {
     @Override
     public void update(){
         try {
-            this.kennzahlensammlung.liquiditätAnpassen(getTaeglicheEnergiekosten() + getTaeglicheHerstellkosten());
+            this.kennzahlensammlung.liquiditätAnpassen(-1f *(getTaeglicheEnergiekosten() + getTaeglicheHerstellkosten()));
         } catch (BankruptException e){
             e.printStackTrace();
         }
