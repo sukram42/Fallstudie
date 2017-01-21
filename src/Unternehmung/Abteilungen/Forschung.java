@@ -18,7 +18,7 @@ public class Forschung extends Abteilung{
     private Map<String, Double> imageBoni = new HashMap<>();
     private ArrayList<String> verfügbareProdukte; //um bereits beforschte Produkte reduzieren
     private ArrayList<String> beforschteProdukte = new ArrayList<>();
-    private int verfügbareMitarbeiter;
+    private int beschäftigteMitarbeiter;
     private ArrayList<Forschungsprojekt> projekte = new ArrayList<>();
     private Produktion produktion;
 
@@ -62,8 +62,8 @@ public class Forschung extends Abteilung{
     }
 
     public void starteProjekt(Produktion produktion, Forschung forschung, String forschungsobjekt, int mitarbeiterAnzahl, long dauer, boolean herstellkosten, Kennzahlensammlung kennzahlensammlung){
-        if((verfügbareMitarbeiter -= mitarbeiterAnzahl) >= 0) { //Überprüfung, ob es genügend Mitarbeiter gibt
-            verfügbareMitarbeiter -= mitarbeiterAnzahl;
+        if((beschäftigteMitarbeiter + mitarbeiterAnzahl) <= this.getMitarbeiterAnzahl()) { //Überprüfung, ob es genügend Mitarbeiter gibt
+            beschäftigteMitarbeiter =+ mitarbeiterAnzahl;
             Forschungsprojekt forschungsprojekt = new Forschungsprojekt(produktion, forschung, forschungsobjekt, mitarbeiterAnzahl, dauer, herstellkosten);
             beforschteProdukte.add(forschungsobjekt);
             projekte.add(forschungsprojekt);
@@ -80,7 +80,7 @@ public ArrayList<Forschungsprojekt> getProjekte(){
         if(projekte.contains(forschungsprojekt)) {
             forschungsprojekt.abbrechen();
             beforschteProdukte.remove(forschungsprojekt.getForschungsobjekt());
-            verfügbareMitarbeiter += forschungsprojekt.getMitarbeiterAnzahl();
+            beschäftigteMitarbeiter -= forschungsprojekt.getMitarbeiterAnzahl();
             projekte.remove(forschungsprojekt);
         }
     }
@@ -89,7 +89,7 @@ public ArrayList<Forschungsprojekt> getProjekte(){
         if(projekte.contains(forschungsprojekt)) {
             forschungsprojekt.abschließen();
             beforschteProdukte.remove(forschungsprojekt.getForschungsobjekt());
-            verfügbareMitarbeiter += forschungsprojekt.getMitarbeiterAnzahl();
+            beschäftigteMitarbeiter -= forschungsprojekt.getMitarbeiterAnzahl();
             projekte.remove(forschungsprojekt);
         }
                 }
@@ -102,6 +102,9 @@ public ArrayList<String> getVerfügbareProdukte() {
         return verfügbareProdukte;
 }
 
+public void addMitarbeiter(){
+
+}
 
 public void update() {
     for (Forschungsprojekt projekt : projekte) {
