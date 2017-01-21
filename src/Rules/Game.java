@@ -1,5 +1,7 @@
 package Rules;
 
+import Unternehmung.Abteilungen.Vertrieb;
+import Unternehmung.Ausschreibung;
 import Unternehmung.Unternehmen;
 
 import java.text.SimpleDateFormat;
@@ -19,6 +21,7 @@ public class Game extends TimerTask{
     private static int day,mounth,quarter,year = 1;
 
     private static ArrayList<Unternehmen> companies = new ArrayList<>();
+    private static ArrayList<Ausschreibung> ausschreibungen = new ArrayList<Ausschreibung>();
 
     /**
      * Konstruktor für ein Spiel mit 2 Spielern
@@ -102,6 +105,11 @@ public class Game extends TimerTask{
         new Game();
     }
 
+    // Getter und Setter:
+    public static ArrayList<Ausschreibung> getAusschreibungen() {
+        return ausschreibungen;
+    }
+
     /**
      * Wird nach jedem Zyklus ausgeführt.
      */
@@ -124,6 +132,51 @@ public class Game extends TimerTask{
             }
         }
 
+        updateAusschreibungen();
+
+    }
+
+    /**
+     * legt am ersten Tag jedes Monats fest, wer den Zuschlag bekommt, löscht dann alle Ausschreibungen und generiert neue
+     */
+    private void updateAusschreibungen(){
+        if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == 1){
+            // Entscheidung über Zuschlag basierend auf der Kennzahl der Verkaufswahrscheinlichkeit:
+            for (int i = 0; i < ausschreibungen.size(); i++){
+                // eine Map mit allen Unternehmen, die sich auf die Ausschreibung beworben haben erstellen:
+                Map<Unternehmen, Float> bewerber = new HashMap<Unternehmen, Float>();
+                for (Unternehmen unternehmen : companies){
+                    Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
+                    if (vertrieb.getOpportunities().get(i) != null){
+                        bewerber.put(unternehmen, unternehmen.getKennzahlensammlung().getVerkaufswahrscheinlichkeit().getWert());
+                    }
+                }
+                // das Unternehmen mit der höchsten Verkaufswahrscheinlichkeit finden
+                float max = -1;
+                for (Map.Entry<Unternehmen, Float> b : bewerber.entrySet()){
+                    if (b.getValue() > max){
+                        max = b.getValue();
+                    }
+                }
+                // Zuschlag geben:
+                for (Map.Entry<Unternehmen, Float> b : bewerber.entrySet()){
+                    if (b.getValue() == max){
+                        Vertrieb vertrieb = (Vertrieb) b.getKey().getAbteilung("vertrieb");
+                        vertrieb.zuschlagBekommen(i);
+                    }
+                }
+            }
+            // alte Ausschreibugnen löschen:
+            for (int i = 0; i < ausschreibungen.size(); i++){
+                ausschreibungen.remove(i);
+            }
+            // neue Ausschreibungen generieren:
+            Random random = new Random();
+            int anzahlAusschreibungen = random.nextInt(10) + 8;
+            for (int i = 1; i <= anzahlAusschreibungen; i++){
+                ausschreibungen.add(new Ausschreibung());
+            }
+        }
     }
 
     public void updateCounter() {

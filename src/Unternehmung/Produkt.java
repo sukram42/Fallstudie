@@ -13,16 +13,26 @@ public class Produkt {
     //private double preis; // Verkaufspreis
 
     /**
-     * Konstruktor zum Erstellen eines noch nicht produzierten Produktes (also einer noch nicht vorhandenen Kombination von name und qualitaetsstufe)
-     * herstellkosten werden generiert
+     * Konstruktor zum Erstellen eines Produktes (Herstellkosten werden generiert) in der Produktion
      * @param name Produktname: "Rucksack", "Rucksacktech", "Duffel" oder "Reisetasche"
      * @param qualitaetsstufe A, B oder C
+     * @param forschungsbonus wird in Produktion in der Liste nachgesehen
      */
     public Produkt(String name, char qualitaetsstufe, double forschungsbonus) {
         this.name = name;
         this.qualitaetsstufe = qualitaetsstufe;
         this.forschungsbonus = forschungsbonus;
         this.herstellkosten = findHerstellkosten(name, qualitaetsstufe) * forschungsbonus;
+    }
+
+    /**
+     * Konstrukor zum Erstellen eines Produktes in Ausschreibungen
+     * @param name Produktname: "Rucksack", "Rucksacktech", "Duffel" oder "Reisetasche"
+     * @param qualitaetsstufe A, B oder C
+     */
+    public Produkt(String name, char qualitaetsstufe) {
+        this.name = name;
+        this.qualitaetsstufe = qualitaetsstufe;
     }
 
     /**

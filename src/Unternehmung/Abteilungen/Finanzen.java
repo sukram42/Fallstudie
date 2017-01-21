@@ -81,7 +81,7 @@ public class Finanzen extends Abteilung {
             // Zinsen an GuV weitergeben:
             this.kennzahlensammlung.getGuv().addZinsaufwendungen((float) zinsen);
             // liquide Mittel und FK anpassen:
-            this.kennzahlensammlung.liquiditätAnpassen((float) (tilgung + zinsen));
+            this.kennzahlensammlung.liquiditätAnpassen((float) - (tilgung + zinsen));
             this.kennzahlensammlung.getBilanz().setFremdkapital(this.kennzahlensammlung.getBilanz().getFremdkapital() - (float) tilgung);
         } catch (BankruptException e){
             e.printStackTrace();

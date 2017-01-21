@@ -69,7 +69,7 @@ public class GuV {
      * @return tägliche Liquiditätsveränderung
      */
     public float getTaeglicheLiquiditätsveränderung(){
-        float kosten = 0;
+        float kosten;
         float gehälter = 0;
         float umsatz = 0; // TODO Umsatz ergänzen, wenn Sales-Klasse steht:
 

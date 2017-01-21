@@ -1,30 +1,46 @@
 package Unternehmung.Abteilungen;
 
-import Unternehmung.Abteilung;
-import Unternehmung.Kennzahlensammlung;
-import Unternehmung.Produkt;
-import Unternehmung.Vertrag;
+import Exceptions.ZuWenigMitarbeiterException;
+import Rules.Game;
+import Unternehmung.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Abteilung, die für Vertrieb zuständig ist
- * die Map verkaufteProdukte enthält alle bereits verkauften Produkte (relevant für Umsatzberechnung!)
  * Created by lucadommes on 30.12.2016.
  */
 public class Vertrieb extends Abteilung {
-    public List<Vertrag> opportunities;
-    public List<Vertrag> accounts;
+
+    private Map<Integer, Ausschreibung> opportunities;
+    private List<Vertrag> accounts;
 
 
     public Vertrieb(Kennzahlensammlung kennzahlensammlung) {
-
         super("Vertrieb",kennzahlensammlung);
-        opportunities = new ArrayList<>();
+        opportunities = new HashMap<>();
         accounts = new ArrayList<>();
+    }
+
+    /**
+     * speichert ein Ausschreibungsobjekt mit dem index, in dem es in Game.ausschreibungen gespeichert ist ab (sofern genug Mitarbeiter vorhanden -> ein Mitarbeiter pro Bewerbung nötig)
+     * @param index unter dem die Ausschreibung in der ArrayList ausschreibungen in der Klasse Game abgelegt ist
+     */
+    public void bewerben(int index) throws ZuWenigMitarbeiterException{
+        if (this.mitarbeiter.size() > opportunities.size()) {
+            ArrayList<Ausschreibung> ausschreibungen = Game.getAusschreibungen();
+            opportunities.put(index, ausschreibungen.get(index));
+        } else {
+            throw new ZuWenigMitarbeiterException("Vertrieb");
+        }
+    }
+
+    /**
+     * wird aufgerufen von Game.updateAusschreibungen, wenn das Unternehmen den Zuschlag bekommt
+     * @param index unter dem die Ausschreibung in der Game.ausschreibungen und in opportunities abgelegt ist
+     */
+    public void zuschlagBekommen(int index){
+        accounts.add(opportunities.get(index).getVertrag());
     }
 
    @Override
@@ -32,8 +48,14 @@ public class Vertrieb extends Abteilung {
 
     }
 
-    // TODO implement this
 
+    // Getter und Setter:
+    public Map<Integer, Ausschreibung> getOpportunities() {
+        return opportunities;
+    }
 
+    public List<Vertrag> getAccounts() {
+        return accounts;
+    }
 
 }
