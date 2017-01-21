@@ -24,13 +24,13 @@ public class BilanzTest extends TestCase{
 /*
     @Test
     public void berechnen() throws Exception {
-testBilanz.getGuv().jahresUeberschussBerechnen();
+testBilanz.getGuv().jahresabschluss();
     }
    */
 
     @Test
     public void addEigenkapital() throws Exception {
-        testBilanz.addEigenkapital(1000);
+        testBilanz.eigenkapitalAnpassen(1000);
         assertEquals(testBilanz.getEigenkapital(), 100000 + 1000);
     }
 

@@ -67,6 +67,10 @@ public class Vertrag {
         return laufzeit;
     }
 
+    public void setLaufzeit(int laufzeit) {
+        this.laufzeit = laufzeit;
+    }
+
     public Calendar getBeginn() {
         return beginn;
     }
@@ -75,4 +79,7 @@ public class Vertrag {
         return end;
     }
 
+    public void setEnd(Calendar end) {
+        this.end = end;
+    }
 }

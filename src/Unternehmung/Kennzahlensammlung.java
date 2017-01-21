@@ -63,7 +63,7 @@ public class Kennzahlensammlung {
         berechnen();
         this.guv.importAufwandUndErlös(); // GuV updaten
         try {
-            this.liquiditätAnpassen(this.guv.getTaeglicheLiquiditätsveränderung());
+            this.liquiditaetAnpassen(this.guv.getTaeglicheLiquiditätsveränderung());
         } catch (BankruptException e){
             e.printStackTrace();
         }
@@ -74,7 +74,7 @@ public class Kennzahlensammlung {
      * wird außerdem aufgerufen, wenn einmalige Liquiditätsveränderungen statt finden (z.B. Kauf einer Maschine oder einmaliger Umsatzerlös)
      * @param liquiditätsVeränderung berechnet von GuV.getTaeglicheLiquiditätsveränderung
      */
-    public void liquiditätAnpassen(float liquiditätsVeränderung) throws BankruptException {
+    public void liquiditaetAnpassen(float liquiditätsVeränderung) throws BankruptException {
         if (this.liquideMittel * -1 <= liquiditätsVeränderung){
             this.setLiquideMittel(this.liquideMittel + liquiditätsVeränderung);
         } else {

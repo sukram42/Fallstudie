@@ -22,6 +22,7 @@ public class GuV {
     private float aufwendungenFuerSozialeLeistungen;
     private float zinsaufwendungen;
     private float fremdinstandhaltung;
+    private float geleisteterSchadensersatz;
 
     //Erlöse
     private float umsatzErlöse;
@@ -34,10 +35,9 @@ public class GuV {
         this.unternehmen = unternehmen;
     }
 
-    public float jahresUeberschussBerechnen(){
+    public void jahresabschluss(Bilanz bilanz){
         this.jahresUeberschuss=(this.umsatzErlöse - (this.aufwendungenFuerEnergie + this.aufwendungenFuerGehaelter +
                 this.aufwendungenFuerRohstoffe + this.aufwendungenFuerWerbung + this.zinsaufwendungen + this.fremdinstandhaltung));
-        float x = jahresUeberschuss;
         this.setAufwendungenFuerEnergie(0);
         this.setAufwendungenFuerGehaelter(0);
         this.setAufwendungenFuerWerbung(0);
@@ -45,7 +45,7 @@ public class GuV {
         this.setUmsatzErlöse(0);
         this.setZinsaufwendungen(0);
         this.setFremdinstandhaltung(0);
-        return x;
+        bilanz.eigenkapitalAnpassen(jahresUeberschuss);
     }
 
     /**
@@ -93,6 +93,14 @@ public class GuV {
 
     public void addFremdinstandhaltung(float fremdinstandhaltung){
         this.fremdinstandhaltung += fremdinstandhaltung;
+    }
+
+    public void addUmsatz(float umsatz){
+        this.umsatzErlöse += umsatz;
+    }
+
+    public void addGeleisteterSchandsersatz(float schadensersatz){
+        this.geleisteterSchadensersatz = schadensersatz;
     }
 
 
@@ -152,5 +160,13 @@ public class GuV {
 
     public void setFremdinstandhaltung(float fremdinstandhaltung) {
         this.fremdinstandhaltung = fremdinstandhaltung;
+    }
+
+    public float getGeleisteterSchadensersatz() {
+        return geleisteterSchadensersatz;
+    }
+
+    public void setGeleisteterSchadensersatz(float geleisteterSchadensersatz) {
+        this.geleisteterSchadensersatz = geleisteterSchadensersatz;
     }
 }
