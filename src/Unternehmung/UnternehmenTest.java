@@ -1,6 +1,7 @@
 package Unternehmung;
 
 import Exceptions.ZuWenigMaschinenstellplatzException;
+import Exceptions.ZuWenigMitarbeiterException;
 import Exceptions.ZuWenigMitarbeiterOderMaschinenException;
 import Unternehmung.Abteilungen.Marketing;
 import Unternehmung.Abteilungen.Produktion;
@@ -17,15 +18,18 @@ public class UnternehmenTest {
         // Unternehmen erstellen:
         Unternehmen unternehmen1 = new Unternehmen("Unternehmen 1", "kennwort", 1000000);
 
-        System.out.println("Liquide Mittel " + unternehmen1.getKennzahlensammlung().getLiquideMittel());
+        System.out.println("Liquide Mittel " + unternehmen1.getKennzahlensammlung().getBilanz().getLiquideMittel());
 
         System.out.println("Unternehmen " + unternehmen1.getName() + " mit Eigenkapital in Höhe von " +
                 unternehmen1.getKennzahlensammlung().getBilanz().getEigenkapital() + " und Fremdkapital in Höhe von " +
                 unternehmen1.getKennzahlensammlung().getBilanz().getFremdkapital() + " gegründet.");
 
-
-        unternehmen1.getAbteilung("hr").addMitarbeiter(2,2500);
-        System.out.println("Mitarbeiterzufriedenheit : " + unternehmen1.getKennzahlensammlung().getMitarbeiterzufriedenheit().berechnen());
+        try {
+            unternehmen1.getAbteilung("hr").addMitarbeiter(2, 2500);
+            System.out.println("Mitarbeiterzufriedenheit : " + unternehmen1.getKennzahlensammlung().getMitarbeiterzufriedenheit().berechnen());
+        } catch (ZuWenigMitarbeiterException e){
+            e.printStackTrace();
+        }
 
         ((SozialeLeistungen)unternehmen1.getAbteilung("sozialeLeistungen")).startProjekt("kantine");
         System.out.println("Mitarbeiterzufriedenheit mit Kantine: " + unternehmen1.getKennzahlensammlung().getMitarbeiterzufriedenheit().berechnen());
@@ -34,7 +38,11 @@ public class UnternehmenTest {
         System.out.println("Produktqualität: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("produktqualität").berechnen());
 
         // Mitarbeiter einstellen:
-        unternehmen1.getAbteilung("produktion").addMitarbeiter(1, 25000);
+        try {
+            unternehmen1.getAbteilung("produktion").addMitarbeiter(1, 25000);
+        } catch (ZuWenigMitarbeiterException e){
+            e.printStackTrace();
+        }
         //unternehmen1.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
 
         // Produktions- und Lagerhalle kaufen:
@@ -76,8 +84,12 @@ public class UnternehmenTest {
                 unternehmen2.getKennzahlensammlung().getBilanz().getFremdkapital() + " gegründet.");
 
         // Mitarbeiter einstellen:
-        unternehmen2.getAbteilung("produktion").addMitarbeiter(10, 25000);
-        //unternehmen2.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
+        try {
+            unternehmen2.getAbteilung("produktion").addMitarbeiter(10, 25000);
+            //unternehmen2.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
+        } catch (ZuWenigMitarbeiterException e){
+            e.printStackTrace();
+        }
 
         // Produktions- und Lagerhalle kaufen:
         Produktion produktion2 = (Produktion) unternehmen1.getAbteilung("produktion");
@@ -120,7 +132,7 @@ public class UnternehmenTest {
                 //unternehmen1.getKennzahlensammlung().getHerstellkosten()));
         //System.out.println("Umsatz: " + unternehmen1.getKennzahlensammlung().getBilanz().getGuv().getUmsatz());
         System.out.println("Bekanntheitsgrad: " + unternehmen1.getKennzahlensammlung().getBekanntheitsgrad());
-        System.out.println("Verkaufsrate: " + unternehmen1.getKennzahlensammlung().getVerkaufswahrscheinlichkeit());
+        System.out.println("Verkaufsrate: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert());
 
         // Unternehmen 2:
         System.out.println("Das Unternehmen " + unternehmen2.getName() + " hat in diesem Geschäftsjahr ein Ergebnis von " +
@@ -129,13 +141,13 @@ public class UnternehmenTest {
                 //unternehmen2.getKennzahlensammlung().getHerstellkosten()));
         //System.out.println("Umsatz: " + unternehmen2.getKennzahlensammlung().getUmsatz());
         System.out.println("Bekanntheitsgrad: " + unternehmen2.getKennzahlensammlung().getBekanntheitsgrad());
-        System.out.println("Verkaufsrate: " + unternehmen2.getKennzahlensammlung().getVerkaufswahrscheinlichkeit());
+        System.out.println("Verkaufsrate: " + unternehmen2.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert());
 
         // Gewinner ermitteln:
 //        Game game = new Game(unternehmen1, unternehmen2);
 //        System.out.println(game.gewinnerErmitteln().getName() + " ist der Gewinner!");
 
-        System.out.println("Liquide Mittel " + unternehmen1.getKennzahlensammlung().getLiquideMittel());
+        System.out.println("Liquide Mittel " + unternehmen1.getKennzahlensammlung().getBilanz().getLiquideMittel());
 
     }
 }

@@ -2,14 +2,17 @@ package Unternehmung.Abteilungen;
 
 import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Unternehmen;
-import junit.framework.TestCase;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by D064018 on 16.01.2017.
  */
-public class HRTest extends TestCase {
+public class HRTest {
 
     private HR testHR;
     private Kennzahlensammlung kennzahlensammlung;
@@ -26,13 +29,13 @@ public class HRTest extends TestCase {
     @Test
     public void getTotalGehalt() throws Exception {
         unternehmen.getAbteilung("produktion").addMitarbeiter(1, 10000);
-        assertEquals(testHR.getTotalGehalt(), 10000);
+        assertEquals(testHR.getTotalGehalt(), 10000, 0.5);
     }
 
     @Test
     public void getDurchschnittlichesGehalt() throws Exception {
         unternehmen.getAbteilung("produktion").addMitarbeiter(2, 10000);
-        assertEquals(testHR.getDurchschnittlichesGehalt(), 10000);
+        assertEquals(testHR.getDurchschnittlichesGehalt(), 10000, 0.5);
     }
 
     @Test
@@ -49,6 +52,11 @@ public class HRTest extends TestCase {
 
     @Test
     public void update() throws Exception {
+
+    }
+
+    @After
+    public void tearDown() throws Exception {
 
     }
 

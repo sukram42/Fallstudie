@@ -1,5 +1,6 @@
 package com.fallstudie.Interface;
 
+import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilung;
 import Unternehmung.Abteilungen.HR;
@@ -25,6 +26,11 @@ public class CompanyInterface {
 
     private static Gson gson = new Gson();
 
+    public static Unternehmen getCompanyFromContext(SecurityContext context) {
+
+        return context!=null?Game.getUnternehmenByName(context.getUserPrincipal().getName()):null;
+    }
+
     /**
      * Erstellt eine neue Company
      * Erwartet einen JSON Code
@@ -48,7 +54,6 @@ public class CompanyInterface {
         return Response.status(218).entity(company.toString()).build();
     }
 
-
     /**
      * Gibt das Unternehmen zurück, dessen Token man im Header trägt.
      *
@@ -69,7 +74,6 @@ public class CompanyInterface {
         ArrayList<Mitarbeiter> mitarbeiter = ((HR)unternehmen.getAbteilung("hr")).getTotalMitarbeiter();
         return Response.ok(gson.toJson(mitarbeiter)).build();
     }
-
 
     @Secured
     @GET
@@ -92,7 +96,11 @@ public class CompanyInterface {
         Abteilung abteilung1 = unternehmen.getAbteilung(object.get("abteilung").getAsString().toLowerCase());
         if(abteilung1 != null)
         {
-            abteilung1.addMitarbeiter(object.get("anzahl").getAsInt(),object.get("gehalt").getAsInt());
+            try {
+                abteilung1.addMitarbeiter(object.get("anzahl").getAsInt(), object.get("gehalt").getAsInt());
+            } catch (ZuWenigMitarbeiterException e){
+                e.printStackTrace();
+            }
         }
         else
             return Response.serverError().entity("Abteilung nicht vorhanden").build();
@@ -155,11 +163,6 @@ public class CompanyInterface {
         object.put("image",ks.getWeicheKennzahl("image").berechnen()*100f);
         object.put("kundenzufriedenheit",ks.getWeicheKennzahl("kundenzufriedenheit").berechnen()*100f);
        return Response.ok().entity(gson.toJson(object)).build();
-    }
-
-    public static Unternehmen getCompanyFromContext(SecurityContext context) {
-
-        return context!=null?Game.getUnternehmenByName(context.getUserPrincipal().getName()):null;
     }
 
     @PUT

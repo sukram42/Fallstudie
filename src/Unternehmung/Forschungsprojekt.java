@@ -41,7 +41,7 @@ public class Forschungsprojekt {
 
         }else{
             double bonus = forschung.getImagebonusById(forschungsobjekt);
-            // (Game.getTime() - beginn) * mitarbeiterAnzahl * abbruchFaktor * mitarbeiterZufriedenheit * irgendeinFaktor;
+            // abbruchFaktor * (Game.getTime() - beginn) * mitarbeiterAnzahl  * mitarbeiterZufriedenheit * irgendeinFaktor;
             forschung.setImagebonus(forschungsobjekt, bonus);
         }
     }
@@ -49,13 +49,13 @@ public class Forschungsprojekt {
     public void abschließen(){
         if(herstellkosten){
             double bonus = produktion.getForschungsbonusById(forschungsobjekt);
-            //  bonus += produktKosten * (Game.getTime() - beginn) * mitarbeiterAnzahl * mitarbeiterZufriedenheit * irgendeinFaktor;
+            //  bonus += (Game.getTime() - beginn) * mitarbeiterAnzahl * mitarbeiterZufriedenheit * irgendeinFaktor;
             produktion.setForschungsbonus(forschungsobjekt, bonus);
         }else{
-        //Kundenzufriedenheit erhöhen
-double bonus = forschung.getImagebonusById(forschungsobjekt);
-           // (Game.getTime() - beginn) * mitarbeiterAnzahl * mitarbeiterZufriedenheit * irgendeinFaktor;
-        forschung.setImagebonus(forschungsobjekt, bonus);
+            //Kundenzufriedenheit erhöhen
+            double bonus = forschung.getImagebonusById(forschungsobjekt);
+            // (Game.getTime() - beginn) * mitarbeiterAnzahl * mitarbeiterZufriedenheit * irgendeinFaktor;
+            forschung.setImagebonus(forschungsobjekt, bonus);
         }
     }
 

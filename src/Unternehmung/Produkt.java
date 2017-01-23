@@ -41,6 +41,7 @@ public class Produkt {
      * @param qualitaetsstufe der Qualitätsstufe (z.B. A-Produkt)
      * @return Herstellkosten des Produktes
      */
+
     private double findHerstellkosten(String name, char qualitaetsstufe){
         switch (name) {
             // TODO realistische / zum Spiel passende Zahlen einsetzen
