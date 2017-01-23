@@ -1,9 +1,12 @@
 package Unternehmung;
 
+import Rules.Game;
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Calendar;
 
 import static org.junit.Assert.*;
 
@@ -15,20 +18,27 @@ public class VertragTest extends TestCase{
     private float preis;
     private float strafe;
     private String kunde;
+    private int laufzeit;
+    private Calendar beginn;
+    private Calendar end;
 
     private Vertrag testVertrag;
 
     public void setUp() throws Exception {
         produktlinie = new Produktlinie(new Produkt("Duffel", 'B', 0.1), 10000, 1);
         preis = 100000;
-        strafe = 50000;
+        strafe = preis * 0.75f;
         kunde = "Kunde AG";
+        laufzeit = 1;
+        beginn = Game.getCalendar();
+        end = beginn;
+        end.add(Calendar.MONTH, laufzeit);
+
     }
 
     @Before
-    @Before
     public void testcreateVertrag(){
-        testVertrag = new Vertrag( produktlinie,kunde);
+        testVertrag = new Vertrag( produktlinie,preis,kunde, laufzeit);
         assertNotNull(testVertrag);
     }
 
@@ -84,5 +94,36 @@ public class VertragTest extends TestCase{
         testVertrag.setKunde(neuerKunde);
         assertEquals(testVertrag.getKunde(),neuerKunde);
     }
+
+    @Test
+    public void getLaufzeit() throws Exception {
+        assertEquals(testVertrag.getLaufzeit(), laufzeit);
+    }
+
+    @Test
+    public void setLaufzeit() throws Exception {
+        int neueLaufzeit = 2;
+        testVertrag.setLaufzeit(neueLaufzeit);
+        assertEquals(testVertrag.getLaufzeit(),neueLaufzeit);
+    }
+
+    @Test
+    public void getBeginn() throws Exception {
+        assertEquals(testVertrag.getBeginn(), beginn);
+    }
+
+    @Test
+    public void getEnd() throws Exception {
+        assertEquals(testVertrag.getEnd(), end);
+    }
+
+    @Test
+    public void setEnd() throws Exception {
+        Calendar neuesEnde= testVertrag.getEnd();
+        neuesEnde.add(Calendar.MONTH, 2);
+        testVertrag.setEnd(neuesEnde);
+        assertEquals(testVertrag.getEnd(),neuesEnde);
+    }
+
 
 }
