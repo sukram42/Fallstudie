@@ -95,15 +95,11 @@ public ArrayList<Forschungsprojekt> getProjekte(){
                 }
 
 public ArrayList<String> getVerfügbareProdukte() {
-        //Produkte, an denen bereits geforscht wird, aussondern
-        for(String produkt : beforschteProdukte){
+    //Produkte, an denen bereits geforscht wird, aussondern
+    for (String produkt : beforschteProdukte) {
         verfügbareProdukte.remove(produkt);
-        }
-        return verfügbareProdukte;
-}
-
-public void addMitarbeiter(){
-
+    }
+    return verfügbareProdukte;
 }
 
 public void update() {
@@ -112,6 +108,5 @@ public void update() {
             projekt.abschließen();
         }
     }
-
 }
 }

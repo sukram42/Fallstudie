@@ -1,41 +1,43 @@
 package Unternehmung;
 
-import junit.framework.TestCase;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by D064018 on 11.01.2017.
  */
 
-public class MaschineTest extends TestCase{
-
+public class MaschineTest{
 
     private Maschine testMaschine;
 
     @Before
-    public void testCreateMaschine() {
+    public void setUp() {
         testMaschine = new Maschine("Rucksack", 2);
-        org.junit.Assert.assertNotNull(testMaschine);
+    assertNotNull(testMaschine);
     }
 
     @Test
     public void testGetKlasse(){
-        org.junit.Assert.assertEquals( testMaschine.getKlasse(), 2);
+       assertEquals( testMaschine.getKlasse(), 2);
     }
 
     @Test
     public void testgetKapazitaet(){
-        org.junit.Assert.assertEquals( testMaschine.getKapazitaet(), 600);
+       assertEquals( testMaschine.getKapazitaet(), 600);
     }
 
     @Test
     public void testGetAnschaffungskst(){
-        org.junit.Assert.assertEquals( testMaschine.getAnschaffungskst(), 15000);
+     assertEquals( testMaschine.getAnschaffungskst(), 15000);
     }
 
     @Test
-    public void reparieren() throws Exception {
+    public void reparieren(){
         Unternehmen Unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
         Kennzahlensammlung kennzahlensammlung = Unternehmen.getKennzahlensammlung();
        // testMaschine.setStatus(0.5);
@@ -43,21 +45,22 @@ public class MaschineTest extends TestCase{
     }
 
     @Test
-    public void getStatus() throws Exception {
-    assertEquals(testMaschine.getStatus(), 1);
+    public void getStatus(){
+    assertEquals(testMaschine.getStatus(), 1, 0.5);
     }
 
     @Test
-    public void setStatus() throws Exception {
+    public void setStatus(){
         testMaschine.setStatus(0.5);
-        assertEquals(testMaschine.getStatus(), 0.5);
+        assertEquals(testMaschine.getStatus(), 0.5, 0.5);
     }
 
     @Test
-    public void getEnergiekosten() throws Exception {
+    public void getEnergiekosten(){
 assertEquals(testMaschine.getEnergiekosten(), 100);
     }
 
+    @After
     public void tearDown(){
 
     }

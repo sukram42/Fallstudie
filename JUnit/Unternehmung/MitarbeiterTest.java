@@ -1,13 +1,15 @@
 package Unternehmung;
 
-import junit.framework.TestCase;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by D064018 on 16.01.2017.
  */
-public class MitarbeiterTest extends TestCase{
+public class MitarbeiterTest{
 
     private String name;
     private String vorname;
@@ -19,6 +21,7 @@ public class MitarbeiterTest extends TestCase{
 
     private Mitarbeiter testMitarbeiter;
 
+    @Before
 public void setUp(){
     name = "Peter";
     vorname = "Hans";
@@ -132,4 +135,8 @@ testMitarbeiter.setProdLeistung(neueProLeistung);
 assertEquals(testMitarbeiter.getProdLeistung(), neueProLeistung);
     }
 
+    @After
+    public void tearDown() throws Exception {
+
+    }
 }

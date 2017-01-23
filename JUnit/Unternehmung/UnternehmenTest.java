@@ -1,17 +1,20 @@
 package Unternehmung;
 
 import Unternehmung.Kennzahlen.Bilanz;
-import junit.framework.TestCase;
-import org.junit.Test;
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 /**
  * Created by D064018 on 15.01.2017.
  */
-public class UnternehmenTest extends TestCase {
+public class UnternehmenTest{
 
     private Unternehmen testUnternehmen;
     private String passwort;
@@ -23,34 +26,25 @@ public class UnternehmenTest extends TestCase {
 
     private transient Map<String,Abteilung> abteilungen = new HashMap<String,Abteilung>();
 
+    @Before
     public void setUp(){
 passwort = "12345";
 name = "Test_Unternehmen";
 eigenkapital = 500000;
 
-    }
-
-    @Before
-    public void testCreateUnternehmen(){
-testUnternehmen = new Unternehmen( name, passwort, eigenkapital);
-        org.junit.Assert.assertNotNull(testUnternehmen);
-    }
-
-
-    @Test
-    public void update() throws Exception {
-
+        testUnternehmen = new Unternehmen( name, passwort, eigenkapital);
+        assertNotNull(testUnternehmen);
     }
 
     @Test
     public void getPasswort() throws Exception {
-assertEquals(testUnternehmen.getPasswort(), 12345);
+assertEquals(testUnternehmen.getPasswort(), "12345");
     }
 
     @Test
     public void setPasswort() throws Exception {
         testUnternehmen.setPasswort("67890");
-        assertEquals(testUnternehmen.getPasswort(), passwort);
+        assertEquals(testUnternehmen.getPasswort(), "67890");
     }
 
     @Test
@@ -80,4 +74,8 @@ assertEquals(testUnternehmen.getPasswort(), 12345);
         assertNotNull(testUnternehmen.getKennzahlensammlung());
     }
 
+    @After
+    public void tearDown() throws Exception {
+
+    }
 }

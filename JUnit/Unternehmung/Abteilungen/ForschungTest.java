@@ -2,14 +2,17 @@ package Unternehmung.Abteilungen;
 
 import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Unternehmen;
-import junit.framework.TestCase;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by D064018 on 21.01.2017.
  */
-public class ForschungTest extends TestCase{
+public class ForschungTest{
 
     private Forschung testForschung;
     private Unternehmen unternehmen;
@@ -17,15 +20,12 @@ public class ForschungTest extends TestCase{
     private Produktion produktion;
     String forschungsobjekt;
 
+    @Before
     public void setUp(){
         forschungsobjekt = "ReisetascheA";
-    }
-
-    @Before
-    public void createTestforschung(){
-         unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
-         kennzahlensammlung = unternehmen.getKennzahlensammlung();
-         produktion = (Produktion)unternehmen.getAbteilung("produktion");
+        unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
+        kennzahlensammlung = unternehmen.getKennzahlensammlung();
+        produktion = (Produktion)unternehmen.getAbteilung("produktion");
         testForschung = new Forschung(kennzahlensammlung, produktion);
         assertNotNull(testForschung);
     }
@@ -33,19 +33,19 @@ public class ForschungTest extends TestCase{
     @Test
     public void setImagebonus() throws Exception {
 testForschung.setImagebonus(forschungsobjekt, 0.05);
-assertEquals(testForschung.getImagebonusById(forschungsobjekt), 0.05);
+assertEquals(testForschung.getImagebonusById(forschungsobjekt), 0.05, 0.5);
     }
 
     @Test
     public void getImagebonusById() throws Exception {
-assertEquals(testForschung.getImagebonusById(forschungsobjekt), 0);
+assertEquals(testForschung.getImagebonusById(forschungsobjekt), 0, 0.5);
     }
 
     @Test
     public void starteProjekt() throws Exception {
         testForschung.addMitarbeiter(5, 8000);
         testForschung.starteProjekt(produktion, testForschung, forschungsobjekt, 5, 100, true, kennzahlensammlung);
-        assertEquals(testForschung.getMitarbeiterAnzahl(), 0);
+        assertFalse(testForschung.getProjekte().isEmpty());
     }
 
     @Test
@@ -76,9 +76,9 @@ assertEquals(testForschung.getImagebonusById(forschungsobjekt), 0);
 assertTrue(testForschung.getVerfügbareProdukte().size() == 12);
     }
 
-    @Test
-    public void update() throws Exception {
-//ToDo
+    @After
+    public void tearDown() throws Exception {
+
     }
 
 }

@@ -129,8 +129,6 @@ public class Produktion extends Abteilung {
         updateForschungsboni();
     }
 
-
-
     // sämtliche Hilfsmethoden:
     /**
      * wird bei jedem timer count ausgeführt und legt die pro timer count produzierten Produkte im Lager ab

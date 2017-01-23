@@ -1,9 +1,8 @@
 package Unternehmung.Abteilungen;
 
 import Unternehmung.Abteilung;
-import Unternehmung.Abteilungen.SozialeProjekte.ZeitGeld;
-import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Abteilungen.SozialeProjekte.SozialProjekt;
+import Unternehmung.Abteilungen.SozialeProjekte.ZeitGeld;
 import Unternehmung.Unternehmen;
 
 import java.util.ArrayList;
@@ -55,6 +54,7 @@ public class SozialeLeistungen extends Abteilung {
             p.resetAktKosten();
         }
     }
+
     public void startProjekt(String name)
     {
         getProjektByName(name).start();

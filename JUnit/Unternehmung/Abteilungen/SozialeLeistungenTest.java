@@ -1,19 +1,23 @@
 package Unternehmung.Abteilungen;
 
 import Unternehmung.Unternehmen;
-import junit.framework.TestCase;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by D064018 on 16.01.2017.
  */
-public class SozialeLeistungenTest extends TestCase{
+public class SozialeLeistungenTest{
 
     private SozialeLeistungen testSozialeLeistungen;
 
     @Before
-    public void createSozialeLeistungen(){
+    public void setUp(){
         Unternehmen unternehmen = new Unternehmen( "Test Unternehmen", "12345", 600000);
         testSozialeLeistungen = new SozialeLeistungen(unternehmen);
     assertNotNull(testSozialeLeistungen);
@@ -50,4 +54,8 @@ public class SozialeLeistungenTest extends TestCase{
         assertFalse(testSozialeLeistungen.getProjects().get(1).isActive());
     }
 
+    @After
+    public void tearDown() throws Exception {
+
+    }
 }

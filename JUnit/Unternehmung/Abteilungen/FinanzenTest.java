@@ -3,6 +3,7 @@ package Unternehmung.Abteilungen;
 import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Unternehmen;
 import junit.framework.TestCase;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,6 +31,11 @@ public class FinanzenTest extends TestCase {
     @Test
     public void update() throws Exception {
 //ToDO
+
+    }
+
+    @After
+    public void tearDown() throws Exception {
 
     }
 
