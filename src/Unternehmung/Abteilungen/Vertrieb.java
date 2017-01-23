@@ -39,16 +39,6 @@ public class Vertrieb extends Abteilung {
     }
 
     /**
-     * // TODO Besprechen, wie genau das aussehen soll
-     * @param vertrag, der zu verlängern ist
-     * @param dauer, um die der Vertrag verlängert werden soll in Monaten
-     */
-    public void vertragVerlängern(Vertrag vertrag, int dauer){
-        vertrag.setLaufzeit(vertrag.getLaufzeit() + dauer);
-        vertrag.getEnd().add(Calendar.MONTH, dauer);
-    }
-
-    /**
      * wird aufgerufen von Game.updateAusschreibungen, wenn das Unternehmen den Zuschlag bekommt
      * @param index unter dem die Ausschreibung in der Game.ausschreibungen und in opportunities abgelegt ist
      */
@@ -88,7 +78,7 @@ public class Vertrieb extends Abteilung {
         }
         try {
             this.kennzahlensammlung.getGuv().addUmsatz(umsatz);
-            this.kennzahlensammlung.liquiditaetAnpassen(umsatz);
+            this.kennzahlensammlung.getBilanz().liquiditaetAnpassen(umsatz);
         } catch (BankruptException e) {
             e.printStackTrace();
         }
@@ -100,7 +90,7 @@ public class Vertrieb extends Abteilung {
      */
     private void vertragBrechen(Vertrag vertrag){
         try {
-            this.kennzahlensammlung.liquiditaetAnpassen(- vertrag.getStrafe());
+            this.kennzahlensammlung.getBilanz().liquiditaetAnpassen(- vertrag.getStrafe());
             this.kennzahlensammlung.getGuv().addGeleisteterSchandsersatz(vertrag.getStrafe());
             this.accounts.remove(vertrag);
         } catch (BankruptException e){

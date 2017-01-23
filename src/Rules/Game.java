@@ -148,7 +148,7 @@ public class Game extends TimerTask{
                 for (Unternehmen unternehmen : companies){
                     Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
                     if (vertrieb.getOpportunities().get(i) != null){
-                        bewerber.put(unternehmen, unternehmen.getKennzahlensammlung().getVerkaufswahrscheinlichkeit().getWert());
+                        bewerber.put(unternehmen, unternehmen.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert());
                     }
                 }
                 // das Unternehmen mit der höchsten Verkaufswahrscheinlichkeit finden

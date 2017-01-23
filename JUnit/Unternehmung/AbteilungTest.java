@@ -1,5 +1,6 @@
 package Unternehmung;
 
+import Exceptions.ZuWenigMitarbeiterException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,14 +35,21 @@ public class AbteilungTest{
 
     @Test
     public void addMitarbeiter(){
-        testAbteilung.addMitarbeiter(1, 10000);
+        try {
+            testAbteilung.addMitarbeiter(1, 10000);
+        } catch (ZuWenigMitarbeiterException e){
+            e.printStackTrace();
+        }
         assertEquals(testAbteilung.getMitarbeiterAnzahl(), 1);
     }
 
     @Test
     public void getMitarbeiter() {
+        try{
         testAbteilung.addMitarbeiter(1, 10000);
-        assertNotNull(testAbteilung.getMitarbeiter().get(0));
+        } catch (ZuWenigMitarbeiterException e) {
+            assertNotNull(testAbteilung.getMitarbeiter().get(0));
+        }
     }
 
     @Test
@@ -57,8 +65,11 @@ public class AbteilungTest{
 
     @Test
     public void getMitarbeiterKosten(){
+        try{
         testAbteilung.addMitarbeiter(2, 10000);
-        assertEquals(testAbteilung.getMitarbeiterKosten(), (2 * 10000), 0.5);
+        } catch (ZuWenigMitarbeiterException e) {
+            assertEquals(testAbteilung.getMitarbeiterKosten(), (2 * 10000), 0.5);
+        }
     }
 
     @After

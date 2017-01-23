@@ -1,5 +1,6 @@
 package Unternehmung;
 
+import Exceptions.ZuWenigMitarbeiterException;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -16,21 +17,22 @@ import java.util.Map;
 
 public abstract class Abteilung {
 
+	public String name;
 	protected transient ArrayList<Mitarbeiter> mitarbeiter = new ArrayList<>();
 	protected transient Kennzahlensammlung kennzahlensammlung;
 	protected transient float aktKosten = 0 ;
-
-	public String name;
 
     public Abteilung(String name, Kennzahlensammlung kennzahlensammlung) {
         this.kennzahlensammlung = kennzahlensammlung;
         this.name = name;
     }
 
-    public void addMitarbeiter(int anzahl, int gehalt) {
+    public void addMitarbeiter(int anzahl, int gehalt) throws ZuWenigMitarbeiterException{
 
-		String erg = "";
-		String content;
+    	if (this.kennzahlensammlung.getMaxNeueMitarbeiter() >= anzahl) { // genügend HR-Mitarbeiter? (einer zuständig für 10 (Nicht-HR)Mitarbeiter)
+
+			String erg = "";
+			String content;
 
 //		if (this.kennzahlensammlung.liquiditätVorhanden(gehalt * anzahl, "gehälter")) {
 
@@ -66,11 +68,21 @@ public abstract class Abteilung {
 
 				mitarbeiter.add(m);
 
+				if (this.name.equals("Human-Resources")){
+					this.kennzahlensammlung.setMaxNeueMitarbeiter(this.kennzahlensammlung.getMaxNeueMitarbeiter() + 10);
+				} else {
+					this.kennzahlensammlung.setMaxNeueMitarbeiter(this.kennzahlensammlung.getMaxNeueMitarbeiter() - 1);
+				}
+
 			}
 //		}else{
 //			System.out.println("Nicht genügend Liquidität vorhanden!");
 //		}
-		this.kennzahlensammlung.berechnen();
+			this.kennzahlensammlung.berechnen();
+
+		} else {
+    		throw new ZuWenigMitarbeiterException("HR");
+		}
 	}
 
 

@@ -23,8 +23,8 @@ public class Vertrag {
         this.preis = preis;
         this.kunde = kunde;
         this.laufzeit = laufzeit;
-        this.beginn = Game.getCalendar();
-        this.end = this.beginn;
+        this.beginn = (Calendar) Game.getCalendar().clone();
+        this.end = (Calendar) this.beginn.clone();
         this.end.add(Calendar.MONTH, laufzeit);
         this.strafe = this.preis * 0.75f;
     }

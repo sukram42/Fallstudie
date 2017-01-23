@@ -19,9 +19,8 @@ public class Marketingkampagne {
 
     public Marketingkampagne(String art, int laufzeit) {
         this.art = art;
-        //this.laufzeit = laufzeit;
-        this.beginn = Game.getCalendar();
-        this.end = this.beginn;
+        this.beginn = (Calendar) Game.getCalendar().clone();
+        this.end = (Calendar) this.beginn.clone();
         this.end.add(Calendar.DAY_OF_MONTH, laufzeit);
         setParamsByArt(art);
     }

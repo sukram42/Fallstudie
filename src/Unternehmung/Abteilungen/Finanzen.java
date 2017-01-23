@@ -62,7 +62,7 @@ public class Finanzen extends Abteilung {
             this.kennzahlensammlung.getBilanz().fremdkapitalAnpassen(hoehe);
             kredite.add(kredit);
         } else {
-            throw new ZuWenigMitarbeiterException("finanzen");
+            throw new ZuWenigMitarbeiterException("Finanzen");
         }
     }
 
@@ -89,7 +89,7 @@ public class Finanzen extends Abteilung {
             // Zinsen an GuV weitergeben:
             this.kennzahlensammlung.getGuv().addZinsaufwendungen((float) zinsen);
             // liquide Mittel und FK anpassen:
-            this.kennzahlensammlung.liquiditaetAnpassen((float) - (tilgung + zinsen));
+            this.kennzahlensammlung.getBilanz().liquiditaetAnpassen((float) - (tilgung + zinsen));
             this.kennzahlensammlung.getBilanz().fremdkapitalAnpassen(- (float) tilgung);
         } catch (BankruptException e){
             e.printStackTrace();

@@ -18,7 +18,7 @@ public class Marktforschung {
     private Calendar end;
 
     public Marktforschung(int umfang) {
-        this.beginn = Game.getCalendar();
+        this.beginn = (Calendar) Game.getCalendar().clone();
         this.umfang = umfang;
         setParamsByUmfang(umfang);
     }
@@ -53,7 +53,7 @@ public class Marktforschung {
         }
         this.impact = impact;
         this.kosten = kosten;
-        this.end = this.beginn;
+        this.end = (Calendar) this.beginn.clone();
         this.end.add(Calendar.DAY_OF_MONTH, dauer);
         this.noetigeMitarbeiter = noetigeMitarbeiter;
     }

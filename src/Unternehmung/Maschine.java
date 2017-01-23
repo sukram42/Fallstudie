@@ -59,7 +59,7 @@ public class Maschine {
                 kosten = 300;
             }
             kennzahlensammlung.getGuv().addFremdinstandhaltung(kosten);
-            kennzahlensammlung.liquiditaetAnpassen(-kosten);
+            kennzahlensammlung.getBilanz().liquiditaetAnpassen(-kosten);
             this.status = 1; // nach Reparatur wieder 100%
         } catch (BankruptException e){
             e.printStackTrace();

@@ -28,11 +28,13 @@ public class Kennzahlensammlung {
     private double ausschussrate;
     private double reklamationsrate;
     private Bekanntheitsgrad bekanntheitsgrad;
-    private Verkaufswahrscheinlichkeit verkaufswahrscheinlichkeit; // Wahrscheinlichkeit, Deals für sich zu gewinnen (abhängig von Maßnahmen
-    private float liquideMittel;
 
     private Bilanz bilanz;
     private transient GuV guv;
+
+    private int maxNeueMitarbeiter; // abhängig von HR-Mitarbeitern (für 10 Mitarbeiter ist ein HR-Mitarbeiter (=Manager) zuständig)
+                                    // wird pro neu eingestelltem HR-Mitarbeiter um 10 hochgesetzt
+                                    // wird pro neu eingestelltem (Nicht-HR-) Mitarbeiter um 1 runtergesetzt
 
     /**
      * Konstruktor zum Erstellen einen Kennzahlenobjekts eines Unternehmens (wird im Unternehmenskonstruktor aufgerufen)
@@ -43,9 +45,10 @@ public class Kennzahlensammlung {
         this.guv = new GuV(unternehmen);
         this.bilanz = new Bilanz(unternehmen);
         this.getBilanz().setEigenkapital(eigenkapital);
-        this.liquideMittel = eigenkapital;
+        this.getBilanz().setLiquideMittel(eigenkapital);
         this.unternehmen = unternehmen;
         this.bekanntheitsgrad = new Bekanntheitsgrad(unternehmen);
+        this.maxNeueMitarbeiter = 0;
     }
 
     // Berechnungen:
@@ -63,22 +66,9 @@ public class Kennzahlensammlung {
         berechnen();
         this.guv.importAufwandUndErlös(); // GuV updaten
         try {
-            this.liquiditaetAnpassen(this.guv.getTaeglicheLiquiditätsveränderung());
+            this.getBilanz().liquiditaetAnpassen(this.guv.getTaeglicheLiquiditätsveränderung());
         } catch (BankruptException e){
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * passt zu jedem Timer Count die liquidität entsprechend an (wirft bei Zahlungsunfähigkeit eine BankruptException)
-     * wird außerdem aufgerufen, wenn einmalige Liquiditätsveränderungen statt finden (z.B. Kauf einer Maschine oder einmaliger Umsatzerlös)
-     * @param liquiditätsVeränderung berechnet von GuV.getTaeglicheLiquiditätsveränderung
-     */
-    public void liquiditaetAnpassen(float liquiditätsVeränderung) throws BankruptException {
-        if (this.liquideMittel * -1 <= liquiditätsVeränderung){
-            this.setLiquideMittel(this.liquideMittel + liquiditätsVeränderung);
-        } else {
-            throw new BankruptException(unternehmen);
         }
     }
 
@@ -128,18 +118,6 @@ public class Kennzahlensammlung {
         this.reklamationsrate = reklamationsrate;
     }
 
-    public Verkaufswahrscheinlichkeit getVerkaufswahrscheinlichkeit() {
-        return verkaufswahrscheinlichkeit;
-    }
-
-    public double getLiquideMittel() {
-        return liquideMittel;
-    }
-
-    public void setLiquideMittel(float liquideMittel) {
-        this.liquideMittel = liquideMittel;
-    }
-
     public Bilanz getBilanz() {
         return bilanz;
     }
@@ -150,5 +128,13 @@ public class Kennzahlensammlung {
 
     public void setGuv(GuV guv) {
         this.guv = guv;
+    }
+
+    public int getMaxNeueMitarbeiter() {
+        return maxNeueMitarbeiter;
+    }
+
+    public void setMaxNeueMitarbeiter(int maxNeueMitarbeiter) {
+        this.maxNeueMitarbeiter = maxNeueMitarbeiter;
     }
 }

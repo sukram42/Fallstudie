@@ -14,6 +14,9 @@ import static org.junit.Assert.*;
  */
 public class ProduktionTest{
 
+    private Kennzahlensammlung kennzahlensammlung;
+    private Produktion testProduktion;
+
     @Test
     public void getGesamtenLagerPlatz() throws Exception {
         testProduktion.lagerhalleKaufen(2);
@@ -60,9 +63,6 @@ assertFalse(testProduktion.getForschungsboni().isEmpty());
         assertFalse(testProduktion.getMaschinen().isEmpty());
     }
 
-    private Kennzahlensammlung kennzahlensammlung;
-    private Produktion testProduktion;
-
     @Before
     public void testCreateProduktion() {
         Unternehmen testUnternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
@@ -85,7 +85,7 @@ assertFalse(testProduktion.getForschungsboni().isEmpty());
         testProduktion.produktionshalleKaufen(2);
         testProduktion.maschinenKaufen("Rucksack",1, 1);
         testProduktion.addMitarbeiter(2, 10000); //Wird das Gehalt mit Erstellen der Mitarbeiter schon den liquiden Kosten abgezogen? hier nicht!
-        assertEquals(kennzahlensammlung.getLiquideMittel(), 500000 - 65000 - 7500, 0.5);
+        assertEquals(kennzahlensammlung.getBilanz().getLiquideMittel(), 500000 - 65000 - 7500, 0.5);
         assertEquals(testProduktion.getMaxProdMenge("Rucksack"), 300); //Kapazität der einzelnen Maschine
     }
 
@@ -93,14 +93,14 @@ assertFalse(testProduktion.getForschungsboni().isEmpty());
     public void produktionshalleKaufen() throws Exception {
         testProduktion.produktionshalleKaufen(2);
         assertEquals(testProduktion.getFreienProduktionshallenPlatz(), 50);
-        assertEquals(kennzahlensammlung.getLiquideMittel(), (500000 - 65000), 0.5);
+        assertEquals(kennzahlensammlung.getBilanz().getLiquideMittel(), (500000 - 65000), 0.5);
     }
 
     @Test
     public void lagerhalleKaufen() throws Exception {
         testProduktion.lagerhalleKaufen(2);
         assertEquals(testProduktion.getFreienLagerPlatz(), 5000);
-        assertEquals(kennzahlensammlung.getLiquideMittel(), (500000 - 20000), 0.5);
+        assertEquals(kennzahlensammlung.getBilanz().getLiquideMittel(), (500000 - 20000), 0.5);
     }
 
     @Ignore
@@ -110,7 +110,7 @@ assertFalse(testProduktion.getForschungsboni().isEmpty());
         testProduktion.addMitarbeiter(2, 10000);
         testProduktion.produzieren("Rucksack", 'A', 100, 50000); //Herstellungskosten sind 20
         testProduktion.update();
-        assertEquals(kennzahlensammlung.getLiquideMittel(), 100 + 100 * 20, 0.5);
+        assertEquals(kennzahlensammlung.getBilanz().getLiquideMittel(), 100 + 100 * 20, 0.5);
     }
 
     @Ignore

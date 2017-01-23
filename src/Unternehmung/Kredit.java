@@ -34,8 +34,8 @@ public class Kredit {
         this.zinsen = zinssatz * this.restwert;
         this.tilgung = this.hoehe / this.laufzeit;
         this.annuität = this.tilgung + this.zinsen;
-        this.beginn = Game.getCalendar();
-        this.end = this.beginn;
+        this.beginn = (Calendar) Game.getCalendar().clone();
+        this.end = (Calendar) this.beginn.clone();
         this.end.add(Calendar.DAY_OF_MONTH, laufzeit);
     }
 

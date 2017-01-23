@@ -28,8 +28,8 @@ public class Produktlinie {
         this.produkt = produkt;
         this.menge = menge;
         this.laufzeit = laufzeit;
-        this.beginn = Game.getCalendar();
-        this.end = this.beginn;
+        this.beginn = (Calendar) Game.getCalendar().clone();
+        this.end = (Calendar) this.beginn.clone();
         this.end.add(Calendar.DAY_OF_MONTH, laufzeit);
         this.id = produkt.getName() + produkt.getQualitaetsstufe();
     }

@@ -1,6 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Exceptions.BankruptException;
+import Exceptions.LagerVollException;
 import Exceptions.ZuWenigMaschinenstellplatzException;
 import Exceptions.ZuWenigMitarbeiterOderMaschinenException;
 import Rules.Game;
@@ -35,7 +36,7 @@ public class Produktion extends Abteilung {
     }
 
     /**
-     * Methode zum Erstellen eines Produktionsauftrags einer neuen oder bestehenden Produktlinie
+     * Methode zum Erstellen eines Produktionsauftrags
      * @param name Produkt (z.B. Rucksack)
      * @param qualitätsstufe A, B oder C
      * @param menge Größe des Auftrags -> so viele Produkte sollen in...
@@ -47,6 +48,7 @@ public class Produktion extends Abteilung {
         // prüfen, ob genügend Mitarbeiter, Maschinen und Liquidität vorhanden ist:
         if (menge <= this.getMaxProdMenge(name)){
             // Produktion in Auftrag geben:
+            /* // Möglichkeit, die Menge eines bestehenden Auftrages zu erhöhen (Alternative: jedes mal einen neuen Auftrag erstellen (siehe unten))
             for (Produktlinie auftrag : this.aufträge){
                 if (auftrag.getId().equals(produktlinie.getId())) {
                     int bisherigeMenge = auftrag.getMenge();
@@ -55,6 +57,7 @@ public class Produktion extends Abteilung {
                     return;
                 }
             }
+            */
             aufträge.add(produktlinie);
             System.out.println("Neue Produktlinie (" + produktlinie.getId() + ") in Auftrag gegeben.");
         } else {
@@ -74,7 +77,7 @@ public class Produktion extends Abteilung {
         // prüfen, ob genügend Fläche (= Produktionshalle) für neue Maschine(n) vorhanden ist:
         if (getFreienProduktionshallenPlatz() >= anzahl) {
             try {
-                kennzahlensammlung.liquiditaetAnpassen(-1*(anschaffungskst * anzahl));
+                kennzahlensammlung.getBilanz().liquiditaetAnpassen(-1*(anschaffungskst * anzahl));
                 kennzahlensammlung.getBilanz().addTAMasch(anschaffungskst * anzahl);
                 maschinen.add(m);
                 for (int i = 1; i <= anzahl; i++) {
@@ -91,10 +94,25 @@ public class Produktion extends Abteilung {
         }
     }
 
+    /**
+     * Maschine wird zu den halben Anschaffungskosten, multipliziert mit dem Reparaturstatus, verkauft
+     * @param maschine, die zu verkaufen ist
+     */
+    public void maschineVerkaufen(Maschine maschine){
+        try {
+            float wiederverkaufswert = (maschine.getAnschaffungskst() / 2) * (float) maschine.getStatus();
+            this.kennzahlensammlung.getBilanz().liquiditaetAnpassen(wiederverkaufswert);
+            this.kennzahlensammlung.getBilanz().addTAMasch(- maschine.getAnschaffungskst());
+            this.kennzahlensammlung.getGuv().addUmsatz(wiederverkaufswert);
+        } catch (BankruptException e){
+            e.printStackTrace();
+        }
+    }
+
     public void produktionshalleKaufen(int größe){
         Halle halle = new Halle("Produktionshalle", größe);
         try{
-            kennzahlensammlung.liquiditaetAnpassen((-1f)*halle.getPreis());
+            kennzahlensammlung.getBilanz().liquiditaetAnpassen((-1f)*halle.getPreis());
             kennzahlensammlung.getBilanz().addGebäude(halle.getPreis());
             this.produktionshallen.add(halle);
             System.out.println("Produktionshalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
@@ -106,7 +124,7 @@ public class Produktion extends Abteilung {
     public void lagerhalleKaufen(int größe){
         Halle halle = new Halle("Lagerhalle", größe);
         try{
-            kennzahlensammlung.liquiditaetAnpassen(-1f* halle.getPreis());
+            kennzahlensammlung.getBilanz().liquiditaetAnpassen(-1f* halle.getPreis());
             kennzahlensammlung.getBilanz().addGebäude(halle.getPreis());
             this.lagerhallen.add(halle);
             System.out.println("Lagerhalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
@@ -121,11 +139,15 @@ public class Produktion extends Abteilung {
     @Override
     public void update(){
         try {
-            this.kennzahlensammlung.liquiditaetAnpassen(-1f *(getTaeglicheEnergiekosten() + getTaeglicheHerstellkosten()));
+            this.kennzahlensammlung.getBilanz().liquiditaetAnpassen(-1f *(getTaeglicheEnergiekosten() + getTaeglicheHerstellkosten()));
         } catch (BankruptException e){
             e.printStackTrace();
         }
-        produkteFertigstellen();
+        try {
+            produkteFertigstellen();
+        } catch (LagerVollException e){
+            e.printStackTrace();
+        }
         updateForschungsboni();
     }
 
@@ -133,8 +155,9 @@ public class Produktion extends Abteilung {
     /**
      * wird bei jedem timer count ausgeführt und legt die pro timer count produzierten Produkte im Lager ab
      */
-    private void produkteFertigstellen () {
+    private void produkteFertigstellen () throws LagerVollException {
         for (Produktlinie auftrag : this.aufträge){
+            auftrag.setLaufzeit(auftrag.getLaufzeit() - 1);
             if (auftrag.getMenge() <= this.getFreienLagerPlatz()){ // genügend Lagerplatz verfügbar?
                 Produktlinie produktlinie = new Produktlinie(auftrag.getProdukt(), auftrag.getMenge()); // neue Produktlinie
                 for (Produktlinie bestand : this.lager) {
@@ -147,8 +170,7 @@ public class Produktion extends Abteilung {
                     }
                 }
             } else {
-                System.out.println("Nicht genügend Lagerfläche vorhanden. Die Produkte gehen verloren.");
-                // TODO Exception notwendig?
+                throw new LagerVollException();
             }
             if (auftrag.getEnd() == Game.getCalendar()){ // falls Laufzeit == 0 Auftrag beenden
                 this.aufträge.remove(auftrag);
