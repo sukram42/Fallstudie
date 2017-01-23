@@ -29,7 +29,7 @@ public class Abteilung {
 
     public void addMitarbeiter(int anzahl, int gehalt) throws ZuWenigMitarbeiterException{
 
-    	if (this.kennzahlensammlung.getMaxNeueMitarbeiter() >= anzahl) { // genügend HR-Mitarbeiter? (einer zuständig für 10 (Nicht-HR)Mitarbeiter)
+    	if (this.name.equals("Human-Resources") || this.kennzahlensammlung.getMaxNeueMitarbeiter() >= anzahl) { // genügend HR-Mitarbeiter? (einer zuständig für 10 (Nicht-HR)Mitarbeiter)
 
 			String erg = "";
 			String content;
