@@ -1,5 +1,6 @@
 package Unternehmung.Abteilungen;
 
+import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilung;
 import Unternehmung.Kennzahlensammlung;
@@ -32,12 +33,16 @@ public class Marketing extends Abteilung {
      * @param art Art der Kampagne, etwa Plakate, Print, Radio oder TV (unterschiedlich teuer und unterschiedlich effektiv)
      * @param laufzeit in timer counts
      */
-    public void marketingkampagneStartenOderVerlängern(String art, int laufzeit){
+    public void marketingkampagneStartenOderVerlängern(String art, int laufzeit) throws ZuWenigMitarbeiterException{
         if (this.kampagnen.get(art) == null) {
             Marketingkampagne kampagne = new Marketingkampagne(art, laufzeit);
-            this.kampagnen.put(art, kampagne);
-            System.out.println("Marketingkampagne \"" + art + "\" gestartet. Kosten: " + kampagne.getKosten()
-                    + " € pro Tag, Bekanntheitsgrad steigt um " + kampagne.getImpact());
+            if (kampagne.getNoetigeMitarbeiter() <= this.getMitarbeiter().size()) {
+                this.kampagnen.put(art, kampagne);
+                System.out.println("Marketingkampagne \"" + art + "\" gestartet. Kosten: " + kampagne.getKosten()
+                        + " € pro Tag, Bekanntheitsgrad steigt täglich um " + kampagne.getImpact());
+            } else {
+                throw new ZuWenigMitarbeiterException("Marketing");
+            }
         } else {
             this.kampagnen.get(art).getEnd().add(Calendar.DAY_OF_MONTH, laufzeit);
             System.out.println("Marketingkampagne \"" + art + "\" wurde verlängert.");
@@ -54,9 +59,14 @@ public class Marketing extends Abteilung {
      * wodurch sich Produkte besser verkaufen lassen (Absatzrate steigt)
      * @param umfang drei verschiedene "Größen" mit unterschiedlichen Dauer und Effektivität
      */
-    public void marktforschungStarten(int umfang){
+    public void marktforschungStarten(int umfang) throws ZuWenigMitarbeiterException{
         if (this.mafos.get(umfang) == null){
-            this.mafos.put(umfang, new Marktforschung(umfang));
+            Marktforschung mafo = new Marktforschung(umfang);
+            if (mafo.getNoetigeMitarbeiter() <= this.getMitarbeiter().size()) {
+                this.mafos.put(umfang, mafo);
+            } else {
+                throw new ZuWenigMitarbeiterException("Marketing");
+            }
         } else {
             System.out.println("Martforschung Stufe " + umfang + " läuft bereits.");
             // TODO Exception notwendig?
@@ -112,6 +122,20 @@ public class Marketing extends Abteilung {
                 this.mafos.remove(mafo.getKey());
             }
         }
+    }
+
+    /**
+     * @return Anzahl der Mitarbeiter, die für Marktforschung oder Marketingkampagnen verfügbar sind
+     */
+    public int getFreieMitarbeiter(){
+        int beschaeftigteMitarbeiter = 0;
+        for (Map.Entry<String, Marketingkampagne> kampagne : this.kampagnen.entrySet()){
+            beschaeftigteMitarbeiter += kampagne.getValue().getNoetigeMitarbeiter();
+        }
+        for (Map.Entry<Integer, Marktforschung> mafo : this.mafos.entrySet()){
+            beschaeftigteMitarbeiter += mafo.getValue().getNoetigeMitarbeiter();
+        }
+        return this.getMitarbeiter().size() - beschaeftigteMitarbeiter;
     }
 
 }
