@@ -4,7 +4,7 @@
         <div class="navbar-header">
 
             <h3 class="navbar-brand"> {{companyName}}
-                <small> Timer: {{time}}</small>
+                <small>{{time}}</small>
             </h3>
         </div>
 
@@ -23,12 +23,12 @@
                 </li>
                 <li class="navbar-brand">
                     <h4>
-                        <i class="fa fa-building" aria-hidden="true"></i> 6.000/20.000
+                        <i class="fa fa-building" aria-hidden="true"></i>{{freieLagerPlaetze}}/{{gesamteLagerPlaetze}}
                     </h4>
                 </li>
                 <li>
-                    <button type="button" class="btn btn-success navbar-btn navbar-right">
-                        <i class="fa fa-user-circle-o" aria-hidden="true"></i> Logout
+                    <button type="button" class="btn btn-success navbar-btn navbar-right" (click)="logOutRequest()">
+                        <i class="fa fa-user-circle-o" aria-hidden="true" ></i> Logout
                     </button>
                 </li>
             </ul>

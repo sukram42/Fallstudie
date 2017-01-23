@@ -4,6 +4,7 @@ package com.fallstudie.Interface;
 import Rules.Game;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -105,6 +106,19 @@ public class GameInterface implements ServletContextListener{
         return null;
     }
 
+    @Secured
+    @PUT
+    @Path("logout")
+    public static Response logOut(@Context SecurityContext context)
+    {
+        Unternehmen unternehmen = CompanyInterface.getCompanyFromContext(context);
+        if(unternehmen !=null){
+            auth.remove(unternehmen);
+            return Response.ok("Logged Out").build();
+        }else
+            return Response.status(409).entity("Not even logged in!").build();
+    }
+
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         System.out.println("Spiel wird generiert");
@@ -116,7 +130,6 @@ public class GameInterface implements ServletContextListener{
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-        System.out.println("Und bam kaputt");
         game = null;
     }
 }

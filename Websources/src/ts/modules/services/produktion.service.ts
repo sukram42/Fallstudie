@@ -15,6 +15,7 @@ export class ProduktionService {
 
     private productlinesSubject = new Subject<any>();
     private machinesSubject = new Subject<any>();
+    private warehouseSubject = new Subject<any>();
 
     constructor(private http: Http) {
         this.http = http;
@@ -25,7 +26,7 @@ export class ProduktionService {
     produzieren(data)
     {
         this.http.post('http://localhost:8080/rest/companies/production',data).map(res => res.text())
-            .subscribe(data=>console.log(data),
+            .subscribe(data=>data,
                 err=>console.log(err),
                 ()=>this.productlinesSubject.next("new Product")
             );
@@ -39,6 +40,12 @@ export class ProduktionService {
     {
         return this.machinesSubject;
     }
+    getWarehouseSubject()
+    {
+        return this.warehouseSubject;
+    }
+
+
     kaufeMaschine(data)
     {
        return this.http.post('http://localhost:8080/rest/companies/production/machines',data).map(res=>res.text());

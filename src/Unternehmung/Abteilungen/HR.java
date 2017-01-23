@@ -57,6 +57,18 @@ public class HR extends Abteilung {
         return erg;
     }
 
+    public boolean kuendigeMitarbeiter(Mitarbeiter opfer)
+    {
+        for(Abteilung a : unternehmen.getAbteilungen().values())
+        {
+            if(a.getMitarbeiter().contains(opfer))
+            {
+                a.getMitarbeiter().remove(opfer);
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public void update() {

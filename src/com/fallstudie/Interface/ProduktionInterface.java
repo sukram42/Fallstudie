@@ -107,7 +107,7 @@ public class ProduktionInterface {
     @Path("warehouses")
     @Secured
     public Response buyWarehouse(@Context SecurityContext securityContext, String content) {
-        try {
+//        try {
             Unternehmen unternehmen = CompanyInterface.getCompanyFromContext(securityContext);
             int groeße = Integer.parseInt(content);
 
@@ -115,9 +115,9 @@ public class ProduktionInterface {
                     .lagerhalleKaufen(groeße);
 
             return Response.ok("Lagerhalle erfolgreich gebaut").build();
-        } catch (Exception e) {
-            return Response.serverError().entity(e.toString()).build();
-        }
+//        } catch (Exception e) {
+//            return Response.serverError().entity(e.toString()).build();
+//        }
     }
 
     @POST

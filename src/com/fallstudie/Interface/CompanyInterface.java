@@ -40,7 +40,7 @@ public class CompanyInterface {
         //jsonCompany ist das Unternehmen, welches mit dem Json file in msg übergeben wird.
         Unternehmen jsonCompany = gson.fromJson(msg, Unternehmen.class);
         //In company wird ein neues Unternehmen erstellt.
-        Unternehmen company = new Unternehmen(jsonCompany.getName(), jsonCompany.getPasswort(), 1000f);
+        Unternehmen company = new Unternehmen(jsonCompany.getName(), jsonCompany.getPasswort(), 100000f);
         if (!Game.getCompanies().contains(company)) {
             Game.getCompanies().add(company);
             return Response.status(200).entity(company.toString()).build();
@@ -97,7 +97,6 @@ public class CompanyInterface {
         else
             return Response.serverError().entity("Abteilung nicht vorhanden").build();
 
-        System.err.println(object.get("anzahl") + " Mitarbeiter erstellt ");
         return Response.ok().build();
     }
 
@@ -111,6 +110,25 @@ public class CompanyInterface {
         return Response.ok(anzahl).build();
     }
 
+    @PUT
+    @Secured
+    @Path("employees")
+    public Response fireEmployee(@Context SecurityContext context, String mitarbeiter)
+    {
+        try {
+            Unternehmen unternehmen = getCompanyFromContext(context);
+            Mitarbeiter mitarbeiter1 = new Gson().fromJson(mitarbeiter, Mitarbeiter.class);
+
+            boolean gekuendigt = ((HR) unternehmen.getAbteilung("hr")).kuendigeMitarbeiter(mitarbeiter1);
+
+            return gekuendigt ? Response.ok("Mitarbeiter gekuendigt").build()
+                              : Response.ok("Mitarbeiter nicht gefunden : " + mitarbeiter).build();
+        }catch(Exception e)
+        {
+            return Response.status(409).entity(e.toString() + " "+ mitarbeiter).build();
+        }
+    }
+
     @GET
     @Secured
     @Path("keyfigures/soft/{keyfigure}")
@@ -119,7 +137,6 @@ public class CompanyInterface {
         Kennzahl kennzahl = getCompanyFromContext(securityContext).getKennzahlensammlung().getWeicheKennzahl(keyfigure);
 
             if (kennzahl != null) {
-                System.out.println("WERT:" + kennzahl.getWert());
                 return Response.ok(kennzahl.getWert()).build();
             }
             else

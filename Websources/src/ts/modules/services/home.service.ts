@@ -23,7 +23,7 @@ export class HomeService {
 
     getTime()
     {
-        return Observable.interval(5000).flatMap(()=>this.http.get('http://localhost:8080/rest/time').map(response => response.text()));
+        return Observable.interval(1000).flatMap(()=>this.http.get('http://localhost:8080/rest/time').map(response => response.text()));
     }
 
 
@@ -41,6 +41,10 @@ export class HomeService {
 
         return this.http.get('http://localhost:8080/rest/auth', {headers})
             .map(response => response.text());
+    }
+    logOut()
+    {
+        return this.http.put("http://localhost:8080/rest/logout",null).map(res=>res.text());
     }
 
 }

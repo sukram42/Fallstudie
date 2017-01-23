@@ -37,6 +37,7 @@ import {NewWarehouseComponent} from "./components/home.components/produktion.com
 import {NewProductionHallComponent} from "./components/home.components/produktion.component/new-production-hall.component";
 import {ProductLineComponent} from "./components/home.components/produktion.component/productline-list.component";
 import {MachineListComponent} from "./components/home.components/produktion.component/machine-list.component";
+import {HomeService} from "./services/home.service";
 
 @NgModule({
     imports: [
@@ -107,7 +108,7 @@ import {MachineListComponent} from "./components/home.components/produktion.comp
 
     bootstrap:    [HomeComponent],
     providers : [HRService,{provide: RequestOptions, useClass : AuthRequestOptions},
-        ProduktionService,KeyFiguresService
+        ProduktionService,KeyFiguresService,HomeService
     ]
 })
 export class HomeModule {

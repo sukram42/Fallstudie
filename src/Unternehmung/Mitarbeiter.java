@@ -13,13 +13,11 @@ public class Mitarbeiter {
 								// nur relevant für Mitarbeiter, die in der Abteilung Produktion eingestellt sind
 								// ist abhängig von der Mitarbeiterzufriedenheit
 	
-	
-	
 	public String getName() {
 		return name;
 	}
-	
-	public Mitarbeiter(String name, String vorname, String adresse, String imagelink, char gender, int gehalt) {
+
+	public Mitarbeiter(String name, String vorname, String adresse, String imagelink, char gender, int gehalt){
 		super();
 		this.name = name;
 		this.vorname = vorname;
@@ -76,5 +74,23 @@ public class Mitarbeiter {
 
 	public void setProdLeistung(int prodLeistung) {
 		this.prodLeistung = prodLeistung;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null)
+		{
+			return false;
+		}
+		if(!(obj instanceof Mitarbeiter))
+		{
+			return false;
+		}
+		Mitarbeiter mit = (Mitarbeiter)obj;
+		if(this.getName().equals(mit.getName()) && this.getVorname().equals(mit.getVorname()))
+		{
+			return true;
+		}
+		return false;
 	}
 }

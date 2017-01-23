@@ -18,8 +18,6 @@ public class Game extends TimerTask{
 
     private static Calendar gameCalendar = new GregorianCalendar(2010,1,1);
 
-    private static int day,mounth,quarter,year = 1;
-
     private static ArrayList<Unternehmen> companies = new ArrayList<>();
     private static ArrayList<Ausschreibung> ausschreibungen = new ArrayList<Ausschreibung>();
 
@@ -33,40 +31,6 @@ public class Game extends TimerTask{
         Timer timer = new Timer();
         timer.schedule(this,0,COUNTER_INTERVALL);
     }
-
-//    public Unternehmen gewinnerErmitteln(){
-//        int u1 = 0; // Punktekonto von unternehmen1
-//        int u2 = 0; // Punktekonto von unternehmen2
-//        Unternehmen gewinner = null;
-//        if(this.spieler == 2){
-//            // Gewinn vergleichen:
-//            if(unternehmen1.getKennzahlensammlung().getGewinn() > unternehmen2.getKennzahlensammlung().getGewinn()){
-//                u1++;
-//            }else if (unternehmen1.getKennzahlensammlung().getGewinn() < unternehmen2.getKennzahlensammlung().getGewinn()) {
-//                u2++;
-//            }
-//            // Bekanntheitsgrad vergleichen:
-//            if(unternehmen1.getKennzahlensammlung().getBekanntheitsgrad() > unternehmen2.getKennzahlensammlung().getBekanntheitsgrad()){
-//                u1++;
-//            } else if(unternehmen1.getKennzahlensammlung().getBekanntheitsgrad() < unternehmen2.getKennzahlensammlung().getBekanntheitsgrad()){
-//                u2++;
-//            }
-//            // Verkaufsrate vergleichen:
-//            if (unternehmen1.getKennzahlensammlung().getVerkaufswahrscheinlichkeit() > unternehmen2.getKennzahlensammlung().getVerkaufswahrscheinlichkeit()){
-//                u1++;
-//            }else if (unternehmen1.getKennzahlensammlung().getVerkaufswahrscheinlichkeit() < unternehmen2.getKennzahlensammlung().getVerkaufswahrscheinlichkeit()){
-//                u2++;
-//            }
-//            // Punkte vergleichen um Gewinner zu ermitteln:
-//            if(u1 > u2){
-//                gewinner = unternehmen1;
-//            }else if(u1 < u2){
-//                gewinner = unternehmen2;
-//            }
-//        }
-//        return gewinner;
-//    }
-
 
     public static ArrayList<Unternehmen> getCompanies()
     {

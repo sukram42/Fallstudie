@@ -14,7 +14,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Map;
 
-public abstract class Abteilung {
+public class Abteilung {
 
 	protected transient ArrayList<Mitarbeiter> mitarbeiter = new ArrayList<>();
 	protected transient Kennzahlensammlung kennzahlensammlung;
@@ -22,6 +22,7 @@ public abstract class Abteilung {
 
 	public String name;
 
+	public Abteilung(){};
     public Abteilung(String name, Kennzahlensammlung kennzahlensammlung) {
         this.kennzahlensammlung = kennzahlensammlung;
         this.name = name;
@@ -83,7 +84,7 @@ public abstract class Abteilung {
 	}
 
 
-	public abstract void update();
+	public void update(){}
 
 	/**
 	 * @return Gibt die aktuellen Kosten der Abteilung zurück;

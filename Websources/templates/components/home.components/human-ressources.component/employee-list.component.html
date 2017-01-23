@@ -20,7 +20,7 @@
                 <td style="text-transform: capitalize;">{{mitarbeiter.name}}</td>
                 <td>{{mitarbeiter.gehalt}} €</td>
                 <td>{{mitarbeiter.department.name}}</td>
-                <td><button  class ="btn btn-default btn-xs">Edit</button></td>
+                <td><button  class ="btn btn-default btn-xs" (click) ="fire(mitarbeiter)">Kündigen!</button></td>
             </tr>
         </tbody>
 

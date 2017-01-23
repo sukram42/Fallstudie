@@ -35,6 +35,11 @@ export class EmployeeListComponent implements OnInit{
     ngOnInit(): void {
     }
 
+    fire(opfer)
+    {
+        this.hrService.fire(opfer);
+    }
+
 
 
 

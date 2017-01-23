@@ -24,7 +24,7 @@ export class NewProductionHallComponent {
     }
 
     kaufeHalle(size) {
-        this.proService.kaufeProduktionshalle(size).subscribe(data => console.log(data), err => console.log(err),()=>this.getHallCapacity());
+        this.proService.kaufeProduktionshalle(size).subscribe(data => data, err => console.log(err),()=>this.getHallCapacity());
     }
     getHallCapacity()
     {

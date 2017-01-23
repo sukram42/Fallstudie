@@ -95,7 +95,7 @@ public class Produktion extends Abteilung {
         try{
             kennzahlensammlung.liquiditaetAnpassen((-1f)*halle.getPreis());
             this.produktionshallen.add(halle);
-            System.out.println("Produktionshalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
+            System.err.println("Produktionshalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
         } catch (BankruptException e) {
             e.printStackTrace();
         }

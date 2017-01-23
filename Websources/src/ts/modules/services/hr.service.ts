@@ -48,4 +48,9 @@ export class HRService {
         return this.http.put('http://localhost:8080/rest/companies/employees/socialprojects/',name).map(res => res.text()).subscribe(data=>{},err=>{console.log(err)},()=>this.socialProjectsSubject.next(name));
     }
 
+    fire(opfer)
+    {
+        var data = JSON.stringify(opfer);
+        this.http.put('http://localhost:8080/rest/companies/employees',data).map(res=>res.text()).subscribe(data=>this.empSubject.next("Opfer detected and fired"),err=>this.empSubject.error(err));
+    }
 }

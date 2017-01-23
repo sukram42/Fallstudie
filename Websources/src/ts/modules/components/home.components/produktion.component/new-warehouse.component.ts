@@ -20,16 +20,18 @@ export class NewWarehouseComponent {
 
     constructor(private proService: ProduktionService) {
         this.getCapacity();
-    }
+        this.proService.getWarehouseSubject()
+            .asObservable().subscribe(data=>this.getCapacity(),err=>console.log(err));
+}
 
     kaufeLager(size) {
-        this.proService.kaufeLager(size).subscribe(data => console.log(data), err => console.log(err),()=>this.getCapacity());
+        this.proService.kaufeLager(size).subscribe(data =>this.proService.getWarehouseSubject().next("new Lager"), err =>this.proService.getWarehouseSubject().error(err));
     }
     getCapacity()
     {
         this.proService.getLagerkapazitaet().subscribe(data=>{
             this.frei = data.free;
             this.gesamt = data.gesamt;
-        },);
+        });
     }
 }
