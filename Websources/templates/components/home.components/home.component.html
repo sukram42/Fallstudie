@@ -5,12 +5,160 @@
 <new-machine-modal></new-machine-modal>
 <new-product-line-modal></new-product-line-modal>
 
+<!--Modal Marketing-->
+<base href="/">
+<div class="modal fade" id="marketingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabe3">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="form-horizontal">
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-10">
+                            <h4 class="modal-title" id="myModalLabe3"> Marketingkampagne</h4>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="marketingType" class="col-sm-2 control-label">Kampagne</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="marketingType">
+                                        <option disabled selected>Auswählen...</option>
+                                        <option value="Rucksack">TV Spot</option>
+                                        <option value="Rucksacktech">Social Media Kampagne</option>
+                                        <option value="Duffel">Radio Kampagne</option>
+                                        <option value="Reisetasche">Print Media Kampagne</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="marketingTime" class="col-sm-2 control-label">Dauer</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control"
+                                           id="marketingTime"
+                                           placeholder="Dauer in Tagen"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <button type="submit" class="btn btn-success right" id="marketingPost" data-dismiss="modal"
+                                    onclick="$('#marketingModal').modal('toggle');">
+                                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Starten
+                            </button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Modal Research-->
+<base href="/">
+<div class="modal fade" id="researchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabe4">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="form-horizontal">
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-10">
+                            <h4 class="modal-title" id="myModalLabe4"> Forschungsprojekt</h4>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="researchType" class="col-sm-2 control-label">Produktlinie</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="researchType">
+                                        <option disabled selected>Auswählen...</option>
+                                        <option value="Rucksack">...</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="researchClass" class="col-sm-2 control-label">Typ</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="researchClass">
+                                        <option disabled selected>Auswählen...</option>
+                                        <option value="1">Herstellkosten</option>
+                                        <option value="1">Image</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="researchTime" class="col-sm-2 control-label">Dauer</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control"
+                                           id="researchTime"
+                                           placeholder="Dauer in Tagen"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="researchPeople" class="col-sm-2 control-label">Mitarbeiter</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control"
+                                           id="researchPeople"
+                                           placeholder="Anzahl an Mitarbeitern"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <button type="submit" class="btn btn-success right" id="researchPost" data-dismiss="modal"
+                                    onclick="$('#researchModal').modal('toggle');">
+                                <i class="fa fa-search-plus" aria-hidden="true"></i> Forschen
+                            </button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!--Sidebar-->
 <div class="wrapper">
     <div class="sidebar" data-color="green">
 
-            <div class="sidebar-wrapper">
-                <div class="overlay">
+        <div class="sidebar-wrapper">
+            <div class="overlay">
                 <div class="logo">
                     <h1>
                         EARTHBOUND

@@ -328,7 +328,7 @@ ol, ul {
     max-width: 100%;
     height: auto;
 }
-#loading {
+/*#loading {
     color: #FFAD29;
     align-content: center;
     text-align: center;
@@ -340,7 +340,7 @@ ol, ul {
     margin-top: auto;
     padding-top: 20%;
 
-}
+}*/
 .overlay{
     background-color: rgba(0, 0, 0, 0.7);
     top: 0;

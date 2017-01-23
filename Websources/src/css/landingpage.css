@@ -52,6 +52,14 @@ img.displayed {
 	display: inline-block;
 	padding-top:15%;
 }
+#headingloading {
+	width: auto;
+	display: inline-block;
+	padding-top:15%;
+	color: #FFAD29;
+	border-color: #FFAD29;
+}
+
 
 .content h1 {
 	text-align: center;
@@ -85,3 +93,12 @@ a {
 	color: #FFAD29;
 	text-decoration: none;
 }
+#headerlandingpage{
+	background-color: transparent;
+	border: transparent;
+}
+#headerlandingpage .btn{
+	background-color: transparent;
+	border: 3px;
+}
+

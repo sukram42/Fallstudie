@@ -27,6 +27,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'/>
 	<link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One|Rubik+One" rel="stylesheet"/>
 	<script src="https://use.fontawesome.com/8573f20f3e.js"></script>
+	<link rel="stylesheet" href="src/css/loading.css">
 
 
 	<script src="node_modules/zone.js/dist/zone.js"></script>
@@ -46,12 +47,32 @@
             console.error(err);
         });
 	</script>
+
 </head>
 <body>
 	<home-component>
 		<div id="loading">
-			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-			<span class="sr-only">Loading...</span>
+			<div class="content">
+
+				<div id="heading">
+					<h1>EARTHBOUND</h1>
+				</div>
+				<p>
+					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+					<span class="sr-only">Loading...</span>
+				</p>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+						</div>
+						<div class="col-md-4">
+						</div>
+					</div>
+				</div>
+			</div>
+
+
 		</div>
 	</home-component>
 </body>

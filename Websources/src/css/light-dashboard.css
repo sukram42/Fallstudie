@@ -3103,6 +3103,8 @@ h4{
   top: 0px;
   right:0px;
   left: 260px;
+  padding-left: 30px;
+  padding-right: 40px;
 
 }
 .footer{
@@ -3111,12 +3113,4 @@ h4{
   right:0px;
   left: 260px;
   margin-top: 10px;
-}
-#headerlandingpage{
-  background-color: transparent;
-  border: transparent;
-}
-#headerlandingpage .btn{
-  background-color: transparent;
-  border: 3px;
 }
