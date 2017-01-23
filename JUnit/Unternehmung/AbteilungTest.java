@@ -1,15 +1,18 @@
 package Unternehmung;
 
-import junit.framework.TestCase;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 /**
  * Created by D064018 on 16.01.2017.
  */
-public class AbteilungTest extends TestCase {
+public class AbteilungTest{
 
     String name;
     float aktKosten;
@@ -17,48 +20,50 @@ public class AbteilungTest extends TestCase {
     ArrayList<Mitarbeiter> mitarbeiter;
     Abteilung testAbteilung;
 
-
+    @Before
     public void setUp(){
         aktKosten = 0;
         kennzahlensammlung = null;
         mitarbeiter = null;
-    }
 
-    @Before
-    public void testCreateAbteilung(){
         Unternehmen unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
         kennzahlensammlung = unternehmen.getKennzahlensammlung();
         testAbteilung = unternehmen.getAbteilung("produktion");
         assertNotNull(testAbteilung);
     }
 
-
     @Test
-    public void addMitarbeiter() throws Exception {
+    public void addMitarbeiter(){
         testAbteilung.addMitarbeiter(1, 10000);
         assertEquals(testAbteilung.getMitarbeiterAnzahl(), 1);
     }
 
     @Test
-    public void getMitarbeiter() throws Exception {
+    public void getMitarbeiter() {
         testAbteilung.addMitarbeiter(1, 10000);
-        assertNotNull(testAbteilung.getMitarbeiter().get(1));
+        assertNotNull(testAbteilung.getMitarbeiter().get(0));
     }
 
     @Test
-    public void getMitarbeiterAnzahl() throws Exception {
+    public void getMitarbeiterAnzahl() {
         assertEquals(testAbteilung.getMitarbeiterAnzahl(), 0);
     }
 
     @Test
-    public void getKosten() throws Exception {
-        assertEquals(testAbteilung.getKosten(), 0);
+    public void getKosten(){
+        float a = 0;
+        assertEquals(testAbteilung.getKosten(), a, 0.5);
     }
 
     @Test
-    public void getMitarbeiterKosten() throws Exception {
+    public void getMitarbeiterKosten(){
         testAbteilung.addMitarbeiter(2, 10000);
-        assertEquals(testAbteilung.getMitarbeiterKosten(), 2 * 10000);
+        assertEquals(testAbteilung.getMitarbeiterKosten(), (2 * 10000), 0.5);
+    }
+
+    @After
+    public void tearDown(){
+
     }
 
 }
