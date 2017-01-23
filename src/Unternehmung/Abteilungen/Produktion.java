@@ -75,8 +75,9 @@ public class Produktion extends Abteilung {
         if (getFreienProduktionshallenPlatz() >= anzahl) {
             try {
                 kennzahlensammlung.liquiditaetAnpassen(-1*(anschaffungskst * anzahl));
+                kennzahlensammlung.getBilanz().addTAMasch(anschaffungskst * anzahl);
                 maschinen.add(m);
-                for (int i = 1; i < anzahl; i++) {
+                for (int i = 1; i <= anzahl; i++) {
                     Maschine n = new Maschine(produkt, klasse);
                     maschinen.add(n);
                 }
@@ -94,6 +95,7 @@ public class Produktion extends Abteilung {
         Halle halle = new Halle("Produktionshalle", größe);
         try{
             kennzahlensammlung.liquiditaetAnpassen((-1f)*halle.getPreis());
+            kennzahlensammlung.getBilanz().addGebäude(halle.getPreis());
             this.produktionshallen.add(halle);
             System.out.println("Produktionshalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
         } catch (BankruptException e) {
@@ -105,6 +107,7 @@ public class Produktion extends Abteilung {
         Halle halle = new Halle("Lagerhalle", größe);
         try{
             kennzahlensammlung.liquiditaetAnpassen(-1f* halle.getPreis());
+            kennzahlensammlung.getBilanz().addGebäude(halle.getPreis());
             this.lagerhallen.add(halle);
             System.out.println("Lagerhalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
         } catch (BankruptException e) {

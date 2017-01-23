@@ -55,6 +55,7 @@ public class Finanzen extends Abteilung {
             throw new ZuHochVerschuldetException();
         }
         Kredit kredit = new Kredit(hoehe, laufzeit, zinssatz);
+        this.kennzahlensammlung.getBilanz().fremdkapitalAnpassen(hoehe);
         kredite.add(kredit);
     }
 
@@ -82,7 +83,7 @@ public class Finanzen extends Abteilung {
             this.kennzahlensammlung.getGuv().addZinsaufwendungen((float) zinsen);
             // liquide Mittel und FK anpassen:
             this.kennzahlensammlung.liquiditaetAnpassen((float) - (tilgung + zinsen));
-            this.kennzahlensammlung.getBilanz().setFremdkapital(this.kennzahlensammlung.getBilanz().getFremdkapital() - (float) tilgung);
+            this.kennzahlensammlung.getBilanz().fremdkapitalAnpassen(- (float) tilgung);
         } catch (BankruptException e){
             e.printStackTrace();
         }

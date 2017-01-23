@@ -35,6 +35,18 @@ public class Bilanz {
         this.eigenkapital += veränderung;
     }
 
+    public void fremdkapitalAnpassen(float veränderung){
+        this.fremdkapital += veränderung;
+    }
+
+    public void addTAMasch(float wert){
+        this.TaMaschWert += wert;
+    }
+
+    public void addGebäude(float wert){
+        this.GebäudeWert += wert;
+    }
+
    // public void addLiquideMittel(float jahresueberschuss){
      //   this.setLiquideMittel(this.liquideMittel + jahresueberschuss);
   //  }

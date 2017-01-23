@@ -16,11 +16,8 @@ public class Ausschreibung {
     private static final char[] qualitaetsstufen = {'A', 'B', 'C'};
     private static final String[] kunden = {""}; // TODO Array mit (fiktiven oder echten?) Kundennamen füllen
     private Vertrag vertrag;
-    private Calendar entscheidung;
 
     public Ausschreibung() {
-        this.entscheidung = Game.getCalendar();
-        this.entscheidung.add(Calendar.MONTH, 1);
         this.vertrag = this.generateRandomVertrag();
     }
 
