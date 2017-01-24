@@ -25,6 +25,7 @@ export class HeaderComponent{
 
     freieLagerPlaetze;
     gesamteLagerPlaetze;
+    liquideMittel;
 
     constructor(private homeService :HomeService, private keyFigures : KeyFiguresService, private hrService : HRService, private proService : ProduktionService){
         this.init();
@@ -43,6 +44,7 @@ export class HeaderComponent{
         this.getCapacity();
         this.getEmployeeCount();
         this.homeService.getTime().subscribe(data=>this.time = data);
+        this.getLiquideMittel();
     }
 
     getEmployeeCount()
@@ -56,6 +58,12 @@ export class HeaderComponent{
             this.freieLagerPlaetze = data.free;
             this.gesamteLagerPlaetze = data.gesamt;
         });
+    }
+
+
+    getLiquideMittel()
+    {
+        this.keyFigures.getLiquideMittel().subscribe(data=>this.liquideMittel = data.liquideMittel,err=>console.log(err));
     }
 
     logOutRequest()
