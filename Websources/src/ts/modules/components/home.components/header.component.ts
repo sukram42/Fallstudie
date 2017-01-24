@@ -54,7 +54,11 @@ export class HeaderComponent{
     }
 
     getCapacity() {
-        this.proService.getLagerkapazitaet().subscribe(data => {
+        this.proService.getLagerkapazitaet().subscribe(data=>{
+            this.freieLagerPlaetze = data.free;
+            this.gesamteLagerPlaetze = data.gesamt;
+        });
+        this.proService.getLagerkapazitaetIntervall().subscribe(data => {
             this.freieLagerPlaetze = data.free;
             this.gesamteLagerPlaetze = data.gesamt;
         });

@@ -38,6 +38,8 @@ import {NewProductionHallComponent} from "./components/home.components/produktio
 import {ProductLineComponent} from "./components/home.components/produktion.component/productline-list.component";
 import {MachineListComponent} from "./components/home.components/produktion.component/machine-list.component";
 import {HomeService} from "./services/home.service";
+import {AusschreibungListComponent} from "./components/home.components/sales.component/ausschreibungen-list.component";
+import {SalesService} from "./services/sales.service";
 
 @NgModule({
     imports: [
@@ -103,12 +105,13 @@ import {HomeService} from "./services/home.service";
                    NewWarehouseComponent,
                    NewProductionHallComponent,
                    ProductLineComponent,
-                   MachineListComponent
+                   MachineListComponent,
+                   AusschreibungListComponent
     ],
 
     bootstrap:    [HomeComponent],
     providers : [HRService,{provide: RequestOptions, useClass : AuthRequestOptions},
-        ProduktionService,KeyFiguresService,HomeService
+        ProduktionService,KeyFiguresService,HomeService,SalesService
     ]
 })
 export class HomeModule {

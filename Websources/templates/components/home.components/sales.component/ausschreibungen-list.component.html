@@ -1,0 +1,32 @@
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" *ngIf="ausschreibungen">
+    <div class="panel panel-default" *ngFor="let ausschreibung of ausschreibungen; let i = index">
+        <div class="panel-heading" role="tab" id="überschriftEins">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion"
+                   [href]="'#collapse' + i" aria-expanded="true"
+                   aria-controls="collapseEins">
+                    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
+                    Ausschreibung #{{1+i}} für  {{ausschreibung.vertrag.produktlinie.produkt.name}}
+                    <small>zum {{ausschreibung.vertrag.end.dayOfMonth}}-{{ausschreibung.vertrag.end.month+1}}-{{ausschreibung.vertrag.end.year}}</small>
+                </a>
+            </h4>
+        </div>
+        <div [id]="'collapse' + i" class="panel-collapse collapse" role="tabpanel"
+             aria-labelledby="überschriftEins">
+            <div class="panel-body">
+                <a role="button" class="btn btn-success btn-xs right"
+                   data-toggle="modal"
+                   data-target="#">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    Angebot abgegen
+                </a>
+                <h4>Ausschreibung der Firma {{ausschreibung.vertrag.kunde}}</h4>
+                <br>
+                <h6>Produkt:</h6>
+                <p>{{ausschreibung.vertrag.produktlinie.menge}} {{ausschreibung.vertrag.produktlinie.produkt.name}} pro Periode der Stufe {{ausschreibung.vertrag.produktlinie.produkt.qualitaetsstufe}}</p>
+                <h6>Laufzeit:</h6>
+                <p>{{ausschreibung.vertrag.laufzeit}} Monate</p>
+            </div>
+        </div>
+    </div>
+</div>

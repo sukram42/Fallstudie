@@ -24,6 +24,13 @@ public class GameInterface implements ServletContextListener{
 
     private static Game game;
 
+    @GET
+    @Path("ausschreibungen")
+    public Response getAusschreibungen()
+    {
+        return Response.ok(gson.toJson(Game.getAusschreibungen())).build();
+    }
+
 
     @GET
     @Path("time")

@@ -30,6 +30,10 @@ export class NewWarehouseComponent {
     getCapacity()
     {
         this.proService.getLagerkapazitaet().subscribe(data=>{
+             this.frei = data.free;
+             this.gesamt = data.gesamt;
+         });
+        this.proService.getLagerkapazitaetIntervall().subscribe(data=>{
             this.frei = data.free;
             this.gesamt = data.gesamt;
         });

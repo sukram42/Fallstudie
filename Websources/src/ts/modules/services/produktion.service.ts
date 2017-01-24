@@ -55,11 +55,11 @@ export class ProduktionService {
     {
         return this.http.post('http://localhost:8080/rest/companies/production/warehouses',size).map(res=>res.text());
     }
-    // getLagerkapazitaet()
-    // {
-    //     return this.http.get('http://localhost:8080/rest/companies/production/warehouses/capacities').map(res=>res.json());
-    // }
     getLagerkapazitaet()
+    {
+        return this.http.get('http://localhost:8080/rest/companies/production/warehouses/capacities').map(res=>res.json());
+    }
+    getLagerkapazitaetIntervall()
     {
         return Observable.interval(5000).flatMap(()=> this.http.get('http://localhost:8080/rest/companies/production/warehouses/capacities').map(res=>res.json()));
     }

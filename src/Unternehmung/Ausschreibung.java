@@ -12,9 +12,9 @@ import java.util.Random;
  * Created by oehlersj on 19.01.2017.
  */
 public class Ausschreibung {
-    private static final String[] produkte = {"Rucksack", "Rucksacktech", "Duffel", "Reisetasche"};
-    private static final char[] qualitaetsstufen = {'A', 'B', 'C'};
-    private static final String[] kunden = {""}; // TODO Array mit (fiktiven oder echten?) Kundennamen füllen
+    private static final transient String[] produkte = {"Rucksack", "Rucksacktech", "Duffel", "Reisetasche"};
+    private static final transient char[] qualitaetsstufen = {'A', 'B', 'C'};
+    private static final transient String[] kunden = {"SchickerRucksackAG","Outdoorjoh.com","BergNeelSen","BergeUndSo","BergDoktor.com","Berglises Hausladen","My Litty Moutain","AdventureTime","LaBoutiqueDeLaSporte"}; // TODO Array mit (fiktiven oder echten?) Kundennamen füllen
     private Vertrag vertrag;
 
     public Ausschreibung() {
