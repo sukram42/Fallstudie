@@ -160,6 +160,10 @@ public class Produktion extends Abteilung {
             auftrag.setLaufzeit(auftrag.getLaufzeit() - 1);
             if (auftrag.getMenge() <= this.getFreienLagerPlatz()){ // genügend Lagerplatz verfügbar?
                 Produktlinie produktlinie = new Produktlinie(auftrag.getProdukt(), auftrag.getMenge()); // neue Produktlinie
+                //Prüfen ob Lager leer ist
+                if(lager.isEmpty()) {
+                    this.lager.add(produktlinie);
+                }
                 for (Produktlinie bestand : this.lager) {
                     // falls Produkte mit derselben id und herstellkosten schon vorhanden ist wird die Menge hochgesetzt:
                     if (produktlinie.getId().equals(bestand.getId()) &&
