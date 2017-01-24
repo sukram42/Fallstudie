@@ -29,7 +29,7 @@ public class Kennzahlensammlung {
     private double reklamationsrate;
     private Bekanntheitsgrad bekanntheitsgrad;
 
-    private Bilanz bilanz;
+    private transient Bilanz bilanz;
     private transient GuV guv;
 
     private int maxNeueMitarbeiter; // abhängig von HR-Mitarbeitern (für 10 Mitarbeiter ist ein HR-Mitarbeiter (=Manager) zuständig)
@@ -48,7 +48,7 @@ public class Kennzahlensammlung {
         this.getBilanz().setLiquideMittel(eigenkapital);
         this.unternehmen = unternehmen;
         this.bekanntheitsgrad = new Bekanntheitsgrad(unternehmen);
-        this.maxNeueMitarbeiter = 0;
+        this.maxNeueMitarbeiter = 1;
     }
 
     // Berechnungen:

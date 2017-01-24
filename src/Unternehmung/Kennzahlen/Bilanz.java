@@ -21,8 +21,8 @@ public class Bilanz {
 
     public Bilanz(Unternehmen unternehmen) {
 
-        this.eigenkapital = 100000;
-        this.liquideMittel=100000;
+        this.eigenkapital  = 100000;
+        this.liquideMittel = 100000;
 
     }
 

@@ -3,6 +3,7 @@ package Unternehmung;
 import Exceptions.ZuWenigMaschinenstellplatzException;
 import Exceptions.ZuWenigMitarbeiterException;
 import Exceptions.ZuWenigMitarbeiterOderMaschinenException;
+import Rules.Game;
 import Unternehmung.Abteilungen.Marketing;
 import Unternehmung.Abteilungen.Produktion;
 import Unternehmung.Abteilungen.SozialeLeistungen;
@@ -13,10 +14,12 @@ import Unternehmung.Abteilungen.SozialeLeistungen;
  */
 public class UnternehmenTest {
     public static void main(String[] args) {
-
+        Game game = new Game();
         // ############################## UNTERNEHMEN 1 ##############################
         // Unternehmen erstellen:
         Unternehmen unternehmen1 = new Unternehmen("Unternehmen 1", "kennwort", 1000000);
+
+        game.getCompanies().add(unternehmen1);
 
         System.out.println("Liquide Mittel " + unternehmen1.getKennzahlensammlung().getBilanz().getLiquideMittel());
 
@@ -37,8 +40,10 @@ public class UnternehmenTest {
         System.out.println("Image: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("image").berechnen());
         System.out.println("Produktqualität: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("produktqualität").berechnen());
 
+
         // Mitarbeiter einstellen:
         try {
+            unternehmen1.getAbteilung("hr").addMitarbeiter(5, 25000);
             unternehmen1.getAbteilung("produktion").addMitarbeiter(1, 25000);
         } catch (ZuWenigMitarbeiterException e){
             e.printStackTrace();
@@ -63,6 +68,14 @@ public class UnternehmenTest {
         } catch (ZuWenigMitarbeiterOderMaschinenException e) {
             e.printStackTrace();
         }
+        //Tage vorspulen um Produktion zu testen
+        System.err.println("Tag " + Game.getCalendar().getTime().getDay());
+        game.run();
+        game.run();
+        game.run();
+        System.err.println("3 Tage später:______________________________");
+        System.err.println("Tag " + Game.getCalendar().getTime().getDay());
+        System.err.println("nur noch " + produktion1.getFreienLagerPlatz() + " von " + produktion1.getGesamtenLagerPlatz() + " Plätzen frei");
 
         // Marketingkampagne und Marktforschung:
         Marketing marketing1 = (Marketing) unternehmen1.getAbteilung("marketing");
@@ -85,6 +98,8 @@ public class UnternehmenTest {
 
         // Mitarbeiter einstellen:
         try {
+
+            unternehmen2.getAbteilung("hr").addMitarbeiter(10, 25000);
             unternehmen2.getAbteilung("produktion").addMitarbeiter(10, 25000);
             //unternehmen2.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
         } catch (ZuWenigMitarbeiterException e){
