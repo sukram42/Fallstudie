@@ -37,6 +37,11 @@ export class KeyFiguresService {
             .map(response => response.text()));
     }
 
+    getLiquideMittel()
+    {
+        return Observable.interval(1000).flatMap(()=>this.http.get('http://localhost:8080/rest/companies/keyfigures/bilanz')
+            .map(res=>res.json()));
+    }
 
 
 }

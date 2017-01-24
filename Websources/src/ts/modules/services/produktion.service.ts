@@ -8,6 +8,7 @@ import {Http, Headers} from "@angular/http";
 
 import 'rxjs/Rx';
 import {Subject} from "rxjs/Subject";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class ProduktionService {
@@ -26,7 +27,7 @@ export class ProduktionService {
     produzieren(data)
     {
         this.http.post('http://localhost:8080/rest/companies/production',data).map(res => res.text())
-            .subscribe(data=>data,
+            .subscribe(data=>console.log(data),
                 err=>console.log(err),
                 ()=>this.productlinesSubject.next("new Product")
             );
@@ -54,9 +55,13 @@ export class ProduktionService {
     {
         return this.http.post('http://localhost:8080/rest/companies/production/warehouses',size).map(res=>res.text());
     }
+    // getLagerkapazitaet()
+    // {
+    //     return this.http.get('http://localhost:8080/rest/companies/production/warehouses/capacities').map(res=>res.json());
+    // }
     getLagerkapazitaet()
     {
-        return this.http.get('http://localhost:8080/rest/companies/production/warehouses/capacities').map(res=>res.json());
+        return Observable.interval(5000).flatMap(()=> this.http.get('http://localhost:8080/rest/companies/production/warehouses/capacities').map(res=>res.json()));
     }
     kaufeProduktionshalle(size)
     {

@@ -137,33 +137,6 @@ public class CompanyInterface {
         }
     }
 
-    @GET
-    @Secured
-    @Path("keyfigures/soft/{keyfigure}")
-    public Response getKeyFigure(@Context SecurityContext securityContext, @PathParam("keyfigure") String keyfigure) {
-
-        Kennzahl kennzahl = getCompanyFromContext(securityContext).getKennzahlensammlung().getWeicheKennzahl(keyfigure);
-
-            if (kennzahl != null) {
-                return Response.ok(kennzahl.getWert()).build();
-            }
-            else
-                return Response.ok(-1).build();
-    }
-
-    @GET
-    @Secured
-    @Path("keyfigures/soft")
-    public Response getKeyFigures(@Context SecurityContext securityContext)
-    {
-       Unternehmen unternehmen = getCompanyFromContext(securityContext);
-        JSONObject object = new JSONObject();
-        Kennzahlensammlung ks = unternehmen.getKennzahlensammlung();
-        object.put("mitarbeiterzufriedenheit",ks.getWeicheKennzahl("mitarbeiterzufriedenheit").berechnen()*100f);
-        object.put("image",ks.getWeicheKennzahl("image").berechnen()*100f);
-        object.put("kundenzufriedenheit",ks.getWeicheKennzahl("kundenzufriedenheit").berechnen()*100f);
-       return Response.ok().entity(gson.toJson(object)).build();
-    }
 
     @PUT
     @Secured
