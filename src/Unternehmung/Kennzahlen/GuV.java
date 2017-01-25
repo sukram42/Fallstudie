@@ -78,7 +78,7 @@ public class GuV {
         Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
         float herstellkosten = produktion.getTaeglicheHerstellkosten();
         float energiekosten = produktion.getTaeglicheEnergiekosten();
-        if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == 26) { // Gehälter nur einmal im Monat (am 26. jeden Monats):
+        if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)) { // Gehälter nur einmal im Monat (am 26. jeden Monats):
             gehälter = ((HR)unternehmen.getAbteilung("hr")).getTotalGehalt();
         }
         kosten = werbekosten + gehälter + sozialeLeistungen + herstellkosten + energiekosten;

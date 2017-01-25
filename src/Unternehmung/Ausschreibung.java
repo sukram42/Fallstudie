@@ -27,7 +27,7 @@ public class Ausschreibung {
     private Vertrag generateRandomVertrag(){
         Random random = new Random();
         float preis = 50; // TODO Preise basierend auf Kennzahlen und Produkt generieren
-        String kunde = kunden[random.nextInt(kunden.length - 1)];
+        String kunde = kunden[random.nextInt(kunden.length)];
         int laufzeit = random.nextInt(59) + 1; // generiert zufällige Laufzeit zwischen 1 (= einmaliger Auftrag) und 60 Monaten (= 5 Jahre)
         return new Vertrag(this.generateRandomProduktlinie(), preis, kunde, laufzeit);
     }
@@ -38,8 +38,8 @@ public class Ausschreibung {
     private Produktlinie generateRandomProduktlinie(){
         // TODO ist die Gefahr hier zu groß, dass Produkte, die ein Spieler produziert hat überhaupt nicht nachgefragt werden?
         Random random = new Random();
-        String name = produkte[random.nextInt(3)];
-        char qualitaetsstufe = qualitaetsstufen[random.nextInt(2)];
+        String name = produkte[random.nextInt(4)];
+        char qualitaetsstufe = qualitaetsstufen[random.nextInt(3)];
         int menge = random.nextInt(500) + 25; // TODO Größe der Ausschreibungen an durchschnittlicher Produktionsmenge festmachen!
         return new Produktlinie(new Produkt(name, qualitaetsstufe), menge);
     }
