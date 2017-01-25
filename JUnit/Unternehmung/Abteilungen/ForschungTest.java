@@ -1,5 +1,6 @@
 package Unternehmung.Abteilungen;
 
+import Exceptions.ZuWenigMitarbeiterException;
 import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Unternehmen;
 import org.junit.After;
@@ -21,9 +22,10 @@ public class ForschungTest{
     String forschungsobjekt;
 
     @Before
-    public void setUp(){
+    public void setUp() throws ZuWenigMitarbeiterException {
         forschungsobjekt = "ReisetascheA";
         unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
+        unternehmen.getAbteilung("hr").addMitarbeiter(1,10000);
         kennzahlensammlung = unternehmen.getKennzahlensammlung();
         produktion = (Produktion)unternehmen.getAbteilung("produktion");
         testForschung = new Forschung(kennzahlensammlung, produktion);

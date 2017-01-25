@@ -14,14 +14,14 @@ import java.util.*;
 public class Vertrieb extends Abteilung {
 
     private Produktion produktion;
-    private Map<Integer, Ausschreibung> opportunities;
+    private ArrayList<Ausschreibung> opportunities;
     private List<Vertrag> accounts;
 
 
     public Vertrieb(Kennzahlensammlung kennzahlensammlung, Abteilung produktion) {
         super("Vertrieb",kennzahlensammlung);
         this.produktion = (Produktion) produktion;
-        opportunities = new HashMap<>();
+        opportunities = new ArrayList<>();
         accounts = new ArrayList<>();
     }
 
@@ -32,7 +32,7 @@ public class Vertrieb extends Abteilung {
     public void bewerben(int index) throws ZuWenigMitarbeiterException{
         if (this.mitarbeiter.size() > opportunities.size()) {
             ArrayList<Ausschreibung> ausschreibungen = Game.getAusschreibungen();
-            opportunities.put(index, ausschreibungen.get(index));
+            opportunities.add(ausschreibungen.get(index));
         } else {
             throw new ZuWenigMitarbeiterException("Vertrieb");
         }
@@ -112,7 +112,7 @@ public class Vertrieb extends Abteilung {
 
 
     // Getter und Setter:
-    public Map<Integer, Ausschreibung> getOpportunities() {
+    public ArrayList<Ausschreibung> getOpportunities() {
         return opportunities;
     }
 

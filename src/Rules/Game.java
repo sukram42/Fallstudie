@@ -31,6 +31,8 @@ public class Game extends TimerTask {
 
         Timer timer = new Timer();
         timer.schedule(this, 0, COUNTER_INTERVALL);
+
+        updateAusschreibungen();
     }
 
     public static ArrayList<Unternehmen> getCompanies() {
@@ -107,7 +109,7 @@ public class Game extends TimerTask {
                 Map<Unternehmen, Float> bewerber = new HashMap<Unternehmen, Float>();
                 for (Unternehmen unternehmen : companies) {
                     Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
-                    if (vertrieb.getOpportunities().get(i) != null) {
+                    if (vertrieb.getOpportunities().size()>i) {
                         bewerber.put(unternehmen, unternehmen.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert());
                     }
                 }
@@ -141,6 +143,7 @@ public class Game extends TimerTask {
 
     public void updateCounter() {
         gameCalendar.add(Calendar.DAY_OF_MONTH, 1);
+        System.out.println(gameCalendar.getTime().toString());
     }
 
 }

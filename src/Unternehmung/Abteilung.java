@@ -63,8 +63,6 @@ public class Abteilung {
 						address.get("street").getAsString() + " " + address.get("city").getAsString(),
 						picture.get("medium").getAsString(), 'w', gehalt);
 				m.setDepartment(this);
-				System.out.println("Vor und Nachname: " +
-						m.getVorname() + " " + m.getName());
 
 				mitarbeiter.add(m);
 

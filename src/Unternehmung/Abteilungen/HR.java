@@ -24,6 +24,10 @@ public class HR extends Abteilung {
         this.unternehmen = unternehmen;
     }
 
+    /**
+     * Gibt Monatsgehalt aller Beschäftigten zurück
+     * @return
+     */
     public float getTotalGehalt()
     {
         float gehalt = 0;
