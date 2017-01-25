@@ -6,6 +6,7 @@ import Rules.Game;
 import Unternehmung.*;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Abteilung, die für Vertrieb zuständig ist
@@ -15,14 +16,14 @@ public class Vertrieb extends Abteilung {
 
     private Produktion produktion;
     private Map<Integer, Ausschreibung> opportunities;
-    private List<Vertrag> accounts;
+    private CopyOnWriteArrayList<Vertrag> accounts;
 
 
     public Vertrieb(Kennzahlensammlung kennzahlensammlung, Abteilung produktion) {
         super("Vertrieb",kennzahlensammlung);
         this.produktion = (Produktion) produktion;
         opportunities = new HashMap<>();
-        accounts = new ArrayList<>();
+        accounts = new CopyOnWriteArrayList<>();
     }
 
     /**
@@ -31,7 +32,7 @@ public class Vertrieb extends Abteilung {
      */
     public void bewerben(int index) throws ZuWenigMitarbeiterException{
         if (this.mitarbeiter.size() > opportunities.size()) {
-            ArrayList<Ausschreibung> ausschreibungen = Game.getAusschreibungen();
+            List<Ausschreibung> ausschreibungen = Game.getAusschreibungen();
             opportunities.put(index, ausschreibungen.get(index));
         } else {
             throw new ZuWenigMitarbeiterException("Vertrieb");
@@ -50,7 +51,7 @@ public class Vertrieb extends Abteilung {
      * Verkauf von Produkten: Lagerbestand verringern, Umsatz erhöhen
      * ruft vertragBrechen() auf, falls nicht genügend Produkte im Lager vorhanden sind
      */
-    private void produkteVerkaufen(){
+    private  void produkteVerkaufen(){
         float umsatz = 0;
         for (Vertrag vertrag : accounts){
             boolean vertragErfüllt = false;
@@ -88,7 +89,7 @@ public class Vertrieb extends Abteilung {
      * Vertragsbruch: Strafe zahlen (Liquidität verringern, Aufwendung verbuchen), Vertrag wird gekündigt (gelöscht)
      * @param vertrag, der nicht eingehalten wurde
      */
-    private void vertragBrechen(Vertrag vertrag){
+    private  void vertragBrechen(Vertrag vertrag){
         try {
             this.kennzahlensammlung.getBilanz().liquiditaetAnpassen(- vertrag.getStrafe());
             this.kennzahlensammlung.getGuv().addGeleisteterSchandsersatz(vertrag.getStrafe());
@@ -99,7 +100,7 @@ public class Vertrieb extends Abteilung {
     }
 
    @Override
-    public void update() {
+    public  void update() {
         if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH)){
             this.produkteVerkaufen();
             for (Vertrag vertrag : this.accounts){

@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Hilfsklasse, um z.B. den Gewinner eines Spiels festzulegen
@@ -14,13 +15,13 @@ import java.util.*;
  */
 public class Game extends TimerTask {
 
-    private static final int COUNTER_INTERVALL = 3 * 1000;//16*1000*60;//16 Minuten
+    private static final int COUNTER_INTERVALL = 100;//3 * 1000;//16*1000*60;//16 Minuten
     private static long counter = 0;
 
     private static Calendar gameCalendar = new GregorianCalendar(2010, 1, 1);
 
     private static ArrayList<Unternehmen> companies = new ArrayList<>();
-    private static ArrayList<Ausschreibung> ausschreibungen = new ArrayList<Ausschreibung>();
+    private static List<Ausschreibung> ausschreibungen = new CopyOnWriteArrayList<>();
 
     /**
      * Konstruktor für ein Spiel mit 2 Spielern
@@ -71,7 +72,7 @@ public class Game extends TimerTask {
     }
 
     // Getter und Setter:
-    public static ArrayList<Ausschreibung> getAusschreibungen() {
+    public static List<Ausschreibung> getAusschreibungen() {
         return ausschreibungen;
     }
 
@@ -109,7 +110,7 @@ public class Game extends TimerTask {
                 Map<Unternehmen, Float> bewerber = new HashMap<Unternehmen, Float>();
                 for (Unternehmen unternehmen : companies) {
                     Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
-                    if (vertrieb.getOpportunities().size()>i) {
+                    if (vertrieb.getOpportunities().get(i) != null) {
                         bewerber.put(unternehmen, unternehmen.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert());
                     }
                 }
