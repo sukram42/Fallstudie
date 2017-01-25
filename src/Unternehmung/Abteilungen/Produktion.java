@@ -66,7 +66,7 @@ public class Produktion extends Abteilung {
     }
 
     /**
-     * Funktion zum Kaufen von Maschinen (die Anschaffungskosten werden direkt weitergegeben (siehe addSonstigeKosten()))
+     * Funktion zum Kaufen von Maschinen (die Anschaffungskosten werden direkt weitergegeben)
      * @param produkt das Produkt, das mit der Maschine erzeugt werden soll
      * @param klasse 1, 2 oder 3
      * @param anzahl Anzahl der zu kaufenden Maschinen
@@ -80,7 +80,7 @@ public class Produktion extends Abteilung {
                 kennzahlensammlung.getBilanz().liquiditaetAnpassen(-1*(anschaffungskst * anzahl));
                 kennzahlensammlung.getBilanz().addTAMasch(anschaffungskst * anzahl);
                 maschinen.add(m);
-                for (int i = 1; i <= anzahl; i++) {
+                for (int i = 1; i < anzahl; i++) {
                     Maschine n = new Maschine(produkt, klasse);
                     maschinen.add(n);
                 }

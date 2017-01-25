@@ -117,6 +117,10 @@ public class Vertrieb extends Abteilung {
         return opportunities;
     }
 
+    public void setOpportunities(Map<Integer, Ausschreibung> opportunities) {
+        this.opportunities = opportunities;
+    }
+
     public List<Vertrag> getAccounts() {
         return accounts;
     }
