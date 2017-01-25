@@ -99,7 +99,7 @@ public class Game extends TimerTask {
     }
 
     /**
-     * legt am ersten Tag jedes Monats fest, wer den Zuschlag bekommt, löscht dann alle Ausschreibungen und generiert neue
+     * legt am ersten Tag jedes Monats fest, wer den Zuschlag bekommt, löscht dann alle Opportunities und Ausschreibungen und generiert neue Ausschreibungen
      */
     private void updateAusschreibungen() {
         if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == 1) {
@@ -127,6 +127,11 @@ public class Game extends TimerTask {
                         vertrieb.zuschlagBekommen(i);
                     }
                 }
+            }
+            // Opportunities bei allen Unternehmen löschen:
+            for (Unternehmen unternehmen : companies){
+                Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
+                vertrieb.setOpportunities(null);
             }
             // alte Ausschreibugnen löschen:
             for (int i = 0; i < ausschreibungen.size(); i++) {
