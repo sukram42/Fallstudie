@@ -29,7 +29,7 @@ public class Bilanz {
     //muss am Ende jedes Jahres ausgeführt werden
     public void berechnen()
     {
-       // eigenkapitalAnpassen(this.guv.jahresabschluss()); -> verschoben in Kennzahlensammlung, weil dort nun die GuV liegt
+       // TODO (wofür) brauchen wir diese Methode? -> Jahresabschluss verändert EK bereits / evtl Berechnung der Bilanzsumme?!
     }
 
     /**

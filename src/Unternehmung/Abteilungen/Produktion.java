@@ -158,7 +158,7 @@ public class Produktion extends Abteilung {
     private void produkteFertigstellen () throws LagerVollException {
         for (Produktlinie auftrag : this.aufträge){
             auftrag.setLaufzeit(auftrag.getLaufzeit() - 1);
-            if (auftrag.getEnd() == Game.getCalendar()){ // falls Laufzeit == 0 Auftrag beenden
+            if (auftrag.getEnd().equals(Game.getCalendar())){ // falls Laufzeit == 0 Auftrag beenden
                 this.aufträge.remove(auftrag);
             }
             if (auftrag.getMenge() <= this.getFreienLagerPlatz()){ // genügend Lagerplatz verfügbar?
