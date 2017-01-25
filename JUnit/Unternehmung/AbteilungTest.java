@@ -67,8 +67,8 @@ public class AbteilungTest{
     public void getMitarbeiterKosten(){
         try{
         testAbteilung.addMitarbeiter(2, 10000);
+        assertEquals(testAbteilung.getMitarbeiterKosten(), (2 * 10000), 0.5);
         } catch (ZuWenigMitarbeiterException e) {
-            assertEquals(testAbteilung.getMitarbeiterKosten(), (2 * 10000), 0.5);
         }
     }
 
