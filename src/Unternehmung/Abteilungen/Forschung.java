@@ -48,6 +48,7 @@ public class Forschung extends Abteilung{
         for (Map.Entry<String, Double> alterImagebonus : this.imageBoni.entrySet()){
             if (alterImagebonus.getKey().equals(id)){
                 alterImagebonus.setValue(neuerImagebonus);
+                //ToDO  Image in Kennzahlensammlung verändern
             }
         }
     }
@@ -61,7 +62,7 @@ public class Forschung extends Abteilung{
         return 0;
     }
 
-    public void starteProjekt(Produktion produktion, Forschung forschung, String forschungsobjekt, int mitarbeiterAnzahl, long dauer, boolean herstellkosten, Kennzahlensammlung kennzahlensammlung){
+    public void starteProjekt(Produktion produktion, Forschung forschung, String forschungsobjekt, int mitarbeiterAnzahl, int dauer, boolean herstellkosten){
         if((beschäftigteMitarbeiter + mitarbeiterAnzahl) <= this.getMitarbeiterAnzahl()) { //Überprüfung, ob es genügend Mitarbeiter gibt
             beschäftigteMitarbeiter =+ mitarbeiterAnzahl;
             Forschungsprojekt forschungsprojekt = new Forschungsprojekt(produktion, forschung, forschungsobjekt, mitarbeiterAnzahl, dauer, herstellkosten);
@@ -103,9 +104,9 @@ public ArrayList<String> getVerfügbareProdukte() {
 }
 
 public void update() {
-    for (Forschungsprojekt projekt : projekte) {
-        if ((projekt.getBeginn() + projekt.getDauer()) <= Game.getTime()) { //Wurde das Projekt abgeschlossen?
-            projekt.abschließen();
+    for ( Forschungsprojekt projekt : projekte) {
+        if (projekt.getEnde() == Game.getCalendar()) {
+            forschungsprojektAbschließen(projekt);
         }
     }
 }

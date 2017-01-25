@@ -1,8 +1,6 @@
 package Unternehmung.Abteilungen;
 
-import Exceptions.ZuWenigMitarbeiterException;
 import Unternehmung.Kennzahlensammlung;
-import Unternehmung.Produkt;
 import Unternehmung.Unternehmen;
 import org.junit.After;
 import org.junit.Before;
@@ -20,11 +18,10 @@ public class ProduktionTest{
     private Produktion testProduktion;
 
     @Before
-    public void testCreateProduktion() throws ZuWenigMitarbeiterException {
-        Unternehmen testUnternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
-        kennzahlensammlung = testUnternehmen.getKennzahlensammlung();
-        testProduktion = (Produktion)testUnternehmen.getAbteilung("produktion");
-        testUnternehmen.getAbteilung("hr").addMitarbeiter(1,10000);
+    public void setUp() {
+        Unternehmen unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
+        kennzahlensammlung = unternehmen.getKennzahlensammlung();
+        testProduktion = (Produktion)unternehmen.getAbteilung("produktion");
         assertNotNull(testProduktion);
     }
 
@@ -73,6 +70,7 @@ assertFalse(testProduktion.getForschungsboni().isEmpty());
         testProduktion.maschinenKaufen("Rucksack",1, 1);
         assertFalse(testProduktion.getMaschinen().isEmpty());
     }
+
 
 
     @Test
