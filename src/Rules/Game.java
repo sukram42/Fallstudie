@@ -31,6 +31,8 @@ public class Game extends TimerTask {
 
         Timer timer = new Timer();
         timer.schedule(this, 0, COUNTER_INTERVALL);
+
+        updateAusschreibungen();
     }
 
     public static ArrayList<Unternehmen> getCompanies() {

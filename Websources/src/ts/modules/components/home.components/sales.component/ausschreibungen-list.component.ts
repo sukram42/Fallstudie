@@ -17,4 +17,9 @@ export class AusschreibungListComponent {
         this.salesService.getAusschreibungen().subscribe(data=>{this.ausschreibungen = data,console.log(data)},err=>console.log(err));
     }
 
+    bewerben(index)
+    {
+        this.salesService.bewerben(index);
+    }
+
 }

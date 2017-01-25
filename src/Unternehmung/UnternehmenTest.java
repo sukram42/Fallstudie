@@ -7,6 +7,8 @@ import Rules.Game;
 import Unternehmung.Abteilungen.Marketing;
 import Unternehmung.Abteilungen.Produktion;
 import Unternehmung.Abteilungen.SozialeLeistungen;
+import Unternehmung.Abteilungen.Vertrieb;
+import com.google.gson.Gson;
 
 /**
  * nur eine Testklasse!
@@ -76,6 +78,18 @@ public class UnternehmenTest {
         System.err.println("3 Tage später:______________________________");
         System.err.println("Tag " + Game.getCalendar().getTime().getDay());
         System.err.println("nur noch " + produktion1.getFreienLagerPlatz() + " von " + produktion1.getGesamtenLagerPlatz() + " Plätzen frei");
+
+        Vertrieb vertrieb = (Vertrieb)unternehmen1.getAbteilung("vertrieb");
+        try {
+            vertrieb.addMitarbeiter(1,10000);
+            System.out.print("SIZE : "+ game.getAusschreibungen().size());
+            vertrieb.bewerben(0);
+            System.out.println(new Gson().toJson(vertrieb.getOpportunities()));
+        } catch (ZuWenigMitarbeiterException e) {
+            e.printStackTrace();
+        }
+
+
 
         // Marketingkampagne und Marktforschung:
         Marketing marketing1 = (Marketing) unternehmen1.getAbteilung("marketing");

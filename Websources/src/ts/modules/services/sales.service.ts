@@ -10,7 +10,7 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class SalesService {
 
-    private mockSubject = new Subject<any>();
+    private opportunitiesSubject = new Subject<any>();
 
 
     constructor(private http: Http) {
@@ -18,8 +18,29 @@ export class SalesService {
 
     getAusschreibungen()
     {
+        //return Observable.interval(1000).flatMap(()=>this.http.get('http://localhost:8080/rest/companies/sales/ausschreibungen').map(response => response.json()));
+        return this.http.get('http://localhost:8080/rest/companies/sales/ausschreibungen').map(response => response.json());
+
+    }
+    getOpportunities()
+    {
         // return Observable.interval(1000).flatMap(()=>this.http.get('http://localhost:8080/rest/ausschreibungen').map(response => response.json()));
-        return this.http.get('http://localhost:8080/rest/ausschreibungen').map(response => response.json());
+        return this.http.get('http://localhost:8080/rest/companies/sales/opportunities').map(response => response.json());
+    }
+    getOpportunitiesSubject()
+    {
+        return this.opportunitiesSubject.asObservable();
+    }
+    bewerben(index)
+    {
+        return this.http.post('http://localhost:8080/rest/companies/sales/ausschreibungen',index)
+            .map(response => response.text())
+            .subscribe(data=>this.opportunitiesSubject.next(data),err=>console.log(err));
+    }
+    getAccounts()
+    {
+        // return Observable.interval(1000).flatMap(()=>this.http.get('http://localhost:8080/rest/ausschreibungen').map(response => response.json()));
+        return this.http.get('http://localhost:8080/rest/companies/sales/accounts').map(response => response.json());
 
     }
 }

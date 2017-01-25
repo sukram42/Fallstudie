@@ -1,4 +1,3 @@
-
 /**
  * Created by boebel on 04.01.2017.
  */
@@ -28,7 +27,7 @@ import {EmployeeListComponent} from "./components/home.components/human-ressourc
 import {HRService} from "./services/hr.service";
 import {SozialeLeistungenComponent} from "./components/home.components/human-ressources.component/soziale-leistungen.component";
 
-import { ChartModule } from 'angular2-chartjs';
+import {ChartModule} from 'angular2-chartjs';
 import {ProduktionService} from "./services/produktion.service";
 import {NewProductLineComponent} from "./components/home.components/produktion.component/new-product-line.component";
 import {KeyFiguresService} from "./services/keyfigures.service";
@@ -40,6 +39,8 @@ import {MachineListComponent} from "./components/home.components/produktion.comp
 import {HomeService} from "./services/home.service";
 import {AusschreibungListComponent} from "./components/home.components/sales.component/ausschreibungen-list.component";
 import {SalesService} from "./services/sales.service";
+import {OpportunitiesListComponent} from "./components/home.components/sales.component/opportunities-list.component";
+import {AccountsListComponent} from "./components/home.components/sales.component/accounts-list.component";
 
 @NgModule({
     imports: [
@@ -88,30 +89,32 @@ import {SalesService} from "./services/sales.service";
         ])
     ],
     declarations: [HomeComponent,
-                   HeaderComponent,
-                   DashboardComponent,
-                   SalesComponent,
-                   ResearchComponent,
-                   ProduktionComponent,
-                   MarketingComponent,
-                   HRComponent,
-                   AccountsComponent,
-                   KeyfiguresComponent,
-                   NewEmployeeComponent,
-                   EmployeeListComponent,
-                   SozialeLeistungenComponent,
-                   NewProductLineComponent,
-                   NewMachineComponent,
-                   NewWarehouseComponent,
-                   NewProductionHallComponent,
-                   ProductLineComponent,
-                   MachineListComponent,
-                   AusschreibungListComponent
+        HeaderComponent,
+        DashboardComponent,
+        SalesComponent,
+        ResearchComponent,
+        ProduktionComponent,
+        MarketingComponent,
+        HRComponent,
+        AccountsComponent,
+        KeyfiguresComponent,
+        NewEmployeeComponent,
+        EmployeeListComponent,
+        SozialeLeistungenComponent,
+        NewProductLineComponent,
+        NewMachineComponent,
+        NewWarehouseComponent,
+        NewProductionHallComponent,
+        ProductLineComponent,
+        MachineListComponent,
+        AusschreibungListComponent,
+        OpportunitiesListComponent,
+        AccountsListComponent
     ],
 
-    bootstrap:    [HomeComponent],
-    providers : [HRService,{provide: RequestOptions, useClass : AuthRequestOptions},
-        ProduktionService,KeyFiguresService,HomeService,SalesService
+    bootstrap: [HomeComponent],
+    providers: [HRService, {provide: RequestOptions, useClass: AuthRequestOptions},
+        ProduktionService, KeyFiguresService, HomeService, SalesService
     ]
 })
 export class HomeModule {
