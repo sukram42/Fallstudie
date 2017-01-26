@@ -23,6 +23,7 @@ public class ForschungsprojektTest {
         unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
         produktion = (Produktion)unternehmen.getAbteilung("produktion");
         forschung = (Forschung)unternehmen.getAbteilung("forschung");
+        unternehmen.getAbteilung("hr").addMitarbeiter(1, 1000);
         forschung.addMitarbeiter(5, 10000);
         testForschungsprojekt = new Forschungsprojekt(produktion, forschung, "RucksacktechA", 5, 50, true);
         assertNotNull(testForschungsprojekt);

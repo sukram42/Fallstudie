@@ -36,7 +36,8 @@ testGuV = new GuV(unternehmen);
       HR hr = (HR)unternehmen.getAbteilung("hr");
       hr.addMitarbeiter(2, 1000);
       testGuV.importAufwandUndErlös();
-        assertEquals(testGuV.getAufwendungenFuerGehaelter(), 2000 / 12, 0.5);
+      long gehalt = 2000 / 12;
+        assertEquals(testGuV.getAufwendungenFuerGehaelter(), gehalt, 0.5);
     }
 
     @Test
