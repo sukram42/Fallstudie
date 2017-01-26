@@ -8,8 +8,11 @@ import Rules.Game;
 import Unternehmung.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.lang.Math.round;
 
 /**
  * Klasse, die die Produktionsabteilung repräsentiert
@@ -39,7 +42,7 @@ public class Produktion extends Abteilung {
      * Methode zum Erstellen eines Produktionsauftrags
      * @param name Produkt (z.B. Rucksack)
      * @param qualitätsstufe A, B oder C
-     * @param menge Größe des Auftrags -> so viele Produkte sollen in...
+     * @param menge Größe des Auftrags -> so viele Produkte sollen monatlich in...
      * @param laufzeit ...so viel Zeit produziert werden (in (Spiel-)Wochen
      */
     public void produzieren(String name, char qualitätsstufe, int menge, int laufzeit) throws ZuWenigMitarbeiterOderMaschinenException{
@@ -162,7 +165,7 @@ public class Produktion extends Abteilung {
                 this.aufträge.remove(auftrag);
             }
             if (auftrag.getMenge() <= this.getFreienLagerPlatz()){ // genügend Lagerplatz verfügbar?
-                Produktlinie produktlinie = new Produktlinie(auftrag.getProdukt(), auftrag.getMenge()); // neue Produktlinie
+                Produktlinie produktlinie = new Produktlinie(auftrag.getProdukt(), round(auftrag.getMenge()/Game.getCalendar().getActualMaximum(Calendar.MONTH))); // neue Produktlinie
                 //Prüfen ob Lager leer ist
                 if(lager.isEmpty()) {
                     this.lager.add(produktlinie);
