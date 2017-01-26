@@ -36,16 +36,16 @@ public class GuV {
     }
 
     public void jahresabschluss(Bilanz bilanz){
+        this.setJahresUeberschuss(0);
         this.jahresUeberschuss=(this.umsatzErlöse - (this.aufwendungenFuerEnergie + this.aufwendungenFuerGehaelter +
                 this.aufwendungenFuerRohstoffe + this.aufwendungenFuerWerbung + this.zinsaufwendungen + this.fremdinstandhaltung));
         this.setAufwendungenFuerEnergie(0);
         this.setAufwendungenFuerGehaelter(0);
         this.setAufwendungenFuerWerbung(0);
-        this.setJahresUeberschuss(0);
         this.setUmsatzErlöse(0);
         this.setZinsaufwendungen(0);
         this.setFremdinstandhaltung(0);
-        bilanz.eigenkapitalAnpassen(jahresUeberschuss);
+        bilanz.eigenkapitalAnpassen(this.jahresUeberschuss);
     }
 
     /**

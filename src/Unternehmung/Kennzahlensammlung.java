@@ -48,7 +48,7 @@ public class Kennzahlensammlung {
         this.getBilanz().setLiquideMittel(eigenkapital);
         this.unternehmen = unternehmen;
         this.bekanntheitsgrad = new Bekanntheitsgrad(unternehmen);
-        this.maxNeueMitarbeiter = 1;
+        this.maxNeueMitarbeiter = 0;
     }
 
     // Berechnungen:

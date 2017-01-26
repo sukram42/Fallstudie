@@ -1,6 +1,7 @@
 package Unternehmung.Abteilungen;
 
 
+import Exceptions.ZuWenigMitarbeiterException;
 import Unternehmung.Abteilung;
 import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Mitarbeiter;
@@ -20,16 +21,16 @@ public class HR extends Abteilung {
      * @param kennzahlensammlung Kennzahlenobjekt wird später benötigt, um Kennzahlensammlung laufend fortzuschreiben / zu berechnen
      */
     public HR(Unternehmen unternehmen, Kennzahlensammlung kennzahlensammlung) {
-        super("Human-Resources" ,kennzahlensammlung);
+        super("Human-Resources", kennzahlensammlung);
         this.unternehmen = unternehmen;
     }
 
     /**
      * Gibt Monatsgehalt aller Beschäftigten zurück
+     *
      * @return
      */
-    public float getTotalGehalt()
-    {
+    public float getTotalGehalt() {
         float gehalt = 0;
         for (Abteilung abteilung : unternehmen.getAbteilungen().values()) {
             for (Mitarbeiter arbeiter : abteilung.getMitarbeiter()) {
@@ -38,22 +39,23 @@ public class HR extends Abteilung {
         }
         return gehalt;
     }
+
     public float getDurchschnittlichesGehalt() {
         float anzahl = getTotalMitarbeiterCount();
         float gehalt = getTotalGehalt();
-        if(anzahl==0)return -1;
+        if (anzahl == 0) return -1;
         return (gehalt / anzahl);
     }
-    public int getTotalMitarbeiterCount()
-    {
+
+    public int getTotalMitarbeiterCount() {
         int count = 0;
         for (Abteilung abteilung : unternehmen.getAbteilungen().values()) {
-            count+=abteilung.getMitarbeiterAnzahl();
+            count += abteilung.getMitarbeiterAnzahl();
         }
         return count;
     }
-    public ArrayList<Mitarbeiter> getTotalMitarbeiter()
-    {
+
+    public ArrayList<Mitarbeiter> getTotalMitarbeiter() {
         ArrayList<Mitarbeiter> erg = new ArrayList<>();
         for (Abteilung abteilung : unternehmen.getAbteilungen().values()) {
             erg.addAll(abteilung.getMitarbeiter());
@@ -61,12 +63,20 @@ public class HR extends Abteilung {
         return erg;
     }
 
-    public boolean kuendigeMitarbeiter(Mitarbeiter opfer)
-    {
-        for(Abteilung a : unternehmen.getAbteilungen().values())
-        {
-            if(a.getMitarbeiter().contains(opfer))
-            {
+    public boolean kuendigeMitarbeiter(Mitarbeiter opfer) throws ZuWenigMitarbeiterException {
+        for (Abteilung a : unternehmen.getAbteilungen().values()) {
+            if (a.getMitarbeiter().contains(opfer)) {
+                // Falls Mitarbeiter in HR eingestellt war können weniger neue Leute eingestellt werden, falls er nicht in HR war kann nun wieder einer mehr eingestellt werden
+                if (opfer.getDepartment().getName().equals("Human-Resources")) {
+                    // es kann nur ein HR-Mitarbeiter entlassen werden, wenn genügend weitere HR-Mitarbeiter vorhanden sind
+                    if (this.kennzahlensammlung.getMaxNeueMitarbeiter() - 9 >= 0) {
+                        this.kennzahlensammlung.setMaxNeueMitarbeiter(this.kennzahlensammlung.getMaxNeueMitarbeiter() - 9); // ein HR-Mitabreiter ist für 10 Leute zuständig
+                    } else {
+                        throw new ZuWenigMitarbeiterException("Human-Resources"); // zu wenig HR-Manager
+                    }
+                } else {
+                    this.kennzahlensammlung.setMaxNeueMitarbeiter(this.kennzahlensammlung.getMaxNeueMitarbeiter() + 1);
+                }
                 a.getMitarbeiter().remove(opfer);
                 return true;
             }

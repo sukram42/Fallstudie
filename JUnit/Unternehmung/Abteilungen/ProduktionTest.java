@@ -1,5 +1,6 @@
 package Unternehmung.Abteilungen;
 
+import Rules.Game;
 import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Unternehmen;
 import org.junit.After;
@@ -7,6 +8,9 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.Calendar;
+
+import static java.lang.Math.round;
 import static org.junit.Assert.*;
 
 /**
@@ -82,7 +86,7 @@ assertFalse(testProduktion.getForschungsboni().isEmpty());
         unternehmen.getAbteilung("hr").addMitarbeiter(1, 1000);
         testProduktion.addMitarbeiter(2, 10000);
         testProduktion.produzieren("Rucksack", 'A', 100, 50000);
-        assertEquals(testProduktion.getMaxProdMenge("Rucksack"), (300 - 100));
+        assertEquals(testProduktion.getMaxProdMenge("Rucksack"), 300);
     }
 
     @Test
@@ -138,7 +142,7 @@ assertFalse(testProduktion.getForschungsboni().isEmpty());
         unternehmen.getAbteilung("hr").addMitarbeiter(1, 1000);
         testProduktion.addMitarbeiter(2, 10000);
         testProduktion.produzieren("Rucksack", 'A', 100, 50000); //Herstellungskosten sind 20
-        assertEquals(testProduktion.getTaeglicheHerstellkosten(), 20 * 100, 0.5);
+        assertEquals(testProduktion.getTaeglicheHerstellkosten(), 20 * round(100/Game.getCalendar().getActualMaximum(Calendar.MONTH)), 0.5);
     }
 
     @Test

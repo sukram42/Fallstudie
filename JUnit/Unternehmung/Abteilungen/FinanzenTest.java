@@ -28,7 +28,7 @@ public class FinanzenTest{
     public void kreditAufnehmen() throws Exception {
         testfinanzen.addMitarbeiter(1, 1000);
         testfinanzen.kreditAufnehmen(200000, 200);
-        assertEquals(kennzahlensammlung.getBilanz().getFremdkapital(), 200000);
+        assertEquals(kennzahlensammlung.getBilanz().getFremdkapital(), (float) 200000, 0);
     }
 
     @After
