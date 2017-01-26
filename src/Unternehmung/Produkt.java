@@ -51,7 +51,7 @@ public class Produkt {
                     case 'B': return 15;
                     case 'C': return 10;
                 }
-            case "Rucksack tech":
+            case "Rucksacktech":
                 switch (qualitaetsstufe){
                     case 'A': return 330;
                     case 'B': return 20;
