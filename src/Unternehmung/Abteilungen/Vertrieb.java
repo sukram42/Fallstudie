@@ -102,7 +102,7 @@ public class Vertrieb extends Abteilung {
         if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH)){
             this.produkteVerkaufen();
             for (Vertrag vertrag : this.accounts){
-                if (Game.getCalendar() == vertrag.getEnd()){
+                if (Game.getCalendar().equals(vertrag.getEnd())){
                     this.accounts.remove(vertrag);
                 }
             }
