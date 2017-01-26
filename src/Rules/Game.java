@@ -15,7 +15,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class Game extends TimerTask {
 
-    private static final int COUNTER_INTERVALL = 100;//3 * 1000;//16*1000*60;//16 Minuten
+    private static final int COUNTER_INTERVALL = 5 * 1000;//16*1000*60;//16 Minuten
     private static long counter = 0;
 
     private static Calendar gameCalendar = new GregorianCalendar(2010, 1, 1);
@@ -132,7 +132,7 @@ public class Game extends TimerTask {
             // Opportunities bei allen Unternehmen löschen:
             for (Unternehmen unternehmen : companies){
                 Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
-                vertrieb.setOpportunities(null);
+                vertrieb.clearOpportunities();
             }
             // alte Ausschreibugnen löschen:
             for (int i = 0; i < ausschreibungen.size(); i++) {

@@ -15,15 +15,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Vertrieb extends Abteilung {
 
     private Produktion produktion;
-    private Map<Integer, Ausschreibung> opportunities;
-    private CopyOnWriteArrayList<Vertrag> accounts;
+    private Map<Integer, Ausschreibung> opportunities = new HashMap<>();;
+    private CopyOnWriteArrayList<Vertrag> accounts = new CopyOnWriteArrayList<>();
 
 
     public Vertrieb(Kennzahlensammlung kennzahlensammlung, Abteilung produktion) {
         super("Vertrieb",kennzahlensammlung);
         this.produktion = (Produktion) produktion;
-        opportunities = new HashMap<>();
-        accounts = new CopyOnWriteArrayList<>();
     }
 
     /**
@@ -117,8 +115,8 @@ public class Vertrieb extends Abteilung {
         return opportunities;
     }
 
-    public void setOpportunities(Map<Integer, Ausschreibung> opportunities) {
-        this.opportunities = opportunities;
+    public void clearOpportunities() {
+        this.opportunities.clear();
     }
 
     public List<Vertrag> getAccounts() {
