@@ -7,6 +7,7 @@
  */
 
 import { Component } from '@angular/core';
+import {SalesService} from "../../services/sales.service";
 
 @Component({
     selector   : 'home-component',
@@ -15,5 +16,9 @@ import { Component } from '@angular/core';
 })
 
 export class SalesComponent {
-
+    errorOpportunities;
+    constructor(private _salesService:SalesService)
+    {
+        _salesService.getOpportunitiesSubject().subscribe(data=>data,err=>this.errorOpportunities=err)
+    }
 }

@@ -28,7 +28,7 @@ export class ProduktionService {
     {
         this.http.post('http://localhost:8080/rest/companies/production',data).map(res => res.text())
             .subscribe(data=>console.log(data),
-                err=>console.log(err),
+                err=>this.productlinesSubject.error(2),
                 ()=>this.productlinesSubject.next("new Product")
             );
     }
@@ -49,7 +49,8 @@ export class ProduktionService {
 
     kaufeMaschine(data)
     {
-       return this.http.post('http://localhost:8080/rest/companies/production/machines',data).map(res=>res.text());
+       return this.http.post('http://localhost:8080/rest/companies/production/machines',data).map(res=>res.text())
+           .subscribe(data=>data,err=>this.machinesSubject.error(1),()=>this.machinesSubject.next("Neue Maschine"));
     }
     kaufeLager(size)
     {

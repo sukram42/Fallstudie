@@ -21,6 +21,7 @@ export class EmployeeListComponent implements OnInit{
 
     mitarbeiterList = [];
 
+
     constructor(private hrService : HRService){
 
         hrService.getEmployeeSubject().subscribe((data) => this.setValues());

@@ -17,12 +17,17 @@ import {HRService} from "../../services/hr.service";
 })
 
 export class ProduktionComponent {
-    employees;
-    constructor(private hrService:HRService)
+    employees
+    errorMaschinen;
+    errorLinie;
+    constructor(private proService:ProduktionService ,private hrService:HRService)
     {
         hrService.getEmployeesProduktion().subscribe(
             data=>{this.employees = data,console.log(data)}
             );
+        this.proService.getMachinesSubject().asObservable().subscribe(data=>data,err=>this.errorMaschinen = err);
+        this.proService.getProductlinesSubject().subscribe(data=>data,err=>this.errorLinie = err);
+
     }
 
 

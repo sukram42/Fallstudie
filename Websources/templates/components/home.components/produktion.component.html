@@ -4,10 +4,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="title">Produktion <i class="fa fa-users" aria-hidden="true"></i><span *ngIf="employees">{{employees}}</span></h4>
+                                <h4 class="title">Produktion <i class="fa fa-users" aria-hidden="true"></i><span
+                                        *ngIf="employees">{{employees}}</span></h4>
                                 <p class="category">Liste aller möglichen Produktlinien in ihrem Unternehmen</p>
                             </div>
                             <div class="col-md-6">
@@ -26,9 +26,26 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row" *ngIf="errorMaschinen">
+                            <div class="col-md-12">
+                                <div  class="alert alert-danger alert-dismissible fade in" role="alert">
+                                    <h4>UN ER HÖRT</h4>
+                                    <p>Du Unmensch hast eine Maschine in die Welt geschickt, welche nun in grausamer Einsamkeit sterben muss. Für die Zukunft, gib deinen Maschinen ein zuhause !</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="errorLinie">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                    <h4>WAS IST DENN MIT DIR FALSCH</h4>
+                                    <p> Du willst mir jetzt ernsthaft sagen, dass ich die ganze scheiße alleine machen muss ?! Ich bin ein Computerprogramm, ich kann auch nicht alles. Wenn du mir jetzt entlich mal Maschinen und nen Kollegen gibst, überlege ich mir es eventuell nochmal. Aber versklav mich jetzt nicht so du Schuft!</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="content">
                         <div class="row">
+
                             <div class="col-md-6">
                                 <new-warehouse-component>Loading</new-warehouse-component>
                                 <new-production-hall-component>Loading</new-production-hall-component>

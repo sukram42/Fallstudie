@@ -24,7 +24,7 @@ export class ProductLineComponent {
         this.proService.getProduktlinien().subscribe(data=>{
             this.data = data;
             console.log(data);
-        })
+        });
     }
 
 }

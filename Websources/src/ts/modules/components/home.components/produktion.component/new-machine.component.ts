@@ -26,6 +26,6 @@ export class NewMachineComponent {
     submitForm(data)
     {
         console.log(data);
-        this.proService.kaufeMaschine(data).subscribe(data=>console.log(data),err=>console.log(err),()=>this.proService.getMachinesSubject().next("Neue Maschine"));
+        this.proService.kaufeMaschine(data);
     }
 }
