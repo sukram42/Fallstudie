@@ -102,3 +102,22 @@ a {
 	border: 3px;
 }
 
+#beta{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	text-align: left;
+}
+#beta h6{
+	margin-bottom:0px;
+	margin-left: 0px;
+	color: #FFAD29;
+
+}
+#beta p{
+	margin-bottom:0px;
+	margin-left: 0px;
+	font-size: 12px;
+	padding-left: 5px;
+
+}
