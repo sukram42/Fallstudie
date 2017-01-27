@@ -12,6 +12,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HRService} from "../../../services/hr.service";
+import {maximumWageValidator} from "../../../directives/min-wage.directive";
 
 @Component({
     selector: 'new-employee-modal',
@@ -28,7 +29,7 @@ export class NewEmployeeComponent {
         this.newEmployee = fb.group({
             // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
             'anzahl' :    [null, Validators.compose([Validators.required,Validators.pattern("[0-9]+")])],
-            'gehalt':     [null, Validators.compose([Validators.required,Validators.pattern("[0-9]+")])],
+            'gehalt':     [null ,Validators.compose([Validators.required,Validators.pattern("[0-9]+"), maximumWageValidator(1360)])],
             'abteilung':  [null, Validators.required]
         });
 

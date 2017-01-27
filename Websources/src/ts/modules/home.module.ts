@@ -41,6 +41,7 @@ import {AusschreibungListComponent} from "./components/home.components/sales.com
 import {SalesService} from "./services/sales.service";
 import {OpportunitiesListComponent} from "./components/home.components/sales.component/opportunities-list.component";
 import {AccountsListComponent} from "./components/home.components/sales.component/accounts-list.component";
+import {FinancesComponent} from "./components/home.components/finances.component";
 
 @NgModule({
     imports: [
@@ -81,10 +82,13 @@ import {AccountsListComponent} from "./components/home.components/sales.componen
                 component: AccountsComponent
             },
             {
+                path: 'finances',
+                component:FinancesComponent
+            },
+            {
                 path: 'home.html',
                 redirectTo: '/dashboard',
                 pathMatch: 'full'
-
             }
         ])
     ],
@@ -109,7 +113,8 @@ import {AccountsListComponent} from "./components/home.components/sales.componen
         MachineListComponent,
         AusschreibungListComponent,
         OpportunitiesListComponent,
-        AccountsListComponent
+        AccountsListComponent,
+        FinancesComponent
     ],
 
     bootstrap: [HomeComponent],
