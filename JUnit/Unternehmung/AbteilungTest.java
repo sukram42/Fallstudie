@@ -29,6 +29,11 @@ public class AbteilungTest{
 
         Unternehmen unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
         kennzahlensammlung = unternehmen.getKennzahlensammlung();
+        try { // HR-Mitarbeiter einstellen, um weitere (in Produktion) einstellen zu können:
+            unternehmen.getAbteilung("hr").addMitarbeiter(1, 10000);
+        } catch (ZuWenigMitarbeiterException e){
+            e.printStackTrace();
+        }
         testAbteilung = unternehmen.getAbteilung("produktion");
         assertNotNull(testAbteilung);
     }
@@ -48,8 +53,9 @@ public class AbteilungTest{
         try{
         testAbteilung.addMitarbeiter(1, 10000);
         } catch (ZuWenigMitarbeiterException e) {
-            assertNotNull(testAbteilung.getMitarbeiter().get(0));
+            e.printStackTrace();
         }
+        assertNotNull(testAbteilung.getMitarbeiter().get(0));
     }
 
     @Test

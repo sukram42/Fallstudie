@@ -12,15 +12,15 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by D064018 on 23.01.2017.
  */
-public class GuVTest{
+public class GuVTest {
 
     private Unternehmen unternehmen;
     private GuV testGuV;
 
     @Before
-    public void setUp(){
-         unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
-testGuV = new GuV(unternehmen);
+    public void setUp() {
+        unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
+        testGuV = new GuV(unternehmen);
     }
 
     @Test
@@ -28,30 +28,30 @@ testGuV = new GuV(unternehmen);
         Bilanz bilanz = new Bilanz(unternehmen);
         testGuV.setAufwendungenFuerEnergie(1000);
         testGuV.jahresabschluss(bilanz);
-        assertEquals(bilanz.getEigenkapital(), 100000 + 1000, 0.5);
+        assertEquals(bilanz.getEigenkapital(), 100000 - 1000, 0.5);
     }
 
     @Test
     public void importAufwandUndErlös() throws Exception {
-      HR hr = (HR)unternehmen.getAbteilung("hr");
-      hr.addMitarbeiter(2, 1000);
-      testGuV.importAufwandUndErlös();
-      long gehalt = 2000 / 12;
+        HR hr = (HR) unternehmen.getAbteilung("hr");
+        hr.addMitarbeiter(2, 1000);
+        testGuV.importAufwandUndErlös();
+        float gehalt = (float) 2000 / 12;
         assertEquals(testGuV.getAufwendungenFuerGehaelter(), gehalt, 0.5);
     }
 
     @Test
     public void getTaeglicheLiquiditätsveränderung() throws Exception {
-       Produktion produktion = (Produktion)unternehmen.getAbteilung("produktion");
-       produktion.produktionshalleKaufen(2);
-       produktion.maschinenKaufen("Rucksack",1, 1);
-       assertEquals(testGuV.getTaeglicheLiquiditätsveränderung(), -100, 0.5);
+        Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
+        produktion.produktionshalleKaufen(2);
+        produktion.maschinenKaufen("Rucksack", 1, 1);
+        assertEquals(testGuV.getTaeglicheLiquiditätsveränderung(), -100, 0.5);
     }
 
     @Test
     public void addZinsaufwendungen() throws Exception {
-testGuV.addZinsaufwendungen(100);
-assertEquals(testGuV.getZinsaufwendungen(), 100, 0.5);
+        testGuV.addZinsaufwendungen(100);
+        assertEquals(testGuV.getZinsaufwendungen(), 100, 0.5);
     }
 
     @Test
@@ -74,12 +74,12 @@ assertEquals(testGuV.getZinsaufwendungen(), 100, 0.5);
 
     @Test
     public void getAufwendungenFuerWerbung() throws Exception {
-assertEquals(testGuV.getAufwendungenFuerWerbung(), 0, 0.5);
+        assertEquals(testGuV.getAufwendungenFuerWerbung(), 0, 0.5);
     }
 
     @Test
     public void setAufwendungenFuerWerbung() throws Exception {
-       testGuV.setAufwendungenFuerWerbung(100);
+        testGuV.setAufwendungenFuerWerbung(100);
         assertEquals(testGuV.getAufwendungenFuerWerbung(), 100, 0.5);
     }
 
@@ -103,7 +103,7 @@ assertEquals(testGuV.getAufwendungenFuerWerbung(), 0, 0.5);
 
     @Test
     public void setAufwendungenFuerEnergie() throws Exception {
-testGuV.setAufwendungenFuerEnergie(100);
+        testGuV.setAufwendungenFuerEnergie(100);
         assertEquals(testGuV.getAufwendungenFuerEnergie(), 100, 0.5);
 
     }
@@ -116,7 +116,7 @@ testGuV.setAufwendungenFuerEnergie(100);
 
     @Test
     public void setUmsatzErlöse() throws Exception {
-testGuV.setUmsatzErlöse(100);
+        testGuV.setUmsatzErlöse(100);
         assertEquals(testGuV.getUmsatzErlöse(), 100, 0.5);
 
     }
@@ -129,7 +129,7 @@ testGuV.setUmsatzErlöse(100);
 
     @Test
     public void setJahresUeberschuss() throws Exception {
-testGuV.setJahresUeberschuss(100);
+        testGuV.setJahresUeberschuss(100);
         assertEquals(testGuV.getJahresUeberschuss(), 100, 0.5);
 
     }
@@ -141,7 +141,7 @@ testGuV.setJahresUeberschuss(100);
 
     @Test
     public void setZinsaufwendungen() throws Exception {
-testGuV.setZinsaufwendungen(100);
+        testGuV.setZinsaufwendungen(100);
         assertEquals(testGuV.getZinsaufwendungen(), 100, 0.5);
 
     }
@@ -153,7 +153,7 @@ testGuV.setZinsaufwendungen(100);
 
     @Test
     public void setFremdinstandhaltung() throws Exception {
-testGuV.setFremdinstandhaltung(100);
+        testGuV.setFremdinstandhaltung(100);
         assertEquals(testGuV.getFremdinstandhaltung(), 100, 0.5);
 
     }
@@ -166,13 +166,13 @@ testGuV.setFremdinstandhaltung(100);
 
     @Test
     public void setGeleisteterSchadensersatz() throws Exception {
-testGuV.setGeleisteterSchadensersatz(100);
+        testGuV.setGeleisteterSchadensersatz(100);
         assertEquals(testGuV.getGeleisteterSchadensersatz(), 100, 0.5);
 
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
 
     }
 }

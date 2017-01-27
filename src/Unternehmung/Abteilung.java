@@ -17,10 +17,10 @@ import java.util.Map;
 
 public class Abteilung {
 
-	public String name;
 	protected transient ArrayList<Mitarbeiter> mitarbeiter = new ArrayList<>();
 	protected transient Kennzahlensammlung kennzahlensammlung;
 	protected transient float aktKosten = 0 ;
+	private String name;
 
     public Abteilung(String name, Kennzahlensammlung kennzahlensammlung) {
         this.kennzahlensammlung = kennzahlensammlung;
@@ -67,7 +67,7 @@ public class Abteilung {
 				mitarbeiter.add(m);
 
 				if (this.name.equals("Human-Resources")){
-					this.kennzahlensammlung.setMaxNeueMitarbeiter(this.kennzahlensammlung.getMaxNeueMitarbeiter() + 10);
+					this.kennzahlensammlung.setMaxNeueMitarbeiter(this.kennzahlensammlung.getMaxNeueMitarbeiter() + 9); // ein HR-Mitarbeiter ist für 10 Mitarbeiter verantwortlich
 				} else {
 					this.kennzahlensammlung.setMaxNeueMitarbeiter(this.kennzahlensammlung.getMaxNeueMitarbeiter() - 1);
 				}
@@ -116,5 +116,9 @@ public class Abteilung {
 		}
 
 		return mitarbeiterKosten;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

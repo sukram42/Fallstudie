@@ -17,9 +17,9 @@ public class ProduktlinieTest {
 
     private  Produktlinie testProduktlinie;
 
-
+    @Before
     public void setUp() throws Exception {
-        id = "Linie594";
+        id = "DuffelB";
         produkt = new Produkt("Duffel",'B',0.2);
         menge = 5000;
         laufzeit = 2;

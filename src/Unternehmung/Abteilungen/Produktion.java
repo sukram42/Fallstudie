@@ -164,22 +164,38 @@ public class Produktion extends Abteilung {
             if (auftrag.getEnd().equals(Game.getCalendar())){ // falls Laufzeit == 0 Auftrag beenden
                 this.aufträge.remove(auftrag);
             }
+            Produktlinie produktlinie = new Produktlinie(auftrag.getProdukt(), round(auftrag.getMenge()/Game.getCalendar().getActualMaximum(Calendar.MONTH))); // neue Produktlinie
             if (auftrag.getMenge() <= this.getFreienLagerPlatz()){ // genügend Lagerplatz verfügbar?
-                Produktlinie produktlinie = new Produktlinie(auftrag.getProdukt(), round(auftrag.getMenge()/Game.getCalendar().getActualMaximum(Calendar.MONTH))); // neue Produktlinie
-                //Prüfen ob Lager leer ist
+                //Prüfen ob Lager leer ist:
                 if(lager.isEmpty()) {
                     this.lager.add(produktlinie);
-                }
-                for (Produktlinie bestand : this.lager) {
-                    // falls Produkte mit derselben id und herstellkosten schon vorhanden ist wird die Menge hochgesetzt:
-                    if (produktlinie.getId().equals(bestand.getId()) &&
-                             (produktlinie.getProdukt().getHerstellkosten() == bestand.getProdukt().getHerstellkosten())){
-                        bestand.setMenge(bestand.getMenge() + auftrag.getMenge());
-                    } else { // ansonsten wird die Produktlinie als neuer Posten im Lager hinzugefügt:
-                        this.lager.add(produktlinie);
+                } else {
+                    for (Produktlinie bestand : this.lager) {
+                        // falls Produkte mit derselben id und herstellkosten schon vorhanden ist wird die Menge hochgesetzt:
+                        if (produktlinie.getId().equals(bestand.getId()) &&
+                                (produktlinie.getProdukt().getHerstellkosten() == bestand.getProdukt().getHerstellkosten())) {
+                            bestand.setMenge(bestand.getMenge() + auftrag.getMenge());
+                        } else { // ansonsten wird die Produktlinie als neuer Posten im Lager hinzugefügt:
+                            this.lager.add(produktlinie);
+                        }
                     }
                 }
             } else {
+                // gleicher Code wie oben, nur mit maximal zu lagernder Menge, sodass Lager bis zum Anschlag gefüllt wird, bevor Produkte verloren gehen:
+                if(lager.isEmpty()) {
+                    this.lager.add(produktlinie);
+                } else {
+                    for (Produktlinie bestand : this.lager) {
+                        // falls Produkte mit derselben id und herstellkosten schon vorhanden ist wird die Menge hochgesetzt:
+                        if (produktlinie.getId().equals(bestand.getId()) &&
+                                (produktlinie.getProdukt().getHerstellkosten() == bestand.getProdukt().getHerstellkosten())) {
+                            bestand.setMenge(bestand.getMenge() + this.getFreienLagerPlatz());
+                        } else { // ansonsten wird die Produktlinie als neuer Posten im Lager hinzugefügt:
+                            produktlinie.setMenge(this.getFreienLagerPlatz());
+                            this.lager.add(produktlinie);
+                        }
+                    }
+                }
                 throw new LagerVollException();
             }
         }
@@ -210,7 +226,7 @@ public class Produktion extends Abteilung {
     public float getTaeglicheHerstellkosten(){
         float herstellkosten = 0;
         for (Produktlinie auftrag : this.aufträge){
-            herstellkosten += auftrag.getProdukt().getHerstellkosten();
+            herstellkosten += auftrag.getProdukt().getHerstellkosten() * round(auftrag.getMenge()/Game.getCalendar().getActualMaximum(Calendar.MONTH));
         }
         return herstellkosten;
     }
