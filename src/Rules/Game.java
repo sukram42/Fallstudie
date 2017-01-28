@@ -120,6 +120,7 @@ public class Game extends TimerTask {
                     }
                 }
                 Unternehmen gewinner = null;
+                boolean gewinnerGefunden = false;
                 while(bewerber.size() > 0) {
                     // das Unternehmen mit der höchsten Verkaufswahrscheinlichkeit finden:
                     Unternehmen besterBewerber = getHoechsteVerkaufswahrscheinlichkeit(bewerber);
@@ -128,13 +129,16 @@ public class Game extends TimerTask {
                     float randomFloat = random.nextFloat();
                     if (randomFloat < besterBewerber.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert()) {
                         gewinner = besterBewerber;
+                        gewinnerGefunden = true;
                     } else {
                         bewerber.remove(besterBewerber);
                     }
                 }
                 // Zuschlag geben:
-                Vertrieb vertrieb = (Vertrieb) gewinner.getAbteilung("vertrieb");
-                vertrieb.zuschlagBekommen(i);
+                if (gewinnerGefunden) {
+                    Vertrieb vertrieb = (Vertrieb) gewinner.getAbteilung("vertrieb");
+                    vertrieb.zuschlagBekommen(i);
+                }
             }
             // Opportunities bei allen Unternehmen löschen:
             for (Unternehmen unternehmen : companies){
