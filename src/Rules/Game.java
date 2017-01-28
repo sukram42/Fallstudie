@@ -39,6 +39,7 @@ public class Game extends TimerTask {
     public static ArrayList<Unternehmen> getCompanies() {
         return companies;
     }
+    //Warum keine "addCompanies" Bennenung ? :D
 
     public static Unternehmen getUnternehmenByName(String name) {
         for (Unternehmen u : companies) {
