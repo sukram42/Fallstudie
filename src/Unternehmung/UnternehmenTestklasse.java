@@ -1,11 +1,8 @@
 package Unternehmung;
 
-import Exceptions.ZuWenigMaschinenstellplatzException;
 import Exceptions.ZuWenigMitarbeiterException;
-import Exceptions.ZuWenigMitarbeiterOderMaschinenException;
 import Rules.Game;
 import Unternehmung.Abteilungen.Marketing;
-import Unternehmung.Abteilungen.Produktion;
 import Unternehmung.Abteilungen.SozialeLeistungen;
 import Unternehmung.Abteilungen.Vertrieb;
 import com.google.gson.Gson;
@@ -14,7 +11,7 @@ import com.google.gson.Gson;
  * nur eine Testklasse!
  * Created by lucadommes on 28.12.2016.
  */
-public class UnternehmenTest {
+public class UnternehmenTestklasse {
     public static void main(String[] args) {
         Game game = new Game();
         // ############################## UNTERNEHMEN 1 ##############################

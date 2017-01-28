@@ -36,6 +36,10 @@ public class Game extends TimerTask {
         updateAusschreibungen();
     }
 
+    public ArrayList<Unternehmen> getCompaniess() {
+        return companies;
+    }
+
     public static ArrayList<Unternehmen> getCompanies() {
         return companies;
     }
@@ -108,27 +112,29 @@ public class Game extends TimerTask {
             // Entscheidung über Zuschlag basierend auf der Kennzahl der Verkaufswahrscheinlichkeit:
             for (int i = 0; i < ausschreibungen.size(); i++) {
                 // eine Map mit allen Unternehmen, die sich auf die Ausschreibung beworben haben erstellen:
-                Map<Unternehmen, Float> bewerber = new HashMap<Unternehmen, Float>();
+                ArrayList<Unternehmen> bewerber = new ArrayList<>();
                 for (Unternehmen unternehmen : companies) {
                     Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
                     if (vertrieb.getOpportunities().get(i) != null) {
-                        bewerber.put(unternehmen, unternehmen.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert());
+                        bewerber.add(unternehmen);
                     }
                 }
-                // das Unternehmen mit der höchsten Verkaufswahrscheinlichkeit finden
-                float max = -1;
-                for (Map.Entry<Unternehmen, Float> b : bewerber.entrySet()) {
-                    if (b.getValue() > max) {
-                        max = b.getValue();
+                Unternehmen gewinner = null;
+                while(bewerber.size() > 0) {
+                    // das Unternehmen mit der höchsten Verkaufswahrscheinlichkeit finden:
+                    Unternehmen besterBewerber = getHoechsteVerkaufswahrscheinlichkeit(bewerber);
+                    // weitere Zufallsentscheidung, sodass nicht immer zwangsläufig der Beste gewinnnt:
+                    Random random = new Random();
+                    float randomFloat = random.nextFloat();
+                    if (randomFloat < besterBewerber.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert()) {
+                        gewinner = besterBewerber;
+                    } else {
+                        bewerber.remove(besterBewerber);
                     }
                 }
                 // Zuschlag geben:
-                for (Map.Entry<Unternehmen, Float> b : bewerber.entrySet()) {
-                    if (b.getValue() == max) {
-                        Vertrieb vertrieb = (Vertrieb) b.getKey().getAbteilung("vertrieb");
-                        vertrieb.zuschlagBekommen(i);
-                    }
-                }
+                Vertrieb vertrieb = (Vertrieb) gewinner.getAbteilung("vertrieb");
+                vertrieb.zuschlagBekommen(i);
             }
             // Opportunities bei allen Unternehmen löschen:
             for (Unternehmen unternehmen : companies){
@@ -146,6 +152,23 @@ public class Game extends TimerTask {
                 ausschreibungen.add(new Ausschreibung());
             }
         }
+    }
+
+    /**
+     * wird aufgerufen von updateAusschreibungen()
+     * @param bewerber ArrayList mit den Bewerbern für eine Ausschreibung
+     * @return Bewerber mit der höchsten Verkaufswahrscheinlichkeit
+     */
+    private Unternehmen getHoechsteVerkaufswahrscheinlichkeit(ArrayList<Unternehmen> bewerber){
+        float max = 0;
+        Unternehmen besterBewerber = null;
+        for (Unternehmen unternehmen : bewerber) {
+            if (unternehmen.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert() > max) {
+                max = unternehmen.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert();
+                besterBewerber = unternehmen;
+            }
+        }
+        return besterBewerber;
     }
 
     public void updateCounter() {
