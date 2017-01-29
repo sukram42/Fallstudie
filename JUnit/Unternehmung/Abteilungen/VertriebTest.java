@@ -31,23 +31,13 @@ public class VertriebTest{
         HR hr = (HR)unternehmen.getAbteilung("hr");
         hr.addMitarbeiter(1, 1000);
         testVertrieb.addMitarbeiter(1, 2000);
-        testVertrieb.bewerben(1);
+        testVertrieb.bewerben(Game.getAusschreibungen().get(1));
         assertTrue(testVertrieb.getOpportunities().size() == 1);
     }
 
     @Test(expected = ZuWenigMitarbeiterException.class)
     public void bewerbenFail() throws ZuWenigMitarbeiterException{
-        testVertrieb.bewerben(1);
-    }
-
-    @Test
-    public void zuschlagBekommen() throws Exception {
-        HR hr = (HR)unternehmen.getAbteilung("hr");
-        hr.addMitarbeiter(1, 1000);
-        testVertrieb.addMitarbeiter(1, 2000);
-        testVertrieb.bewerben(1);
-        testVertrieb.zuschlagBekommen(1);
-        assertTrue(testVertrieb.getAccounts().size() > 0);
+        testVertrieb.bewerben(Game.getAusschreibungen().get(1));
     }
 
 
@@ -56,7 +46,7 @@ public class VertriebTest{
         HR hr = (HR)unternehmen.getAbteilung("hr");
         hr.addMitarbeiter(1, 1000);
         testVertrieb.addMitarbeiter(1, 2000);
-        testVertrieb.bewerben(1);
+        testVertrieb.bewerben(Game.getAusschreibungen().get(1));
         assertTrue(testVertrieb.getOpportunities().size() > 0);
     }
 
@@ -65,8 +55,8 @@ public class VertriebTest{
         HR hr = (HR)unternehmen.getAbteilung("hr");
         hr.addMitarbeiter(1, 1000);
         testVertrieb.addMitarbeiter(1, 2000);
-        testVertrieb.bewerben(1);
-        testVertrieb.zuschlagBekommen(1);
+        testVertrieb.bewerben(Game.getAusschreibungen().get(1));
+        testVertrieb.getAccounts().add(Game.getAusschreibungen().get(1).getVertrag());
         assertTrue(testVertrieb.getAccounts().size() == 1);
     }
 

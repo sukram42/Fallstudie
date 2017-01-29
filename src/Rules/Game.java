@@ -106,50 +106,43 @@ public class Game extends TimerTask {
 
     /**
      * legt am ersten Tag jedes Monats fest, wer den Zuschlag bekommt, löscht dann alle Opportunities und Ausschreibungen und generiert neue Ausschreibungen
+     * das Unternehmen, dass als erstes ein Angebot abgegeben hat bekommt den Zuschlag, wenn ein zufälliger Float zwischen 0 und der Verkafuswahrscheinlichkeit liegt:
      */
     private void updateAusschreibungen() {
+        // TODO gewährleisten, dass man am Anfang auch mal einen Zuschlag bekommt, wo die Verkaufswahrscheinlichkeit noch sehr gering ist!!
         if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == 1) {
             // Entscheidung über Zuschlag basierend auf der Kennzahl der Verkaufswahrscheinlichkeit:
-            for (int i = 0; i < ausschreibungen.size(); i++) {
-                // eine Map mit allen Unternehmen, die sich auf die Ausschreibung beworben haben erstellen:
-                ArrayList<Unternehmen> bewerber = new ArrayList<>();
-                for (Unternehmen unternehmen : companies) {
-                    Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
-                    if (vertrieb.getOpportunities().get(i) != null) {
-                        bewerber.add(unternehmen);
+            for (Ausschreibung ausschreibung : ausschreibungen) {
+                if(ausschreibung.getBewerber() != null){
+                    Unternehmen gewinner = null;
+                    boolean gewinnerGefunden = false;
+                    // Gewinner der Ausschreibung ermitteln:
+                    for (Unternehmen unternehmen : ausschreibung.getBewerber()){
+                        Random random = new Random();
+                        float randomFloat = random.nextFloat();
+                        // das Unternehmen, dass als erstes ein Angebot abgegeben hat bekommt den Zuschlag, wenn ein zufälliger Float zwischen 0 und der Verkafuswahrscheinlichkeit liegt:
+                        if (randomFloat < unternehmen.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert()){
+                            gewinner = unternehmen;
+                            gewinnerGefunden = true;
+                            break;
+                        }
+                    }
+                    // Zuschlag geben:
+                    if (gewinnerGefunden) {
+                        Vertrieb vertrieb = (Vertrieb) gewinner.getAbteilung("vertrieb");
+                        vertrieb.getAccounts().add(ausschreibung.getVertrag());
                     }
                 }
-                Unternehmen gewinner = null;
-                boolean gewinnerGefunden = false;
-                while(bewerber.size() > 0) {
-                    // das Unternehmen mit der höchsten Verkaufswahrscheinlichkeit finden:
-                    Unternehmen besterBewerber = getHoechsteVerkaufswahrscheinlichkeit(bewerber);
-                    // weitere Zufallsentscheidung, sodass nicht immer zwangsläufig der Beste gewinnnt:
-                    Random random = new Random();
-                    float randomFloat = random.nextFloat();
-                    if (randomFloat < besterBewerber.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert()) {
-                        gewinner = besterBewerber;
-                        gewinnerGefunden = true;
-                    } else {
-                        bewerber.remove(besterBewerber);
-                    }
-                }
-                // Zuschlag geben:
-                if (gewinnerGefunden) {
-                    Vertrieb vertrieb = (Vertrieb) gewinner.getAbteilung("vertrieb");
-                    vertrieb.zuschlagBekommen(i);
-                }
+
             }
             // Opportunities bei allen Unternehmen löschen:
             for (Unternehmen unternehmen : companies){
                 Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
-                vertrieb.clearOpportunities();
+                vertrieb.getOpportunities().clear();
             }
             // alte Ausschreibugnen löschen:
-            for (int i = 0; i < ausschreibungen.size(); i++) {
-                ausschreibungen.remove(i);
-            }
-            // neue Ausschreibungen generieren:
+            ausschreibungen.clear();
+            // neue zufällige Ausschreibungen generieren:
             Random random = new Random();
             int anzahlAusschreibungen = random.nextInt(10) + 8;
             for (int i = 1; i <= anzahlAusschreibungen; i++) {

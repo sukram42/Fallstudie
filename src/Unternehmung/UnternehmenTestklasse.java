@@ -74,7 +74,7 @@ public class UnternehmenTestklasse {
         Vertrieb vertrieb = (Vertrieb)unternehmen1.getAbteilung("vertrieb");
         try {
             System.out.print("SIZE : "+ game.getAusschreibungen().size());
-            vertrieb.bewerben(0);
+            vertrieb.bewerben(Game.getAusschreibungen().get(0));
             System.out.println(new Gson().toJson(vertrieb.getOpportunities()));
         } catch (ZuWenigMitarbeiterException e) {
             e.printStackTrace();

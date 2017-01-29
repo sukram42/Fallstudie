@@ -1,8 +1,6 @@
 package Unternehmung;
 
-import Rules.Game;
-
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -16,6 +14,7 @@ public class Ausschreibung {
     private static final transient char[] qualitaetsstufen = {'A', 'B', 'C'};
     private static final transient String[] kunden = {"SchickerRucksackAG","Outdoorjoh.com","BergNeelSen","BergeUndSo","BergDoktor.com","Berglises Hausladen","My Litty Moutain","AdventureTime","LaBoutiqueDeLaSporte"}; // TODO Array mit (fiktiven oder echten?) Kundennamen füllen
     private Vertrag vertrag;
+    private ArrayList<Unternehmen> bewerber = new ArrayList<>();
 
     public Ausschreibung() {
         this.vertrag = this.generateRandomVertrag();
@@ -48,5 +47,9 @@ public class Ausschreibung {
     //Getter und Setter:
     public Vertrag getVertrag() {
         return vertrag;
+    }
+
+    public ArrayList<Unternehmen> getBewerber() {
+        return bewerber;
     }
 }

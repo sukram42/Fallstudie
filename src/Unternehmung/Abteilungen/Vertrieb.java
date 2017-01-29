@@ -15,34 +15,28 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Vertrieb extends Abteilung {
 
     private Produktion produktion;
-    private Map<Integer, Ausschreibung> opportunities = new HashMap<>();;
+    private Unternehmen unternehmen;
+    private ArrayList<Ausschreibung> opportunities = new ArrayList<>();
     private CopyOnWriteArrayList<Vertrag> accounts = new CopyOnWriteArrayList<>();
 
 
-    public Vertrieb(Kennzahlensammlung kennzahlensammlung, Abteilung produktion) {
+    public Vertrieb(Unternehmen unternehmen, Kennzahlensammlung kennzahlensammlung, Abteilung produktion) {
         super("Vertrieb",kennzahlensammlung);
+        this.unternehmen = unternehmen;
         this.produktion = (Produktion) produktion;
     }
 
     /**
      * speichert ein Ausschreibungsobjekt mit dem index, in dem es in Game.ausschreibungen gespeichert ist ab (sofern genug Mitarbeiter vorhanden -> ein Mitarbeiter pro Bewerbung nötig)
-     * @param index unter dem die Ausschreibung in der ArrayList ausschreibungen in der Klasse Game abgelegt ist
+     * @param ausschreibung aus der Liste in der Klasse Game
      */
-    public void bewerben(int index) throws ZuWenigMitarbeiterException{
+    public void bewerben(Ausschreibung ausschreibung) throws ZuWenigMitarbeiterException{
         if (this.mitarbeiter.size() > opportunities.size()) {
-            List<Ausschreibung> ausschreibungen = Game.getAusschreibungen();
-            opportunities.put(index, ausschreibungen.get(index));
+            ausschreibung.getBewerber().add(this.unternehmen);
+            opportunities.add(ausschreibung);
         } else {
             throw new ZuWenigMitarbeiterException("Vertrieb");
         }
-    }
-
-    /**
-     * wird aufgerufen von Game.updateAusschreibungen, wenn das Unternehmen den Zuschlag bekommt
-     * @param index unter dem die Ausschreibung in der Game.ausschreibungen und in opportunities abgelegt ist
-     */
-    public void zuschlagBekommen(int index){
-        accounts.add(opportunities.get(index).getVertrag());
     }
 
     /**
@@ -111,12 +105,8 @@ public class Vertrieb extends Abteilung {
 
 
     // Getter und Setter:
-    public Map<Integer, Ausschreibung> getOpportunities() {
+    public ArrayList<Ausschreibung> getOpportunities() {
         return opportunities;
-    }
-
-    public void clearOpportunities() {
-        this.opportunities.clear();
     }
 
     public List<Vertrag> getAccounts() {

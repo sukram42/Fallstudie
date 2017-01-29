@@ -29,7 +29,7 @@ public class SalesInterface {
         Vertrieb sales = (Vertrieb)unternehmen.getAbteilung("vertrieb");
 
         try {
-            sales.bewerben(index);
+            sales.bewerben(Game.getAusschreibungen().get(index));
             return Response.ok("Auf Ausschreibung beworben").build();
         } catch (ZuWenigMitarbeiterException e) {
             return Response.status(409).entity(e.toString()).build();
@@ -42,7 +42,7 @@ public class SalesInterface {
         Unternehmen unternehmen = CompanyInterface.getCompanyFromContext(securityContext);
         Vertrieb sales = (Vertrieb) unternehmen.getAbteilung("vertrieb");
 
-        return Response.ok().entity(gson.toJson(new ArrayList<>(sales.getOpportunities().values()))).build();
+        return Response.ok().entity(gson.toJson(new ArrayList<>(sales.getOpportunities()))).build();
     }
 
     @GET
