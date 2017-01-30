@@ -227,7 +227,7 @@ public class Produktion extends Abteilung {
     public float getTaeglicheHerstellkosten(){
         float herstellkosten = 0;
         for (Produktlinie auftrag : this.aufträge){
-            herstellkosten += auftrag.getProdukt().getHerstellkosten() * round(auftrag.getMenge()/Game.getCalendar().getActualMaximum(Calendar.MONTH));
+            herstellkosten += auftrag.getProdukt().getHerstellkosten() * auftrag.getMenge();
         }
         return herstellkosten;
     }
