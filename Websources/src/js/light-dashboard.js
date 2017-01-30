@@ -14,7 +14,7 @@ $(document).ready(function(){
     
     // Init navigation toggle for small screens   
     if(window_width <= 991){
-        lbd.initRightMenu();   
+        lbd.initRightMenu();   y
     }
      
     //  Activate the tooltips   
