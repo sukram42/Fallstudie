@@ -59,9 +59,6 @@ public class GuV {
         Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
         aufwendungenFuerRohstoffe += produktion.getTaeglicheHerstellkosten();
         aufwendungenFuerEnergie += produktion.getTaeglicheEnergiekosten();
-
-        // TODO Umsatz ergänzen, wenn Sales-Klasse steht:
-        //umsatzErlöse += ;
     }
 
     /**

@@ -25,9 +25,6 @@ public class Kennzahlensammlung {
 
     // faktische Kennzahlensammlung:
     private double marktanteil;
-    private double ausschussrate;
-    private double reklamationsrate;
-    private Bekanntheitsgrad bekanntheitsgrad;
 
     private transient Bilanz bilanz;
     private transient GuV guv;
@@ -47,7 +44,6 @@ public class Kennzahlensammlung {
         this.getBilanz().setEigenkapital(eigenkapital);
         this.getBilanz().setLiquideMittel(eigenkapital);
         this.unternehmen = unternehmen;
-        this.bekanntheitsgrad = new Bekanntheitsgrad(unternehmen);
         this.maxNeueMitarbeiter = 0;
     }
 
@@ -63,6 +59,7 @@ public class Kennzahlensammlung {
 
     public void update()
     {
+        kennzahlenRuntersetzen();
         berechnen();
         this.guv.importAufwandUndErlös(); // GuV updaten
         try {
@@ -72,11 +69,20 @@ public class Kennzahlensammlung {
         }
     }
 
+    /**
+     * setzt alle Kennzahlen bei jedem Timer Count um 0.1 herunter
+     */
+    private void kennzahlenRuntersetzen(){
+        for (Kennzahl kennzahl : this.weicheKennzahlen.values()){
+            kennzahl.setModifier(kennzahl.getModifier() - 0.01f);
+        }
+    }
+
     public void initWeicheKennzahlen(){
         weicheKennzahlen.put("mitarbeiterzufriedenheit",new Mitarbeiterzufriedenheit(unternehmen));
         weicheKennzahlen.put("kundenzufriedenheit",new Kundenzufriedenheit(unternehmen));
         weicheKennzahlen.put("image",new Image(unternehmen));
-        weicheKennzahlen.put("produktqualität",new Produktqualität(unternehmen));
+        weicheKennzahlen.put("bekanntheitsgrad", new Bekanntheitsgrad(unternehmen));
         weicheKennzahlen.put("verkaufswahrscheinlichkeit", new Verkaufswahrscheinlichkeit(unternehmen));
     }
 
@@ -86,9 +92,6 @@ public class Kennzahlensammlung {
 
 
     // Getter und Setter:
-    public Bekanntheitsgrad getBekanntheitsgrad() {
-        return bekanntheitsgrad;
-    }
 
     public  Kennzahl getMitarbeiterzufriedenheit() {
         return weicheKennzahlen.get("mitarbeiterzufriedenheit");
@@ -100,22 +103,6 @@ public class Kennzahlensammlung {
 
     public void setMarktanteil(double marktanteil) {
         this.marktanteil = marktanteil;
-    }
-
-    public double getAusschussrate() {
-        return ausschussrate;
-    }
-
-    public void setAusschussrate(double ausschussrate) {
-        this.ausschussrate = ausschussrate;
-    }
-
-    public double getReklamationsrate() {
-        return reklamationsrate;
-    }
-
-    public void setReklamationsrate(double reklamationsrate) {
-        this.reklamationsrate = reklamationsrate;
     }
 
     public Bilanz getBilanz() {
@@ -136,5 +123,9 @@ public class Kennzahlensammlung {
 
     public void setMaxNeueMitarbeiter(int maxNeueMitarbeiter) {
         this.maxNeueMitarbeiter = maxNeueMitarbeiter;
+    }
+
+    public Map<String, Kennzahl> getWeicheKennzahlen() {
+        return weicheKennzahlen;
     }
 }

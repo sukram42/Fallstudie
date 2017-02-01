@@ -18,9 +18,9 @@ public class Vertrag {
     private Calendar end;
 
 
-    public Vertrag(Produktlinie produktlinie, float preis, String kunde, int laufzeit) {
+    public Vertrag(Produktlinie produktlinie, String kunde, int laufzeit) {
         this.produktlinie = produktlinie;
-        this.preis = preis;
+        this.preis = (float) this.produktlinie.getProdukt().getHerstellkosten() * 1.15f; // 15% Gewinn-Marge
         this.kunde = kunde;
         this.laufzeit = laufzeit;
         this.beginn = (Calendar) Game.getCalendar().clone();

@@ -104,7 +104,7 @@ public class Marketing extends Abteilung {
      */
     private void updateMarketingkampagnen() {
         for (Map.Entry<String, Marketingkampagne> kampagne : this.kampagnen.entrySet()) {
-            this.kennzahlensammlung.getBekanntheitsgrad().addModifier(kampagne.getValue().getImpact()); // impact weitergeben
+            this.kennzahlensammlung.getWeicheKennzahl("bekannheitsgrad").addModifier(kampagne.getValue().getImpact()); // impact weitergeben
             if (kampagne.getValue().getEnd().equals(Game.getCalendar())) {
                 this.kampagnen.remove(kampagne.getKey());
             }

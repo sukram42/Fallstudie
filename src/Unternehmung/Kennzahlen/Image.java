@@ -3,6 +3,8 @@ package Unternehmung.Kennzahlen;
 import Unternehmung.Unternehmen;
 
 /**
+ * Image setzt sich zusammen aus Mitarbeiterzufriedenheit und Kundenzufriedenheit
+ * ist Grundlage zur Generierung von Preisen (sprich zur Durchsetzbarkeit von Preisen)
  * Created by boebel on 17.01.2017.
  */
 public class Image extends Kennzahl{
@@ -10,7 +12,7 @@ public class Image extends Kennzahl{
 
     public Image(Unternehmen unternehmen) {
         super(unternehmen);
-        this.setBasiswert(0.1f);
+        this.berechnen();
         this.setWert(this.getWert());
     }
     @Override

@@ -1,5 +1,7 @@
 package Unternehmung;
 
+import Rules.Game;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,7 +14,9 @@ import java.util.Random;
 public class Ausschreibung {
     private static final transient String[] produkte = {"Rucksack", "Rucksacktech", "Duffel", "Reisetasche"};
     private static final transient char[] qualitaetsstufen = {'A', 'B', 'C'};
-    private static final transient String[] kunden = {"SchickerRucksackAG","Outdoorjoh.com","BergNeelSen","BergeUndSo","BergDoktor.com","Berglises Hausladen","My Litty Moutain","AdventureTime","LaBoutiqueDeLaSporte"}; // TODO Array mit (fiktiven oder echten?) Kundennamen füllen
+    private static final transient String[] kunden = {"SchickerRucksackAG","Outdoorjoh.com","BergNeelSen","BergeUndSo",
+            "BergDoktor.com","Berglises Hausladen","My Litty Moutain","AdventureTime","LaBoutiqueDeLaSporte",
+            "EA Sports", "Bags & more", "Climbers Equipment Inc.", "Wack Jolfskin", "Gear4Fun", "Travelbuddy GmbH", "TielschSports"};
     private Vertrag vertrag;
     private ArrayList<Unternehmen> bewerber = new ArrayList<>();
 
@@ -25,21 +29,32 @@ public class Ausschreibung {
      */
     private Vertrag generateRandomVertrag(){
         Random random = new Random();
-        float preis = 50; // TODO Preise basierend auf Kennzahlen und Produkt generieren
         String kunde = kunden[random.nextInt(kunden.length)];
         int laufzeit = random.nextInt(59) + 1; // generiert zufällige Laufzeit zwischen 1 (= einmaliger Auftrag) und 60 Monaten (= 5 Jahre)
-        return new Vertrag(this.generateRandomProduktlinie(), preis, kunde, laufzeit);
+        return new Vertrag(this.generateRandomProduktlinie(), kunde, laufzeit);
     }
 
     /**
      * @return Produktlinie mit zufällig generierten Werten
      */
     private Produktlinie generateRandomProduktlinie(){
-        // TODO ist die Gefahr hier zu groß, dass Produkte, die ein Spieler produziert hat überhaupt nicht nachgefragt werden?
         Random random = new Random();
         String name = produkte[random.nextInt(4)];
         char qualitaetsstufe = qualitaetsstufen[random.nextInt(3)];
-        int menge = random.nextInt(500) + 25; // TODO Größe der Ausschreibungen an durchschnittlicher Produktionsmenge festmachen!
+        // durchschnittliche Produktionsmenge als Maßstab für Interval, in dem die Ausschreibungen generiert werden:
+        int durchschnittlicheProduktionsmenge = 0;
+        int menge;
+        if (Game.getCompanies().size() != 0) {
+            durchschnittlicheProduktionsmenge = Game.getGesamtabsatz() / Game.getCompanies().size();
+        }
+        if (durchschnittlicheProduktionsmenge <= 400) {
+            menge = random.nextInt(150) + 50; // Anfangsintervall = [50; 200]
+        } else {
+            // Intervall = [200; x]:
+            int intervallBeginn = Math.round(durchschnittlicheProduktionsmenge - durchschnittlicheProduktionsmenge * 0.5f);
+            int intervallEnde = Math.round(durchschnittlicheProduktionsmenge + durchschnittlicheProduktionsmenge * 0.5f);
+            menge = random.nextInt(intervallEnde) + intervallBeginn;
+        }
         return new Produktlinie(new Produkt(name, qualitaetsstufe), menge);
     }
 

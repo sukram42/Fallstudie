@@ -84,6 +84,15 @@ public class Maschine {
         }
     }
 
+    /**
+     * setzt Maschinenstatus bei jedem Timer Count herunter
+     */
+    public void statusRuntersetzen(){
+        if (this.status > 0) {
+            this.status -= 0.01f;
+        }
+    }
+
     // Getter und Setter:
     public int getKlasse() {
         return klasse;

@@ -153,6 +153,9 @@ public class Produktion extends Abteilung {
             e.printStackTrace();
         }
         updateForschungsboni();
+        for (Maschine maschine : this.maschinen){
+            maschine.statusRuntersetzen();
+        }
     }
 
     // sämtliche Hilfsmethoden:
