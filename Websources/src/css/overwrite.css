@@ -365,3 +365,5 @@ h4, .h4 {
 .mitarbeiter{
     padding-top: 5px;
 }
+.table > thead > tr > th {
+border-bottom-width: 0px;}
