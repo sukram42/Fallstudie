@@ -36,9 +36,6 @@ public class MarketingInterface {
              return Response.status(201).entity("Marketingkampagne erfolgreich gestartet").build();
         } catch (ZuWenigMitarbeiterException e) {
             return Response.ok("ERROR:" + e.toString()).build();
-        }catch(LaeuftBereitsException e1)
-        {
-            return Response.status(409).entity(e1.toString()).build();
         }
     }
 
@@ -51,6 +48,7 @@ public class MarketingInterface {
         return Response.status(201).entity("MarketingKampagne erfolgreich gestartet").build();
     }
 
+    /*
     @GET
     @Secured
     @Path("campaigns/{campaign}")
@@ -59,7 +57,7 @@ public class MarketingInterface {
         Marketing marketing = getMarketingFromContext(context);
         return Response.ok(marketing.istMarketingkampagneAktiv(art)).build();
     }
-
+    */
 
     private Marketing getMarketingFromContext(SecurityContext context)
     {

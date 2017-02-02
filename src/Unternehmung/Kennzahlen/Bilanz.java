@@ -1,6 +1,7 @@
 package Unternehmung.Kennzahlen;
 
 import Exceptions.BankruptException;
+import Exceptions.ZuWenigCashException;
 import Unternehmung.Unternehmen;
 
 /**
@@ -44,6 +45,20 @@ public class Bilanz {
             this.setLiquideMittel(this.liquideMittel + liquiditätsVeränderung);
         } else {
             throw new BankruptException(unternehmen);
+        }
+    }
+
+    /**
+     * wird von Methoden wie maschineKaufen ausgegeben und prüft, ob genügend Liquidität vorhanden ist und wirft ggf. eine ZuWenigCashException
+     * wird nur von Methoden aufgerufen, durch die bei unzureichender Liquidität nicht eine BankruptException geworfen werden soll
+     * @param kosten der Investition
+     * @return true, wenn genügend Cash vorhanden ist
+     */
+    public boolean liquiditaetAusreichend(float kosten) throws ZuWenigCashException{
+        if (this.liquideMittel >= kosten){
+            return true;
+        } else {
+            throw new ZuWenigCashException();
         }
     }
 
