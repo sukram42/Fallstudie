@@ -48,11 +48,6 @@ assertNotNull(testKennzahlensammlung.getWeicheKennzahl(kennzahl));
     }
 
     @Test
-    public void getBekanntheitsgrad() throws Exception {
-        assertNotNull(testKennzahlensammlung.getBekanntheitsgrad());
-    }
-
-    @Test
     public void getMitarbeiterzufriedenheit() throws Exception {
         assertNotNull(testKennzahlensammlung.getMitarbeiterzufriedenheit());
     }
@@ -66,32 +61,6 @@ assertNotNull(testKennzahlensammlung.getWeicheKennzahl(kennzahl));
     public void setMarktanteil() throws Exception {
 testKennzahlensammlung.setMarktanteil(2);
         assertEquals(testKennzahlensammlung.getMarktanteil(), 2, 0.5);
-    }
-
-    @Test
-    public void getAusschussrate() throws Exception {
-        assertEquals(testKennzahlensammlung.getAusschussrate(), 0, 0.5);
-
-    }
-
-    @Test
-    public void setAusschussrate() throws Exception {
-        testKennzahlensammlung.setAusschussrate(2);
-        assertEquals(testKennzahlensammlung.getAusschussrate(), 2, 0.5);
-
-    }
-
-    @Test
-    public void getReklamationsrate() throws Exception {
-        assertEquals(testKennzahlensammlung.getReklamationsrate(), 0, 0.5);
-
-    }
-
-    @Test
-    public void setReklamationsrate() throws Exception {
-        testKennzahlensammlung.setReklamationsrate(2);
-        assertEquals(testKennzahlensammlung.getReklamationsrate(), 2, 0.5);
-
     }
 
 //    @Test

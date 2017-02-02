@@ -42,11 +42,14 @@ public class Kennzahl {
      * @return finaler Wert der Kennzahl
      */
     public float berechnen(){
-
-        if (basiswert + modifier >= 1) {
-            wert = (float) 1;
+        if (this.modifier < 0){
+            this.modifier = 0;
         }
-        wert  = (float)(basiswert + modifier);
+        if (this.basiswert + this.modifier >= 1) {
+            this.wert = 1f;
+        } else {
+            this.wert = this.basiswert + this.modifier;
+        }
         return getWert();
     }
 
@@ -71,6 +74,10 @@ public class Kennzahl {
 
     public float getModifier() {
         return modifier;
+    }
+
+    public void setModifier(float modifier) {
+        this.modifier = modifier;
     }
 
     public float getWert() {

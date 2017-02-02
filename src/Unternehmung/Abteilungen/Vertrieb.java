@@ -16,6 +16,7 @@ public class Vertrieb extends Abteilung {
 
     private Produktion produktion;
     private Unternehmen unternehmen;
+    private int verkaufteProdukte; // Anzahl verkaufter Produkte im vergangenen Monat (für Berechnung des Marktanteils)
     private ArrayList<Ausschreibung> opportunities = new ArrayList<>();
     private CopyOnWriteArrayList<Vertrag> accounts = new CopyOnWriteArrayList<>();
 
@@ -45,6 +46,7 @@ public class Vertrieb extends Abteilung {
      */
     private  void produkteVerkaufen(){
         float umsatz = 0;
+        int verkaufteProdukte = 0;
         for (Vertrag vertrag : accounts){
             boolean vertragErfüllt = false;
             int menge = vertrag.getProduktlinie().getMenge();
@@ -57,10 +59,12 @@ public class Vertrieb extends Abteilung {
                         // Menge verringern, Umsatz addieren:
                         bestand.setMenge(bestand.getMenge() - menge);
                         umsatz += vertrag.getPreis() * vertrag.getProduktlinie().getMenge();
+                        verkaufteProdukte += vertrag.getProduktlinie().getMenge();
                         vertragErfüllt = true;
                     } else {
                         // alle vorhandenen Produkte verkaufen:
-                        umsatz += bestand.getMenge();
+                        umsatz += bestand.getMenge() * vertrag.getPreis();
+                        verkaufteProdukte += bestand.getMenge();
                         this.produktion.getLager().remove(bestand);
                     }
                 }
@@ -69,6 +73,7 @@ public class Vertrieb extends Abteilung {
                 this.vertragBrechen(vertrag);
             }
         }
+        this.verkaufteProdukte = verkaufteProdukte;
         try {
             this.kennzahlensammlung.getGuv().addUmsatz(umsatz);
             this.kennzahlensammlung.getBilanz().liquiditaetAnpassen(umsatz);
@@ -105,6 +110,10 @@ public class Vertrieb extends Abteilung {
 
 
     // Getter und Setter:
+    public int getVerkaufteProdukte() {
+        return verkaufteProdukte;
+    }
+
     public ArrayList<Ausschreibung> getOpportunities() {
         return opportunities;
     }
@@ -112,5 +121,6 @@ public class Vertrieb extends Abteilung {
     public List<Vertrag> getAccounts() {
         return accounts;
     }
+
 
 }

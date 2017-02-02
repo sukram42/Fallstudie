@@ -8,12 +8,10 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by cs on 20.01.2017.
  */
-public class VertragTest extends TestCase{
+public class VertragTest extends TestCase {
     private Produktlinie produktlinie;
     private float preis;
     private float strafe;
@@ -37,8 +35,8 @@ public class VertragTest extends TestCase{
     }
 
     @Before
-    public void testcreateVertrag(){
-        testVertrag = new Vertrag( produktlinie,preis,kunde, laufzeit);
+    public void testcreateVertrag() {
+        testVertrag = new Vertrag(produktlinie, kunde, laufzeit);
         assertNotNull(testVertrag);
     }
 
@@ -49,7 +47,7 @@ public class VertragTest extends TestCase{
 
     @Test
     public void getProduktlinie() throws Exception {
-        assertEquals( testVertrag.getProduktlinie(), produktlinie);
+        assertEquals(testVertrag.getProduktlinie(), produktlinie);
     }
 
     @Test
@@ -61,7 +59,7 @@ public class VertragTest extends TestCase{
 
     @Test
     public void getPreis() throws Exception {
-        assertEquals( testVertrag.getPreis(), preis);
+        assertEquals(testVertrag.getPreis(), preis);
     }
 
     @Test
@@ -80,7 +78,7 @@ public class VertragTest extends TestCase{
     public void setStrafe() throws Exception {
         float neueStrafe = 60000;
         testVertrag.setStrafe(neueStrafe);
-        assertEquals(testVertrag.getStrafe(),neueStrafe);
+        assertEquals(testVertrag.getStrafe(), neueStrafe);
     }
 
     @Test
@@ -92,7 +90,7 @@ public class VertragTest extends TestCase{
     public void setKunde() throws Exception {
         String neuerKunde = "Kunde GmbH";
         testVertrag.setKunde(neuerKunde);
-        assertEquals(testVertrag.getKunde(),neuerKunde);
+        assertEquals(testVertrag.getKunde(), neuerKunde);
     }
 
     @Test
@@ -104,7 +102,7 @@ public class VertragTest extends TestCase{
     public void setLaufzeit() throws Exception {
         int neueLaufzeit = 2;
         testVertrag.setLaufzeit(neueLaufzeit);
-        assertEquals(testVertrag.getLaufzeit(),neueLaufzeit);
+        assertEquals(testVertrag.getLaufzeit(), neueLaufzeit);
     }
 
     @Test
@@ -119,10 +117,10 @@ public class VertragTest extends TestCase{
 
     @Test
     public void setEnd() throws Exception {
-        Calendar neuesEnde= testVertrag.getEnd();
+        Calendar neuesEnde = testVertrag.getEnd();
         neuesEnde.add(Calendar.MONTH, 2);
         testVertrag.setEnd(neuesEnde);
-        assertEquals(testVertrag.getEnd(),neuesEnde);
+        assertEquals(testVertrag.getEnd(), neuesEnde);
     }
 
 

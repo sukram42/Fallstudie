@@ -1,8 +1,11 @@
 package Unternehmung;
 
+import Rules.Game;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Calendar;
 
 import static org.junit.Assert.*;
 
@@ -63,7 +66,7 @@ public class ProduktlinieTest {
 
     @Test
     public void getMenge() throws Exception {
-        assertEquals(testProduktlinie.getMenge(),menge);
+        assertEquals(testProduktlinie.getMenge(),menge/ Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH));
     }
 
     @Test

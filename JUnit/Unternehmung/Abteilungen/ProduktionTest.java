@@ -142,7 +142,7 @@ assertFalse(testProduktion.getForschungsboni().isEmpty());
         unternehmen.getAbteilung("hr").addMitarbeiter(1, 1000);
         testProduktion.addMitarbeiter(2, 10000);
         testProduktion.produzieren("Rucksack", 'A', 100, 50000); //Herstellungskosten sind 20
-        assertEquals(testProduktion.getTaeglicheHerstellkosten(), 20 * round(100/Game.getCalendar().getActualMaximum(Calendar.MONTH)), 0.5);
+        assertEquals(testProduktion.getTaeglicheHerstellkosten(), 20 * round(100/Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH)), 0.5);
     }
 
     @Test

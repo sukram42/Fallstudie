@@ -26,7 +26,7 @@ public class Produktlinie {
      */
     public Produktlinie(Produkt produkt, int menge, int laufzeit){
         this.produkt = produkt;
-        this.menge = menge / Game.getCalendar().getActualMaximum(Calendar.MONTH);
+        this.menge = menge / Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH);
         this.laufzeit = laufzeit;
         this.beginn = (Calendar) Game.getCalendar().clone();
         this.end = (Calendar) this.beginn.clone();
