@@ -22,14 +22,14 @@ export class StartComponent{
         if(validateToken)
         {
             validateToken.subscribe(data=> {
-                    console.log("Data |" + data + "|");
                     if (data.trim() == "true") {
                         window.location.href = "home.html";
-                        console.log("na los");
                     }
                 }
             ),err =>{console.log("Error")};
         }
+
+
     }
 
 

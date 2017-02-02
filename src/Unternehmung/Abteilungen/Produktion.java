@@ -104,6 +104,7 @@ public class Produktion extends Abteilung {
     public void maschineVerkaufen(Maschine maschine){
         try {
             float wiederverkaufswert = (maschine.getAnschaffungskst() / 2) * (float) maschine.getStatus();
+            this.maschinen.remove(maschine);
             this.kennzahlensammlung.getBilanz().liquiditaetAnpassen(wiederverkaufswert);
             this.kennzahlensammlung.getBilanz().addTAMasch(- maschine.getAnschaffungskst());
             this.kennzahlensammlung.getGuv().addUmsatz(wiederverkaufswert);
@@ -152,6 +153,9 @@ public class Produktion extends Abteilung {
             e.printStackTrace();
         }
         updateForschungsboni();
+        for (Maschine maschine : this.maschinen){
+            maschine.statusRuntersetzen();
+        }
     }
 
     // sämtliche Hilfsmethoden:
@@ -226,7 +230,7 @@ public class Produktion extends Abteilung {
     public float getTaeglicheHerstellkosten(){
         float herstellkosten = 0;
         for (Produktlinie auftrag : this.aufträge){
-            herstellkosten += auftrag.getProdukt().getHerstellkosten() * round(auftrag.getMenge()/Game.getCalendar().getActualMaximum(Calendar.MONTH));
+            herstellkosten += auftrag.getProdukt().getHerstellkosten() * auftrag.getMenge();
         }
         return herstellkosten;
     }

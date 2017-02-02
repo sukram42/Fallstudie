@@ -23,10 +23,10 @@
                     </div>
                     <div class="row">
                         <div class="col-md-1"></div>
-                        <div class="col-md-10">
-                            <div *ngIf="error" class="alert alert-danger alert-dismissible fade in" role="alert">
-                                <h4>OMG</h4>
-                                <p>{{error}}</p>
+                        <div class="col-md-10" *ngIf="error">
+                            <div  class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <h4>Kein Personal</h4>
+                                <p>Stellen Sie sicher, dass Sie genügend Mitarbeiter in die Abteilung 'Human Resources' eingestellt haben.</p>
                             </div>
                         </div>
                         <div class="col-md-1"></div>

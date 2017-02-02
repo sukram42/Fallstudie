@@ -25,8 +25,20 @@ export class ProduktionComponent {
         hrService.getEmployeesProduktion().subscribe(
             data=>{this.employees = data,console.log(data)}
             );
-        this.proService.getMachinesSubject().asObservable().subscribe(data=>data,err=>this.errorMaschinen = err);
-        this.proService.getProductlinesSubject().subscribe(data=>data,err=>this.errorLinie = err);
+
+        this.proService.getMachinesSubject().asObservable()
+            .subscribe(data=>{
+                if(data.toString().startsWith("ERROR"))
+                    this.errorMaschinen = data;
+                else this.errorMaschinen = undefined;
+            });
+
+        this.proService.getProductlinesSubject()
+            .subscribe(data=>{
+                if(data.toString().startsWith("ERROR"))
+                    this.errorLinie = data;
+                else this.errorLinie = undefined;
+            });
 
     }
 

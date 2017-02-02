@@ -14,7 +14,7 @@ $(document).ready(function(){
     
     // Init navigation toggle for small screens   
     if(window_width <= 991){
-        lbd.initRightMenu();   
+        lbd.initRightMenu();   y
     }
      
     //  Activate the tooltips   
@@ -175,13 +175,6 @@ $(document).ready(function() {
         }
         return false;
     });
-});
-
-$(document).ready(function() {
-    var $this = $(this),
-        container = $('#content');
-    target = $this.data('target');
-    container.load('src/html/dashboard.html');
 });
 
 // Change active state in sidebar

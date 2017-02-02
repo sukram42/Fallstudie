@@ -39,6 +39,7 @@ public class Game extends TimerTask {
     public static ArrayList<Unternehmen> getCompanies() {
         return companies;
     }
+    //Warum keine "addCompanies" Bennenung ? :D
 
     public static Unternehmen getUnternehmenByName(String name) {
         for (Unternehmen u : companies) {
@@ -88,7 +89,7 @@ public class Game extends TimerTask {
             u.update();
             u.getKennzahlensammlung().update();
         }
-
+        this.updateMarktanteile();
         if ((getCalendar().get(Calendar.MONTH) == Calendar.DECEMBER) && getCalendar().get(Calendar.DAY_OF_MONTH) == 30) {
             for (Unternehmen u : companies) {
                 u.updateYearly();
@@ -101,44 +102,46 @@ public class Game extends TimerTask {
 
     /**
      * legt am ersten Tag jedes Monats fest, wer den Zuschlag bekommt, löscht dann alle Opportunities und Ausschreibungen und generiert neue Ausschreibungen
+     * das Unternehmen, dass als erstes ein Angebot abgegeben hat bekommt den Zuschlag, wenn ein zufälliger Float zwischen 0 und der Verkafuswahrscheinlichkeit (oder 0.4, wenn Verkaufswahrscheinlichkeit niedriger als 0.4) liegt:
      */
     private void updateAusschreibungen() {
         if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == 1) {
             // Entscheidung über Zuschlag basierend auf der Kennzahl der Verkaufswahrscheinlichkeit:
-            for (int i = 0; i < ausschreibungen.size(); i++) {
-                // eine Map mit allen Unternehmen, die sich auf die Ausschreibung beworben haben erstellen:
-                Map<Unternehmen, Float> bewerber = new HashMap<Unternehmen, Float>();
-                for (Unternehmen unternehmen : companies) {
-                    Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
-                    if (vertrieb.getOpportunities().get(i) != null) {
-                        bewerber.put(unternehmen, unternehmen.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert());
+            for (Ausschreibung ausschreibung : ausschreibungen) {
+                if(ausschreibung.getBewerber() != null) {
+                    Unternehmen gewinner = null;
+                    boolean gewinnerGefunden = false;
+                    // Gewinner der Ausschreibung ermitteln:
+                    for (Unternehmen unternehmen : ausschreibung.getBewerber()) {
+                        Random random = new Random();
+                        float randomFloat = random.nextFloat();
+                        float verkaufswahrscheinlichkeit = unternehmen.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert();
+                        // Verkaufswahrscheinlichkeit auf 0.4 setzten, falls sie geringer ist, sodass die Chance nicht zu gering ist
+                        if (verkaufswahrscheinlichkeit > 0.4f){
+                            verkaufswahrscheinlichkeit = 0.4f;
+                        }
+                        // das Unternehmen, dass als erstes ein Angebot abgegeben hat bekommt den Zuschlag, wenn ein zufälliger Float zwischen 0 und der Verkafuswahrscheinlichkeit liegt:
+                        if (randomFloat < verkaufswahrscheinlichkeit) {
+                            gewinner = unternehmen;
+                            gewinnerGefunden = true;
+                            break;
+                        }
                     }
-                }
-                // das Unternehmen mit der höchsten Verkaufswahrscheinlichkeit finden
-                float max = -1;
-                for (Map.Entry<Unternehmen, Float> b : bewerber.entrySet()) {
-                    if (b.getValue() > max) {
-                        max = b.getValue();
-                    }
-                }
-                // Zuschlag geben:
-                for (Map.Entry<Unternehmen, Float> b : bewerber.entrySet()) {
-                    if (b.getValue() == max) {
-                        Vertrieb vertrieb = (Vertrieb) b.getKey().getAbteilung("vertrieb");
-                        vertrieb.zuschlagBekommen(i);
+                    // Zuschlag geben:
+                    if (gewinnerGefunden) {
+                        Vertrieb vertrieb = (Vertrieb) gewinner.getAbteilung("vertrieb");
+                        vertrieb.getAccounts().add(ausschreibung.getVertrag());
                     }
                 }
             }
             // Opportunities bei allen Unternehmen löschen:
             for (Unternehmen unternehmen : companies){
                 Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
-                vertrieb.clearOpportunities();
+                vertrieb.getOpportunities().clear();
             }
             // alte Ausschreibugnen löschen:
-            for (int i = 0; i < ausschreibungen.size(); i++) {
-                ausschreibungen.remove(i);
-            }
-            // neue Ausschreibungen generieren:
+            ausschreibungen.clear();
+            // neue zufällige Ausschreibungen generieren:
             Random random = new Random();
             int anzahlAusschreibungen = random.nextInt(10) + 8;
             for (int i = 1; i <= anzahlAusschreibungen; i++) {
@@ -147,7 +150,36 @@ public class Game extends TimerTask {
         }
     }
 
-    public void updateCounter() {
+    /**
+     * berechnet und setzt bei jedem Timer Intervall den absoluten mengenmäßigen Marktanteil für jedes Unternehmen
+     */
+    private void updateMarktanteile(){
+        int gesamtabsatz = getGesamtabsatz();
+        if (gesamtabsatz > 0) {
+            for (Unternehmen unternehmen : companies) {
+                Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
+                unternehmen.getKennzahlensammlung().setMarktanteil(vertrieb.getVerkaufteProdukte() / gesamtabsatz);
+            }
+        } else {
+            for (Unternehmen unternehmen : companies){
+                unternehmen.getKennzahlensammlung().setMarktanteil(0);
+            }
+        }
+    }
+
+    /**
+     * Ermitteln der gesamten Produktionsmenge aller Unternehmen
+     */
+    public static int getGesamtabsatz(){
+        int gesamtabsatz = 0;
+        for (Unternehmen unternehmen : companies){
+            Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
+            gesamtabsatz += vertrieb.getVerkaufteProdukte();
+        }
+        return gesamtabsatz;
+    }
+
+    private void updateCounter() {
         gameCalendar.add(Calendar.DAY_OF_MONTH, 1);
         System.out.println(gameCalendar.getTime().toString());
     }

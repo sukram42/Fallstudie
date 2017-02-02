@@ -1,11 +1,8 @@
 package Unternehmung;
 
-import Exceptions.ZuWenigMaschinenstellplatzException;
 import Exceptions.ZuWenigMitarbeiterException;
-import Exceptions.ZuWenigMitarbeiterOderMaschinenException;
 import Rules.Game;
 import Unternehmung.Abteilungen.Marketing;
-import Unternehmung.Abteilungen.Produktion;
 import Unternehmung.Abteilungen.SozialeLeistungen;
 import Unternehmung.Abteilungen.Vertrieb;
 import com.google.gson.Gson;
@@ -14,7 +11,7 @@ import com.google.gson.Gson;
  * nur eine Testklasse!
  * Created by lucadommes on 28.12.2016.
  */
-public class UnternehmenTest {
+public class UnternehmenTestklasse {
     public static void main(String[] args) {
         Game game = new Game();
         // ############################## UNTERNEHMEN 1 ##############################
@@ -40,7 +37,6 @@ public class UnternehmenTest {
         System.out.println("Mitarbeiterzufriedenheit mit Kantine: " + unternehmen1.getKennzahlensammlung().getMitarbeiterzufriedenheit().berechnen());
         System.out.println("Kundenzufriedenheit: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("kundenzufriedenheit").berechnen());
         System.out.println("Image: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("image").berechnen());
-        System.out.println("Produktqualität: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("produktqualität").berechnen());
 
 
         // Mitarbeiter einstellen:
@@ -77,7 +73,7 @@ public class UnternehmenTest {
         Vertrieb vertrieb = (Vertrieb)unternehmen1.getAbteilung("vertrieb");
         try {
             System.out.print("SIZE : "+ game.getAusschreibungen().size());
-            vertrieb.bewerben(0);
+            vertrieb.bewerben(Game.getAusschreibungen().get(0));
             System.out.println(new Gson().toJson(vertrieb.getOpportunities()));
         } catch (ZuWenigMitarbeiterException e) {
             e.printStackTrace();

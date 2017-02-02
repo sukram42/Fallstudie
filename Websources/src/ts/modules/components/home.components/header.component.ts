@@ -35,8 +35,7 @@ export class HeaderComponent{
 
         this.proService.getWarehouseSubject()
             .asObservable().subscribe(data=>this.getCapacity(),err=>console.log(err));
-
-        this.hrService.getEmployeeSubject().subscribe(data=>{this.getEmployeeCount()},err=>console.log(err))
+        this.hrService.getEmployeeSubject().subscribe(data=>{this.getEmployeeCount()},err=>{})
     }
 
     init()
@@ -50,7 +49,6 @@ export class HeaderComponent{
     getEmployeeCount()
     {
         this.keyFigures.getEmployeeCount().subscribe(data=>this.mitarbeiterCount = data);
-        console.log("hallo");
     }
 
     getCapacity() {

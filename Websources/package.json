@@ -93,6 +93,7 @@
     "concurrently": "^3.1.0",
     "es6-promise": "^3.2.1",
     "es6-shim": "^0.35.1",
+    "gulp-clean": "^0.3.2",
     "lite-server": "^2.2.0",
     "tsify": "^1.0.0",
     "typescript": "^2.0.2",

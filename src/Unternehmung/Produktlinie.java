@@ -13,7 +13,7 @@ public class Produktlinie {
     private String id; // zur Identifikation der Produktlinie in der Map in der Klasse Produktion
                         // setzt sich zusammen aus Produktname und Qualitätsstufe
     private Produkt produkt; // zu produzierendes Produkt
-    private int menge; // in der Produktion: zu produzierende Menge pro Monat | im Lager: vorhandene Produkte
+    private int menge; // in der Produktion: zu produzierende Menge pro Tag (angegeben vom User pro Monat) | im Lager: vorhandene Produkte
     private int laufzeit; // Anzahl der Perioden in denen das Produkt produziert werden soll
     private Calendar beginn;
     private Calendar end;
@@ -21,12 +21,12 @@ public class Produktlinie {
     /**
      * Konstruktor, der beim Erstellen eines neuen Produktionsauftrags verwendet wird
      * @param produkt zu produzierendes Produkt
-     * @param menge Produktionsmenge pro Timer count
+     * @param menge Produktionsmenge pro Monat
      * @param laufzeit des Auftrags in timer counts (wird dann bei jedem timer count runter gesetzt)
      */
     public Produktlinie(Produkt produkt, int menge, int laufzeit){
         this.produkt = produkt;
-        this.menge = menge;
+        this.menge = menge / Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH);
         this.laufzeit = laufzeit;
         this.beginn = (Calendar) Game.getCalendar().clone();
         this.end = (Calendar) this.beginn.clone();

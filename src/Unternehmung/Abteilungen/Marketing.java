@@ -35,7 +35,7 @@ public class Marketing extends Abteilung {
      * @param laufzeit in timer counts
      */
     public void marketingkampagneStarten(String art, int laufzeit) throws ZuWenigMitarbeiterException, LaeuftBereitsException{
-        if (this.kampagnen.get(art) == null) {
+        if (!istMarketingkampagneAktiv(art)) {
             Marketingkampagne kampagne = new Marketingkampagne(art, laufzeit);
             if (kampagne.getNoetigeMitarbeiter() <= this.getMitarbeiter().size()) {
                 this.kampagnen.put(art, kampagne);
@@ -49,6 +49,10 @@ public class Marketing extends Abteilung {
         }
     }
 
+    public boolean istMarketingkampagneAktiv(String art)
+    {
+        return this.kampagnen.get(art) != null;
+    }
 
     public void marketingkampagneAbbrechen(String art) {
         this.kampagnen.remove(art);
@@ -104,7 +108,7 @@ public class Marketing extends Abteilung {
      */
     private void updateMarketingkampagnen() {
         for (Map.Entry<String, Marketingkampagne> kampagne : this.kampagnen.entrySet()) {
-            this.kennzahlensammlung.getBekanntheitsgrad().addModifier(kampagne.getValue().getImpact()); // impact weitergeben
+            this.kennzahlensammlung.getWeicheKennzahl("bekannheitsgrad").addModifier(kampagne.getValue().getImpact()); // impact weitergeben
             if (kampagne.getValue().getEnd().equals(Game.getCalendar())) {
                 this.kampagnen.remove(kampagne.getKey());
             }

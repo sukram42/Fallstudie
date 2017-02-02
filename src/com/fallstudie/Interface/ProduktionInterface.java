@@ -9,10 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.json.simple.JSONObject;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
@@ -47,7 +44,7 @@ public class ProduktionInterface {
                     );
             return Response.ok().entity(content).build();
         } catch (ZuWenigMitarbeiterOderMaschinenException e) {
-            return Response.status(409).entity(e.toString()).build();
+            return Response.status(200).entity("ERROR:" + e.toString()).build();
         }
     }
 
@@ -98,7 +95,7 @@ public class ProduktionInterface {
 
             return Response.ok().entity(content).build();
         } catch (ZuWenigMaschinenstellplatzException e) {
-            return Response.status(409).entity(e.toString()).build();
+            return Response.status(200).entity("ERROR:" + e.toString()).build();
         }
 
     }
@@ -193,6 +190,24 @@ public class ProduktionInterface {
         } catch (Exception e) {
             return Response.serverError().entity(e.toString()).build();
         }
+    }
+
+    @GET
+    @Secured
+    @Path("machines/{no}/status")
+    public Response getMachinesStatus(@Context SecurityContext securityContext, @PathParam("no") String machinesNo)
+    {
+        Unternehmen unternehmen = CompanyInterface.getCompanyFromContext(securityContext);
+        Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
+
+        try {
+            int no = Integer.parseInt(machinesNo);
+            return Response.ok(produktion.getMaschinen().get(no).getStatus()).build();
+        }catch(NumberFormatException e)
+        {
+            return Response.status(500).entity(gson.toJson(e)).build();
+        }
+
     }
 
 

@@ -23,67 +23,75 @@ export class ProduktionService {
     }
 
 
-
-    produzieren(data)
-    {
-        this.http.post('http://localhost:8080/rest/companies/production',data).map(res => res.text())
-            .subscribe(data=>console.log(data),
-                err=>this.productlinesSubject.error(2),
-                ()=>this.productlinesSubject.next("new Product")
+    produzieren(data) {
+        this.http.post('http://localhost:8080/rest/companies/production', data)
+            .map(res => res.text())
+            .subscribe(data => {
+                    if (data.toString().startsWith("ERROR"))
+                        this.productlinesSubject.next("ERROR" + 2);
+                    else this.productlinesSubject.next("new Product")
+                },
+                err => console.log(err)
             );
     }
-    getProductlinesSubject()
-    {
+
+    getProductlinesSubject() {
         return this.productlinesSubject.asObservable();
     }
 
-    getMachinesSubject()
-    {
+    getMachinesSubject() {
         return this.machinesSubject;
     }
-    getWarehouseSubject()
-    {
+
+    getWarehouseSubject() {
         return this.warehouseSubject;
     }
 
 
-    kaufeMaschine(data)
-    {
-       return this.http.post('http://localhost:8080/rest/companies/production/machines',data).map(res=>res.text())
-           .subscribe(data=>data,err=>this.machinesSubject.error(1),()=>this.machinesSubject.next("Neue Maschine"));
-    }
-    kaufeLager(size)
-    {
-        return this.http.post('http://localhost:8080/rest/companies/production/warehouses',size).map(res=>res.text());
-    }
-    getLagerkapazitaet()
-    {
-        return this.http.get('http://localhost:8080/rest/companies/production/warehouses/capacities').map(res=>res.json());
-    }
-    getLagerkapazitaetIntervall()
-    {
-        return Observable.interval(5000).flatMap(()=> this.http.get('http://localhost:8080/rest/companies/production/warehouses/capacities').map(res=>res.json()));
-    }
-    kaufeProduktionshalle(size)
-    {
-        return this.http.post('http://localhost:8080/rest/companies/production/halls',size).map(res=>res.text());
-    }
-    getProduktionshallenkapazitaet()
-    {
-        return this.http.get('http://localhost:8080/rest/companies/production/halls/capacities').map(res=>res.json());
-    }
-    getProduktlinien()
-    {
-        return this.http.get('http://localhost:8080/rest/companies/production/productlines').map(res=>res.json());
-    }
-    getMachines()
-    {
-        return this.http.get('http://localhost:8080/rest/companies/production/machines').map(res=>res.json());
+    kaufeMaschine(data) {
+        return this.http.post('http://localhost:8080/rest/companies/production/machines', data)
+            .map(res => res.text())
+            .subscribe(data => {
+                if (data.toString().startsWith("ERROR"))
+                    this.machinesSubject.next("ERROR" + 1);
+                else this.machinesSubject.next("Neue Maschine")
+            });
     }
 
-    repairMachines(index)
+    kaufeLager(size) {
+        return this.http.post('http://localhost:8080/rest/companies/production/warehouses', size).map(res => res.text());
+    }
+
+    getLagerkapazitaet() {
+        return this.http.get('http://localhost:8080/rest/companies/production/warehouses/capacities').map(res => res.json());
+    }
+
+    getLagerkapazitaetIntervall() {
+        return Observable.interval(5000).flatMap(() => this.http.get('http://localhost:8080/rest/companies/production/warehouses/capacities').map(res => res.json()));
+    }
+
+    kaufeProduktionshalle(size) {
+        return this.http.post('http://localhost:8080/rest/companies/production/halls', size).map(res => res.text());
+    }
+
+    getProduktionshallenkapazitaet() {
+        return this.http.get('http://localhost:8080/rest/companies/production/halls/capacities').map(res => res.json());
+    }
+
+    getProduktlinien() {
+        return this.http.get('http://localhost:8080/rest/companies/production/productlines').map(res => res.json());
+    }
+
+    getMachines() {
+        return this.http.get('http://localhost:8080/rest/companies/production/machines').map(res => res.json());
+    }
+
+    repairMachines(index) {
+        return this.http.put('http://localhost:8080/rest/companies/production/machines', index).map(res => res.text());
+    }
+    getMachinesStatus(no)
     {
-        return this.http.put('http://localhost:8080/rest/companies/production/machines',index).map(res=>res.text());
+        return this.http.get('http://localhost:8080/rest/companies/production/machines/' + no+ '/status').map(res=>res.text());
     }
 
 }
