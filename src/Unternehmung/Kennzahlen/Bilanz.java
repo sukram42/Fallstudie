@@ -8,6 +8,7 @@ import Unternehmung.Unternehmen;
  */
 public class Bilanz {
 
+    private final Unternehmen unternehmen;
     //Aktiva
     private float TaMaschWert;
     private float GebäudeWert;
@@ -23,6 +24,7 @@ public class Bilanz {
 
         this.eigenkapital  = 100000;
         this.liquideMittel = 100000;
+        this.unternehmen = unternehmen;
 
     }
 
@@ -41,7 +43,7 @@ public class Bilanz {
         if (this.liquideMittel * -1 <= liquiditätsVeränderung){
             this.setLiquideMittel(this.liquideMittel + liquiditätsVeränderung);
         } else {
-            throw new BankruptException();
+            throw new BankruptException(unternehmen);
         }
     }
 

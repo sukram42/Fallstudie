@@ -12,10 +12,14 @@ import {HRService} from "../../services/hr.service";
 })
 
 export class HRComponent {
-
+    employees;
     error;
     constructor(hrService : HRService)
     {
+        hrService.getEmployeesHR().subscribe(
+            data=>{this.employees = data,console.log(data)}
+        );
+
         hrService.getEmployeeSubject()
             .subscribe((data) => {
                 if (data.toString().startsWith("ERROR"))

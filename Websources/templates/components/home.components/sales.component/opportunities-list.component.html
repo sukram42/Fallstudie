@@ -3,7 +3,7 @@
         <div class="panel-heading" role="tab" id="überschriftEins2">
             <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#accordion2"
-                   [href]="'#collapse' + i" aria-expanded="true"
+                   [href]="'#collapseopo' + i" aria-expanded="true"
                    aria-controls="collapseEins2">
                     <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
                     Angebot #{{1+i}}
@@ -11,16 +11,10 @@
                 <span class="badge right">23 Tage verbleibend</span>
             </h4>
         </div>
-        <div [id]="'collapse' + i" class="panel-collapse collapse" role="tabpanel"
+        <div [id]="'collapseopo' + i" class="panel-collapse collapse" role="tabpanel"
              aria-labelledby="überschriftEins2">
             <div class="panel-body">
                 <div>
-                    <!--<a role="button" class="btn btn-success btn-xs right"
-                       data-toggle="modal"
-                       data-target="#">
-                        <i class="fa fa-times-circle" aria-hidden="true"></i>
-                        Angebot zurückziehen
-                    </a>-->
                     <h4 *ngIf="opportunity.vertrag.produktlinie.name == 'Rucksack'">Ausschreibung für Rucksäcke</h4>
                     <h4 *ngIf="opportunity.vertrag.produktlinie.name == 'Duffel'">Ausschreibung für Duffels</h4>
                     <h4 *ngIf="opportunity.vertrag.produktlinie.name == 'Rucksacktech'">Ausschreibung für technische Rucksäcke</h4>

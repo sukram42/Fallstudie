@@ -17,7 +17,7 @@ import {HRService} from "../../services/hr.service";
 })
 
 export class ProduktionComponent {
-    employees
+    employees;
     errorMaschinen;
     errorLinie;
     constructor(private proService:ProduktionService ,private hrService:HRService)

@@ -30,7 +30,8 @@ public class Kennzahlensammlung {
     private transient GuV guv;
 
     private int maxNeueMitarbeiter; // abhängig von HR-Mitarbeitern (für 10 Mitarbeiter ist ein HR-Mitarbeiter (=Manager) zuständig)
-                                    // wird pro neu eingestelltem HR-Mitarbeiter um 10 hochgesetzt
+    private boolean bankrupt=false;
+    // wird pro neu eingestelltem HR-Mitarbeiter um 10 hochgesetzt
                                     // wird pro neu eingestelltem (Nicht-HR-) Mitarbeiter um 1 runtergesetzt
 
     /**
@@ -127,5 +128,13 @@ public class Kennzahlensammlung {
 
     public Map<String, Kennzahl> getWeicheKennzahlen() {
         return weicheKennzahlen;
+    }
+
+    public void setBankrupt() {
+        this.bankrupt = true;
+    }
+    public boolean isBankrupt()
+    {
+        return this.bankrupt;
     }
 }

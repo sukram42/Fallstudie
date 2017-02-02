@@ -4,6 +4,7 @@
  */
 
 import { Component } from '@angular/core';
+import {HomeService} from "../../services/home.service";
 
 @Component({
     selector   : 'home-component',
@@ -13,4 +14,14 @@ import { Component } from '@angular/core';
 
 export class HomeComponent {
 
+    constructor(private _homeService:HomeService)
+    {
+        _homeService.isBankrupt().subscribe(data=>
+        {
+           if(data =="true")
+           {
+               console.error("BANKROT!");
+           }
+        });
+    }
 }

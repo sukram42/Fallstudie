@@ -78,13 +78,13 @@ export class DashboardComponent implements OnInit
             .subscribe(content=>{
                 if(!this.data) {
                     this.data = {
-                        labels: ["Mitarbeiterzufriedenheit", "Kundenzufriedenheit", "Bekanntheitsgrad", "Image", "Produktqualität"],
+                        labels: ["Mitarbeiterzufriedenheit", "Kundenzufriedenheit", "Bekanntheitsgrad", "Image", "Marktanteil"],
                         datasets: [
                             {
                                 label: "Kennzahlen",
                                 backgroundColor: "rgba(255,173,41,0.7)",
                                 borderColor: "rgba(255,173,41,1)",
-                                data: [content.mitarbeiterzufriedenheit, content.kundenzufriedenheit, 0, content.image, 0]
+                                data: [content.mitarbeiterzufriedenheit, content.kundenzufriedenheit, content.bekanntheitsgrad, content.image, 0]
                             }//,
                             // {
                             //     label: "kennzahlen des letzten Geschäftsjahres",
@@ -98,7 +98,9 @@ export class DashboardComponent implements OnInit
                 {
                     this.data.datasets[0].data[0] =content.mitarbeiterzufriedenheit ;
                     this.data.datasets[0].data[1] =content.kundenzufriedenheit;
+                    this.data.datasets[0].data[2] =content.bekanntheitsgrad;
                     this.data.datasets[0].data[3] =content.image ;
+                    this.data.datasets[0].data[4] =content.marktanteil ;
                 }
 
           });

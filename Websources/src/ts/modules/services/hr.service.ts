@@ -31,9 +31,24 @@ export class HRService {
         return this.http.get('http://localhost:8080/rest/companies/employees').map(res => res.json());
     }
 
-    getEmployeesProduktion()
-    {
+    getEmployeesProduktion() {
          return this.http.get('http://localhost:8080/rest/companies/employees/production').map(res => res.text());
+    }
+
+    getEmployeesMarketing() {
+        return this.http.get('http://localhost:8080/rest/companies/employees/marketing').map(res => res.text());
+    }
+
+    getEmployeesHR() {
+        return this.http.get('http://localhost:8080/rest/companies/employees/hr').map(res => res.text());
+    }
+
+    getEmployeesSales(){
+        return this.http.get('http://localhost:8080/rest/companies/employees/sales').map(res => res.text());
+    }
+
+    getEmployeesResearch() {
+        return this.http.get('http://localhost:8080/rest/companies/employees/research').map(res => res.text());
     }
 
     getEmployeeSubject(): Observable<any> {

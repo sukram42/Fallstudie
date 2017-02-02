@@ -12,7 +12,6 @@ import {SalesService} from "../../../services/sales.service";
 
 export class AccountsListComponent {
     accounts;
-
     constructor(private salesService: SalesService) {
         this.salesService.getAccounts().subscribe(data=>{this.accounts = data,console.log(data)},err=>console.log(err));
     }

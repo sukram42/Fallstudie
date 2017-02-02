@@ -25,20 +25,31 @@ export class MachineListComponent {
     loadList()
     {
         this.proService.getMachines()
-            .subscribe(data=>{this.data = data});
+            .subscribe(data=>{this.data = data,console.log(data)});
     }
 
     refreshStatus()
     {
-        if(this.data && this.data.length > 0) {
-            for (var i = 0; i < this.data.length; i++) {
-                this.proService.getMachinesStatus(i)
-                    .subscribe(data => {
-                        if(this.data[i])
-                           this.data[i].status = data;
-                    });
-            }
-        }
+        // if(this.data && this.data.length > 0) {
+        //     for (var i = 0; i < this.data.length; i++) {
+        //         this.proService.getMachinesStatus(i)
+        //             .subscribe(data => {
+        //                 console.log(i);
+        //                 if(this.data[i])
+        //                 {
+        //                     this.data[i].status = data;
+        //                 }
+        //             });
+        //     }
+        // }
+        this.proService.getMachines()
+            .subscribe(data=>
+            {
+                for(var i = 0; i<data.length;i++)
+                {
+                    this.data[i].status = data[i].status;
+                }
+            });
     }
 
     repairMachine(index)
@@ -50,4 +61,8 @@ export class MachineListComponent {
         );
     }
 
+    roundStatus(machine)
+    {
+        return Math.round(machine.status*100);
+    }
 }

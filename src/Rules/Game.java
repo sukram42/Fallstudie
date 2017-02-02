@@ -21,6 +21,7 @@ public class Game extends TimerTask {
     private static Calendar gameCalendar = new GregorianCalendar(2010, 1, 1);
 
     private static ArrayList<Unternehmen> companies = new ArrayList<>();
+    private static ArrayList<Unternehmen> companiesArchiv = new ArrayList<>();
     private static List<Ausschreibung> ausschreibungen = new CopyOnWriteArrayList<>();
 
     /**
@@ -88,6 +89,7 @@ public class Game extends TimerTask {
         for (Unternehmen u : companies) {
             u.update();
             u.getKennzahlensammlung().update();
+            bankruptTest(u);
         }
         this.updateMarktanteile();
         if ((getCalendar().get(Calendar.MONTH) == Calendar.DECEMBER) && getCalendar().get(Calendar.DAY_OF_MONTH) == 30) {
@@ -98,6 +100,18 @@ public class Game extends TimerTask {
 
         updateAusschreibungen();
 
+    }
+
+    /**
+     * Testet ob ein Unternehmen pleite ist und setzt es in eine Archivliste
+     * @param u Das zu überprüfende Unternehmen
+     */
+    private void bankruptTest(Unternehmen u) {
+        if(u.getKennzahlensammlung().isBankrupt())
+        {
+            companies.remove(u);
+            companiesArchiv.add(u);
+        }
     }
 
     /**

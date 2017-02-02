@@ -35,7 +35,6 @@ public class CompanyInterface {
      * Erstellt eine neue Company
      * Erwartet einen JSON Code
      * <p>
-     * TODO Umschreiben in verschiedene Parameter
      *
      * @param msg JSON Code
      * @return
@@ -75,6 +74,15 @@ public class CompanyInterface {
         return Response.ok(gson.toJson(mitarbeiter)).build();
     }
 
+    @GET
+    @Secured
+    @Path("bankrupt")
+    public Response isBankrupt(@Context SecurityContext context)
+    {
+        Unternehmen unternehmen = getCompanyFromContext(context);
+        return Response.ok(unternehmen.getKennzahlensammlung().isBankrupt()).build();
+    }
+
     @Secured
     @GET
     @Path("employees/production")
@@ -82,6 +90,46 @@ public class CompanyInterface {
     {
         Unternehmen unternehmen = getCompanyFromContext(context);
         int anzahl = unternehmen.getAbteilung("produktion").getMitarbeiterAnzahl();
+        return Response.ok(anzahl).build();
+    }
+
+    @Secured
+    @GET
+    @Path("employees/marketing")
+    public Response getEmployeeCountInMarketing(@Context SecurityContext context)
+    {
+        Unternehmen unternehmen = getCompanyFromContext(context);
+        int anzahl = unternehmen.getAbteilung("marketing").getMitarbeiterAnzahl();
+        return Response.ok(anzahl).build();
+    }
+
+    @Secured
+    @GET
+    @Path("employees/research")
+    public Response getEmployeeCountInResearch(@Context SecurityContext context)
+    {
+        Unternehmen unternehmen = getCompanyFromContext(context);
+        int anzahl = unternehmen.getAbteilung("forschung").getMitarbeiterAnzahl();
+        return Response.ok(anzahl).build();
+    }
+
+    @Secured
+    @GET
+    @Path("employees/hr")
+    public Response getEmployeeCountInProductionHR(@Context SecurityContext context)
+    {
+        Unternehmen unternehmen = getCompanyFromContext(context);
+        int anzahl = unternehmen.getAbteilung("hr").getMitarbeiterAnzahl();
+        return Response.ok(anzahl).build();
+    }
+
+    @GET
+    @Secured
+    @Path("employees/sales")
+    public Response getEmployeeCountInSales(@Context SecurityContext context)
+    {
+        Unternehmen unternehmen = getCompanyFromContext(context);
+        int anzahl = unternehmen.getAbteilung("vertrieb").getMitarbeiterAnzahl();
         return Response.ok(anzahl).build();
     }
 
@@ -137,7 +185,6 @@ public class CompanyInterface {
         }
     }
 
-
     @PUT
     @Secured
     @Path("/employees/socialprojects")
@@ -152,7 +199,6 @@ public class CompanyInterface {
             return Response.serverError().entity("Project could not be started").build();
         }
     }
-
 
     @GET
     @Secured

@@ -34,4 +34,9 @@
             </ul>
         </div>
     </div>
+    <div class="row" [hidden] ="!bankrupt">
+        <div class="alert alert-danger fade in">
+            <marquee><h3>+++ Das Unternehmen {{companyName}} ist nun BANKROTT +++ </h3></marquee>
+        </div>
+    </div>
 </nav>

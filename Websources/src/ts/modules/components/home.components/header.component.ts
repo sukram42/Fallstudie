@@ -27,36 +27,42 @@ export class HeaderComponent{
     gesamteLagerPlaetze;
     liquideMittel;
 
-    constructor(private homeService :HomeService, private keyFigures : KeyFiguresService, private hrService : HRService, private proService : ProduktionService){
+    bankrupt=false;
+
+    constructor(private _homeService :HomeService, private _keyFigures : KeyFiguresService, private _hrService : HRService, private _proService : ProduktionService){
         this.init();
-        this.homeService.getCompany()
+        this._homeService.getCompany()
             .subscribe(data => this.companyName = data.name,
                 err => alert(err));
 
-        this.proService.getWarehouseSubject()
+        _homeService.isBankrupt().subscribe(data=>{
+            if(data =="true")this.bankrupt =true;
+        });
+
+        this._proService.getWarehouseSubject()
             .asObservable().subscribe(data=>this.getCapacity(),err=>console.log(err));
-        this.hrService.getEmployeeSubject().subscribe(data=>{this.getEmployeeCount()},err=>{})
+        this._hrService.getEmployeeSubject().subscribe(data=>{this.getEmployeeCount()},err=>{})
     }
 
     init()
     {
         this.getCapacity();
         this.getEmployeeCount();
-        this.homeService.getTime().subscribe(data=>this.time = data);
+        this._homeService.getTime().subscribe(data=>this.time = data);
         this.getLiquideMittel();
     }
 
     getEmployeeCount()
     {
-        this.keyFigures.getEmployeeCount().subscribe(data=>this.mitarbeiterCount = data);
+        this._keyFigures.getEmployeeCount().subscribe(data=>this.mitarbeiterCount = data);
     }
 
     getCapacity() {
-        this.proService.getLagerkapazitaet().subscribe(data=>{
+        this._proService.getLagerkapazitaet().subscribe(data=>{
             this.freieLagerPlaetze = data.free;
             this.gesamteLagerPlaetze = data.gesamt;
         });
-        this.proService.getLagerkapazitaetIntervall().subscribe(data => {
+        this._proService.getLagerkapazitaetIntervall().subscribe(data => {
             this.freieLagerPlaetze = data.free;
             this.gesamteLagerPlaetze = data.gesamt;
         });
@@ -65,12 +71,12 @@ export class HeaderComponent{
 
     getLiquideMittel()
     {
-        this.keyFigures.getLiquideMittel().subscribe(data=>this.liquideMittel = data.liquideMittel,err=>console.log(err));
+        this._keyFigures.getLiquideMittel().subscribe(data=>this.liquideMittel = data.liquideMittel,err=>console.log(err));
     }
 
     logOutRequest()
     {
-        this.homeService.logOut().subscribe(data=>data, err=>console.log(err),()=>this.logOut());
+        this._homeService.logOut().subscribe(data=>data, err=>console.log(err),()=>this.logOut());
     }
     logOut()
     {

@@ -26,6 +26,11 @@ export class HomeService {
         return Observable.interval(1000).flatMap(()=>this.http.get('http://localhost:8080/rest/time').map(response => response.text()));
     }
 
+    isBankrupt()
+    {
+        return Observable.interval(1000).flatMap(()=>this.http.get('http://localhost:8080/rest/companies/bankrupt')).map(response=>response.text());
+    }
+
 
     getToken() {
         return window.localStorage.getItem("auth_key");

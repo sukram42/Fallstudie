@@ -59,6 +59,8 @@ public class FinanceInterface {
         object.put("mitarbeiterzufriedenheit",ks.getWeicheKennzahl("mitarbeiterzufriedenheit").berechnen()*100f);
         object.put("image",ks.getWeicheKennzahl("image").berechnen()*100f);
         object.put("kundenzufriedenheit",ks.getWeicheKennzahl("kundenzufriedenheit").berechnen()*100f);
+        object.put("bekanntheitsgrad",ks.getWeicheKennzahl("bekanntheitsgrad").berechnen()*100f);
+        object.put("marktanteil",ks.getMarktanteil()*100f);
         return Response.ok().entity(gson.toJson(object)).build();
     }
 

@@ -8,6 +8,7 @@
 
 import { Component } from '@angular/core';
 import {SalesService} from "../../services/sales.service";
+import {HRService} from "../../services/hr.service";
 
 @Component({
     selector   : 'home-component',
@@ -17,8 +18,12 @@ import {SalesService} from "../../services/sales.service";
 
 export class SalesComponent {
     errorOpportunities;
-    constructor(private _salesService:SalesService)
+    employees;
+    constructor(private _hrService:HRService,private _salesService:SalesService)
     {
-        _salesService.getOpportunitiesSubject().subscribe(data=>data,err=>this.errorOpportunities=err)
+        _salesService.getOpportunitiesSubject().subscribe(data=>data,err=>this.errorOpportunities=err);
+        _hrService.getEmployeesSales().subscribe(
+            data=>{this.employees = data,console.log(data)}
+        );
     }
 }

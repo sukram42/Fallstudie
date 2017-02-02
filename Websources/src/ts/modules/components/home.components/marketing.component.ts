@@ -7,6 +7,7 @@
  */
 
 import { Component } from '@angular/core';
+import {HRService} from "../../services/hr.service";
 
 @Component({
     selector   : 'home-component',
@@ -15,5 +16,12 @@ import { Component } from '@angular/core';
 })
 
 export class MarketingComponent {
+    employees;
+    constructor(private hrService:HRService)
+    {
+        hrService.getEmployeesMarketing().subscribe(
+            data=>{this.employees = data,console.log(data)}
+        );
 
+    }
 }
