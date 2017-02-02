@@ -18,8 +18,14 @@ export class HRService {
 
     addEmployees(values)
     {
-        this.http.post('http://localhost:8080/rest/companies/employees',values).subscribe(data=>{this.empSubject.next(values)},err=>this.empSubject.error(err));
-    }
+        return this.http.post('http://localhost:8080/rest/companies/employees',values)
+            .map(res=>res.text())
+            .subscribe(
+                data=> {
+                    if(data.toString().startsWith("ERROR")) this.empSubject.next(data);
+                    else this.empSubject.next("neuer Mitarbeiter im Lande");
+                });
+}
 
     getEmployees() {
         return this.http.get('http://localhost:8080/rest/companies/employees').map(res => res.json());
@@ -45,12 +51,15 @@ export class HRService {
 
     changeProjectActivity(name)
     {
-        return this.http.put('http://localhost:8080/rest/companies/employees/socialprojects/',name).map(res => res.text()).subscribe(data=>{},err=>{console.log(err)},()=>this.socialProjectsSubject.next(name));
+        return this.http.put('http://localhost:8080/rest/companies/employees/socialprojects/',name).map(res => res.text())
+            .subscribe(data=>{},err=>{console.log(err)},()=>this.socialProjectsSubject.next(name));
     }
 
     fire(opfer)
-    {
-        var data = JSON.stringify(opfer);
-        this.http.put('http://localhost:8080/rest/companies/employees',data).map(res=>res.text()).subscribe(data=>this.empSubject.next("Opfer detected and fired"),err=>this.empSubject.error(err));
+    {;
+        var data = JSON.stringify(opfer)
+        this.http.put('http://localhost:8080/rest/companies/employees',data).map(res=>res.text())
+            .subscribe(data=>this.empSubject.next("Opfer detected and fired"),
+                err=>this.empSubject.error(err));
     }
 }

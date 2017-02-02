@@ -99,7 +99,7 @@ public class CompanyInterface {
             try {
                 abteilung1.addMitarbeiter(object.get("anzahl").getAsInt(), object.get("gehalt").getAsInt());
             } catch (ZuWenigMitarbeiterException e){
-                return Response.status(409).entity(e.toString()).build();
+                return Response.status(200).entity("ERROR:" + e.toString()).build();
             }
         }
         else

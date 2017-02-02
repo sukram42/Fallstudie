@@ -42,6 +42,10 @@ import {SalesService} from "./services/sales.service";
 import {OpportunitiesListComponent} from "./components/home.components/sales.component/opportunities-list.component";
 import {AccountsListComponent} from "./components/home.components/sales.component/accounts-list.component";
 import {FinancesComponent} from "./components/home.components/finances.component";
+import {NewMarketingCampaignComponent} from "./components/home.components/marketing.component/new-marketing-campaign.component";
+import {MarketingService} from "./services/marketing.service";
+import {CampagneListComponent} from "./components/home.components/marketing.component/campaign-list.component";
+import {ImpressumComponent} from "./components/impressum.component";
 
 @NgModule({
     imports: [
@@ -114,12 +118,15 @@ import {FinancesComponent} from "./components/home.components/finances.component
         AusschreibungListComponent,
         OpportunitiesListComponent,
         AccountsListComponent,
-        FinancesComponent
+        FinancesComponent,
+        NewMarketingCampaignComponent,
+        CampagneListComponent,
+        ImpressumComponent
     ],
 
     bootstrap: [HomeComponent],
     providers: [HRService, {provide: RequestOptions, useClass: AuthRequestOptions},
-        ProduktionService, KeyFiguresService, HomeService, SalesService
+        ProduktionService, KeyFiguresService, HomeService, SalesService,MarketingService
     ]
 })
 export class HomeModule {

@@ -177,13 +177,6 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
-    var $this = $(this),
-        container = $('#content');
-    target = $this.data('target');
-    container.load('src/html/dashboard.html');
-});
-
 // Change active state in sidebar
 $(document).ready(function() {
     $('.sideBarButton').click(function() {

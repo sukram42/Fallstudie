@@ -13,26 +13,26 @@ import {Component, OnInit} from '@angular/core';
 import {HRService} from "../../../services/hr.service";
 
 @Component({
-    selector: 'employee-list',
-    templateUrl: '../../../../templates/components/home.components/human-ressources.component/employee-list.component.html'
-})
+        selector: 'employee-list',
+        templateUrl: '../../../../templates/components/home.components/human-ressources.component/employee-list.component.html'
+    })
 
-export class EmployeeListComponent implements OnInit{
+    export class EmployeeListComponent implements OnInit{
 
     mitarbeiterList = [];
 
 
     constructor(private hrService : HRService){
 
-        hrService.getEmployeeSubject().subscribe((data) => this.setValues());
+        hrService.getEmployeeSubject().subscribe((data) => this.setValues(),err=>{});
         this.setValues();
     }
 
-
     setValues()
     {
-        this.hrService.getEmployees().subscribe(data=>(this.mitarbeiterList = data));
+        this.hrService.getEmployees().subscribe(data=>this.mitarbeiterList = data,err=>{});
     }
+
     ngOnInit(): void {
     }
 

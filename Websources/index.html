@@ -26,26 +26,26 @@
 	<link href="src/css/sidebar.css" rel="stylesheet"/>
 	<link href="src/css/overwrite.css" rel="stylesheet"/>
 	<link href="src/css/landingpage.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="src/css/loading.css">
+
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'/>
 	<link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One|Rubik+One" rel="stylesheet"/>
 	<script src="https://use.fontawesome.com/8573f20f3e.js"></script>
-	<link rel="stylesheet" href="src/css/loading.css">
+
 
 
 
 	<!-- Angularjs-->
 	<!-- Polyfill(s) for older browsers -->
-	<script src="node_modules/core-js/client/shim.min.js"></script>
+	<script src="app/lib/es6-shim.min.js"></script>
 
-	<link rel="stylesheet" href="styles.css">
-
-	<script src="node_modules/zone.js/dist/zone.js"></script>
-	<script src="node_modules/reflect-metadata/Reflect.js"></script>
-	<script src="node_modules/systemjs/dist/system.src.js"></script>
-	<!--<script src="node_modules/@angular/http/bundles/http.umd.js"></script>-->
+	<script src="app/lib/zone.js"></script>
+	<script src="app/lib/Reflect.js"></script>
+	<script src="app/lib/system.src.js"></script>
 
 	<!--Own Scripts-->
-	<script type="text/javascript" src="src/js/light-dashboard.js"></script>
+
+	<!--<link href="app/js/ux/final.min.js"/>-->
 	<script src="systemjs.config.js"></script>
 	<script>
         System.import('app').catch(function (err) {
@@ -65,10 +65,8 @@
                 },
                 dataType: 'text',
                 success: function (data){
-                    console.log("Data |" + data + "|");
                     if (data.trim() == "true") {
                         window.location.href = "home.html";
-                        console.log("na los");
                     }
                 }
             });
