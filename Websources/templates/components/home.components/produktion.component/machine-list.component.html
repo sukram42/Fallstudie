@@ -24,10 +24,15 @@
                     <p *ngIf="machine.produkt == 'Rucksacktech'">{{machine.kapazitaet}} technische Rucksäcke pro Periode</p>
                     <p *ngIf="machine.produkt == 'Reisetasche'">{{machine.kapazitaet}} Reisetaschen pro Periode</p>
                     <h6>Leistung:</h6>
-                    <a role="button" class="btn btn-default btn-xs right" (click) ="repairMachine(i);">
-                        <i class="fa fa-wrench" aria-hidden="true"></i>
-                        Reparieren
-                    </a>
+
+                        <a role="button" class="btn btn-default btn-xs right" (click) ="repairMachine(i);">
+                            <i class="fa fa-wrench" aria-hidden="true"></i>
+                            Reparieren
+                        </a>
+                        <a role="button" class="btn btn-default btn-xs right" (click) ="repairMachine(i);">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active"
                              role="progressbar"

@@ -6,6 +6,7 @@ import {HttpModule} from '@angular/http';
 import {StartComponent} from "./components/start.component";
 import {LoginFormComponent} from "./components/login-formular.component";
 import {RegisterFormularComponent} from "./components/register-formular.component";
+import {ImpressumComponent} from "./components/impressum.component";
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import {RegisterFormularComponent} from "./components/register-formular.componen
     declarations: [
         StartComponent,
         LoginFormComponent,
-        RegisterFormularComponent],
+        RegisterFormularComponent,
+        ImpressumComponent],
 
     bootstrap:    [StartComponent]
 })

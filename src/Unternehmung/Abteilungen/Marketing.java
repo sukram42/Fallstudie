@@ -8,6 +8,7 @@ import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Marketingkampagne;
 import Unternehmung.Marktforschung;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.Map;
  */
 public class Marketing extends Abteilung {
 
-    Map<String, Marketingkampagne> kampagnen = new HashMap<String, Marketingkampagne>(); // <art, Marketingkampagne>
+    ArrayList<Marketingkampagne> kampagnen = new ArrayList<Marketingkampagne>(); // <art, Marketingkampagne>
     Map<Integer, Marktforschung> mafos = new HashMap<Integer, Marktforschung>(); // <umfang, Marktforschung>
 
     /**
@@ -34,24 +35,15 @@ public class Marketing extends Abteilung {
      * @param art Art der Kampagne, etwa Plakate, Print, Radio oder TV (unterschiedlich teuer und unterschiedlich effektiv)
      * @param laufzeit in timer counts
      */
-    public void marketingkampagneStarten(String art, int laufzeit) throws ZuWenigMitarbeiterException, LaeuftBereitsException{
-        if (!istMarketingkampagneAktiv(art)) {
-            Marketingkampagne kampagne = new Marketingkampagne(art, laufzeit);
-            if (kampagne.getNoetigeMitarbeiter() <= this.getMitarbeiter().size()) {
-                this.kampagnen.put(art, kampagne);
-                System.out.println("Marketingkampagne \"" + art + "\" gestartet. Kosten: " + kampagne.getKosten()
-                        + " € pro Tag, Bekanntheitsgrad steigt täglich um " + kampagne.getImpact());
-            } else {
-                throw new ZuWenigMitarbeiterException("Marketing");
-            }
+    public void marketingkampagneStarten(String art, int laufzeit) throws ZuWenigMitarbeiterException{
+        Marketingkampagne kampagne = new Marketingkampagne(art, laufzeit);
+        if (kampagne.getNoetigeMitarbeiter() <= this.getMitarbeiter().size()) {
+            this.kampagnen.add(kampagne);
+            System.out.println("Marketingkampagne \"" + art + "\" gestartet. Kosten: " + kampagne.getKosten()
+                    + " € pro Tag, Bekanntheitsgrad steigt täglich um " + kampagne.getImpact());
         } else {
-            throw new LaeuftBereitsException("Marketingkampagne");
+            throw new ZuWenigMitarbeiterException("Marketing");
         }
-    }
-
-    public boolean istMarketingkampagneAktiv(String art)
-    {
-        return this.kampagnen.get(art) != null;
     }
 
     public void marketingkampagneAbbrechen(String art) {
@@ -93,8 +85,8 @@ public class Marketing extends Abteilung {
     @Override
     public float getKosten(){
         float taeglicheKosten = 0;
-        for (Map.Entry<String, Marketingkampagne> kampagne : this.kampagnen.entrySet()) {
-            taeglicheKosten += kampagne.getValue().getKosten();
+        for (Marketingkampagne kampagne : this.kampagnen) {
+            taeglicheKosten += kampagne.getKosten();
         }
         for (Map.Entry<Integer, Marktforschung> mafo : this.mafos.entrySet()){
             taeglicheKosten += mafo.getValue().getKosten();
@@ -107,10 +99,10 @@ public class Marketing extends Abteilung {
      * zählt die verbleibende Laufzeit runter und löscht Projekt, wenn Laufzeit vorbei
      */
     private void updateMarketingkampagnen() {
-        for (Map.Entry<String, Marketingkampagne> kampagne : this.kampagnen.entrySet()) {
-            this.kennzahlensammlung.getWeicheKennzahl("bekannheitsgrad").addModifier(kampagne.getValue().getImpact()); // impact weitergeben
-            if (kampagne.getValue().getEnd().equals(Game.getCalendar())) {
-                this.kampagnen.remove(kampagne.getKey());
+        for (Marketingkampagne kampagne : this.kampagnen) {
+            this.kennzahlensammlung.getWeicheKennzahl("bekannheitsgrad").addModifier(kampagne.getImpact()); // impact weitergeben
+            if (kampagne.getEnd().equals(Game.getCalendar())) {
+                this.kampagnen.remove(kampagne);
             }
         }
     }
@@ -132,8 +124,8 @@ public class Marketing extends Abteilung {
      */
     public int getFreieMitarbeiter(){
         int beschaeftigteMitarbeiter = 0;
-        for (Map.Entry<String, Marketingkampagne> kampagne : this.kampagnen.entrySet()){
-            beschaeftigteMitarbeiter += kampagne.getValue().getNoetigeMitarbeiter();
+        for (Marketingkampagne kampagne : this.kampagnen){
+            beschaeftigteMitarbeiter += kampagne.getNoetigeMitarbeiter();
         }
         for (Map.Entry<Integer, Marktforschung> mafo : this.mafos.entrySet()){
             beschaeftigteMitarbeiter += mafo.getValue().getNoetigeMitarbeiter();
