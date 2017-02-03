@@ -1,6 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Exceptions.LaeuftBereitsException;
+import Exceptions.ZuWenigCashException;
 import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilung;
@@ -40,9 +41,13 @@ public class Marketing extends Abteilung {
     public void marketingkampagneStarten(String art, int laufzeit) throws ZuWenigMitarbeiterException{
         Marketingkampagne kampagne = new Marketingkampagne(art, laufzeit);
         if (kampagne.getNoetigeMitarbeiter() <= this.getVerfuegbareMitarbeiter()) {
-            this.kampagnen.add(kampagne);
-//            System.out.println("Marketingkampagne \"" + art + "\" gestartet. Kosten: " + kampagne.getKosten()
-//                    + " € pro Tag, Bekanntheitsgrad steigt täglich um " + kampagne.getImpact());
+            try{
+                if (this.kennzahlensammlung.getBilanz().liquiditaetAusreichend(kampagne.getKosten())) {
+                    this.kampagnen.add(kampagne);
+                }
+            } catch (ZuWenigCashException e){
+                e.printStackTrace();
+            }
         } else {
             throw new ZuWenigMitarbeiterException("Marketing");
         }
@@ -61,7 +66,13 @@ public class Marketing extends Abteilung {
         if (this.mafos.get(umfang) == null){
             Marktforschung mafo = new Marktforschung(umfang);
             if (mafo.getNoetigeMitarbeiter() <= this.getVerfuegbareMitarbeiter()) {
-                this.mafos.put(umfang, mafo);
+                try{
+                    if (this.kennzahlensammlung.getBilanz().liquiditaetAusreichend(mafo.getKosten())) {
+                        this.mafos.put(umfang, mafo);
+                    }
+                } catch (ZuWenigCashException e){
+                    e.printStackTrace();
+                }
             } else {
                 throw new ZuWenigMitarbeiterException("Marketing");
             }
