@@ -32,13 +32,9 @@ public class MarketingInterface {
         Marketing marketing = getMarketingFromContext(context);
         try {
              marketing.marketingkampagneStarten(art, Integer.parseInt(laufzeit));
-
-             return Response.status(201).entity("Marketingkampagne erfolgreich gestartet").build();
+w             return Response.status(201).entity("Marketingkampagne erfolgreich gestartet").build();
         } catch (ZuWenigMitarbeiterException e) {
             return Response.ok("ERROR:" + e.toString()).build();
-        }catch(LaeuftBereitsException e1)
-        {
-            return Response.status(409).entity(e1.toString()).build();
         }
     }
 
@@ -53,11 +49,11 @@ public class MarketingInterface {
 
     @GET
     @Secured
-    @Path("campaigns/{campaign}")
-    public Response isAktiv(@Context SecurityContext context,@PathParam("campaign") String art)
+    @Path("campaigns/")
+    public  Response getCampaigns(@Context SecurityContext context)
     {
         Marketing marketing = getMarketingFromContext(context);
-        return Response.ok(marketing.istMarketingkampagneAktiv(art)).build();
+        return Response.ok().build();
     }
 
 

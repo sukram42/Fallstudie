@@ -24,8 +24,13 @@ export class MarketingService {
                 if(data.toString().startsWith("ERROR"))
                     this.campaigneSubject.next(data);
                 else this.campaigneSubject.next("Kampagne gestartet")
-
             });
+    }
+
+    getCampaigns()
+    {
+        return this.http.get('http://localhost:8080/rest/companies/marketing/campaigns')
+            .map(res => res.json())
     }
 
     stopCampaign(art)

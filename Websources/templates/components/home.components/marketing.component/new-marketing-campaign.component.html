@@ -1,6 +1,6 @@
 <div class="modal fade" id="marketingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabe3">
     <div class="modal-dialog" role="document">
-        <form class="form-horizontal" [formGroup]="newCampaign" (ngSubmit)="onSubmit(newCampaign.value)">
+        <form class="form-horizontal" [formGroup]="newCampaign" (ngSubmit)="onSubmit(newCampaign.value);$('#marketingModal').modal('toggle');">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="row">
@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="marketingTime" class="col-sm-2 control-label">Dauer</label>
-                                <div class="col-sm-10" [ngClass]="{'has-error':!newCampaign.controls['laufzeit'].valid}">>
+                                <div class="col-sm-10" [ngClass]="{'has-error':!newCampaign.controls['laufzeit'].valid}">
                                     <input type="text" class="form-control"
                                            id="marketingTime"
                                            placeholder="Dauer in Tagen"
@@ -52,7 +52,7 @@
                         <div class="col-md-1"></div>
                         <div class="col-md-10">
                             <button type="submit" class="btn btn-success right" id="marketingPost" data-dismiss="modal"
-                                    onclick="$('#marketingModal').modal('toggle');" [disabled]="!newCampaign.valid">
+                                  [disabled]="!newCampaign.valid">
                                 <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Starten
                             </button>
                         </div>
