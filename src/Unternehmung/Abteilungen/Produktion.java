@@ -1,9 +1,6 @@
 package Unternehmung.Abteilungen;
 
-import Exceptions.BankruptException;
-import Exceptions.LagerVollException;
-import Exceptions.ZuWenigMaschinenstellplatzException;
-import Exceptions.ZuWenigMitarbeiterOderMaschinenException;
+import Exceptions.*;
 import Rules.Game;
 import Unternehmung.*;
 
@@ -80,16 +77,18 @@ public class Produktion extends Abteilung {
         // prüfen, ob genügend Fläche (= Produktionshalle) für neue Maschine(n) vorhanden ist:
         if (getFreienProduktionshallenPlatz() >= anzahl) {
             try {
-                kennzahlensammlung.getBilanz().liquiditaetAnpassen(-1*(anschaffungskst * anzahl));
-                kennzahlensammlung.getBilanz().addTAMasch(anschaffungskst * anzahl);
-                maschinen.add(m);
-                for (int i = 1; i < anzahl; i++) {
-                    Maschine n = new Maschine(produkt, klasse);
-                    maschinen.add(n);
+                if (kennzahlensammlung.getBilanz().liquiditaetAusreichend(m.getAnschaffungskst())) {
+                    kennzahlensammlung.getBilanz().liquiditaetAnpassen(-1 * (anschaffungskst * anzahl));
+                    kennzahlensammlung.getBilanz().addTAMasch(anschaffungskst * anzahl);
+                    maschinen.add(m);
+                    for (int i = 1; i < anzahl; i++) {
+                        Maschine n = new Maschine(produkt, klasse);
+                        maschinen.add(n);
+                    }
+                    System.out.println(anzahl + " Maschine(n) der Klasse " + klasse + " gekauft, Kapazität: " + m.getKapazitaet() +
+                            " Stück pro Jahr, Anschaffungskosten: " + anschaffungskst + " €");
                 }
-                System.out.println(anzahl + " Maschine(n) der Klasse " + klasse + " gekauft, Kapazität: " + m.getKapazitaet() +
-                        " Stück pro Jahr, Anschaffungskosten: " + anschaffungskst + " €");
-            } catch (BankruptException e) {
+            } catch (ZuWenigCashException | BankruptException e) {
                 e.printStackTrace();
             }
         } else {
@@ -115,12 +114,14 @@ public class Produktion extends Abteilung {
 
     public void produktionshalleKaufen(int größe){
         Halle halle = new Halle("Produktionshalle", größe);
-        try{
-            kennzahlensammlung.getBilanz().liquiditaetAnpassen((-1f)*halle.getPreis());
-            kennzahlensammlung.getBilanz().addGebäude(halle.getPreis());
-            this.produktionshallen.add(halle);
-            System.out.println("Produktionshalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
-        } catch (BankruptException e) {
+        try {
+            if (kennzahlensammlung.getBilanz().liquiditaetAusreichend(halle.getPreis())) {
+                kennzahlensammlung.getBilanz().liquiditaetAnpassen((-1f) * halle.getPreis());
+                kennzahlensammlung.getBilanz().addGebäude(halle.getPreis());
+                this.produktionshallen.add(halle);
+                System.out.println("Produktionshalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
+            }
+        } catch (ZuWenigCashException | BankruptException e) {
             e.printStackTrace();
         }
     }
@@ -128,11 +129,13 @@ public class Produktion extends Abteilung {
     public void lagerhalleKaufen(int größe){
         Halle halle = new Halle("Lagerhalle", größe);
         try{
-            kennzahlensammlung.getBilanz().liquiditaetAnpassen(-1f* halle.getPreis());
-            kennzahlensammlung.getBilanz().addGebäude(halle.getPreis());
-            this.lagerhallen.add(halle);
-            System.out.println("Lagerhalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
-        } catch (BankruptException e) {
+            if (kennzahlensammlung.getBilanz().liquiditaetAusreichend(halle.getPreis())) {
+                kennzahlensammlung.getBilanz().liquiditaetAnpassen(-1f * halle.getPreis());
+                kennzahlensammlung.getBilanz().addGebäude(halle.getPreis());
+                this.lagerhallen.add(halle);
+                System.out.println("Lagerhalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
+            }
+        } catch (ZuWenigCashException | BankruptException e) {
             e.printStackTrace();
         }
     }
@@ -142,11 +145,6 @@ public class Produktion extends Abteilung {
      */
     @Override
     public void update(){
-        try {
-            this.kennzahlensammlung.getBilanz().liquiditaetAnpassen(-1f *(getTaeglicheEnergiekosten() + getTaeglicheHerstellkosten()));
-        } catch (BankruptException e){
-            e.printStackTrace();
-        }
         try {
             produkteFertigstellen();
         } catch (LagerVollException e){

@@ -47,6 +47,7 @@ w             return Response.status(201).entity("Marketingkampagne erfolgreich 
         return Response.status(201).entity("MarketingKampagne erfolgreich gestartet").build();
     }
 
+    /*
     @GET
     @Secured
     @Path("campaigns/")
@@ -55,7 +56,7 @@ w             return Response.status(201).entity("Marketingkampagne erfolgreich 
         Marketing marketing = getMarketingFromContext(context);
         return Response.ok().build();
     }
-
+    */
 
     private Marketing getMarketingFromContext(SecurityContext context)
     {

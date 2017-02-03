@@ -1,6 +1,7 @@
 package Unternehmung;
 
 import Exceptions.BankruptException;
+import Exceptions.ZuWenigCashException;
 
 /**
  * repräsentiert eine Maschine
@@ -58,10 +59,12 @@ public class Maschine {
             } else if (currentStatus < 1) {
                 kosten = 300;
             }
-            kennzahlensammlung.getGuv().addFremdinstandhaltung(kosten);
-            kennzahlensammlung.getBilanz().liquiditaetAnpassen(-kosten);
-            this.status = 1; // nach Reparatur wieder 100%
-        } catch (BankruptException e){
+            if (kennzahlensammlung.getBilanz().liquiditaetAusreichend(kosten)) {
+                kennzahlensammlung.getGuv().addFremdinstandhaltung(kosten);
+                kennzahlensammlung.getBilanz().liquiditaetAnpassen(-kosten);
+                this.status = 1; // nach Reparatur wieder 100%
+            }
+        } catch (ZuWenigCashException | BankruptException e) {
             e.printStackTrace();
         }
     }
