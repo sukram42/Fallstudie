@@ -14,15 +14,17 @@ public class Marketingkampagne {
     private float impact; // Einfluss auf Bekanntheitsgrad (pro Tag / timer count)
     private float kosten; // pro Tag (timer count)
     private int noetigeMitarbeiter;
+    private int laufzeit; // in Tagen
     private Calendar beginn;
     private Calendar end;
 
     public Marketingkampagne(String art, int laufzeit) {
         this.art = art;
+        this.laufzeit = laufzeit;
         this.beginn = (Calendar) Game.getCalendar().clone();
         this.end = (Calendar) this.beginn.clone();
         this.end.add(Calendar.DAY_OF_MONTH, laufzeit);
-        setParamsByArt(art);
+        this.setParamsByArt(art);
     }
 
     /**
@@ -59,24 +61,16 @@ public class Marketingkampagne {
         return art;
     }
 
-    public void setArt(String art) {
-        this.art = art;
+    public int getLaufzeit() {
+        return laufzeit;
     }
 
     public float getImpact() {
         return impact;
     }
 
-    public void setImpact(float impact) {
-        this.impact = impact;
-    }
-
     public float getKosten() {
         return kosten;
-    }
-
-    public void setKosten(float kosten) {
-        this.kosten = kosten;
     }
 
     public int getNoetigeMitarbeiter() {
@@ -89,9 +83,5 @@ public class Marketingkampagne {
 
     public Calendar getEnd() {
         return end;
-    }
-
-    public void setEnd(Calendar end) {
-        this.end = end;
     }
 }

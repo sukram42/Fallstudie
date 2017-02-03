@@ -42,7 +42,7 @@ public class MarketingInterface {
     @DELETE
     @Secured
     @Path("campaigns/{campaign}")
-    public Response stopKampagne(@Context SecurityContext context,@PathParam("campaign") String art) {
+    public Response stopKampagne(@Context SecurityContext context,@PathParam("campaign") String art) { // TODO das geht so nicht mehr, da die kampagnen nicht mehr in einer Map gespeichert sind
         Marketing marketing = getMarketingFromContext(context);
         marketing.marketingkampagneAbbrechen(art);
         return Response.status(201).entity("MarketingKampagne erfolgreich gestartet").build();

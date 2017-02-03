@@ -9,7 +9,6 @@ import Unternehmung.Marketingkampagne;
 import Unternehmung.Marktforschung;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,8 +18,8 @@ import java.util.Map;
  */
 public class Marketing extends Abteilung {
 
-    ArrayList<Marketingkampagne> kampagnen = new ArrayList<Marketingkampagne>(); // <art, Marketingkampagne>
-    Map<Integer, Marktforschung> mafos = new HashMap<Integer, Marktforschung>(); // <umfang, Marktforschung>
+    private ArrayList<Marketingkampagne> kampagnen = new ArrayList<Marketingkampagne>(); // <art, Marketingkampagne>
+    private Map<Integer, Marktforschung> mafos = new HashMap<Integer, Marktforschung>(); // <umfang, Marktforschung>
 
     /**
      * Konstruktor, zum Erstellen der Abteilung Marketing
@@ -37,7 +36,7 @@ public class Marketing extends Abteilung {
      */
     public void marketingkampagneStarten(String art, int laufzeit) throws ZuWenigMitarbeiterException{
         Marketingkampagne kampagne = new Marketingkampagne(art, laufzeit);
-        if (kampagne.getNoetigeMitarbeiter() <= this.getMitarbeiter().size()) {
+        if (kampagne.getNoetigeMitarbeiter() <= this.getVerfuegbareMitarbeiter()) {
             this.kampagnen.add(kampagne);
             System.out.println("Marketingkampagne \"" + art + "\" gestartet. Kosten: " + kampagne.getKosten()
                     + " € pro Tag, Bekanntheitsgrad steigt täglich um " + kampagne.getImpact());
@@ -47,7 +46,7 @@ public class Marketing extends Abteilung {
     }
 
     public void marketingkampagneAbbrechen(String art) {
-        this.kampagnen.remove(art);
+        this.kampagnen.remove(art); // TODO fix this (first in MarketingInterface)
     }
 
     /**
@@ -58,7 +57,7 @@ public class Marketing extends Abteilung {
     public void marktforschungStarten(int umfang) throws ZuWenigMitarbeiterException, LaeuftBereitsException{
         if (this.mafos.get(umfang) == null){
             Marktforschung mafo = new Marktforschung(umfang);
-            if (mafo.getNoetigeMitarbeiter() <= this.getMitarbeiter().size()) {
+            if (mafo.getNoetigeMitarbeiter() <= this.getVerfuegbareMitarbeiter()) {
                 this.mafos.put(umfang, mafo);
             } else {
                 throw new ZuWenigMitarbeiterException("Marketing");
@@ -122,7 +121,7 @@ public class Marketing extends Abteilung {
     /**
      * @return Anzahl der Mitarbeiter, die für Marktforschung oder Marketingkampagnen verfügbar sind
      */
-    public int getFreieMitarbeiter(){
+    public int getVerfuegbareMitarbeiter(){
         int beschaeftigteMitarbeiter = 0;
         for (Marketingkampagne kampagne : this.kampagnen){
             beschaeftigteMitarbeiter += kampagne.getNoetigeMitarbeiter();
