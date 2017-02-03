@@ -8,10 +8,8 @@ import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Marketingkampagne;
 import Unternehmung.Marktforschung;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * Klasse, die die Abteilung Marketing repräsentiert, hier können Marketingkampagnen und Marktforschung durchgeführt werden
@@ -46,8 +44,8 @@ public class Marketing extends Abteilung {
         }
     }
 
-    public void marketingkampagneAbbrechen(String art) {
-        this.kampagnen.remove(art);
+    public void marketingkampagneAbbrechen(int id) {
+        this.kampagnen.remove(id);
     }
 
     /**
@@ -133,4 +131,12 @@ public class Marketing extends Abteilung {
         return this.getMitarbeiter().size() - beschaeftigteMitarbeiter;
     }
 
+
+    /**
+     * Marketingkampagne
+     */
+    public List<Marketingkampagne> getKampagnen()
+    {
+        return kampagnen;
+    }
 }

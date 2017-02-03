@@ -10,8 +10,8 @@ import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class MarketingService {
-    
-    campaigneSubject : Subject<any>;
+
+    campaignSubject = new Subject<any>();
     
     constructor(private http: Http) {
     }
@@ -21,12 +21,22 @@ export class MarketingService {
         return this.http.post('http://localhost:8080/rest/companies/marketing/campaigns/' + art, laufzeit)
             .map(res => res.text())
             .subscribe(data=>{
+                console.log("DATA: " + data);
                 if(data.toString().startsWith("ERROR"))
-                    this.campaigneSubject.next(data);
-                else this.campaigneSubject.next("Kampagne gestartet")
+                    this.campaignSubject.next(data);
+                else this.campaignSubject.next("Kampagne gestartet")
             });
     }
 
+    getCosts()
+    {
+        return this.http.get('http://localhost:8080/rest/companies/marketing/costs').map(res=>res.json());
+    }
+
+    getCampaignSubject()
+    {
+        return this.campaignSubject.asObservable();
+    }
     getCampaigns()
     {
         return this.http.get('http://localhost:8080/rest/companies/marketing/campaigns')

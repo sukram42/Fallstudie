@@ -36,8 +36,6 @@ public class SozialeLeistungen extends Abteilung {
         projekte.add(new ZeitGeld("urlaubsgeld", (hr.getTotalGehalt() * 0.5f), 0.2f, Calendar.JULY, unternehmen));
         projekte.add(new ZeitGeld("weihnachtsgeld", (hr.getTotalGehalt() * 0.3f), 0.3f, Calendar.DECEMBER, unternehmen));
         projekte.add(new SozialProjekt("kindergarten", 10000, 100, 0.2f, unternehmen));
-
-        // TODO Mitarbeiterzufriedenheit erhöhen
     }
 
     /**

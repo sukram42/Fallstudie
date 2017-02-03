@@ -4,6 +4,7 @@ import Exceptions.LaeuftBereitsException;
 import Exceptions.ZuWenigMaschinenstellplatzException;
 import Exceptions.ZuWenigMitarbeiterException;
 import Unternehmung.Abteilungen.Marketing;
+import Unternehmung.Marketingkampagne;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -14,6 +15,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by boebel on 02.02.2017.
@@ -32,7 +35,7 @@ public class MarketingInterface {
         Marketing marketing = getMarketingFromContext(context);
         try {
              marketing.marketingkampagneStarten(art, Integer.parseInt(laufzeit));
-w             return Response.status(201).entity("Marketingkampagne erfolgreich gestartet").build();
+             return Response.status(201).entity("Marketingkampagne erfolgreich gestartet").build();
         } catch (ZuWenigMitarbeiterException e) {
             return Response.ok("ERROR:" + e.toString()).build();
         }
@@ -41,22 +44,35 @@ w             return Response.status(201).entity("Marketingkampagne erfolgreich 
     @DELETE
     @Secured
     @Path("campaigns/{campaign}")
-    public Response stopKampagne(@Context SecurityContext context,@PathParam("campaign") String art) {
+    public Response stopKampagne(@Context SecurityContext context,@PathParam("campaign") int id) {
         Marketing marketing = getMarketingFromContext(context);
-        marketing.marketingkampagneAbbrechen(art);
+        marketing.marketingkampagneAbbrechen(id);
         return Response.status(201).entity("MarketingKampagne erfolgreich gestartet").build();
     }
 
-    /*
     @GET
     @Secured
-    @Path("campaigns/")
+    @Path("campaigns")
     public  Response getCampaigns(@Context SecurityContext context)
     {
         Marketing marketing = getMarketingFromContext(context);
-        return Response.ok().build();
+        return Response.ok(gson.toJson(marketing.getKampagnen())).build();
     }
-    */
+    @GET
+    @Secured
+    @Path("costs")
+    public Response getCosts(@Context SecurityContext context)
+    {
+        Marketing marketing = getMarketingFromContext(context);
+        Map<String,Marketingkampagne> erg = new HashMap();
+
+        erg.put("tv",Marketingkampagne.setParamsByArt("TV"));
+        erg.put("radio",Marketingkampagne.setParamsByArt("Radio"));
+        erg.put("print",Marketingkampagne.setParamsByArt("Print"));
+        erg.put("social",Marketingkampagne.setParamsByArt("Social Media"));
+
+        return Response.ok(gson.toJson(erg)).build();
+    }
 
     private Marketing getMarketingFromContext(SecurityContext context)
     {

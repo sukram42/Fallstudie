@@ -13,6 +13,18 @@ import {MarketingService} from "../../../services/marketing.service";
 
 })
 export class CampagneListComponent {
+    campaigns;
+
+    constructor(private _markService:MarketingService)
+    {
+        this.loadList();
+        _markService.getCampaignSubject().subscribe(()=>this.loadList())
+    }
+
+    loadList()
+    {
+        this._markService.getCampaigns().subscribe(data=>{this.campaigns = data,console.log(data)});
+    }
 
 
 }

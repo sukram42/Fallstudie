@@ -22,37 +22,42 @@ public class Marketingkampagne {
         this.beginn = (Calendar) Game.getCalendar().clone();
         this.end = (Calendar) this.beginn.clone();
         this.end.add(Calendar.DAY_OF_MONTH, laufzeit);
-        setParamsByArt(art);
+        setParamsByArt(this);
     }
 
     /**
-     * @param art Auf Basis der Art der Marketingkampagne werden impact und kosten gesetzt
+     * @param mk Auf Basis der Art dieser Marketingkampagne werden impact und kosten in der angegebenen Marketingkampagne gesetzt
      */
-    private void setParamsByArt(String art){
-        switch (art){
+    public static Marketingkampagne setParamsByArt(Marketingkampagne mk){
+        if(mk == null)
+            return null;
+        switch (mk.getArt()){
             case "Social Media":
-                this.impact = 0.001f;
-                this.kosten = 10;
-                this.noetigeMitarbeiter = 1;
+                mk.impact = 0.001f;
+                mk.kosten = 10;
+                mk.noetigeMitarbeiter = 1;
                 break;
             case "Print":
-                this.impact = 0.002f;
-                this.kosten = 50;
-                this.noetigeMitarbeiter = 2;
+                mk.impact = 0.002f;
+                mk.kosten = 50;
+                mk.noetigeMitarbeiter = 2;
                 break;
             case "Radio":
-                this.impact = 0.004f;
-                this.kosten = 100;
-                this.noetigeMitarbeiter = 4;
+                mk.impact = 0.004f;
+                mk.kosten = 100;
+                mk.noetigeMitarbeiter = 4;
                 break;
             case "TV":
-                this.impact = 0.02f;
-                this.kosten = 500;
-                this.noetigeMitarbeiter = 6;
+                mk.impact = 0.02f;
+                mk.kosten = 500;
+                mk.noetigeMitarbeiter = 6;
                 break;
         }
+        return  mk;
     }
-
+    public static Marketingkampagne setParamsByArt(String art){
+        return Marketingkampagne.setParamsByArt(new Marketingkampagne(art,0));
+    }
 
     // Getter and Setter:
     public String getArt() {

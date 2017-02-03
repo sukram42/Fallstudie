@@ -8,6 +8,7 @@
 
 import { Component } from '@angular/core';
 import {HRService} from "../../services/hr.service";
+import {MarketingService} from "../../services/marketing.service";
 
 @Component({
     selector   : 'home-component',
@@ -17,11 +18,24 @@ import {HRService} from "../../services/hr.service";
 
 export class MarketingComponent {
     employees;
-    constructor(private hrService:HRService)
+    error;
+    costs;
+    constructor(private _hrService:HRService, private _marketingService:MarketingService)
     {
-        hrService.getEmployeesMarketing().subscribe(
-            data=>{this.employees = data,console.log(data)}
+        _hrService.getEmployeesMarketing().subscribe(
+            data=>this.employees = data
         );
+
+        _marketingService.getCampaignSubject().subscribe(data=> {
+            if (data.toString().startsWith("ERROR"))
+                this.error = true;
+            else
+                this.error = undefined;
+        });
+
+        _marketingService.getCosts().subscribe(data=>{
+            this.costs=data;
+        });
 
     }
 }

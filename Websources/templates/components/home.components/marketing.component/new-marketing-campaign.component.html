@@ -1,6 +1,7 @@
 <div class="modal fade" id="marketingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabe3">
     <div class="modal-dialog" role="document">
-        <form class="form-horizontal" [formGroup]="newCampaign" (ngSubmit)="onSubmit(newCampaign.value);$('#marketingModal').modal('toggle');">
+        <form class="form-horizontal" [formGroup]="newCampaign" (ngSubmit)="console.log('hallo')">
+            <!--submitForm(newCampaign.value);$('#marketingModal').modal('toggle');"-->
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="row">
@@ -51,9 +52,9 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-10">
-                            <button type="submit" class="btn btn-success right" id="marketingPost" data-dismiss="modal"
-                                  [disabled]="!newCampaign.valid">
-                                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Starten
+                            <button type="button" class="btn btn-success" id="apiuser" [disabled]="!newCampaign.valid"
+                                    data-dismiss="modal" (click)="submitForm(newCampaign.value)">
+                                <i class="fa fa-user-plus" aria-hidden="true"></i> Einstellen
                             </button>
                         </div>
                         <div class="col-md-1"></div>
