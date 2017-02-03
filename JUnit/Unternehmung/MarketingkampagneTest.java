@@ -13,14 +13,14 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by D064018 on 23.01.2017.
  */
-public class MarketingkampagneTest{
+public class MarketingkampagneTest {
     private String art;
     private int laufzeit;
     private Marketingkampagne testmarketingkampagne;
 
 
     @Before
-    public void setUp(){
+    public void setUp() {
         art = "Print";
         laufzeit = 5;
 
@@ -31,46 +31,27 @@ public class MarketingkampagneTest{
 
     @Test
     public void getArt() throws Exception {
-assertEquals(testmarketingkampagne.getArt(), art);
-    }
-
-    @Test
-    public void setArt() throws Exception {
-        testmarketingkampagne.setArt("Social Media");
-assertEquals(testmarketingkampagne.getArt(), "Social Media");
+        assertEquals(testmarketingkampagne.getArt(), art);
     }
 
     @Test
     public void getImpact() throws Exception {
-assertEquals(testmarketingkampagne.getImpact(), 0.002f, 0.5);
-    }
-
-    @Test
-    public void setImpact() throws Exception {
-testmarketingkampagne.setImpact(0.0025f);
-        assertEquals(testmarketingkampagne.getImpact(), 0.0025f, 0.5);
+        assertEquals(testmarketingkampagne.getImpact(), 0.002f, 0.5);
     }
 
     @Test
     public void getKosten() throws Exception {
-assertEquals(testmarketingkampagne.getKosten(), 50, 0.5);
-    }
-
-    @Test
-    public void setKosten() throws Exception {
-testmarketingkampagne.setKosten(100);
-        assertEquals(testmarketingkampagne.getKosten(), 100, 0.5);
-
+        assertEquals(testmarketingkampagne.getKosten(), 10000, 0.5);
     }
 
     @Test
     public void getNoetigeMitarbeiter() throws Exception {
-assertEquals(testmarketingkampagne.getNoetigeMitarbeiter(), 2);
+        assertEquals(testmarketingkampagne.getNoetigeMitarbeiter(), 3);
     }
 
     @Test
     public void getBeginn() throws Exception {
-assertNotNull(testmarketingkampagne.getBeginn());
+        assertNotNull(testmarketingkampagne.getBeginn());
     }
 
     @Test
@@ -78,15 +59,8 @@ assertNotNull(testmarketingkampagne.getBeginn());
         assertNotNull(testmarketingkampagne.getEnd());
     }
 
-    @Test
-    public void setEnd() throws Exception {
-        Calendar neuesDatum = new GregorianCalendar(2019, 4, 20, 14, 29, 21);
-        testmarketingkampagne.setEnd(neuesDatum);
-       assertEquals(testmarketingkampagne.getEnd(), neuesDatum);
-    }
-
     @After
-    public void tearDown(){
+    public void tearDown() {
 
     }
 }

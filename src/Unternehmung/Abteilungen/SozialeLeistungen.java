@@ -31,11 +31,13 @@ public class SozialeLeistungen extends Abteilung {
 
     public void initProjects() {
         HR hr = (HR)unternehmen.getAbteilung("hr");
-        projekte.add(new SozialProjekt("kantine", 10000, 100, 0.2f,unternehmen ));
-        projekte.add(new SozialProjekt("wifi", 10000, 100, 0.2f, unternehmen));
+        projekte.add(new SozialProjekt("kantine", 100000, 5000, 0.3f,unternehmen ));
+        projekte.add(new SozialProjekt("wifi", 10000, 500, 0.1f, unternehmen));
         projekte.add(new ZeitGeld("urlaubsgeld", (hr.getTotalGehalt() * 0.5f), 0.2f, Calendar.JULY, unternehmen));
-        projekte.add(new ZeitGeld("weihnachtsgeld", (hr.getTotalGehalt() * 0.3f), 0.3f, Calendar.DECEMBER, unternehmen));
-        projekte.add(new SozialProjekt("kindergarten", 10000, 100, 0.2f, unternehmen));
+        projekte.add(new ZeitGeld("weihnachtsgeld", (hr.getTotalGehalt() * 0.3f), 0.15f, Calendar.DECEMBER, unternehmen));
+        projekte.add(new SozialProjekt("kindergarten", 100000, 2000, 0.25f, unternehmen));
+
+        // TODO Mitarbeiterzufriedenheit erhöhen
     }
 
     /**

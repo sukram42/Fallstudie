@@ -35,6 +35,7 @@ public class MarketingInterface {
         Marketing marketing = getMarketingFromContext(context);
         try {
              marketing.marketingkampagneStarten(art, Integer.parseInt(laufzeit));
+
              return Response.status(201).entity("Marketingkampagne erfolgreich gestartet").build();
         } catch (ZuWenigMitarbeiterException e) {
             return Response.ok("ERROR:" + e.toString()).build();
@@ -50,6 +51,7 @@ public class MarketingInterface {
         return Response.status(201).entity("MarketingKampagne erfolgreich gestartet").build();
     }
 
+
     @GET
     @Secured
     @Path("campaigns")
@@ -58,6 +60,7 @@ public class MarketingInterface {
         Marketing marketing = getMarketingFromContext(context);
         return Response.ok(gson.toJson(marketing.getKampagnen())).build();
     }
+
     @GET
     @Secured
     @Path("costs")
