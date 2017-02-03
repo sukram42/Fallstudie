@@ -34,7 +34,7 @@ public class Finanzen extends Abteilung {
      * @param hoehe vom Spieler gewählt
      * @param laufzeit vom Spieler gewählt
      */
-    public void kreditAufnehmen(int hoehe, int laufzeit) throws ZuHochVerschuldetException, ZuWenigMitarbeiterException{
+    public void kreditAufnehmen(int hoehe, int laufzeit) throws ZuHochVerschuldetException, ZuWenigMitarbeiterException, BankruptException {
         if (this.mitarbeiter.size() > 0) {
             double neuerVerschuldungsgrad = (kennzahlensammlung.getBilanz().getFremdkapital() + hoehe) /
                     kennzahlensammlung.getBilanz().getEigenkapital();
@@ -60,6 +60,7 @@ public class Finanzen extends Abteilung {
             }
             Kredit kredit = new Kredit(hoehe, laufzeit, zinssatz);
             this.kennzahlensammlung.getBilanz().fremdkapitalAnpassen(hoehe);
+            this.kennzahlensammlung.getBilanz().liquiditaetAnpassen(hoehe);
             kredite.add(kredit);
         } else {
             throw new ZuWenigMitarbeiterException("Finanzen");

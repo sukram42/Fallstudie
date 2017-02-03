@@ -47,27 +47,27 @@ public class Produkt {
             // TODO realistische / zum Spiel passende Zahlen einsetzen
             case "Rucksack":
                 switch (qualitaetsstufe){
-                    case 'A': return 20;
-                    case 'B': return 15;
-                    case 'C': return 10;
+                    case 'A': return 70;
+                    case 'B': return 20;
+                    case 'C': return 5;
                 }
             case "Rucksacktech":
                 switch (qualitaetsstufe){
-                    case 'A': return 330;
-                    case 'B': return 20;
-                    case 'C': return 15;
+                    case 'A': return 200;
+                    case 'B': return 85;
+                    case 'C': return 25;
                 }
             case "Duffel":
                 switch (qualitaetsstufe){
-                    case 'A': return 25;
-                    case 'B': return 20;
+                    case 'A': return 100;
+                    case 'B': return 30;
                     case 'C': return 15;
                 }
             case "Reisetasche":
                 switch (qualitaetsstufe){
-                    case 'A': return 35;
-                    case 'B': return 30;
-                    case 'C': return 20;
+                    case 'A': return 100;
+                    case 'B': return 45;
+                    case 'C': return 30;
                 }
         }
         return -1;

@@ -31,24 +31,24 @@ public class Marketingkampagne {
     private void setParamsByArt(String art){
         switch (art){
             case "Social Media":
-                this.impact = 0.001f;
-                this.kosten = 10;
+                this.impact = 0.0002f;
+                this.kosten = 1000;
                 this.noetigeMitarbeiter = 1;
                 break;
             case "Print":
                 this.impact = 0.002f;
-                this.kosten = 50;
-                this.noetigeMitarbeiter = 2;
+                this.kosten = 10000;
+                this.noetigeMitarbeiter = 3;
                 break;
             case "Radio":
-                this.impact = 0.004f;
-                this.kosten = 100;
+                this.impact = 0.015f;
+                this.kosten = 60000;
                 this.noetigeMitarbeiter = 4;
                 break;
             case "TV":
-                this.impact = 0.02f;
-                this.kosten = 500;
-                this.noetigeMitarbeiter = 6;
+                this.impact = 0.05f;
+                this.kosten = 130000;
+                this.noetigeMitarbeiter = 7;
                 break;
         }
     }
