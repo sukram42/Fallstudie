@@ -70,6 +70,10 @@ public class Marketingkampagne {
         return laufzeit;
     }
 
+    public void setLaufzeit(int laufzeit) {
+        this.laufzeit = laufzeit;
+    }
+
     public float getImpact() {
         return impact;
     }

@@ -102,6 +102,7 @@ public class Marketing extends Abteilung {
     private void updateMarketingkampagnen() {
         for (Marketingkampagne kampagne : this.kampagnen) {
             this.kennzahlensammlung.getWeicheKennzahl("bekannheitsgrad").addModifier(kampagne.getImpact()); // impact weitergeben
+            kampagne.setLaufzeit(kampagne.getLaufzeit() - 1);
             if (kampagne.getEnd().equals(Game.getCalendar())) {
                 this.kampagnen.remove(kampagne);
             }
