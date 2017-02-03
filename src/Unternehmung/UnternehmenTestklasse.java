@@ -83,6 +83,15 @@ public class UnternehmenTestklasse {
 
         // Marketingkampagne und Marktforschung:
         Marketing marketing1 = (Marketing) unternehmen1.getAbteilung("marketing");
+        try {
+            marketing1.addMitarbeiter(1,1);
+            marketing1.marketingkampagneStarten("Social",1);
+            game.run();
+            game.run();
+            System.out.println(Game.getTimeString());
+        } catch (ZuWenigMitarbeiterException e) {
+            e.printStackTrace();
+        }
 //        marketing1.marketingKampagne("Print");
 //        marketing1.marketingKampagne("TV");
 //        marketing1.marktforschung(2);

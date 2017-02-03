@@ -13,6 +13,7 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Klasse, die die Abteilung Marketing repräsentiert, hier können Marketingkampagnen und Marktforschung durchgeführt werden
@@ -20,7 +21,7 @@ import java.util.Map;
  */
 public class Marketing extends Abteilung {
 
-    private ArrayList<Marketingkampagne> kampagnen = new ArrayList<Marketingkampagne>(); // <art, Marketingkampagne>
+    private List<Marketingkampagne> kampagnen = new CopyOnWriteArrayList<>(); // <art, Marketingkampagne>
     private Map<Integer, Marktforschung> mafos = new HashMap<Integer, Marktforschung>(); // <umfang, Marktforschung>
 
     /**
@@ -40,8 +41,8 @@ public class Marketing extends Abteilung {
         Marketingkampagne kampagne = new Marketingkampagne(art, laufzeit);
         if (kampagne.getNoetigeMitarbeiter() <= this.getVerfuegbareMitarbeiter()) {
             this.kampagnen.add(kampagne);
-            System.out.println("Marketingkampagne \"" + art + "\" gestartet. Kosten: " + kampagne.getKosten()
-                    + " € pro Tag, Bekanntheitsgrad steigt täglich um " + kampagne.getImpact());
+//            System.out.println("Marketingkampagne \"" + art + "\" gestartet. Kosten: " + kampagne.getKosten()
+//                    + " € pro Tag, Bekanntheitsgrad steigt täglich um " + kampagne.getImpact());
         } else {
             throw new ZuWenigMitarbeiterException("Marketing");
         }
@@ -101,7 +102,7 @@ public class Marketing extends Abteilung {
      */
     private void updateMarketingkampagnen() {
         for (Marketingkampagne kampagne : this.kampagnen) {
-            this.kennzahlensammlung.getWeicheKennzahl("bekannheitsgrad").addModifier(kampagne.getImpact()); // impact weitergeben
+            this.kennzahlensammlung.getWeicheKennzahl("bekanntheitsgrad").addModifier(kampagne.getImpact()); // impact weitergeben
             kampagne.setLaufzeit(kampagne.getLaufzeit() - 1);
             if (kampagne.getEnd().equals(Game.getCalendar())) {
                 this.kampagnen.remove(kampagne);
