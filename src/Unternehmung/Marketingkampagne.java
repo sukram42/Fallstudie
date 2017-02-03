@@ -35,24 +35,24 @@ public class Marketingkampagne {
             return null;
         switch (mk.getArt()){
             case "Social Media":
-                this.impact = 0.0002f;
-                this.kosten = 1000;
-                this.noetigeMitarbeiter = 1;
+                mk.impact = 0.0002f;
+                mk.kosten = 1000;
+                mk.noetigeMitarbeiter = 1;
                 break;
             case "Print":
-                this.impact = 0.002f;
-                this.kosten = 10000;
-                this.noetigeMitarbeiter = 3;
+                mk.impact = 0.002f;
+                mk.kosten = 10000;
+                mk.noetigeMitarbeiter = 3;
                 break;
             case "Radio":
-                this.impact = 0.015f;
-                this.kosten = 60000;
-                this.noetigeMitarbeiter = 4;
+                mk.impact = 0.015f;
+                mk.kosten = 60000;
+                mk.noetigeMitarbeiter = 4;
                 break;
             case "TV":
-                this.impact = 0.05f;
-                this.kosten = 130000;
-                this.noetigeMitarbeiter = 7;
+                mk.impact = 0.05f;
+                mk.kosten = 130000;
+                mk.noetigeMitarbeiter = 7;
                 break;
         }
         return  mk;
