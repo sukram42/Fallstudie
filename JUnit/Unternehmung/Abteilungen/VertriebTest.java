@@ -5,6 +5,7 @@ import Rules.Game;
 import Unternehmung.Unternehmen;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
@@ -14,13 +15,17 @@ import static junit.framework.TestCase.assertTrue;
  */
 public class VertriebTest{
 
-    private Game game;
+    private static Game game;
     private Unternehmen unternehmen;
     private Vertrieb testVertrieb;
 
+    @BeforeClass
+    public static void createGameVertrieb(){
+        game = new Game();
+    }
+
     @Before
     public void setUp(){
-        game = new Game();
         unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
         testVertrieb = (Vertrieb)unternehmen.getAbteilung("vertrieb");
         game.getCompanies().add(unternehmen);

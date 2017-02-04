@@ -34,8 +34,14 @@ public class ForschungTest{
 
     @Test
     public void setImagebonus() throws Exception {
-testForschung.setImagebonus(forschungsobjekt, 0.05);
+testForschung.setImagebonus(forschungsobjekt, 0.05f);
 assertEquals(testForschung.getImagebonusById(forschungsobjekt), 0.05, 0.5);
+    }
+
+    @Test
+    public void setForschungsbonus() throws Exception {
+        testForschung.setForschungsbonus(forschungsobjekt, 0.05f);
+        assertEquals(produktion.getForschungsbonusById(forschungsobjekt), 0.95f, 0.05);
     }
 
     @Test
@@ -46,14 +52,14 @@ assertEquals(testForschung.getImagebonusById(forschungsobjekt), 0, 0.5);
     @Test
     public void starteProjekt() throws Exception {
         testForschung.addMitarbeiter(5, 8000);
-        testForschung.starteProjekt(produktion, testForschung, forschungsobjekt, 5, 100, true);
+        testForschung.starteProjekt(kennzahlensammlung, testForschung, forschungsobjekt, 5, 100, true);
         assertFalse(testForschung.getProjekte().isEmpty());
     }
 
     @Test
     public void getProjekte() throws Exception {
         testForschung.addMitarbeiter(5, 8000);
-        testForschung.starteProjekt(produktion, testForschung, forschungsobjekt, 5, 100, true);
+        testForschung.starteProjekt(kennzahlensammlung, testForschung, forschungsobjekt, 5, 100, true);
         assertFalse(testForschung.getProjekte().isEmpty());
     }
 
@@ -61,7 +67,7 @@ assertEquals(testForschung.getImagebonusById(forschungsobjekt), 0, 0.5);
     public void forschungsprojektAbbrechen() throws Exception {
         //double erwarteterBonus = x * 0.7;
         testForschung.addMitarbeiter(5, 8000);
-        testForschung.starteProjekt(produktion, testForschung, forschungsobjekt, 5, 100, true);
+        testForschung.starteProjekt(kennzahlensammlung, testForschung, forschungsobjekt, 5, 100, true);
         //assertEquals(produktion.getForschungsbonusById(forschungsobjekt), erwarteterBonues);
     }
 
@@ -69,7 +75,7 @@ assertEquals(testForschung.getImagebonusById(forschungsobjekt), 0, 0.5);
     public void forschungsprojektAbschließen() throws Exception {
         //double erwarteterBonus = x;
         testForschung.addMitarbeiter(5, 8000);
-        testForschung.starteProjekt(produktion, testForschung, forschungsobjekt, 5, 100, true);
+        testForschung.starteProjekt(kennzahlensammlung, testForschung, forschungsobjekt, 5, 100, true);
        // assertEquals(produktion.getForschungsbonusById(forschungsobjekt), erwateterBonues);
     }
 

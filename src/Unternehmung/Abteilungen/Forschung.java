@@ -1,5 +1,6 @@
 package Unternehmung.Abteilungen;
 
+import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilung;
 import Unternehmung.Forschungsprojekt;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 public class Forschung extends Abteilung{
 
-    private Map<String, Double> imageBoni = new HashMap<>();
+    private Map<String, Float> imageBoni = new HashMap<>();
     private ArrayList<String> verfügbareProdukte; //um bereits beforschte Produkte reduzieren
     private ArrayList<String> beforschteProdukte = new ArrayList<>();
     private int beschäftigteMitarbeiter;
@@ -30,31 +31,48 @@ public class Forschung extends Abteilung{
     }
 
     private void initImageBoni(){
-        this.imageBoni.put("RucksackA",(double) 0);
-        this.imageBoni.put("RucksackB",(double) 0);
-        this.imageBoni.put("RucksackC",(double) 0);
-        this.imageBoni.put("RucksacktechA",(double) 0);
-        this.imageBoni.put("RucksacktechB",(double) 0);
-        this.imageBoni.put("RucksacktechC",(double) 0);
-        this.imageBoni.put("DuffelA",(double) 0);
-        this.imageBoni.put("DuffelB",(double) 0);
-        this.imageBoni.put("DuffelC",(double) 0);
-        this.imageBoni.put("ReisetascheA",(double) 0);
-        this.imageBoni.put("ReisetascheB",(double) 0);
-        this.imageBoni.put("ReisetascheC",(double) 0);
+        this.imageBoni.put("RucksackA", 0f);
+        this.imageBoni.put("RucksackB", 0f);
+        this.imageBoni.put("RucksackC", 0f);
+        this.imageBoni.put("RucksacktechA", 0f);
+        this.imageBoni.put("RucksacktechB", 0f);
+        this.imageBoni.put("RucksacktechC", 0f);
+        this.imageBoni.put("DuffelA", 0f);
+        this.imageBoni.put("DuffelB", 0f);
+        this.imageBoni.put("DuffelC", 0f);
+        this.imageBoni.put("ReisetascheA", 0f);
+        this.imageBoni.put("ReisetascheB", 0f);
+        this.imageBoni.put("ReisetascheC", 0f);
     }
 
-    public void setImagebonus (String id, double neuerImagebonus){
-        for (Map.Entry<String, Double> alterImagebonus : this.imageBoni.entrySet()){
-            if (alterImagebonus.getKey().equals(id)){
-                alterImagebonus.setValue(neuerImagebonus);
-                //ToDO  Image in Kennzahlensammlung verändern
+    public void setImagebonus (String id, float zusätzlicherImagebonus){
+        for (Map.Entry<String, Float> Imagebonus : this.imageBoni.entrySet()){
+            if (Imagebonus.getKey().equals(id)){
+                if(Imagebonus.getValue() + zusätzlicherImagebonus > 0.05f){ //Der neue Bonus würde den maximal Bonus übersteigen
+                    this.kennzahlensammlung.getWeicheKennzahl("kundenzufriedenheit").addModifier(0.05f - Imagebonus.getValue());
+                    Imagebonus.setValue(0.05f);
+                }else {
+                    Imagebonus.setValue(Imagebonus.getValue() + zusätzlicherImagebonus);
+                    this.kennzahlensammlung.getWeicheKennzahl("kundenzufriedenheit").addModifier(zusätzlicherImagebonus);
+                }
             }
         }
     }
 
-    public double getImagebonusById(String id) {
-        for (Map.Entry<String, Double> imageBoni : this.imageBoni.entrySet()) {
+    public void setForschungsbonus (String id, double zusätzlicherForschungsbonus){
+        for (Map.Entry<String, Double> Produktionsbonus : produktion.getForschungsboni().entrySet()){
+            if (Produktionsbonus.getKey().equals(id)){
+                if(Produktionsbonus.getValue() - zusätzlicherForschungsbonus < 0.75){ //Der neue Bonus würde den maximal Bonus übersteigen
+                    Produktionsbonus.setValue(0.75);
+                }else {
+                    Produktionsbonus.setValue(Produktionsbonus.getValue() - zusätzlicherForschungsbonus);
+                }
+              }
+        }
+    }
+
+    public float getImagebonusById(String id) {
+        for (Map.Entry<String, Float> imageBoni : this.imageBoni.entrySet()) {
             if (imageBoni.getKey().equals(id)) {
                 return imageBoni.getValue();
             }
@@ -62,14 +80,15 @@ public class Forschung extends Abteilung{
         return 0;
     }
 
-    public void starteProjekt(Produktion produktion, Forschung forschung, String forschungsobjekt, int mitarbeiterAnzahl, int dauer, boolean herstellkosten){
+    public void starteProjekt(Kennzahlensammlung kennzahlensammlung, Forschung forschung, String forschungsobjekt,
+                              int mitarbeiterAnzahl, int dauer, boolean herstellkosten)throws ZuWenigMitarbeiterException{
         if((beschäftigteMitarbeiter + mitarbeiterAnzahl) <= this.getMitarbeiterAnzahl()) { //Überprüfung, ob es genügend Mitarbeiter gibt
             beschäftigteMitarbeiter =+ mitarbeiterAnzahl;
-            Forschungsprojekt forschungsprojekt = new Forschungsprojekt(produktion, forschung, forschungsobjekt, mitarbeiterAnzahl, dauer, herstellkosten);
+            Forschungsprojekt forschungsprojekt = new Forschungsprojekt(kennzahlensammlung, forschung, forschungsobjekt, mitarbeiterAnzahl, dauer, herstellkosten);
             beforschteProdukte.add(forschungsobjekt);
             projekte.add(forschungsprojekt);
         }else{
-            //Werfe Fehler: Nicht genügend Mitarbeiter vorhanden
+            throw new ZuWenigMitarbeiterException("Forschung");
         }
             }
 
@@ -97,6 +116,7 @@ public ArrayList<Forschungsprojekt> getProjekte(){
 
 public ArrayList<String> getVerfügbareProdukte() {
     //Produkte, an denen bereits geforscht wird, aussondern
+    //Gibt es besondere Produkt Objekte, oder genügt der der Namens-String
     for (String produkt : beforschteProdukte) {
         verfügbareProdukte.remove(produkt);
     }
@@ -104,8 +124,8 @@ public ArrayList<String> getVerfügbareProdukte() {
 }
 
 public void update() {
-    for ( Forschungsprojekt projekt : projekte) {
-        if (projekt.getEnde() == Game.getCalendar()) {
+    for ( Forschungsprojekt projekt : this.projekte) {
+        if (projekt.getEnde().equals(Game.getCalendar())) {
             forschungsprojektAbschließen(projekt);
         }
     }
