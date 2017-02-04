@@ -90,9 +90,10 @@ public class Maschine {
     /**
      * setzt Maschinenstatus bei jedem Timer Count herunter
      */
-    public void statusRuntersetzen(){
+    public void statusUndEnergiekstRuntersetzen(){
         if (this.status > 0) {
-            this.status -= 0.01f;
+            this.status -= 0.000962f; // jede Maschine geht 0.0962% pro Tag kaputt, dadurch ist sie (ohne Instandhaltung) nach 3 Jahren bei 0%
+            this.energiekosten *= 1.000962f; // Energiekosten steigen äquivalent
         }
     }
 

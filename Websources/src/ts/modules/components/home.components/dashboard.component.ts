@@ -74,7 +74,7 @@ export class DashboardComponent implements OnInit
 
     constructor(private keyFigures : KeyFiguresService)
     {
-        keyFigures.getKeyFigures()
+        keyFigures.getSoftKeyFigures()
             .subscribe(content=>{
                 if(!this.data) {
                     this.data = {

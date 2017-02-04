@@ -6,6 +6,9 @@ import Unternehmung.Abteilungen.Produktion;
 import Unternehmung.Unternehmen;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by oehlersj on 13.01.2017.
@@ -13,6 +16,10 @@ import java.util.Calendar;
 public class GuV {
 
     private transient Unternehmen unternehmen;
+
+    private Map<Date, GuV> archiv = new HashMap<>(); // Sammlung der GuV's am Monatsende
+    private float aufwendungenArchiv;
+    private float erloeseArchiv;
 
     //Aufwendungen
     private float aufwendungenFuerRohstoffe; //alle Produktionskosten
@@ -25,7 +32,7 @@ public class GuV {
     private float geleisteterSchadensersatz;
 
     //Erlöse
-    private float umsatzErlöse;
+    private float umsatzErloese;
 
     private float jahresUeberschuss;
 
@@ -35,14 +42,23 @@ public class GuV {
         this.unternehmen = unternehmen;
     }
 
+    /**
+     * Konsturktor zum archivieren der Aufwendungen und Erlöse
+     * @param zuKopieren aktuelle GuV, um Aufwendungen und Erlöse zu kopieren und zu archivieren
+     */
+    private GuV(GuV zuKopieren) {
+        this.aufwendungenArchiv = zuKopieren.getAufwendungenArchiv();
+        this.erloeseArchiv = zuKopieren.getErloeseArchiv();
+    }
+
     public void jahresabschluss(Bilanz bilanz){
         this.setJahresUeberschuss(0);
-        this.jahresUeberschuss=(this.umsatzErlöse - (this.aufwendungenFuerEnergie + this.aufwendungenFuerGehaelter +
+        this.jahresUeberschuss=(this.umsatzErloese - (this.aufwendungenFuerEnergie + this.aufwendungenFuerGehaelter +
                 this.aufwendungenFuerRohstoffe + this.aufwendungenFuerWerbung + this.zinsaufwendungen + this.fremdinstandhaltung));
         this.setAufwendungenFuerEnergie(0);
         this.setAufwendungenFuerGehaelter(0);
         this.setAufwendungenFuerWerbung(0);
-        this.setUmsatzErlöse(0);
+        this.setUmsatzErloese(0);
         this.setZinsaufwendungen(0);
         this.setFremdinstandhaltung(0);
         bilanz.eigenkapitalAnpassen(this.jahresUeberschuss);
@@ -79,25 +95,41 @@ public class GuV {
             gehälter = ((HR)unternehmen.getAbteilung("hr")).getTotalGehalt();
         }
         kosten = werbekosten + gehälter + sozialeLeistungen + herstellkosten + energiekosten;
-
+        this.aufwendungenArchiv += kosten;
+        this.erloeseArchiv += umsatz;
         return umsatz - kosten;
+    }
+
+    /**
+     * wird von Kennzahlensammlung.update() am Monatsende aufgerufen
+     * klont die GuV, zieht alle vorherigen Kosten und Erlöse ab legt sie in archiv ab
+     */
+    public void archivieren(){
+        GuV archivGuV = new GuV(this);
+        this.archiv.put(Game.getCalendar().getTime(), archivGuV);
+        this.aufwendungenArchiv = 0;
+        this.umsatzErloese = 0;
     }
 
     // add-Methoden (werden bei Zahlungen aufgerufen -> Alternative zu Abteilung.getKosten()):
     public void addZinsaufwendungen(float zinsaufwendungen){
         this.zinsaufwendungen += zinsaufwendungen;
+        this.aufwendungenArchiv += zinsaufwendungen;
     }
 
     public void addFremdinstandhaltung(float fremdinstandhaltung){
         this.fremdinstandhaltung += fremdinstandhaltung;
+        this.aufwendungenArchiv += fremdinstandhaltung;
     }
 
     public void addUmsatz(float umsatz){
-        this.umsatzErlöse += umsatz;
+        this.umsatzErloese += umsatz;
+        this.umsatzErloese += umsatz;
     }
 
     public void addGeleisteterSchandsersatz(float schadensersatz){
         this.geleisteterSchadensersatz = schadensersatz;
+        this.aufwendungenArchiv += schadensersatz;
     }
 
 
@@ -127,12 +159,12 @@ public class GuV {
         this.aufwendungenFuerEnergie = aufwendungenFuerEnergie;
     }
 
-    public float getUmsatzErlöse() {
-        return umsatzErlöse;
+    public float getUmsatzErloese() {
+        return umsatzErloese;
     }
 
-    public void setUmsatzErlöse(float umsatzErlöse) {
-        this.umsatzErlöse = umsatzErlöse;
+    public void setUmsatzErloese(float umsatzErloese) {
+        this.umsatzErloese = umsatzErloese;
     }
 
     public float getJahresUeberschuss() {
@@ -166,4 +198,29 @@ public class GuV {
     public void setGeleisteterSchadensersatz(float geleisteterSchadensersatz) {
         this.geleisteterSchadensersatz = geleisteterSchadensersatz;
     }
+
+    public Unternehmen getUnternehmen() {
+        return unternehmen;
+    }
+
+    public float getAufwendungenArchiv() {
+        return aufwendungenArchiv;
+    }
+
+    public void setAufwendungenArchiv(float aufwendungenArchiv) {
+        this.aufwendungenArchiv = aufwendungenArchiv;
+    }
+
+    public float getErloeseArchiv() {
+        return erloeseArchiv;
+    }
+
+    public void setErloeseArchiv(float erloeseArchiv) {
+        this.erloeseArchiv = erloeseArchiv;
+    }
+
+    public Map<Date, GuV> getArchiv() {
+        return archiv;
+    }
+
 }

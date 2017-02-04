@@ -63,7 +63,7 @@ public class GuVTest {
     @Test
     public void addUmsatz() throws Exception {
         testGuV.addUmsatz(100);
-        assertEquals(testGuV.getUmsatzErlöse(), 100, 0.5);
+        assertEquals(testGuV.getUmsatzErloese(), 100, 0.5);
     }
 
     @Test
@@ -110,14 +110,14 @@ public class GuVTest {
 
     @Test
     public void getUmsatzErlöse() throws Exception {
-        assertEquals(testGuV.getUmsatzErlöse(), 0, 0.5);
+        assertEquals(testGuV.getUmsatzErloese(), 0, 0.5);
 
     }
 
     @Test
     public void setUmsatzErlöse() throws Exception {
-        testGuV.setUmsatzErlöse(100);
-        assertEquals(testGuV.getUmsatzErlöse(), 100, 0.5);
+        testGuV.setUmsatzErloese(100);
+        assertEquals(testGuV.getUmsatzErloese(), 100, 0.5);
 
     }
 

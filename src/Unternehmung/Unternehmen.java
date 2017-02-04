@@ -51,6 +51,7 @@ public class Unternehmen {
 	public void updateYearly()
 	{
 		this.kennzahlensammlung.getGuv().jahresabschluss(this.kennzahlensammlung.getBilanz());
+		this.kennzahlensammlung.archivieren();
 	}
 
 	// Getter und Setter:

@@ -4,10 +4,7 @@ import Exceptions.*;
 import Rules.Game;
 import Unternehmung.*;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static java.lang.Math.round;
 
@@ -17,6 +14,8 @@ import static java.lang.Math.round;
  * Created by lucadommes on 29.12.2016.
  */
 public class Produktion extends Abteilung {
+
+    private String[] produkte = {"Rucksack", "Rucksacktech", "Duffel", "Reisetasche"};
 
     private ArrayList<Maschine> maschinen = new ArrayList<Maschine>(); // Maschinenpark
     private ArrayList<Halle> produktionshallen = new ArrayList<Halle>();
@@ -46,7 +45,7 @@ public class Produktion extends Abteilung {
         Produktlinie produktlinie = new Produktlinie(
                 new Produkt(name, qualitätsstufe, this.getForschungsbonusById(name + qualitätsstufe)), menge, laufzeit);
         // prüfen, ob genügend Mitarbeiter, Maschinen und Liquidität vorhanden ist:
-        if (menge <= this.getMaxProdMenge(name)){
+        if (menge <= this.getVerfuegbareProdMengeByProdukt(name)){
             // Produktion in Auftrag geben:
             /* // Möglichkeit, die Menge eines bestehenden Auftrages zu erhöhen (Alternative: jedes mal einen neuen Auftrag erstellen (siehe unten))
             for (Produktlinie auftrag : this.aufträge){
@@ -147,58 +146,77 @@ public class Produktion extends Abteilung {
     public void update(){
         try {
             produkteFertigstellen();
-        } catch (LagerVollException e){
+        } catch (LagerVollException | ZuWenigMitarbeiterOderMaschinenException e){
             e.printStackTrace();
         }
         updateForschungsboni();
+        // update Maschinen:
         for (Maschine maschine : this.maschinen){
-            maschine.statusRuntersetzen();
+            maschine.statusUndEnergiekstRuntersetzen();
         }
+        // Wert der Fertigen Erzeugnisse im Lager an Bilanz weiter geben
+        float wert = 0;
+        for (Produktlinie produktlinie : this.lager){
+            wert += produktlinie.getMenge() * produktlinie.getProdukt().getHerstellkosten();
+        }
+        this.kennzahlensammlung.getBilanz().setFeWert(wert);
     }
 
     // sämtliche Hilfsmethoden:
     /**
      * wird bei jedem timer count ausgeführt und legt die pro timer count produzierten Produkte im Lager ab
      */
-    private void produkteFertigstellen () throws LagerVollException {
+    private void produkteFertigstellen () throws LagerVollException, ZuWenigMitarbeiterOderMaschinenException{
+        int mitarbeiterKapazitaet = this.getMaxMitarbeiterProdMenge();
+        Map<String, Integer> prodMengen = this.getMaxMaschProdMengen();
+
         for (Produktlinie auftrag : this.aufträge){
             auftrag.setLaufzeit(auftrag.getLaufzeit() - 1);
             if (auftrag.getEnd().equals(Game.getCalendar())){ // falls Laufzeit == 0 Auftrag beenden
                 this.aufträge.remove(auftrag);
             }
-            Produktlinie produktlinie = new Produktlinie(auftrag.getProdukt(), round(auftrag.getMenge()/Game.getCalendar().getActualMaximum(Calendar.MONTH))); // neue Produktlinie
-            if (auftrag.getMenge() <= this.getFreienLagerPlatz()){ // genügend Lagerplatz verfügbar?
-                //Prüfen ob Lager leer ist:
-                if(lager.isEmpty()) {
-                    this.lager.add(produktlinie);
-                } else {
-                    for (Produktlinie bestand : this.lager) {
-                        // falls Produkte mit derselben id und herstellkosten schon vorhanden ist wird die Menge hochgesetzt:
-                        if (produktlinie.getId().equals(bestand.getId()) &&
-                                (produktlinie.getProdukt().getHerstellkosten() == bestand.getProdukt().getHerstellkosten())) {
-                            bestand.setMenge(bestand.getMenge() + auftrag.getMenge());
-                        } else { // ansonsten wird die Produktlinie als neuer Posten im Lager hinzugefügt:
-                            this.lager.add(produktlinie);
+            if (auftrag.getMenge() <= prodMengen.get(auftrag.getProdukt().getName()) && auftrag.getMenge() <= mitarbeiterKapazitaet) { // Maschinen- und Mitarbeiterauslastung prüfen
+                // Maschinen- und Mitarbeiterauslastung anpassen:
+                int vorherigeMenge = prodMengen.get(auftrag.getProdukt().getName());
+                prodMengen.put(auftrag.getProdukt().getName(), vorherigeMenge - auftrag.getMenge());
+                mitarbeiterKapazitaet -= auftrag.getMenge();
+                // Produzieren:
+                Produktlinie produktlinie = new Produktlinie(auftrag.getProdukt(), round(auftrag.getMenge() / Game.getCalendar().getActualMaximum(Calendar.MONTH))); // neue Produktlinie
+                if (auftrag.getMenge() <= this.getFreienLagerPlatz()) { // genügend Lagerplatz verfügbar?
+                    //Prüfen ob Lager leer ist:
+                    if (lager.isEmpty()) {
+                        this.lager.add(produktlinie);
+                    } else {
+                        for (Produktlinie bestand : this.lager) {
+                            // falls Produkte mit derselben id und herstellkosten schon vorhanden ist wird die Menge hochgesetzt:
+                            if (produktlinie.getId().equals(bestand.getId()) &&
+                                    (produktlinie.getProdukt().getHerstellkosten() == bestand.getProdukt().getHerstellkosten())) {
+                                bestand.setMenge(bestand.getMenge() + auftrag.getMenge());
+                            } else { // ansonsten wird die Produktlinie als neuer Posten im Lager hinzugefügt:
+                                this.lager.add(produktlinie);
+                            }
                         }
                     }
+                } else {
+                    // gleicher Code wie oben, nur mit maximal zu lagernder Menge, sodass Lager bis zum Anschlag gefüllt wird, bevor Produkte verloren gehen:
+                    if (lager.isEmpty()) {
+                        this.lager.add(produktlinie);
+                    } else {
+                        for (Produktlinie bestand : this.lager) {
+                            // falls Produkte mit derselben id und herstellkosten schon vorhanden ist wird die Menge hochgesetzt:
+                            if (produktlinie.getId().equals(bestand.getId()) &&
+                                    (produktlinie.getProdukt().getHerstellkosten() == bestand.getProdukt().getHerstellkosten())) {
+                                bestand.setMenge(bestand.getMenge() + this.getFreienLagerPlatz());
+                            } else { // ansonsten wird die Produktlinie als neuer Posten im Lager hinzugefügt:
+                                produktlinie.setMenge(this.getFreienLagerPlatz());
+                                this.lager.add(produktlinie);
+                            }
+                        }
+                    }
+                    throw new LagerVollException();
                 }
             } else {
-                // gleicher Code wie oben, nur mit maximal zu lagernder Menge, sodass Lager bis zum Anschlag gefüllt wird, bevor Produkte verloren gehen:
-                if(lager.isEmpty()) {
-                    this.lager.add(produktlinie);
-                } else {
-                    for (Produktlinie bestand : this.lager) {
-                        // falls Produkte mit derselben id und herstellkosten schon vorhanden ist wird die Menge hochgesetzt:
-                        if (produktlinie.getId().equals(bestand.getId()) &&
-                                (produktlinie.getProdukt().getHerstellkosten() == bestand.getProdukt().getHerstellkosten())) {
-                            bestand.setMenge(bestand.getMenge() + this.getFreienLagerPlatz());
-                        } else { // ansonsten wird die Produktlinie als neuer Posten im Lager hinzugefügt:
-                            produktlinie.setMenge(this.getFreienLagerPlatz());
-                            this.lager.add(produktlinie);
-                        }
-                    }
-                }
-                throw new LagerVollException();
+                throw new ZuWenigMitarbeiterOderMaschinenException(auftrag.getProdukt().getName());
             }
         }
     }
@@ -234,25 +252,60 @@ public class Produktion extends Abteilung {
     }
 
     /**
-     * berechnet die maximal zu produzierende Menge eines Produkts, also abhängig von der Anzahl der produktspezifischen Maschinen
-     * @param produkt, das produziert werden soll
-     * @return MIN(Maschinenkapazität, Mitarbeiterkapazität)
+     * @return maximale Produktionskapazität der Mitarbeiter
      */
-    public int getMaxProdMenge(String produkt){
-        int maschKapazität = 0;
-        int mitarbeiterKapazität = 0;
-        for (Maschine maschine : this.maschinen){
-            if (maschine.getProdukt().equals(produkt)){
-                maschKapazität += maschine.getKapazitaet();
-            }
-        }
+    private int getMaxMitarbeiterProdMenge(){
+        int menge = 0;
         for (Mitarbeiter mitarbeiter : this.mitarbeiter){
-            mitarbeiterKapazität += mitarbeiter.getProdLeistung();
+            menge += mitarbeiter.getProdLeistung();
         }
-        if (maschKapazität <= mitarbeiterKapazität){
-            return maschKapazität;
+        return menge;
+    }
+
+    /**
+     * @param produkt, das produziert werden soll
+     * @return maximale Produktionsmenge, die auf Grund der Maschinenkapazität für dieses Produkt ermittelt wurde
+     */
+    public int getMaxMaschProdMengeByProdukt(String produkt){
+        return this.getMaxMaschProdMengen().get(produkt);
+    }
+
+    /**
+     * wird von getMaxMaschProdMengeByProdukt() verwendet
+     * @return Map mit den Produkten (key) und der jeweiligen maximal möglichen Produktionsmenge
+     */
+    private Map<String, Integer> getMaxMaschProdMengen(){
+        Map<String, Integer> maxMaschProdMengen = new HashMap<>();
+        for (String produkt : this.produkte){
+            int maschKapazität = 0;
+            for (Maschine maschine : this.maschinen){
+                if (maschine.getProdukt().equals(produkt)){
+                    if (maschine.getStatus() > 0) {
+                        maschKapazität += maschine.getKapazitaet();
+                    }
+                }
+            }
+            maxMaschProdMengen.put(produkt, maschKapazität);
         }
-        return mitarbeiterKapazität;
+        return maxMaschProdMengen;
+    }
+
+    /**
+     * wird von produzieren aufgerufen, um zu prüfen, ob ein neuer Produktionsauftrag angenommen werden kann
+     * @param produkt das produziert werden soll
+     * @return maximale Menge mit der dieses Produkt produziert werden kann
+     */
+    private int getVerfuegbareProdMengeByProdukt(String produkt){
+        int inProduktion = 0;
+        for (Produktlinie auftrag : this.aufträge){
+            inProduktion += auftrag.getMenge();
+        }
+        int freieMitarbeiterKapazitaet = this.getMaxMitarbeiterProdMenge() - inProduktion;
+        int produktKapazitaet = this.getMaxMaschProdMengeByProdukt(produkt);
+        if (freieMitarbeiterKapazitaet >= produktKapazitaet){
+            return freieMitarbeiterKapazitaet;
+        }
+        return produktKapazitaet;
     }
 
     /**

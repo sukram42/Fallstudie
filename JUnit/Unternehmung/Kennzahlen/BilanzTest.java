@@ -71,29 +71,29 @@ assertEquals(testBilanz.getTaMaschWert(), neuerTaMaschWert, 0.5);
     @Test
     public void getGebäudeWert() throws Exception {
         float neuerGebäudeWert = 100000;
-        testBilanz.setGebäudeWert(neuerGebäudeWert);
-        assertEquals(testBilanz.getGebäudeWert(), neuerGebäudeWert, 0.5);
+        testBilanz.setGebaeudeWert(neuerGebäudeWert);
+        assertEquals(testBilanz.getGebaeudeWert(), neuerGebäudeWert, 0.5);
     }
 
     @Test
     public void setGebäudeWert() throws Exception {
         float neuerGebäudeWert = 100000;
-        testBilanz.setGebäudeWert(neuerGebäudeWert);
-        assertEquals(testBilanz.getGebäudeWert(), neuerGebäudeWert, 0.5);
+        testBilanz.setGebaeudeWert(neuerGebäudeWert);
+        assertEquals(testBilanz.getGebaeudeWert(), neuerGebäudeWert, 0.5);
     }
 
     @Test
     public void getFEWert() throws Exception {
         float neuerFEWert = 30500;
-        testBilanz.setFEWert(neuerFEWert);
-        assertEquals(testBilanz.getFEWert(), neuerFEWert, 0.5);
+        testBilanz.setFeWert(neuerFEWert);
+        assertEquals(testBilanz.getFeWert(), neuerFEWert, 0.5);
     }
 
     @Test
     public void setFEWert() throws Exception {
         float neuerFEWert = 30500;
-        testBilanz.setFEWert(neuerFEWert);
-        assertEquals(testBilanz.getFEWert(), neuerFEWert, 0.5);
+        testBilanz.setFeWert(neuerFEWert);
+        assertEquals(testBilanz.getFeWert(), neuerFEWert, 0.5);
     }
 
     @Test
