@@ -75,7 +75,6 @@ assertNotNull(Game.getTimeString());
 
     @After
     public void tearDown(){
-
         testGame.getCompanies().remove(unternehmen);
     }
 

@@ -67,6 +67,6 @@ public class VertriebTest{
 
     @After
     public void tearUp(){
-
+        game.getCompanies().remove(unternehmen);
     }
 }
