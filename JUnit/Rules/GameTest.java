@@ -5,29 +5,36 @@ import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Unternehmen;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by D064018 on 27.01.2017.
  */
+
 public class GameTest{
 
-    private Game testGame;
+    private static Game testGame;
     private Kennzahlensammlung kennzahlensammlung;
     private Produktion produktion;
     private Unternehmen unternehmen;
     private String unternehmensname;
 
-    @Before
-    public void setUp() throws Exception{
-        unternehmensname = "Test_Unternehmen";
+    @BeforeClass
+    public static void createGame(){
         testGame = new Game();
+    }
+
+    @Before
+    public  void setUp() throws Exception{
+        unternehmensname = "Test_Unternehmen";
         unternehmen = new Unternehmen(unternehmensname, "12345", 500000);
         testGame.getCompanies().add(unternehmen);
-        assertNotNull(testGame);
+        assertNotNull(unternehmen);
     }
 
     @Test
@@ -57,19 +64,19 @@ assertNotNull(Game.getTimeString());
 
     @Test
     public void getAusschreibungen() throws Exception {
-        assertTrue(Game.getAusschreibungen().size() == 0);
+        testGame.run();
+        assertTrue(Game.getAusschreibungen().size() > 0);
     }
 
     @Test
     public void _run() throws Exception {
-        testGame.run();
-        assertNotNull(Game.getAusschreibungen());
+        assertEquals(Game.getTime(), 1);
     }
 
     @After
     public void tearDown(){
-        System.setOut(null);
-        System.setErr(null);
+
+        testGame.getCompanies().remove(unternehmen);
     }
 
 }
