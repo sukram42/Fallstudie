@@ -1,270 +1,168 @@
 <div role="tabpanel" class="tab-pane active" id="SollesJahr" *ngIf="keyfigures">
     <br>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-8">
             <div class="panel panel-default">
                 <!-- Standard-Panel-Inhalt -->
-                <div class="panel-heading">Erfolgskonten</div>
+                <div class="panel-heading">interne Bilanz</div>
 
                 <!-- Listengruppe -->
-                <ul class="list-group" >
-                    <li class="list-group-item"><table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th data-field="afaA">Soll</th>
-                            <th data-field="afa" style="text-align: center;"><b>A.f.R</b></th>
-                            <th data-field="afaP" style="text-align: right;">Haben</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{runden(keyfigures.guv.aufwendungenFuerRohstoffe)}} €</td>
-                            <td></td>
-                            <td style="text-align: right;">0 €</td>
-                        </tr>
-                        </tbody>
-                    </table></li>
-                    <li class="list-group-item"><table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th data-field="werbungA">Soll</th>
-                            <th data-field="werbung" style="text-align: center;"><b>Werbeaufwendungen</b></th>
-                            <th data-field="werbungP" style="text-align: right;">Haben</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{runden(keyfigures.guv.aufwendungenFuerWerbung)}} €</td>
-                            <td></td>
-                            <td style="text-align: right;">0 €</td>
-                        </tr>
-                        </tbody>
-                    </table></li>
-                    <li class="list-group-item"><table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th data-field="gehaltA">Soll</th>
-                            <th data-field="gehalt" style="text-align: center;"><b>A.f.Gehälter</b></th>
-                            <th data-field="gehaltP" style="text-align: right;">Haben</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{runden(keyfigures.guv.aufwendungenFuerGehaelter)}} €</td>
-                            <td></td>
-                            <td style="text-align: right;">0 €</td>
-                        </tr>
-                        </tbody>
-                    </table></li>
-                    <li class="list-group-item"><table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th data-field="energieA">Soll</th>
-                            <th data-field="energie" style="text-align: center;"><b>Energieaufwendungen</b></th>
-                            <th data-field="energieP" style="text-align: right;">Haben</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{runden(keyfigures.guv.aufwendungenFuerEnergie)}} €</td>
-                            <td></td>
-                            <td style="text-align: right;">0 €</td>
-                        </tr>
-                        </tbody>
-                    </table></li>
-                    <li class="list-group-item"><table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th data-field="zinsA">Soll</th>
-                            <th data-field="zins" style="text-align: center;"><b>Zinsaufwendungen</b></th>
-                            <th data-field="zinsP" style="text-align: right;">Haben</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{runden(keyfigures.guv.zinsaufwendungen)}} €</td>
-                            <td></td>
-                            <td style="text-align: right;">0 €</td>
-                        </tr>
-                        </tbody>
-                    </table></li>
-                    <li class="list-group-item"><table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th data-field="fremdA">Soll</th>
-                            <th data-field="fremd" style="text-align: center;"><b>Fremdinstandhaltung</b></th>
-                            <th data-field="fremdP" style="text-align: right;">Haben</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{runden(keyfigures.guv.fremdinstandhaltung)}} €</td>
-                            <td></td>
-                            <td style="text-align: right;">0 €</td>
-                        </tr>
-                        </tbody>
-                    </table></li>
-                    <li class="list-group-item"><table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th data-field="ausA">Soll</th>
-                            <th data-field="ausAuf" style="text-align: center;"><b>Außerordentliche Aufwendungen</b></th>
-                            <th data-field="ausP" style="text-align: right;">Haben</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>0 €</td>
-                            <td></td>
-                            <td style="text-align: right;">0 €</td>
-                        </tr>
-                        </tbody>
-                    </table></li>
-                    <li class="list-group-item"><table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th data-field="uefeeA">Soll</th>
-                            <th data-field="uefee" style="text-align: center;"><b>U.e.f.e.E</b></th>
-                            <th data-field="uefeeP" style="text-align: right;">Haben</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>0 €</td>
-                            <td></td>
-                            <td style="text-align: right;">{{runden(keyfigures.guv.umsatzErloese)}} €</td>
-                        </tr>
-                        </tbody>
-                    </table></li>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <table class="table table-condensed">
+                            <thead>
+                            <tr>
+                                <th data-field="aktiva">Aktiva</th>
+                                <th data-field="bilanz" style="text-align: center;"><b>Aktueller Bilanzstand zum {{time}}</b></th>
+                                <th data-field="passiva" style="text-align: right;">Passiva</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <ul style="list-style-type: none;white-space:nowrap;">
+                                        <li><b>Gebäude</b></li>
+                                        <li><b>TA Masch</b></li>
+                                        <li><b>Fertig Erzeugnisse</b></li>
+                                        <li><b>liquide Mittel</b></li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul style="list-style-type: none;white-space:nowrap;">
+                                        <li>{{runden(keyfigures.bilanz.gebaeudeWert)}} €</li>
+                                        <li>{{runden(keyfigures.bilanz.taMaschWert)}} €</li>
+                                        <li>{{runden(keyfigures.bilanz.feWert)}} €</li>
+                                        <li>{{runden(keyfigures.bilanz.liquideMittel)}} €</li>
+                                    </ul>
+                                </td>
+                                <td></td>
+                                <td style="text-align: right;">
+                                    <ul style="list-style-type: none; ">
+                                        <li><b>Eigenkapital</b></li>
+                                        <li><b>Fremdkapital</b></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                </td>
+                                <td style="white-space:nowrap;">
+                                    <ul style="list-style-type: none; white-space:nowrap;">
+                                        <li>{{runden(keyfigures.bilanz.eigenkapital)}} €</li>
+                                        <li>{{runden(keyfigures.bilanz.fremdkapital)}} €</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td></td>
+                                <td><b>{{runden(keyfigures.bilanz.summeAktiva)}} €</b></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>{{runden(keyfigures.bilanz.summePassiva)}} €</b></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </li>
+                </ul>
+            </div>
+
+            <!--GUV-->
+            <div class="panel panel-default">
+                <!-- Standard-Panel-Inhalt -->
+                <div class="panel-heading">GuV</div>
+
+                <!-- Listengruppe -->
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <table class="table table-condensed">
+                            <thead>
+                            <tr>
+                                <th data-field="aktiva">Aktiva</th>
+                                <th data-field="bilanz" style="text-align: center;"><b>Aktueller GuV zum {{time}}</b></th>
+                                <th data-field="passiva" style="text-align: right;">Passiva</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <ul style="list-style-type: none;white-space:nowrap;">
+                                        <li><b>Aufwendungen für Rohstoffe</b></li>
+                                        <li><b>Aufwendungen für Werbung</b></li>
+                                        <li><b>Aufwendungen für Gehälter</b></li>
+                                        <li><b>Aufwendungen für Energie</b></li>
+                                        <li><b>Aufwendungen für Soziale Leistungen</b></li>
+                                        <li><b>Aufwendungen für Zinsen</b></li>
+                                        <li><b>Aufwendungen für Fremdinstandhaltung</b></li>
+                                        <li><b>Aufwendungen für Schadensersatz</b></li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul style="list-style-type: none;white-space:nowrap;">
+                                        <li>{{runden(keyfigures.guv.aufwendungenFuerRohstoffe)}} €</li>
+                                        <li>{{runden(keyfigures.guv.aufwendungenFuerWerbung)}} €</li>
+                                        <li>{{runden(keyfigures.guv.aufwendungenFuerGehaelter)}} €</li>
+                                        <li>{{runden(keyfigures.guv.aufwendungenFuerEnergie)}} €</li>
+                                        <li>{{runden(keyfigures.guv.aufwendungenFuerSozialeLeistungen)}} €</li>
+                                        <li>{{runden(keyfigures.guv.zinsaufwendungen)}} €</li>
+                                        <li>{{runden(keyfigures.guv.fremdinstandhaltung)}} €</li>
+                                        <li>{{runden(keyfigures.guv.geleisteterSchadensersatz)}} €</li>
+                                    </ul>
+                                </td>
+                                <td></td>
+                                <td style="text-align: right;">
+                                    <ul style="list-style-type: none; ">
+                                        <li><b>Umsatzerlöse</b></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                </td>
+                                <td style="white-space:nowrap;">
+                                    <ul style="list-style-type: none; white-space:nowrap;">
+                                        <li>{{runden(keyfigures.guv.umsatzErloese)}} €</li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td></td>
+                                <td><b>{{runden(keyfigures.bilanz.summeAktiva)}} €</b></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>{{runden(keyfigures.bilanz.summePassiva)}} €</b></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </li>
                 </ul>
             </div>
         </div>
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <!-- Standard-Panel-Inhalt -->
-                        <div class="panel-heading">Bestandskonten</div>
 
-                        <!-- Listengruppe -->
-                        <ul class="list-group">
-                            <li class="list-group-item"><table class="table table-condensed">
-                                <thead>
-                                <tr>
-                                    <th data-field="afaA">Soll</th>
-                                    <th data-field="afa" style="text-align: center;"><b>A.f.R</b></th>
-                                    <th data-field="afaP" style="text-align: right;">Haben</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>30000 €</td>
-                                    <td></td>
-                                    <td style="text-align: right;">2500 €</td>
-                                </tr>
-                                </tbody>
-                            </table></li>
-                            <li class="list-group-item"><table class="table table-condensed">
-                                <thead>
-                                <tr>
-                                    <th data-field="werbungA">Soll</th>
-                                    <th data-field="werbung" style="text-align: center;"><b>Werbeaufwendungen</b></th>
-                                    <th data-field="werbungP" style="text-align: right;">Haben</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>30000 €</td>
-                                    <td></td>
-                                    <td style="text-align: right;">2500 €</td>
-                                </tr>
-                                </tbody>
-                            </table></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <!-- Standard-Panel-Inhalt -->
-                        <div class="panel-heading">Laufende Kredite</div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <!-- Standard-Panel-Inhalt -->
+                <div class="panel-heading">Laufende Kredite</div>
 
-                        <!-- Listengruppe -->
-                        <ul class="list-group">
-                            <li class="list-group-item">
+                <!-- Listengruppe -->
+                <ul class="list-group">
+                    <li class="list-group-item">
 
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <!-- Standard-Panel-Inhalt -->
-                        <div class="panel-heading">Bilanz</div>
-
-                        <!-- Listengruppe -->
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <table class="table table-condensed">
-                                    <thead>
-                                    <tr>
-                                        <th data-field="aktiva">Aktiva</th>
-                                        <th data-field="bilanz" style="text-align: center;"><b>Aktueller Bilanzstand zum {{time}}</b></th>
-                                        <th data-field="passiva" style="text-align: right;">Passiva</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <ul style="list-style-type: none;white-space:nowrap;">
-                                                <li><b>Gebäude</b></li>
-                                                <li><b>TA Masch</b></li>
-                                                <li><b>Fertig Erzeugnisse</b></li>
-                                                <li><b>liquide Mittel</b></li>
-                                            </ul>
-                                        </td>
-                                        <td>
-                                            <ul style="list-style-type: none;white-space:nowrap;">
-                                                <li>{{runden(keyfigures.bilanz.gebaeudeWert)}} €</li>
-                                                <li>{{runden(keyfigures.bilanz.taMaschWert)}} €</li>
-                                                <li>{{runden(keyfigures.bilanz.feWert)}} €</li>
-                                                <li>{{runden(keyfigures.bilanz.liquideMittel)}} €</li>
-                                            </ul>
-                                        </td>
-                                        <td></td>
-                                        <td style="text-align: right;">
-                                            <ul style="list-style-type: none; ">
-                                                <li><b>Eigenkapital</b></li>
-                                                <li><b>Fremdkapital</b></li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                            </ul>
-                                        </td>
-                                        <td style="white-space:nowrap;">
-                                            <ul style="list-style-type: none; white-space:nowrap;">
-                                                <li>{{runden(keyfigures.bilanz.eigenkapital)}} €</li>
-                                                <li>{{runden(keyfigures.bilanz.fremdkapital)}} €</li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td></td>
-                                        <td><b>{{runden(keyfigures.bilanz.summeAktiva)}} €</b></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><b>{{runden(keyfigures.bilanz.summePassiva)}} €</b></td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

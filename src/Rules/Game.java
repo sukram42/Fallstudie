@@ -15,7 +15,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class Game extends TimerTask {
 
-    private static final int COUNTER_INTERVALL = 5 * 1000;//16*1000*60;//16 Minuten
+    private static final int COUNTER_INTERVALL = 120*1000;//5 * 1000;//16*1000*60;//16 Minuten
     private static long counter = 0;
 
     private static Calendar gameCalendar = new GregorianCalendar(2010, 1, 1);
@@ -109,7 +109,7 @@ public class Game extends TimerTask {
     private void bankruptTest(Unternehmen u) {
         if(u.getKennzahlensammlung().isBankrupt())
         {
-            companies.remove(u);
+//            companies.remove(u);
             companiesArchiv.add(u);
         }
     }
