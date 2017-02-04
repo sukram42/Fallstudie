@@ -154,6 +154,12 @@ public class Produktion extends Abteilung {
         for (Maschine maschine : this.maschinen){
             maschine.statusRuntersetzen();
         }
+        // Wert der Fertigen Erzeugnisse im Lager an Bilanz weiter geben
+        float wert = 0;
+        for (Produktlinie produktlinie : this.lager){
+            wert += produktlinie.getMenge() * produktlinie.getProdukt().getHerstellkosten();
+        }
+        this.kennzahlensammlung.getBilanz().setFeWert(wert);
     }
 
     // sämtliche Hilfsmethoden:
