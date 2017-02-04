@@ -1,12 +1,15 @@
 package Unternehmung;
 
 import Exceptions.BankruptException;
+import Rules.Game;
 import Unternehmung.Kennzahlen.*;
 import Unternehmung.Kennzahlen.Bilanz;
 import Unternehmung.Kennzahlen.GuV;
 import Unternehmung.Kennzahlen.Kennzahl;
 import Unternehmung.Kennzahlen.Mitarbeiterzufriedenheit;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,8 +22,10 @@ import java.util.Map;
 public class Kennzahlensammlung {
 
     private transient Unternehmen unternehmen;
-    // "weiche" Kennzahlensammlung:
 
+    private Map<Date, Kennzahlensammlung> archiv = new HashMap<>(); // Archiv für Jahresabschlüsse (Bilanz + GuV)
+
+    // "weiche" Kennzahlensammlung:
     private Map<String,  Kennzahl> weicheKennzahlen = new HashMap<>();
 
     // faktische Kennzahlensammlung:
@@ -48,6 +53,15 @@ public class Kennzahlensammlung {
         this.maxNeueMitarbeiter = 0;
     }
 
+    /**
+     * Konstruktor ausschließlich für Archivierung des Jahresabschlusses (siehe archivieren())
+     * @param zuKopieren aktuelle Kennzahlensammlung, die dann im archiv abgelegt wird
+     */
+    private Kennzahlensammlung(Kennzahlensammlung zuKopieren) {
+        this.bilanz = zuKopieren.getBilanz();
+        this.guv = zuKopieren.getGuv();
+    }
+
     // Berechnungen:
     public void berechnen()
     {
@@ -68,6 +82,9 @@ public class Kennzahlensammlung {
         } catch (BankruptException e){
             e.printStackTrace();
         }
+        if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH)) {
+            this.getGuv().archivieren();
+        }
     }
 
     /**
@@ -77,6 +94,14 @@ public class Kennzahlensammlung {
         for (Kennzahl kennzahl : this.weicheKennzahlen.values()){
             kennzahl.setModifier(kennzahl.getModifier() - 0.01f);
         }
+    }
+
+    /**
+     * wird am Jahresende aufgerufen, um Jahresabschluss (Bilanz + GuV) zu archivieren
+     */
+    public void archivieren(){
+        Kennzahlensammlung jahresabschluss = new Kennzahlensammlung(this);
+        this.archiv.put(Game.getCalendar().getTime(), jahresabschluss);
     }
 
     public void initWeicheKennzahlen(){
@@ -133,8 +158,13 @@ public class Kennzahlensammlung {
     public void setBankrupt() {
         this.bankrupt = true;
     }
+
     public boolean isBankrupt()
     {
         return this.bankrupt;
+    }
+
+    public Map<Date, Kennzahlensammlung> getArchiv() {
+        return archiv;
     }
 }
