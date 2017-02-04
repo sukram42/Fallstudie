@@ -47,6 +47,7 @@ import {MarketingService} from "./services/marketing.service";
 import {CampagneListComponent} from "./components/home.components/marketing.component/campaign-list.component";
 import {ImpressumComponent} from "./components/impressum.component";
 import {AccountsSidebar} from "./components/home.components/sales.component/accounts-sidebar.component";
+import {ActualComponent} from "./components/home.components/finance.component/actual.component";
 
 @NgModule({
     imports: [
@@ -123,7 +124,8 @@ import {AccountsSidebar} from "./components/home.components/sales.component/acco
         NewMarketingCampaignComponent,
         CampagneListComponent,
         ImpressumComponent,
-        AccountsSidebar
+        AccountsSidebar,
+        ActualComponent
     ],
 
     bootstrap: [HomeComponent],

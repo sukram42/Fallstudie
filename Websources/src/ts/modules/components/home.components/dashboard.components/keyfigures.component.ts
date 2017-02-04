@@ -40,7 +40,7 @@ export class KeyfiguresComponent implements OnInit{
 
     public init()
     {
-        this.keyFigures.getKeyFigure(this.newTitle)
+        this.keyFigures.getSoftKeyFigure(this.newTitle)
             .subscribe(data =>(this.progress = Math.round((data*100) * 100) / 100),
                 err=>console.log(err));
     }

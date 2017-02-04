@@ -26,10 +26,10 @@ public class Kennzahlensammlung {
     // faktische Kennzahlensammlung:
     private double marktanteil;
 
-    private transient Bilanz bilanz;
-    private transient GuV guv;
+    private Bilanz bilanz;
+    private GuV guv;
 
-    private int maxNeueMitarbeiter; // abhängig von HR-Mitarbeitern (für 10 Mitarbeiter ist ein HR-Mitarbeiter (=Manager) zuständig)
+    private transient int maxNeueMitarbeiter; // abhängig von HR-Mitarbeitern (für 10 Mitarbeiter ist ein HR-Mitarbeiter (=Manager) zuständig)
     private boolean bankrupt=false;
     // wird pro neu eingestelltem HR-Mitarbeiter um 10 hochgesetzt
                                     // wird pro neu eingestelltem (Nicht-HR-) Mitarbeiter um 1 runtergesetzt

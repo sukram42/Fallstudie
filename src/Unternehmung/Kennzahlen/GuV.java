@@ -25,7 +25,7 @@ public class GuV {
     private float geleisteterSchadensersatz;
 
     //Erlöse
-    private float umsatzErlöse;
+    private float umsatzErloese;
 
     private float jahresUeberschuss;
 
@@ -37,12 +37,12 @@ public class GuV {
 
     public void jahresabschluss(Bilanz bilanz){
         this.setJahresUeberschuss(0);
-        this.jahresUeberschuss=(this.umsatzErlöse - (this.aufwendungenFuerEnergie + this.aufwendungenFuerGehaelter +
+        this.jahresUeberschuss=(this.umsatzErloese - (this.aufwendungenFuerEnergie + this.aufwendungenFuerGehaelter +
                 this.aufwendungenFuerRohstoffe + this.aufwendungenFuerWerbung + this.zinsaufwendungen + this.fremdinstandhaltung));
         this.setAufwendungenFuerEnergie(0);
         this.setAufwendungenFuerGehaelter(0);
         this.setAufwendungenFuerWerbung(0);
-        this.setUmsatzErlöse(0);
+        this.setUmsatzErloese(0);
         this.setZinsaufwendungen(0);
         this.setFremdinstandhaltung(0);
         bilanz.eigenkapitalAnpassen(this.jahresUeberschuss);
@@ -93,7 +93,7 @@ public class GuV {
     }
 
     public void addUmsatz(float umsatz){
-        this.umsatzErlöse += umsatz;
+        this.umsatzErloese += umsatz;
     }
 
     public void addGeleisteterSchandsersatz(float schadensersatz){
@@ -127,12 +127,12 @@ public class GuV {
         this.aufwendungenFuerEnergie = aufwendungenFuerEnergie;
     }
 
-    public float getUmsatzErlöse() {
-        return umsatzErlöse;
+    public float getUmsatzErloese() {
+        return umsatzErloese;
     }
 
-    public void setUmsatzErlöse(float umsatzErlöse) {
-        this.umsatzErlöse = umsatzErlöse;
+    public void setUmsatzErloese(float umsatzErloese) {
+        this.umsatzErloese = umsatzErloese;
     }
 
     public float getJahresUeberschuss() {

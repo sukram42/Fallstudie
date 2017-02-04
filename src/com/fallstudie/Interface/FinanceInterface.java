@@ -34,6 +34,7 @@ public class FinanceInterface {
         return Response.ok(gson.toJson(bilanz)).build();
 
     }
+
     @GET
     @Secured
     @Path("soft/{keyfigure}")
@@ -50,8 +51,17 @@ public class FinanceInterface {
 
     @GET
     @Secured
+    @Path("")
+    public Response getKennzahlensammlung(@Context SecurityContext securityContext) {
+        Kennzahlensammlung kennzahl = CompanyInterface.getCompanyFromContext(securityContext).getKennzahlensammlung();
+        kennzahl.getBilanz().setSummen();
+            return Response.ok(gson.toJson(kennzahl)).build();
+    }
+
+    @GET
+    @Secured
     @Path("soft")
-    public Response getKeyFigures(@Context SecurityContext securityContext)
+    public Response getSoftKeyFigures(@Context SecurityContext securityContext)
     {
         Unternehmen unternehmen = CompanyInterface.getCompanyFromContext(securityContext);
         JSONObject object = new JSONObject();

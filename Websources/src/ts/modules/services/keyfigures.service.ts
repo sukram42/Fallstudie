@@ -10,31 +10,40 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class KeyFiguresService {
-    constructor(private http: Http) {
-        this.http = http;
+    constructor(private _http: Http) {
+        this._http = _http;
     }
 
-    getKeyFigure(name:string)
+    getSoftKeyFigure(name:string)
     {
-        return  Observable.interval(10000).flatMap(()=>this.http.get('http://localhost:8080/rest/companies/keyfigures/soft/' + name)
+        return  Observable.interval(10000).flatMap(()=>this._http.get('http://localhost:8080/rest/companies/keyfigures/soft/' + name)
             .map(response => response.json()));
     }
-    getKeyFigures()
+    getSoftKeyFigures()
     {
-        return  Observable.interval(1000).flatMap(()=>this.http.get('http://localhost:8080/rest/companies/keyfigures/soft')
+        return  Observable.interval(1000).flatMap(()=>this._http.get('http://localhost:8080/rest/companies/keyfigures/soft')
         .map(response => response.json()));
     }
 
+    getKeyFigures()
+    {
+        return this._http.get('http://localhost:8080/rest/companies/keyfigures').map(res=>res.json());
+    }
+
+    getBilanz()
+    {
+        return this._http.get('http://localhost:8080/rest/companies/keyfigures/bilanz').map(res=>res.json());
+    }
 
     getEmployeeCount()
     {
-        return Observable.interval(5000).flatMap(()=>this.http.get('http://localhost:8080/rest/companies/employees/count')
+        return Observable.interval(5000).flatMap(()=>this._http.get('http://localhost:8080/rest/companies/employees/count')
             .map(response => response.text()));
     }
 
     getLiquideMittel()
     {
-        return Observable.interval(1000).flatMap(()=>this.http.get('http://localhost:8080/rest/companies/keyfigures/bilanz')
+        return Observable.interval(1000).flatMap(()=>this._http.get('http://localhost:8080/rest/companies/keyfigures/bilanz')
             .map(res=>res.json()));
     }
 
