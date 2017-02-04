@@ -86,7 +86,7 @@ assertFalse(testProduktion.getForschungsboni().isEmpty());
         unternehmen.getAbteilung("hr").addMitarbeiter(1, 1000);
         testProduktion.addMitarbeiter(2, 10000);
         testProduktion.produzieren("Rucksack", 'A', 100, 50000);
-        assertEquals(testProduktion.getMaxProdMenge("Rucksack"), 300);
+        assertEquals(testProduktion.getMaxMaschProdMengeByProdukt("Rucksack"), 300);
     }
 
     @Test
@@ -96,7 +96,7 @@ assertFalse(testProduktion.getForschungsboni().isEmpty());
         unternehmen.getAbteilung("hr").addMitarbeiter(1, 1000);
         testProduktion.addMitarbeiter(2, 10000); //Wird das Gehalt mit Erstellen der Mitarbeiter schon den liquiden Kosten abgezogen? hier nicht!
         assertEquals(kennzahlensammlung.getBilanz().getLiquideMittel(), 500000 - 65000 - 7500, 0.5);
-        assertEquals(testProduktion.getMaxProdMenge("Rucksack"), 300); //Kapazität der einzelnen Maschine
+        assertEquals(testProduktion.getMaxMaschProdMengeByProdukt("Rucksack"), 300); //Kapazität der einzelnen Maschine
     }
 
     @Test
