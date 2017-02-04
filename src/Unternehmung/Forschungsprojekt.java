@@ -2,7 +2,6 @@ package Unternehmung;
 
 import Rules.Game;
 import Unternehmung.Abteilungen.Forschung;
-import Unternehmung.Abteilungen.Produktion;
 
 import java.util.Calendar;
 
@@ -11,63 +10,52 @@ import java.util.Calendar;
  */
 public class Forschungsprojekt {
 
-    public final double abbruchFaktor = 0.7;
+    private static float abbruchFaktor = 0.7f;
 
     private int mitarbeiterAnzahl;
     private String forschungsobjekt;
     private Calendar ende;
-    private Calendar beginn;
+    private long beginn;
     private boolean herstellkosten; //Indikator, ob Kostenreduzierung oder Image gewählt wurde
     //Es kann immer nur an max. einer Eigenschaft geforscht werden, da sich die Entwicklungen ansonsten in die Quere kommen und 2 unterschiedliche
     // Produkte herauskommen würden.
-    private Produktion produktion;
     private Forschung forschung;
+    Kennzahlensammlung kennzahlensammlung;
 
     //Effektivität über Mitarbeiterzufriedenheit
+    //Ansonsten soll das Gehalt der Mitarbeiter immer x sein
 
-    public Forschungsprojekt(Produktion produktion, Forschung forschung, String forschungsobjekt, int mitarbeiterAnzahl, int laufzeit, boolean herstellkosten){
-    beginn = Game.getCalendar();
+    public Forschungsprojekt(Kennzahlensammlung kennzahlensammlung, Forschung forschung, String forschungsobjekt, int mitarbeiterAnzahl, int laufzeit, boolean herstellkosten){
+    beginn = Game.getTime();
+    this.kennzahlensammlung = kennzahlensammlung;
     this.mitarbeiterAnzahl = mitarbeiterAnzahl;
     this.forschungsobjekt = forschungsobjekt;
-    this.ende = this.beginn;
+    this.ende = Game.getCalendar();
     this.ende.add(Calendar.DAY_OF_MONTH, laufzeit);
     this.herstellkosten = herstellkosten;
-    this.produktion = produktion;
     this.forschung = forschung;
     }
 
-    public void abbrechen(){
-        if(herstellkosten){
-            double bonus = produktion.getForschungsbonusById(forschungsobjekt);
-            bonus += 1;
-          //  bonus = abbruchFaktor * (Game.getTime() - beginn) * mitarbeiterAnzahl * mitarbeiterZufriedenheit * irgendeinFaktor;
-            produktion.setForschungsbonus(forschungsobjekt, bonus);
-
-        }else{
-            double bonus = forschung.getImagebonusById(forschungsobjekt);
-            bonus += 1;
-            // abbruchFaktor * (Game.getTime() - beginn) * mitarbeiterAnzahl  * mitarbeiterZufriedenheit * irgendeinFaktor;
+    public void abbrechen() {
+        float bonus = 0;
+        if (herstellkosten) {
+            //    bonus  = abbruchFaktor * (Game.getTime() - beginn) * mitarbeiterAnzahl * irgendeinFaktor;
+            forschung.setForschungsbonus(forschungsobjekt, bonus);
+        } else {
+            //bonus = abbruchFaktor * (Game.getTime() - beginn) * mitarbeiterAnzahl  * 1.5 * kennzahlensammlung.getMitarbeiterzufriedenheit() * irgendeinFaktor;
             forschung.setImagebonus(forschungsobjekt, bonus);
         }
     }
 
     public void abschließen(){
+        float bonus = 0;
         if(herstellkosten){
-            double bonus = produktion.getForschungsbonusById(forschungsobjekt);
-            bonus += 2;
-            //  bonus += (Game.getTime() - beginn) * mitarbeiterAnzahl * mitarbeiterZufriedenheit * irgendeinFaktor;
-            produktion.setForschungsbonus(forschungsobjekt, bonus);
+            //    bonus  = (Game.getTime() - beginn) * mitarbeiterAnzahl * irgendeinFaktor;
+            forschung.setForschungsbonus(forschungsobjekt, bonus);
         }else{
-            //Kundenzufriedenheit erhöhen
-            double bonus = forschung.getImagebonusById(forschungsobjekt);
-            bonus += 2;
-            // (Game.getTime() - beginn) * mitarbeiterAnzahl * mitarbeiterZufriedenheit * irgendeinFaktor;
+            //bonus = (Game.getTime() - beginn) * mitarbeiterAnzahl  * 1.5 * kennzahlensammlung.getMitarbeiterzufriedenheit() * irgendeinFaktor;
             forschung.setImagebonus(forschungsobjekt, bonus);
         }
-    }
-
-    public Calendar getBeginn() {
-        return beginn;
     }
 
     public Calendar getEnde() {

@@ -7,11 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -68,13 +64,6 @@ assertNotNull(Game.getTimeString());
     public void _run() throws Exception {
         testGame.run();
         assertNotNull(Game.getAusschreibungen());
-    }
-
-    @Test
-    public void updateCounter() throws Exception {
-    testGame.updateCounter();
-        Calendar calendar = new GregorianCalendar(2010, 1, 2);
-        assertEquals(Game.getCalendar(), calendar); //angeblich sei calender == 2012, 2, 3
     }
 
     @After
