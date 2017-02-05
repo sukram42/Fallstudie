@@ -71,6 +71,7 @@ public class Forschungsprojekt {
     }
 
     public void feuereMitarbeiter(){
-        this.mitarbeiterAnzahl =- 1;
+        this.mitarbeiterAnzahl -= 1;
+
     }
 }
