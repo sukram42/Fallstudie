@@ -13,6 +13,17 @@ import static org.junit.Assert.*;
  * Created by cs on 20.01.2017.
  */
 public class ProduktlinieTest {
+
+    @Test
+    public void getBeginn() throws Exception {
+
+    }
+
+    @Test
+    public void getEnd() throws Exception {
+
+    }
+
     private String id;
     private Produkt produkt;
     private int menge;

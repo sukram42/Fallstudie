@@ -4,9 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -14,6 +11,22 @@ import static org.junit.Assert.assertNotNull;
  * Created by D064018 on 23.01.2017.
  */
 public class MarketingkampagneTest {
+
+    @Test
+    public void setParamsByArt() throws Exception {
+
+    }
+
+    @Test
+    public void getLaufzeit() throws Exception {
+
+    }
+
+    @Test
+    public void setLaufzeit() throws Exception {
+
+    }
+
     private String art;
     private int laufzeit;
     private Marketingkampagne testmarketingkampagne;

@@ -13,6 +13,31 @@ import static org.junit.Assert.assertNotNull;
 
 public class MaschineTest{
 
+    @Test
+    public void statusRuntersetzen() throws Exception {
+
+    }
+
+    @Test
+    public void getKlasse() throws Exception {
+
+    }
+
+    @Test
+    public void getKapazitaet() throws Exception {
+
+    }
+
+    @Test
+    public void getAnschaffungskst() throws Exception {
+
+    }
+
+    @Test
+    public void getProdukt() throws Exception {
+
+    }
+
     private Maschine testMaschine;
 
     @Before

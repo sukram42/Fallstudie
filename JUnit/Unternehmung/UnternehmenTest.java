@@ -16,6 +16,22 @@ import static org.junit.Assert.assertNotNull;
  */
 public class UnternehmenTest{
 
+    @Test
+    public void initDepartments() throws Exception {
+
+    }
+
+    @Test
+    public void updateYearly() throws Exception {
+
+    }
+
+    @Test
+    public void getName() throws Exception {
+
+    }
+
+
     private Unternehmen testUnternehmen;
     private String passwort;
     private String name;

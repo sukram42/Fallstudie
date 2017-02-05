@@ -1,5 +1,6 @@
 package Unternehmung;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,6 +16,7 @@ public class AusschreibungTest{
     @Before
     public void setUp(){
         testausschreibung = new Ausschreibung();
+        assertNotNull(testausschreibung);
     }
 
     @Test
@@ -22,4 +24,8 @@ public class AusschreibungTest{
 assertNotNull(testausschreibung);
     }
 
+    @After
+    public void tearDown(){
+
+    }
 }

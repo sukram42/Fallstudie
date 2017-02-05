@@ -124,10 +124,22 @@ public ArrayList<String> getVerfügbareProdukte() {
 }
 
 public void update() {
+        if (beschäftigteMitarbeiter > this.getMitarbeiterAnzahl()){
+    int i = beschäftigteMitarbeiter - this.getMitarbeiterAnzahl();
+    for(int x = i; x > 0; x--){
+        Forschungsprojekt projekt = this.getProjekte().get(this.projekte.size() - 1);
+        projekt.feuereMitarbeiter();
+        if ( projekt.getMitarbeiterAnzahl() == 0){
+            projekt.abschließen();
+        }
+    }
+}
     for ( Forschungsprojekt projekt : this.projekte) {
+
         if (projekt.getEnde().equals(Game.getCalendar())) {
             forschungsprojektAbschließen(projekt);
         }
     }
+
 }
 }

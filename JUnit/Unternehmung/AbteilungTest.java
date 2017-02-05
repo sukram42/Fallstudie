@@ -15,6 +15,11 @@ import static org.junit.Assert.assertNotNull;
  */
 public class AbteilungTest{
 
+    @Test
+    public void getName() throws Exception {
+
+    }
+
     String name;
     float aktKosten;
     Kennzahlensammlung kennzahlensammlung;

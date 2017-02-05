@@ -9,6 +9,17 @@ import org.junit.Test;
  * Created by cs on 17.01.2017.
  */
 public class ProduktTest extends TestCase {
+
+    @Test
+    public void getForschungsbonus() throws Exception {
+
+    }
+
+    @Test
+    public void setForschungsbonus() throws Exception {
+
+    }
+
     private String name;
     private char qualitaetsstufe;
     private double herstellkosten;
@@ -45,12 +56,12 @@ public class ProduktTest extends TestCase {
         //assertEquals( testProdukt, result );
 
     }
-/*
+
     @Test
-    public void getName() throws Exception {
+    public void getName_() throws Exception {
         assertEquals( testProdukt.getName(), name);
     }
-*/
+
     @Test
     public void setName() throws Exception {
         String neuerName = "Duffel";

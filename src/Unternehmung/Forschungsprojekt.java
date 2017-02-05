@@ -69,4 +69,8 @@ public class Forschungsprojekt {
     public int getMitarbeiterAnzahl(){
         return mitarbeiterAnzahl;
     }
+
+    public void feuereMitarbeiter(){
+        this.mitarbeiterAnzahl =- 1;
+    }
 }
