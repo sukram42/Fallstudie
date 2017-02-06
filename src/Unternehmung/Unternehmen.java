@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Unternehmen {
 
-	private String passwort;
+	private transient String passwort;
 	private String name;
 	private transient Kennzahlensammlung kennzahlensammlung;
 

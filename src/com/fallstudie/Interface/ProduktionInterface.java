@@ -60,11 +60,11 @@ public class ProduktionInterface {
 
         liste.put("Rucksack", (ArrayList<Produktlinie>) auftraege
                 .stream()
-                .filter(s -> s.getId().contains("Rucksack"))
+                .filter(s -> s.getId().startsWith("Rucksack")&& !s.getId().startsWith("Rucksacktech"))
                 .collect(Collectors.toList()));
         liste.put("Rucksacktech",(ArrayList<Produktlinie>) auftraege
                 .stream()
-                .filter(s->"rucksacktech".equals(s.getProdukt()))
+                .filter(s->s.getId().startsWith("Rucksacktech"))
                 .collect(Collectors.toList()));
         liste.put("Duffel", (ArrayList<Produktlinie>) auftraege
                 .stream()
