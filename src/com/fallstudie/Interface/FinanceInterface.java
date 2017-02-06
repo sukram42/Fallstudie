@@ -2,6 +2,7 @@ package com.fallstudie.Interface;
 
 import Unternehmung.Abteilungen.HR;
 import Unternehmung.Kennzahlen.Bilanz;
+import Unternehmung.Kennzahlen.GuV;
 import Unternehmung.Kennzahlen.Kennzahl;
 import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Unternehmen;
@@ -14,6 +15,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by boebel on 23.01.2017.
@@ -73,6 +77,17 @@ public class FinanceInterface {
         object.put("marktanteil",ks.getMarktanteil()*100f);
         return Response.ok().entity(gson.toJson(object)).build();
     }
+    @GET
+    @Secured
+    @Path("archiv")
+    public Response getArchiv(@Context SecurityContext securityContext)
+    {
+        Unternehmen unternehmen = CompanyInterface.getCompanyFromContext(securityContext);
+        Queue<Map.Entry> archiv = unternehmen.getKennzahlensammlung().getGuv().getArchiv();
+//        List<Map.Entry> erg = new ArrayList<>();
+
+
+        return Response.ok(gson.toJson(archiv)).build();
+    }
 
 }
-

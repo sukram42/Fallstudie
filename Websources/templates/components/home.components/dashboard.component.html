@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="header">
                         <h4 class="title">Nicht monetäre Kennzahlen</h4>
-                        <p class="category">Werte der letzden Periode</p>
+                        <p class="category">Werte der letzten Periode</p>
                     </div>
                     <div class="content">
 
@@ -14,32 +14,19 @@
                         <chart [type]="type" [data]="data" [options]="options"></chart>
                         <br>
                         <h6>Lagerbestände:</h6>
-                        <!--<div class="row">
-                            <div class="col-md-3">
-                                <kennzahl title="Kundenzufriedenheit" progress="90"></kennzahl>
-                            </div>
-                            <div class="col-md-3">
-                                <kennzahl title="Mitarbeiterzufriedenheit"></kennzahl>
-                            </div>
-                            <div class="col-md-3">
-                                <kennzahl title="Produktqualität" progress="15"></kennzahl>
-                            </div>
-                            <div class="col-md-3">
-                                <kennzahl title="Bekanntheitsgrad" progress="10"></kennzahl>
-                            </div>
-                        </div>-->
+
                     </div>
                 </div>
             </div>
             <div class="col-md-7">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Nicht monetäre Kennzahlen</h4>
-                        <p class="category">Werte der letzden Periode</p>
+                        <h4 class="title">GuV</h4>
+                        <p class="category">Werte der letzten Perioden</p>
                     </div>
                     <div class="content">
                         <h6>Gewinnbetrachtung:</h6>
-                        <chart [type]="type2" [data]="data2" [options]="options2"></chart>
+                        <chart [type]="type2" [data]="aufwandchar" [options]="options2" #barchart></chart>
                         <br>
                         <h6>Marktanteil:</h6>
                         <chart [type]="type3" [data]="data3" [options]="options3"></chart>

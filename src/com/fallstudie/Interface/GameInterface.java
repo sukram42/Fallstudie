@@ -4,7 +4,6 @@ package com.fallstudie.Interface;
 import Rules.Game;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -63,7 +62,6 @@ public class GameInterface implements ServletContextListener{
                 validateToken(tmp_token);
             }catch(NotAuthorizedException e)
             {
-
                 System.out.println("Not auth");
               auth =false;
             }

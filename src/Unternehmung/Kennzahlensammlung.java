@@ -85,6 +85,7 @@ public class Kennzahlensammlung {
         if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH)) {
             this.getGuv().archivieren();
         }
+
     }
 
     /**

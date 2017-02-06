@@ -5,7 +5,14 @@ import Rules.Game;
 import Unternehmung.Abteilungen.Marketing;
 import Unternehmung.Abteilungen.SozialeLeistungen;
 import Unternehmung.Abteilungen.Vertrieb;
+import Unternehmung.Kennzahlen.GuV;
 import com.google.gson.Gson;
+
+import javax.ws.rs.core.Response;
+import java.util.AbstractMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
 
 /**
  * nur eine Testklasse!
@@ -38,6 +45,11 @@ public class UnternehmenTestklasse {
         System.out.println("Kundenzufriedenheit: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("kundenzufriedenheit").berechnen());
         System.out.println("Image: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("image").berechnen());
 
+        for(int i = 0; i < 40;i++)
+        {
+            game.run();
+        }
+        System.out.println(new Gson().toJson(unternehmen1.getKennzahlensammlung().getGuv().getArchiv()));
 
         // Mitarbeiter einstellen:
         try {
@@ -48,26 +60,6 @@ public class UnternehmenTestklasse {
             e.printStackTrace();
         }
         //unternehmen1.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
-
-        // Produktions- und Lagerhalle kaufen:
-//        Produktion produktion1 = (Produktion) unternehmen1.getAbteilung("produktion");
-//        produktion1.produktionshalleKaufen(1);
-//        produktion1.lagerhalleKaufen(2);
-//
-//        // Maschinen kaufen:
-//        try {
-//            produktion1.maschinenKaufen("Rucksack", 3, 1);
-//        } catch (ZuWenigMaschinenstellplatzException e){
-//            e.printStackTrace();
-//        }
-
-//        // Rucksäcke produzieren:
-//        try{
-//            produktion1.produzieren("Rucksack", 'C', 10, 12);
-//        } catch (ZuWenigMitarbeiterOderMaschinenException e) {
-//            e.printStackTrace();
-//        }
-        //Tage vorspulen um Produktion zu testen
 
 
         Vertrieb vertrieb = (Vertrieb)unternehmen1.getAbteilung("vertrieb");

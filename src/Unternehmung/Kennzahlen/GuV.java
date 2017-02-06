@@ -5,10 +5,8 @@ import Unternehmung.Abteilungen.HR;
 import Unternehmung.Abteilungen.Produktion;
 import Unternehmung.Unternehmen;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by oehlersj on 13.01.2017.
@@ -17,7 +15,7 @@ public class GuV {
 
     private transient Unternehmen unternehmen;
 
-    private Map<Date, GuV> archiv = new HashMap<>(); // Sammlung der GuV's am Monatsende
+    private transient Queue<Map.Entry> archiv = new LinkedList<>(); // Sammlung der GuV's am Monatsende
     private float aufwendungenArchiv;
     private float erloeseArchiv;
 
@@ -106,7 +104,13 @@ public class GuV {
      */
     public void archivieren(){
         GuV archivGuV = new GuV(this);
-        this.archiv.put(Game.getCalendar().getTime(), archivGuV);
+//        this.archiv.put(Game.getCalendar().getTime(), archivGuV);
+        if(archiv.size()==5)
+            archiv.remove();
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMMM yyyy");
+        Map.Entry<Date,GuV> entry = new AbstractMap.SimpleEntry(sdf.format(Game.getCalendar().getTime()), archivGuV);
+        archiv.add(entry);
+
         this.aufwendungenArchiv = 0;
         this.umsatzErloese = 0;
     }
@@ -219,7 +223,7 @@ public class GuV {
         this.erloeseArchiv = erloeseArchiv;
     }
 
-    public Map<Date, GuV> getArchiv() {
+    public Queue<Map.Entry> getArchiv() {
         return archiv;
     }
 
