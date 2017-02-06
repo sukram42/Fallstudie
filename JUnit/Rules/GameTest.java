@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
  * Created by D064018 on 27.01.2017.
  */
 
-public class GameTest{
+public class GameTest {
 
     private static Game testGame;
     private Kennzahlensammlung kennzahlensammlung;
@@ -25,12 +25,12 @@ public class GameTest{
     private String unternehmensname;
 
     @BeforeClass
-    public static void createGame(){
+    public static void createGame() {
         testGame = new Game();
     }
 
     @Before
-    public  void setUp() throws Exception{
+    public void setUp() throws Exception {
         unternehmensname = "Test_Unternehmen";
         unternehmen = new Unternehmen(unternehmensname, "12345", 500000);
         testGame.getCompanies().add(unternehmen);
@@ -49,12 +49,12 @@ public class GameTest{
 
     @Test
     public void getTime() throws Exception {
-assertNotNull(Game.getTime());
+        assertNotNull(Game.getTime());
     }
 
     @Test
     public void getTimeString() throws Exception {
-assertNotNull(Game.getTimeString());
+        assertNotNull(Game.getTimeString());
     }
 
     @Test
@@ -76,7 +76,7 @@ assertNotNull(Game.getTimeString());
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         testGame.getCompanies().remove(unternehmen);
     }
 

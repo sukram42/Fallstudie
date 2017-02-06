@@ -10,12 +10,12 @@ import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Hilfsklasse, um z.B. den Gewinner eines Spiels festzulegen
+ * Klasse für Spiellogik und -steuerung
  * Created by lucadommes on 08.01.2017.
  */
 public class Game extends TimerTask {
 
-    private static final int COUNTER_INTERVALL =1*1000;//5 * 1000;//16*1000*60;//16 Minuten
+    private static final int COUNTER_INTERVALL = 120 * 1000;//5 * 1000;//16*1000*60;//16 Minuten
     private static long counter = 0;
 
     private static Calendar gameCalendar = new GregorianCalendar(2010, 1, 1);
@@ -91,7 +91,7 @@ public class Game extends TimerTask {
             bankruptTest(u);
         }
         this.updateMarktanteile();
-        if ((getCalendar().get(Calendar.MONTH) == Calendar.DECEMBER) && getCalendar().get(Calendar.DAY_OF_MONTH) == 30) {
+        if ((getCalendar().get(Calendar.MONTH) == Calendar.DECEMBER) && getCalendar().get(Calendar.DAY_OF_MONTH) == 31) {
             for (Unternehmen u : companies) {
                 u.updateYearly();
             }
@@ -103,11 +103,11 @@ public class Game extends TimerTask {
 
     /**
      * Testet ob ein Unternehmen pleite ist und setzt es in eine Archivliste
+     *
      * @param u Das zu überprüfende Unternehmen
      */
     private void bankruptTest(Unternehmen u) {
-        if(u.getKennzahlensammlung().isBankrupt())
-        {
+        if (u.getKennzahlensammlung().isBankrupt()) {
 //            companies.remove(u);
             companiesArchiv.add(u);
         }
@@ -121,7 +121,7 @@ public class Game extends TimerTask {
         if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == 1) {
             // Entscheidung über Zuschlag basierend auf der Kennzahl der Verkaufswahrscheinlichkeit:
             for (Ausschreibung ausschreibung : ausschreibungen) {
-                if(ausschreibung.getBewerber() != null) {
+                if (ausschreibung.getBewerber() != null) {
                     Unternehmen gewinner = null;
                     boolean gewinnerGefunden = false;
                     // Gewinner der Ausschreibung ermitteln:
@@ -130,7 +130,7 @@ public class Game extends TimerTask {
                         float randomFloat = random.nextFloat();
                         float verkaufswahrscheinlichkeit = unternehmen.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert();
                         // Verkaufswahrscheinlichkeit auf 0.4 setzten, falls sie geringer ist, sodass die Chance nicht zu gering ist
-                        if (verkaufswahrscheinlichkeit > 0.4f){
+                        if (verkaufswahrscheinlichkeit > 0.4f) {
                             verkaufswahrscheinlichkeit = 0.4f;
                         }
                         // das Unternehmen, dass als erstes ein Angebot abgegeben hat bekommt den Zuschlag, wenn ein zufälliger Float zwischen 0 und der Verkafuswahrscheinlichkeit liegt:
@@ -148,7 +148,7 @@ public class Game extends TimerTask {
                 }
             }
             // Opportunities bei allen Unternehmen löschen:
-            for (Unternehmen unternehmen : companies){
+            for (Unternehmen unternehmen : companies) {
                 Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
                 vertrieb.getOpportunities().clear();
             }
@@ -166,7 +166,7 @@ public class Game extends TimerTask {
     /**
      * berechnet und setzt bei jedem Timer Intervall den absoluten mengenmäßigen Marktanteil für jedes Unternehmen
      */
-    private void updateMarktanteile(){
+    private void updateMarktanteile() {
         int gesamtabsatz = getGesamtabsatz();
         if (gesamtabsatz > 0) {
             for (Unternehmen unternehmen : companies) {
@@ -174,7 +174,7 @@ public class Game extends TimerTask {
                 unternehmen.getKennzahlensammlung().setMarktanteil(vertrieb.getVerkaufteProdukte() / gesamtabsatz);
             }
         } else {
-            for (Unternehmen unternehmen : companies){
+            for (Unternehmen unternehmen : companies) {
                 unternehmen.getKennzahlensammlung().setMarktanteil(0);
             }
         }
@@ -183,9 +183,9 @@ public class Game extends TimerTask {
     /**
      * Ermitteln der gesamten Produktionsmenge aller Unternehmen
      */
-    public static int getGesamtabsatz(){
+    public static int getGesamtabsatz() {
         int gesamtabsatz = 0;
-        for (Unternehmen unternehmen : companies){
+        for (Unternehmen unternehmen : companies) {
             Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
             gesamtabsatz += vertrieb.getVerkaufteProdukte();
         }

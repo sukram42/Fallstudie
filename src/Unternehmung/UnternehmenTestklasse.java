@@ -2,8 +2,8 @@ package Unternehmung;
 
 import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
+import Unternehmung.Abteilungen.HR;
 import Unternehmung.Abteilungen.Marketing;
-import Unternehmung.Abteilungen.SozialeLeistungen;
 import Unternehmung.Abteilungen.Vertrieb;
 import Unternehmung.Kennzahlen.GuV;
 import com.google.gson.Gson;
@@ -40,7 +40,7 @@ public class UnternehmenTestklasse {
             e.printStackTrace();
         }
 
-        ((SozialeLeistungen)unternehmen1.getAbteilung("sozialeLeistungen")).startProjekt("kantine");
+        ((HR)unternehmen1.getAbteilung("hr")).startProjekt("kantine");
         System.out.println("Mitarbeiterzufriedenheit mit Kantine: " + unternehmen1.getKennzahlensammlung().getMitarbeiterzufriedenheit().berechnen());
         System.out.println("Kundenzufriedenheit: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("kundenzufriedenheit").berechnen());
         System.out.println("Image: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("image").berechnen());
