@@ -12,15 +12,15 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by D064018 on 16.01.2017.
  */
-public class SozialeLeistungenTest{
+public class SozialeLeistungenTest {
 
-    private SozialeLeistungen testSozialeLeistungen;
+    private HR testSozialeLeistungen;
 
     @Before
-    public void setUp(){
-        Unternehmen unternehmen = new Unternehmen( "Test Unternehmen", "12345", 600000);
-        testSozialeLeistungen = new SozialeLeistungen(unternehmen);
-    assertNotNull(testSozialeLeistungen);
+    public void setUp() {
+        Unternehmen unternehmen = new Unternehmen("Test Unternehmen", "12345", 600000);
+        testSozialeLeistungen = new HR(unternehmen, unternehmen.getKennzahlensammlung());
+        assertNotNull(testSozialeLeistungen);
         testSozialeLeistungen.initProjects();
     }
 
@@ -31,7 +31,7 @@ public class SozialeLeistungenTest{
 
     @Test
     public void update() throws Exception {
-      //     testSozialeLeistungen.startProjekt("wifi");
+        //     testSozialeLeistungen.startProjekt("wifi");
 
     }
 

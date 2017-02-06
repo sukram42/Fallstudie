@@ -4,15 +4,11 @@ import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilung;
 import Unternehmung.Abteilungen.HR;
-import Unternehmung.Abteilungen.SozialeLeistungen;
 import Unternehmung.Abteilungen.SozialeProjekte.SozialProjekt;
-import Unternehmung.Kennzahlen.Kennzahl;
-import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Mitarbeiter;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import org.json.simple.JSONObject;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -191,7 +187,7 @@ public class CompanyInterface {
     public Response changeSocialProject(@Context SecurityContext securityContext,String name)
     {
         Unternehmen unternehmen = getCompanyFromContext(securityContext);
-        SozialeLeistungen sl = (SozialeLeistungen) unternehmen.getAbteilung("sozialeLeistungen");
+        HR sl = (HR) unternehmen.getAbteilung("hr");
         try {
             sl.changeProjectActivity(name);
             return Response.ok("started").build();
@@ -206,7 +202,7 @@ public class CompanyInterface {
     public Response getSocialProjects(@Context SecurityContext securityContext)
     {
         Unternehmen unternehmen = getCompanyFromContext(securityContext);
-        List<SozialProjekt> projects = ((SozialeLeistungen)unternehmen.getAbteilung("sozialeLeistungen")).getProjects();
+        List<SozialProjekt> projects = ((HR)unternehmen.getAbteilung("hr")).getProjects();
         return Response.ok(gson.toJson(projects)).build();
     }
 
