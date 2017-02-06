@@ -144,11 +144,7 @@ public class Produktion extends Abteilung {
      */
     @Override
     public void update(){
-        try {
-            produkteFertigstellen();
-        } catch (LagerVollException | ZuWenigMitarbeiterOderMaschinenException e){
-            e.printStackTrace();
-        }
+        produkteFertigstellen();
         updateForschungsboni();
         // update Maschinen:
         for (Maschine maschine : this.maschinen){
@@ -166,7 +162,7 @@ public class Produktion extends Abteilung {
     /**
      * wird bei jedem timer count ausgeführt und legt die pro timer count produzierten Produkte im Lager ab
      */
-    private void produkteFertigstellen () throws LagerVollException, ZuWenigMitarbeiterOderMaschinenException{
+    private void produkteFertigstellen () {
         int mitarbeiterKapazitaet = this.getMaxMitarbeiterProdMenge();
         Map<String, Integer> prodMengen = this.getMaxMaschProdMengen();
 
@@ -213,10 +209,18 @@ public class Produktion extends Abteilung {
                             }
                         }
                     }
-                    throw new LagerVollException();
+                    try {
+                        throw new LagerVollException();
+                    }catch (LagerVollException e){
+                        e.printStackTrace();
+                    }
                 }
             } else {
-                throw new ZuWenigMitarbeiterOderMaschinenException(auftrag.getProdukt().getName());
+                try {
+                    throw new ZuWenigMitarbeiterOderMaschinenException(auftrag.getProdukt().getName());
+                }catch (ZuWenigMitarbeiterOderMaschinenException e){
+                    e.printStackTrace();
+                }
             }
         }
     }

@@ -129,6 +129,7 @@ public void update() {
     for(int x = i; x > 0; x--){
         Forschungsprojekt projekt = this.getProjekte().get(this.projekte.size() - 1);
         projekt.feuereMitarbeiter();
+        this.beschäftigteMitarbeiter -= 1;
         if ( projekt.getMitarbeiterAnzahl() == 0){
             projekt.abschließen();
         }

@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -70,7 +70,9 @@ assertNotNull(Game.getTimeString());
 
     @Test
     public void _run() throws Exception {
-        assertEquals(Game.getTime(), 1);
+        long a = Game.getTime();
+        testGame.run();
+        assertFalse(Game.getTime() == a);
     }
 
     @After

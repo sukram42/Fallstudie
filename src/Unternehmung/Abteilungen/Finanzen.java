@@ -97,4 +97,9 @@ public class Finanzen extends Abteilung {
         }
     }
 
+    // Getter and Setter:
+    public ArrayList<Kredit> getKredite() {
+        return kredite;
+    }
+
 }

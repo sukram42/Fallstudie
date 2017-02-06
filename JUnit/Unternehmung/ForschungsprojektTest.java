@@ -69,6 +69,12 @@ assertNotNull(testForschungsprojekt.getEnde());
         assertEquals(testForschungsprojekt.getForschungsobjekt(), "RucksacktechA");
     }
 
+     @Test
+     public void feuereMitarbeiter() throws Exception{
+        testForschungsprojekt.feuereMitarbeiter();
+        assertEquals(testForschungsprojekt.getMitarbeiterAnzahl(), 4);
+     }
+
     @Test
     public void getMitarbeiterAnzahl() throws Exception {
 assertEquals(testForschungsprojekt.getMitarbeiterAnzahl(), 5);
