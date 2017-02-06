@@ -74,6 +74,27 @@ public class HR extends Abteilung {
                     } else {
                         throw new ZuWenigMitarbeiterException("Human-Resources"); // zu wenig HR-Manager
                     }
+                } else if (a.getName().equals("Marketing")) {
+                    Marketing marketing = (Marketing) a;
+                    if (marketing.getVerfuegbareMitarbeiter() - 1 >= 0) {
+                        this.kennzahlensammlung.setMaxNeueMitarbeiter(this.kennzahlensammlung.getMaxNeueMitarbeiter() + 1);
+                    } else {
+                        throw new ZuWenigMitarbeiterException("Marketing");
+                    }
+                } else if (a.getName().equals("Finanzen")){
+                    Finanzen finanzen = (Finanzen) a;
+                    if (finanzen.getKredite().size() > 0 && finanzen.getMitarbeiter().size() - 1 > 0){
+                        this.kennzahlensammlung.setMaxNeueMitarbeiter(this.kennzahlensammlung.getMaxNeueMitarbeiter() + 1);
+                    } else {
+                        throw new ZuWenigMitarbeiterException("Finanzen");
+                    }
+                } else if (a.getName().equals("Vertrieb")){
+                    Vertrieb vertrieb = (Vertrieb) a;
+                    if (vertrieb.getAccounts().size() >= vertrieb.getMitarbeiter().size()){
+                        this.kennzahlensammlung.setMaxNeueMitarbeiter(this.kennzahlensammlung.getMaxNeueMitarbeiter() + 1);
+                    } else {
+                        throw new ZuWenigMitarbeiterException("Vertrieb");
+                    }
                 } else {
                     this.kennzahlensammlung.setMaxNeueMitarbeiter(this.kennzahlensammlung.getMaxNeueMitarbeiter() + 1);
                 }

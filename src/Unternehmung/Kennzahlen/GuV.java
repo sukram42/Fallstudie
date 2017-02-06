@@ -124,7 +124,7 @@ public class GuV {
 
     public void addUmsatz(float umsatz){
         this.umsatzErloese += umsatz;
-        this.umsatzErloese += umsatz;
+        this.erloeseArchiv += umsatz;
     }
 
     public void addGeleisteterSchandsersatz(float schadensersatz){
