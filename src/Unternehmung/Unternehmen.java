@@ -8,11 +8,9 @@ import java.util.Map;
 
 public class Unternehmen {
 
-	private transient String passwort;
+	private String passwort;
 	private String name;
 	private transient Kennzahlensammlung kennzahlensammlung;
-
-	private transient Bilanz bilanz;
 
 	private transient Map<String,Abteilung> abteilungen = new HashMap<String,Abteilung>();
 
