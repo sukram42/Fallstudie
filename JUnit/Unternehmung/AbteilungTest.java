@@ -1,6 +1,5 @@
 package Unternehmung;
 
-import Exceptions.ZuWenigMitarbeiterException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +16,7 @@ public class AbteilungTest{
 
     @Test
     public void getName() throws Exception {
-
+assertEquals(testAbteilung.getName(), "Produktion");
     }
 
     String name;
@@ -27,39 +26,27 @@ public class AbteilungTest{
     Abteilung testAbteilung;
 
     @Before
-    public void setUp(){
+    public void setUp()  throws Exception{
         aktKosten = 0;
         kennzahlensammlung = null;
         mitarbeiter = null;
 
-        Unternehmen unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
+        Unternehmen unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000) ;
         kennzahlensammlung = unternehmen.getKennzahlensammlung();
-        try { // HR-Mitarbeiter einstellen, um weitere (in Produktion) einstellen zu können:
             unternehmen.getAbteilung("hr").addMitarbeiter(1, 10000);
-        } catch (ZuWenigMitarbeiterException e){
-            e.printStackTrace();
-        }
         testAbteilung = unternehmen.getAbteilung("produktion");
         assertNotNull(testAbteilung);
     }
 
     @Test
-    public void addMitarbeiter(){
-        try {
-            testAbteilung.addMitarbeiter(1, 10000);
-        } catch (ZuWenigMitarbeiterException e){
-            e.printStackTrace();
-        }
+    public void addMitarbeiter() throws Exception{
+        testAbteilung.addMitarbeiter(1, 10000);
         assertEquals(testAbteilung.getMitarbeiterAnzahl(), 1);
     }
 
     @Test
-    public void getMitarbeiter() {
-        try{
+    public void getMitarbeiter()  throws Exception{
         testAbteilung.addMitarbeiter(1, 10000);
-        } catch (ZuWenigMitarbeiterException e) {
-            e.printStackTrace();
-        }
         assertNotNull(testAbteilung.getMitarbeiter().get(0));
     }
 
@@ -75,12 +62,11 @@ public class AbteilungTest{
     }
 
     @Test
-    public void getMitarbeiterKosten(){
-        try{
+    public void getMitarbeiterKosten()  throws Exception{
+
         testAbteilung.addMitarbeiter(2, 10000);
         assertEquals(testAbteilung.getMitarbeiterKosten(), (2 * 10000), 0.5);
-        } catch (ZuWenigMitarbeiterException e) {
-        }
+
     }
 
     @After
