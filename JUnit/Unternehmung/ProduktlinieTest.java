@@ -16,12 +16,12 @@ public class ProduktlinieTest {
 
     @Test
     public void getBeginn() throws Exception {
-
+assertEquals(testProduktlinie.getBeginn().getTime().toString(), "Mon Feb 01 00:00:00 CET 2010");
     }
 
     @Test
     public void getEnd() throws Exception {
-
+        assertEquals(testProduktlinie.getEnd().getTime().toString(), "Wed Feb 03 00:00:00 CET 2010");
     }
 
     private String id;
