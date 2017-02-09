@@ -1,12 +1,8 @@
-package Unternehmung;
+package Unternehmung.Kennzahlen;
 
 import Exceptions.BankruptException;
 import Rules.Game;
-import Unternehmung.Kennzahlen.*;
-import Unternehmung.Kennzahlen.Bilanz;
-import Unternehmung.Kennzahlen.GuV;
-import Unternehmung.Kennzahlen.Kennzahl;
-import Unternehmung.Kennzahlen.Mitarbeiterzufriedenheit;
+import Unternehmung.Unternehmen;
 
 import java.util.Calendar;
 import java.util.Date;

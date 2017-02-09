@@ -1,7 +1,7 @@
 package Unternehmung.Abteilungen;
 
 import Rules.Game;
-import Unternehmung.Kennzahlensammlung;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 import Unternehmung.Unternehmen;
 import org.junit.After;
 import org.junit.Before;

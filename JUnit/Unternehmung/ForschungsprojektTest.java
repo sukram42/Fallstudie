@@ -2,6 +2,7 @@ package Unternehmung;
 
 import Unternehmung.Abteilungen.Forschung;
 import Unternehmung.Abteilungen.Produktion;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

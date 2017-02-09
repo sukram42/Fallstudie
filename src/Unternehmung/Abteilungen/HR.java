@@ -5,7 +5,7 @@ import Exceptions.ZuWenigMitarbeiterException;
 import Unternehmung.Abteilung;
 import Unternehmung.Abteilungen.SozialeProjekte.SozialProjekt;
 import Unternehmung.Abteilungen.SozialeProjekte.ZeitGeld;
-import Unternehmung.Kennzahlensammlung;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 import Unternehmung.Mitarbeiter;
 import Unternehmung.Unternehmen;
 

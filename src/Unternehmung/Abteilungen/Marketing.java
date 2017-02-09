@@ -5,13 +5,11 @@ import Exceptions.ZuWenigCashException;
 import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilung;
-import Unternehmung.Kennzahlensammlung;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 import Unternehmung.Marketingkampagne;
 import Unternehmung.Marktforschung;
 
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;

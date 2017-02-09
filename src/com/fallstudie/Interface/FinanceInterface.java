@@ -1,10 +1,8 @@
 package com.fallstudie.Interface;
 
-import Unternehmung.Abteilungen.HR;
 import Unternehmung.Kennzahlen.Bilanz;
-import Unternehmung.Kennzahlen.GuV;
 import Unternehmung.Kennzahlen.Kennzahl;
-import Unternehmung.Kennzahlensammlung;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 import org.json.simple.JSONObject;
@@ -15,8 +13,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import javax.xml.crypto.Data;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**

@@ -1,6 +1,6 @@
 package Unternehmung.Abteilungen;
 
-import Unternehmung.Kennzahlensammlung;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 import Unternehmung.Unternehmen;
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +21,7 @@ public class FinanzenTest{
         Unternehmen unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
         kennzahlensammlung = unternehmen.getKennzahlensammlung();
         unternehmen.getAbteilung("hr").addMitarbeiter(1, 1000);
-        testfinanzen = new Finanzen(kennzahlensammlung);
+        testfinanzen = new Finanzen(unternehmen);
     }
 
     @Test

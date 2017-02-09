@@ -1,24 +1,17 @@
 package Unternehmung;
 
-import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 /**
  * Created by cs on 17.01.2017.
  */
-public class ProduktTest extends TestCase {
+public class ProduktTest{
 
-    @Test
-    public void getForschungsbonus() throws Exception {
-
-    }
-
-    @Test
-    public void setForschungsbonus() throws Exception {
-
-    }
 
     private String name;
     private char qualitaetsstufe;
@@ -27,23 +20,13 @@ public class ProduktTest extends TestCase {
 
     private Produkt testProdukt;
 
+    @Before
     public void setUp(){
         name = "Rucksack";
         qualitaetsstufe = 'A';
-        forschungsbonus = 0.1;
-        //Produkt eestProdukt = new Produkt(name, qualitaetsstufe,forschungsbonus);
-        //Class<?> produktClass = testProdukt.getClass();
-
-        //herstellkosten =  produktClass.getDeclaredMethod(findhe) //findherstellkosten( name, qualitaetsstufe)* forschungsbonus;
-    }
-
-    @Before
-    public void testcreateProdukt(){
-        testProdukt = new Produkt(name, qualitaetsstufe, forschungsbonus);
+        testProdukt = new Produkt(name, qualitaetsstufe, 1);
         assertNotNull(testProdukt);
     }
-
-
 
     @After
     public void tearDown() throws Exception {
@@ -51,11 +34,18 @@ public class ProduktTest extends TestCase {
     }
 
     @Test
-    public void testfindherstellkosten(){
-        //double result = testProdukt.findHerstellkosten( testProdukt.getName(), testProdukt.getQualitaetsstufe() );
-        //assertEquals( testProdukt, result );
-
+    public void getForschungsbonus() throws Exception {
+        Unternehmen unternehmen = new Unternehmen("Test_Unternehmen", "af1r2", 100000);
+        assertEquals(testProdukt.getForschungsbonus(), 1, 0.5);
     }
+
+    @Test
+    public void setForschungsbonus() throws Exception {
+        Unternehmen unternehmen = new Unternehmen("Test_Unternehmen", "af1r2", 100000);
+        testProdukt.setForschungsbonus(0.9);
+        assertEquals(testProdukt.getForschungsbonus(), 0.9, 0.5);
+    }
+
 
     @Test
     public void getName_() throws Exception {
@@ -85,14 +75,14 @@ public class ProduktTest extends TestCase {
 
     @Test
     public void getHerstellkosten() throws Exception {
-        assertEquals( testProdukt.getHerstellkosten(), herstellkosten);
+        assertEquals( testProdukt.getHerstellkosten(), 70, 0.5);
     }
 
     @Test
     public void setHerstellkosten() throws Exception {
         double neueHerstellkosten = 20;
         testProdukt.setHerstellkosten(neueHerstellkosten);
-        assertEquals( testProdukt.getHerstellkosten(), neueHerstellkosten);
+        assertEquals( testProdukt.getHerstellkosten(), neueHerstellkosten, 0.5);
 
     }
 }

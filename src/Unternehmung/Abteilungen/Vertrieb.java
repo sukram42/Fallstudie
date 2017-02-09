@@ -4,6 +4,7 @@ import Exceptions.BankruptException;
 import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.*;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;

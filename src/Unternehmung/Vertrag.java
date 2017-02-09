@@ -1,6 +1,7 @@
 package Unternehmung;
 
 import Rules.Game;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 
 import java.util.Calendar;
 
@@ -20,13 +21,21 @@ public class Vertrag {
 
     public Vertrag(Produktlinie produktlinie, String kunde, int laufzeit) {
         this.produktlinie = produktlinie;
-        this.preis = (float) this.produktlinie.getProdukt().getHerstellkosten() * 1.5f; // 50% Gewinn-Marge
         this.kunde = kunde;
         this.laufzeit = laufzeit;
         this.beginn = (Calendar) Game.getCalendar().clone();
         this.end = (Calendar) this.beginn.clone();
         this.end.add(Calendar.MONTH, laufzeit);
         this.strafe = this.preis * 0.75f;
+    }
+
+    /**
+     * // Marge von 15% multipliziert sich mit der Verkaufswahrscheinlichkeit
+     * @param kennzahlensammlung des Unternehmen, das den Zuschlag bekommen hat
+     */
+    public void setPreisByKennzahlen(Kennzahlensammlung kennzahlensammlung){
+        this.preis = (float) this.produktlinie.getProdukt().getHerstellkosten() +
+                1.15f * (1 + kennzahlensammlung.getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert());
     }
 
 

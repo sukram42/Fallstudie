@@ -28,7 +28,6 @@ public class Game extends TimerTask {
      * Konstruktor für ein Spiel mit 2 Spielern
      */
     public Game() {
-
         System.out.println("Ein Neues Spiel wird erstellt");
 
         Timer timer = new Timer();
@@ -143,6 +142,7 @@ public class Game extends TimerTask {
                     // Zuschlag geben:
                     if (gewinnerGefunden) {
                         Vertrieb vertrieb = (Vertrieb) gewinner.getAbteilung("vertrieb");
+                        ausschreibung.getVertrag().setPreisByKennzahlen(gewinner.getKennzahlensammlung());
                         vertrieb.getAccounts().add(ausschreibung.getVertrag());
                     }
                 }

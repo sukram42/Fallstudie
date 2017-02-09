@@ -1,6 +1,7 @@
 package Unternehmung;
 
 import Exceptions.ZuWenigMitarbeiterException;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

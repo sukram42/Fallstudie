@@ -2,6 +2,7 @@ package Unternehmung;
 
 import Exceptions.BankruptException;
 import Exceptions.ZuWenigCashException;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 
 /**
  * repräsentiert eine Maschine
@@ -12,9 +13,10 @@ public class Maschine {
     private int klasse; // etwa 1, 2, 3 -> unterschiedliche Kapazität, Anschaffungskosten, Halbwertszeit
     private int kapazitaet; // kann maximal so viele Produkte pro Monat produzieren. abhängig von klasse
     private int anschaffungskst; // abhängig von klasse
-    private int energiekosten; // pro Tag, bei jeder Maschinenklasse gleich
+    private float energiekosten; // pro Tag, bei jeder Maschinenklasse gleich
     private double status; // sinkt jeden Monat um X, kann durch Reparaturen wieder hochgesetzt werden
     private String produkt; // das Produkt, das mit dieser Maschine produziert wird ("Rucksack", "Rucksacktech", "Duffel" oder "Reisetasche")
+    private static final float ENERGIEKOSTEN = 100;
 
     /**
      * Maschinen-Konstruktor
@@ -24,7 +26,7 @@ public class Maschine {
     public Maschine(String produkt, int klasse) {
         this.produkt = produkt;
         this.klasse = klasse;
-        this.energiekosten = 100; // <- TODO realistischen / zum Spiel passenden Wert für Energiekosten einsetzen
+        this.energiekosten = ENERGIEKOSTEN; // <- TODO realistischen / zum Spiel passenden Wert für Energiekosten einsetzen
         this.status = 1;
         findKapazitätUndAnschaffungskst(klasse);
     }
@@ -93,7 +95,7 @@ public class Maschine {
     public void statusUndEnergiekstRuntersetzen(){
         if (this.status > 0) {
             this.status -= 0.000962f; // jede Maschine geht 0.0962% pro Tag kaputt, dadurch ist sie (ohne Instandhaltung) nach 3 Jahren bei 0%
-            this.energiekosten *= 1.000962f; // Energiekosten steigen äquivalent
+            this.energiekosten = (float) (1 + (1 - this.status)) * ENERGIEKOSTEN; // Energiekosten steigen äquivalent
         }
     }
 
@@ -118,7 +120,7 @@ public class Maschine {
         this.status = status;
     }
 
-    public int getEnergiekosten() {
+    public float getEnergiekosten() {
         return energiekosten;
     }
 
