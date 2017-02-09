@@ -21,7 +21,6 @@ public class Game extends TimerTask {
     private static Calendar gameCalendar = new GregorianCalendar(2010, 1, 1);
 
     private static ArrayList<Unternehmen> companies = new ArrayList<>();
-    private static Map<String, Double> marktanteile = new HashMap<String, Double>();
     private static ArrayList<Unternehmen> companiesArchiv = new ArrayList<>();
     private static List<Ausschreibung> ausschreibungen = new CopyOnWriteArrayList<>();
 
@@ -130,13 +129,6 @@ public class Game extends TimerTask {
     }
 
     /**
-     * fügt ein neues Unternehmen zur Map der Marktanteile hinzu
-     */
-    public static void addMarktanteil(Unternehmen unternehmen){
-        marktanteile.put(unternehmen.getName(), unternehmen.getKennzahlensammlung().getMarktanteil());
-    }
-
-    /**
      * berechnet und setzt bei jedem Timer Intervall den absoluten mengenmäßigen Marktanteil für jedes Unternehmen
      */
     private void updateMarktanteile() {
@@ -159,6 +151,15 @@ public class Game extends TimerTask {
     }
 
     // Getter, Setter und Hilfsmethoden:
+
+    public static Map<String, Double> getMarktanteile() {
+        Map<String, Double> marktanteile = new HashMap<>();
+        for (Unternehmen unternehmen : companies){
+            marktanteile.put(unternehmen.getName(), unternehmen.getKennzahlensammlung().getMarktanteil());
+        }
+        return marktanteile;
+    }
+
     public static ArrayList<Unternehmen> getCompanies() {
         return companies;
     }
@@ -205,11 +206,6 @@ public class Game extends TimerTask {
 
     public static List<Ausschreibung> getAusschreibungen() {
         return ausschreibungen;
-    }
-
-
-    public static Map<String, Double> getMarktanteile() {
-        return marktanteile;
     }
 
 }
