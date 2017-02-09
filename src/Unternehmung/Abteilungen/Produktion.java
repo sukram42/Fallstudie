@@ -3,6 +3,7 @@ package Unternehmung.Abteilungen;
 import Exceptions.*;
 import Rules.Game;
 import Unternehmung.*;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 
 import java.util.*;
 

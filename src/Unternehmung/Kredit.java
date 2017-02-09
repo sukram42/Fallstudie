@@ -37,6 +37,9 @@ public class Kredit {
         this.beginn = (Calendar) Game.getCalendar().clone();
         this.end = (Calendar) this.beginn.clone();
         this.end.add(Calendar.DAY_OF_MONTH, laufzeit);
+        if (this.end.after(Game.getGameEnd().getTime())){
+            this.end = (Calendar) Game.getGameEnd().clone();
+        }
     }
 
     public void update() {

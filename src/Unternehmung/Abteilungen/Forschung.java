@@ -4,7 +4,7 @@ import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilung;
 import Unternehmung.Forschungsprojekt;
-import Unternehmung.Kennzahlensammlung;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 
 import java.util.ArrayList;
 import java.util.HashMap;

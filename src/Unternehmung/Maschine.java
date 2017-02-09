@@ -2,6 +2,7 @@ package Unternehmung;
 
 import Exceptions.BankruptException;
 import Exceptions.ZuWenigCashException;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 
 /**
  * repräsentiert eine Maschine

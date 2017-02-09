@@ -12,15 +12,16 @@ public class Image extends Kennzahl{
 
     public Image(Unternehmen unternehmen) {
         super(unternehmen);
+        this.setBasiswert(0);
         this.berechnen();
         this.setWert(this.getWert());
     }
     @Override
     public float berechnen() {
-        float mitarbeiterZufriedenheit = unternehmen.getKennzahlensammlung().getWeicheKennzahl("mitarbeiterzufriedenheit").getWert();
-        float kundenZufriedenheit = unternehmen.getKennzahlensammlung().getWeicheKennzahl("kundenzufriedenheit").getWert();
+        //float mitarbeiterZufriedenheit = unternehmen.getKennzahlensammlung().getWeicheKennzahl("mitarbeiterzufriedenheit").getWert();
+        //float kundenZufriedenheit = unternehmen.getKennzahlensammlung().getWeicheKennzahl("kundenzufriedenheit").getWert();
 
-        setBasiswert(mitarbeiterZufriedenheit * 0.5f + kundenZufriedenheit * 0.25f);
+        //setBasiswert(mitarbeiterZufriedenheit * 0.5f + kundenZufriedenheit * 0.25f);
         return super.berechnen();
     }
 }

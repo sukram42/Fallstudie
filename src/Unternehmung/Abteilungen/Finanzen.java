@@ -5,9 +5,8 @@ import Exceptions.ZuHochVerschuldetException;
 import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilung;
-import Unternehmung.Kennzahlensammlung;
+import Unternehmung.Kennzahlen.Kennzahlensammlung;
 import Unternehmung.Kredit;
-import Unternehmung.Mitarbeiter;
 
 import java.util.ArrayList;
 import java.util.Calendar;

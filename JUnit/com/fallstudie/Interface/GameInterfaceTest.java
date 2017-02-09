@@ -11,10 +11,10 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by D064018 on 06.02.2017.
  */
-public class GameInterfaceTest{
+public class GameInterfaceTest {
 
-  //  private static GameInterface testGameInterface;
-      private  GameInterface testGameInterface;
+    //  private static GameInterface testGameInterface;
+    private GameInterface testGameInterface;
 
    /* @BeforeClass
     public static void createGameInterface() {
@@ -34,21 +34,21 @@ public class GameInterfaceTest{
 
     @Test
     public void getTimer() throws Exception {
-assertEquals(testGameInterface.getTimer().getEntity(), "01 Feb 2010");
+        assertEquals(testGameInterface.getTimer().getEntity(), "01 Feb 2010");
     }
 
     @Test
     public void authenticateUser() throws Exception {
         Unternehmen testUnternehmen = new Unternehmen("Test_Unternehmen", "12345", 100000);
         Game.getCompanies().add(testUnternehmen);
-assertEquals(testGameInterface.authenticateUser("Test_Unternehmen", "12345").getStatus(), 200);
+        assertEquals(testGameInterface.authenticateUser("Test_Unternehmen", "12345").getStatus(), 200);
     }
 
     @Test
     public void validate() throws Exception {
         //Wie ist ein korrekter autheader
-      //  Header h = new Header( );
-   // assertEquals(testGameInterface.validate("blo").getStatus(), );
+        //  Header h = new Header( );
+        // assertEquals(testGameInterface.validate("blo").getStatus(), );
     }
 
     @Test
@@ -58,7 +58,7 @@ assertEquals(testGameInterface.authenticateUser("Test_Unternehmen", "12345").get
 
     @Test
     public void logOut() throws Exception {
-      //  SecurityContext.CLIENT_CERT_AUTH
+        //  SecurityContext.CLIENT_CERT_AUTH
     }
 
     @Test

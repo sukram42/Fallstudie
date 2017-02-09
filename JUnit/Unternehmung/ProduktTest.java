@@ -24,7 +24,7 @@ public class ProduktTest{
     public void setUp(){
         name = "Rucksack";
         qualitaetsstufe = 'A';
-        testProdukt = new Produkt(name, qualitaetsstufe);
+        testProdukt = new Produkt(name, qualitaetsstufe, 1);
         assertNotNull(testProdukt);
     }
 
