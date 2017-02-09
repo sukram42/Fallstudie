@@ -29,6 +29,7 @@ public class Unternehmen {
         this.kennzahlensammlung = new Kennzahlensammlung(this, eigenkapital);
         this.kennzahlensammlung.initWeicheKennzahlen(); // ausgelagert, um Zugriffe auf Kennzahlensammlung noch während diese erstellt wird zu vermeiden
         initDepartments();
+        Game.addMarktanteil(this);
     }
 
     /**

@@ -21,6 +21,7 @@ public class Game extends TimerTask {
     private static Calendar gameCalendar = new GregorianCalendar(2010, 1, 1);
 
     private static ArrayList<Unternehmen> companies = new ArrayList<>();
+    private static Map<String, Double> marktanteile = new HashMap<String, Double>();
     private static ArrayList<Unternehmen> companiesArchiv = new ArrayList<>();
     private static List<Ausschreibung> ausschreibungen = new CopyOnWriteArrayList<>();
 
@@ -36,46 +37,11 @@ public class Game extends TimerTask {
         updateAusschreibungen();
     }
 
-    public static ArrayList<Unternehmen> getCompanies() {
-        return companies;
-    }
-    //Warum keine "addCompanies" Bennenung ? :D
-
-    public static Unternehmen getUnternehmenByName(String name) {
-        for (Unternehmen u : companies) {
-            if (name.equals(u.getName()))
-                return u;
-        }
-        return null;
-    }
-
-    /**
-     * Methode zum Zurückgeben des aktuellen Timervalues
-     *
-     * @return Counter value
-     */
-    public static long getTime() {
-        return counter;
-    }
-
-    public static String getTimeString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
-        return sdf.format(gameCalendar.getTime());
-    }
-
-    public static Calendar getCalendar() {
-        return gameCalendar;
-    }
-
     public static void main(String[] args) {
         Game game = new Game();
         System.out.println("AUSSCHREIBUNGEN:__" + new Gson().toJson(game.getAusschreibungen()));
     }
 
-    // Getter und Setter:
-    public static List<Ausschreibung> getAusschreibungen() {
-        return ausschreibungen;
-    }
 
     /**
      * Wird nach jedem Zyklus ausgeführt.
@@ -164,6 +130,13 @@ public class Game extends TimerTask {
     }
 
     /**
+     * fügt ein neues Unternehmen zur Map der Marktanteile hinzu
+     */
+    public static void addMarktanteil(Unternehmen unternehmen){
+        marktanteile.put(unternehmen.getName(), unternehmen.getKennzahlensammlung().getMarktanteil());
+    }
+
+    /**
      * berechnet und setzt bei jedem Timer Intervall den absoluten mengenmäßigen Marktanteil für jedes Unternehmen
      */
     private void updateMarktanteile() {
@@ -180,6 +153,25 @@ public class Game extends TimerTask {
         }
     }
 
+    private void updateCounter() {
+        gameCalendar.add(Calendar.DAY_OF_MONTH, 1);
+        System.out.println(gameCalendar.getTime().toString());
+    }
+
+    // Getter, Setter und Hilfsmethoden:
+    public static ArrayList<Unternehmen> getCompanies() {
+        return companies;
+    }
+    //Warum keine "addCompanies" Bennenung ? :D
+
+    public static Unternehmen getUnternehmenByName(String name) {
+        for (Unternehmen u : companies) {
+            if (name.equals(u.getName()))
+                return u;
+        }
+        return null;
+    }
+
     /**
      * Ermitteln der gesamten Produktionsmenge aller Unternehmen
      */
@@ -192,9 +184,32 @@ public class Game extends TimerTask {
         return gesamtabsatz;
     }
 
-    private void updateCounter() {
-        gameCalendar.add(Calendar.DAY_OF_MONTH, 1);
-        System.out.println(gameCalendar.getTime().toString());
+    /**
+     * Methode zum Zurückgeben des aktuellen Timervalues
+     *
+     * @return Counter value
+     */
+    public static long getTime() {
+        return counter;
+    }
+
+    public static String getTimeString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
+        return sdf.format(gameCalendar.getTime());
+    }
+
+    public static Calendar getCalendar() {
+        return gameCalendar;
+    }
+
+
+    public static List<Ausschreibung> getAusschreibungen() {
+        return ausschreibungen;
+    }
+
+
+    public static Map<String, Double> getMarktanteile() {
+        return marktanteile;
     }
 
 }

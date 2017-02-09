@@ -2,6 +2,7 @@ package com.fallstudie.Interface;
 
 import Rules.Game;
 import Unternehmung.Unternehmen;
+import controller.GameController;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class GameInterfaceTest {
 
     //  private static GameInterface testGameInterface;
-    private GameInterface testGameInterface;
+    private GameController testGameInterface;
 
    /* @BeforeClass
     public static void createGameInterface() {
@@ -24,7 +25,7 @@ public class GameInterfaceTest {
 
     @Before
     public void setUp() throws Exception {
-        testGameInterface = new GameInterface();
+        testGameInterface = new GameController();
     }
 
     @After
