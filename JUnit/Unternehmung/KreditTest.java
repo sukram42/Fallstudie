@@ -6,8 +6,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by cs on 20.01.2017.
  */
@@ -114,14 +112,14 @@ public class KreditTest extends TestCase {
 
     @Test
     public void getAnnuität() throws Exception {
-        assertEquals(testKredit.getAnnuität(),annuität);
+        assertEquals(testKredit.getAnnuitaet(),annuität);
     }
 
     @Test
     public void setAnnuität() throws Exception {
         double neueAnnuität = 9000;
-        testKredit.setAnnuität(neueAnnuität);
-        assertEquals(testKredit.getAnnuität(),neueAnnuität);
+        testKredit.setAnnuitaet(neueAnnuität);
+        assertEquals(testKredit.getAnnuitaet(),neueAnnuität);
     }
 
     @Test

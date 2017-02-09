@@ -48,6 +48,9 @@ import {CampagneListComponent} from "./components/home.components/marketing.comp
 import {ImpressumComponent} from "./components/impressum.component";
 import {AccountsSidebar} from "./components/home.components/sales.component/accounts-sidebar.component";
 import {ActualComponent} from "./components/home.components/finance.component/actual.component";
+import {NewResearchComponent} from "./components/home.components/research.component/new-research.component";
+import {NewKreditComponent} from "./components/home.components/finance.component/new-kredit.component";
+import {KreditListComponent} from "./components/home.components/finance.component/kredit-list.component";
 
 @NgModule({
     imports: [
@@ -125,7 +128,10 @@ import {ActualComponent} from "./components/home.components/finance.component/ac
         CampagneListComponent,
         ImpressumComponent,
         AccountsSidebar,
-        ActualComponent
+        ActualComponent,
+        NewResearchComponent,
+        NewKreditComponent,
+        KreditListComponent
     ],
 
     bootstrap: [HomeComponent],
