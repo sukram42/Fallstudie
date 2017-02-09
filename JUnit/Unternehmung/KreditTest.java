@@ -16,7 +16,7 @@ public class KreditTest extends TestCase {
     double zinssatz;
     double zinsen;
     double tilgung;
-    double annuität;
+    double annuitaet;
     long beginn;
 
     private Kredit testKredit;
@@ -28,7 +28,7 @@ public class KreditTest extends TestCase {
         restwert = hoehe;
         zinsen = zinssatz * restwert;
         tilgung = hoehe / laufzeit;
-        annuität = tilgung + zinsen;
+        annuitaet = tilgung + zinsen;
         beginn= Game.getTime();
     }
 
@@ -111,15 +111,15 @@ public class KreditTest extends TestCase {
     }
 
     @Test
-    public void getAnnuität() throws Exception {
-        assertEquals(testKredit.getAnnuitaet(),annuität);
+    public void getAnnuitaet() throws Exception {
+        assertEquals(testKredit.getAnnuitaet(), annuitaet);
     }
 
     @Test
-    public void setAnnuität() throws Exception {
-        double neueAnnuität = 9000;
-        testKredit.setAnnuitaet(neueAnnuität);
-        assertEquals(testKredit.getAnnuitaet(),neueAnnuität);
+    public void setAnnuitaet() throws Exception {
+        double neueAnnuitaet = 9000;
+        testKredit.setAnnuitaet(neueAnnuitaet);
+        assertEquals(testKredit.getAnnuitaet(),neueAnnuitaet);
     }
 
     @Test

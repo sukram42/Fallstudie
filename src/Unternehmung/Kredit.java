@@ -16,7 +16,7 @@ public class Kredit {
     private double zinssatz;
     private double zinsen;
     private double tilgung;
-    private double annuität;
+    private double annuitaet;
     private Calendar beginn;
     private Calendar end;
 
@@ -33,7 +33,7 @@ public class Kredit {
         this.restwert = hoehe;
         this.zinsen = zinssatz * this.restwert;
         this.tilgung = this.hoehe / this.laufzeit;
-        this.annuität = this.tilgung + this.zinsen;
+        this.annuitaet = this.tilgung + this.zinsen;
         this.beginn = (Calendar) Game.getCalendar().clone();
         this.end = (Calendar) this.beginn.clone();
         this.end.add(Calendar.DAY_OF_MONTH, laufzeit);
@@ -42,7 +42,7 @@ public class Kredit {
     public void update() {
         this.restwert -= this.tilgung;
         this.zinsen = this.zinssatz * this.restwert;
-        this.annuität = this.tilgung + this.zinsen;
+        this.annuitaet = this.tilgung + this.zinsen;
     }
 
 
@@ -88,12 +88,12 @@ public class Kredit {
         this.tilgung = tilgung;
     }
 
-    public double getAnnuität() {
-        return annuität;
+    public double getAnnuitaet() {
+        return annuitaet;
     }
 
-    public void setAnnuität(double annuität) {
-        this.annuität = annuität;
+    public void setAnnuitaet(double annuitaet) {
+        this.annuitaet = annuitaet;
     }
 
     public double getZinsen() {
