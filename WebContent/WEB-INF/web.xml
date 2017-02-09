@@ -29,6 +29,6 @@
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
     <listener>
-        <listener-class>com.fallstudie.Interface.GameInterface</listener-class>
+        <listener-class>controller.GameController</listener-class>
     </listener>
 </web-app>
