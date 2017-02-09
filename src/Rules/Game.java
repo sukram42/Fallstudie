@@ -19,7 +19,6 @@ public class Game extends TimerTask {
     private static long counter = 0;
 
     private static Calendar gameCalendar = new GregorianCalendar(2010, 1, 1);
-    private static Calendar gameEnd = (Calendar) gameCalendar.clone();
 
     private static ArrayList<Unternehmen> companies = new ArrayList<>();
     private static ArrayList<Unternehmen> companiesArchiv = new ArrayList<>();
@@ -29,7 +28,6 @@ public class Game extends TimerTask {
      * Konstruktor für ein Spiel mit 2 Spielern
      */
     public Game() {
-        gameEnd.add(Calendar.YEAR, 10); // Spielende nach 10 Jahren
         System.out.println("Ein Neues Spiel wird erstellt");
 
         Timer timer = new Timer();
@@ -197,10 +195,6 @@ public class Game extends TimerTask {
     private void updateCounter() {
         gameCalendar.add(Calendar.DAY_OF_MONTH, 1);
         System.out.println(gameCalendar.getTime().toString());
-    }
-
-    public static Calendar getGameEnd() {
-        return gameEnd;
     }
 
 }

@@ -1,12 +1,17 @@
 package Unternehmung;
 
+import Rules.Game;
 import Unternehmung.Abteilungen.*;
 import Unternehmung.Kennzahlen.Kennzahlensammlung;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Unternehmen {
+
+    private Calendar gruendungsDatum;
+    private Calendar gameEnd;
 
     private String passwort;
     private String name;
@@ -16,6 +21,9 @@ public class Unternehmen {
 
     public Unternehmen(String name, String passwort, float eigenkapital) {
         super();
+        this.gruendungsDatum = (Calendar) Game.getCalendar().clone();
+        this.gameEnd = (Calendar) this.gruendungsDatum.clone();
+        this.gameEnd.add(Calendar.YEAR, 10); // Spielende nach 10 Jahren
         this.passwort = passwort;
         this.name = name;
         this.kennzahlensammlung = new Kennzahlensammlung(this, eigenkapital);
@@ -28,7 +36,7 @@ public class Unternehmen {
      */
     private void initDepartments() {
         abteilungen.put("marketing", new Marketing(kennzahlensammlung));
-        abteilungen.put("finanzen", new Finanzen(kennzahlensammlung));
+        abteilungen.put("finanzen", new Finanzen(this));
         abteilungen.put("produktion", new Produktion(kennzahlensammlung));
         abteilungen.put("forschung", new Forschung(kennzahlensammlung, abteilungen.get("produktion")));
         abteilungen.put("vertrieb", new Vertrieb(this, kennzahlensammlung, abteilungen.get("produktion")));
@@ -75,4 +83,13 @@ public class Unternehmen {
     public Kennzahlensammlung getKennzahlensammlung() {
         return kennzahlensammlung;
     }
+
+    public Calendar getGruendungsDatum() {
+        return gruendungsDatum;
+    }
+
+    public Calendar getGameEnd() {
+        return gameEnd;
+    }
+
 }
