@@ -58,6 +58,45 @@
 
 %		LISTINGS
 \usepackage{listings}	%Format Listings properly 
+
+\usepackage{color}
+\renewcommand{\lstlistlistingname}{Quelltextverzeichnis}
+\renewcommand{\lstlistingname}{Quelltext}
+
+
+\definecolor{hpegreen}{RGB}{1,169,130}
+\definecolor{hpegray1}{RGB}{198,201,202}
+\definecolor{hpeorange}{RGB}{255,141,109}
+\definecolor{hpeturquoise}{RGB}{42,210,201}
+\definecolor{gray1}{RGB}{245,245,245}
+
+\lstset{ %
+	backgroundcolor=\color{gray1}, 
+	basicstyle=\footnotesize,             
+	breakatwhitespace=false,              
+	breaklines=true,                            
+	captionpos=b,                 				 
+	commentstyle=\color{hpegreen}, 
+	deletekeywords={...},                   
+	escapeinside={(*@}{@*)}, 		   
+	extendedchars=true,            			
+	keepspaces=true,                			 
+	keywordstyle=\color{hpeturquoise},      		
+	otherkeywords={*,...},           			
+	numbers=left,                   
+	numbersep=10pt,                   
+	numberstyle=\tiny\color{hpegray1}, 
+	rulecolor=\color{black},       
+	showspaces=false,               
+	showstringspaces=false,        
+	showtabs=false,                 
+	stringstyle=\color{hpeorange},    
+	tabsize=3,	                   
+	title=\lstname                   
+}
+
+
+
 \renewcommand{\lstlistlistingname}{Quelltextverzeichnis}
 \lstset{numbers=left,
 	numberstyle=\tiny,
