@@ -1,0 +1,92 @@
+
+\section{Rest-Schnittstelle}
+
+Die Verbindung zwischen der Programmlogik im Java Backend und dem Angular 2 Frontend wird über eine so genannte \acf{REST}- Schnittstelle. Dieses basiert auf dem \acf{HTTP}, welche es ermöglicht verschiedene Daten zwischen einem Client und einem Server zu senden.
+Eine Nachricht des \acl{HTTP} besteht aus einem Header, welcher Meta- Daten einer Anfrage, und einen Body, welcher Daten zur Übertragung enthält.
+Basierend auf dieser Struktur können nun vom Client aus Anfragen an bestimmte Server URLs gesendet werden. Als Grundlage besagter Anfragen stehen 9 Verben (\texttt{GET},\texttt{POST},\texttt{PUT},\texttt{DELETE},\texttt{PATCH},\texttt{HEAD},\texttt{OPTIONS},\texttt{CONNECT},\texttt{TRACE}), welche die Art der Anfrage beschreibt. Im Folgenden werden die häufigsten 4 Anfragen gezeigt:
+
+\begin{description} 
+	\item  [GET] {Mit einer \texttt{GET}- Anfrage werden reine Informationen angefragt. Daten im Body sind nicht erlaubt.}
+	\item [POST]{Die \texttt{POST}-Anfrage wird dazu verwendet um neue Elemente auf dem Server zu erstellen. Das neue Element kann im Body der Anfrage in Form eines JSON Textes übertragen werden}
+	\item [PUT]{Während \texttt{POST} neue Objekte auf dem Server erstellt, dient eine \texttt{PUT} Anfrage dazu, Daten zu Updaten. Das geupdatete Objekt wird im Body der Anfrage mitgeliefert}.
+	\item[DELETE] {Wie der Name vermuten lässt, dient die \texttt{DELETE}-Anfrage dazu Objekte zu löschen}.
+	
+\end{description}
+
+Um konkrete Elemente anzusprechen, können Parameter innerhalb des URLs übergeben werden. So wird das Unternehmen mit der ID 1 zum Beispiel über die URL 
+\texttt{localhost:8080/rest/companies/1} angesprochen.
+Aufgrund dieser verschiedenen Anfragen kommt es zu unterschiedlichen Ergebnissen beim Aufruf einer bestimmten URL. Wird zum Beispiel die URL \texttt{'localhost:8080/rest/companies/1'} aufgerufen kommt es zu folgenden Ergebnissen:
+
+\begin{description} 
+	\item[GET] Es wird das erste Unternehmen zurück gegeben
+	\item[POST] Es wird ein neues Unternehmen erstellt, welches nun die ID 1 hat.
+	\item[PUT] Es wird das Unternehmen mit der ID 1 überarbeitet
+	\item[DELETE] Das Unternehmen mit der ID 1 wird entfernt
+\end{description}
+
+Nachdem eine Anfrage erfolgreich den Server erreicht hat, bearbeitet dieser die besagten Anfragen unter Berücksichtigung der oben genannten Verben. Das Ergebnis der Requests wird anschließend an den Client gesendet. Anbei befindet sich eine Nummer, welche den Status der Anfrage dokumentiert. Die für das Projekt relevanten Statusnummern sind im Folgenden kurz erläutert:
+
+
+\begin{description}
+	\item[200(\texttt{OK})] Die Anfrage wurde erfolgreich abgearbeitet
+	\item[201(\texttt{CREATED})] Ein Objekt wurde erfolgreich erstellt
+	
+	\item[400(\texttt{BAD REQUEST)})] Wird zurückgegeben wenn eine Anfrage fehlerhaft ist. Gründe dafür könnte ein falsch codierter Body sein.
+	\item[401(\texttt{UNAUTHORIZED})] Dieser Status wird zurückgegeben, wenn eine nicht autorisierte Anfrage getätigt wurde.
+	\item[405(\texttt{METHOD NOT ALLOWED})] Wird zurückgegeben wenn eine URL für das gesendete Verb nicht definiert ist.
+	\item[409(\texttt{CONFLICT})] Dieser Status besagt, dass eine Anfrage nicht durchgeführt werden kann. Ein Beispiel dafür könnte sein, dass ein Unternehmen bereits existiert und deshalb nicht neu erstellt werden kann.
+\end{description}
+
+Die konkrete Umsetzung der Schnittstelle wird im Backend in dem Package \texttt{controller} umgesetzt. 
+Darin wird für jede \ac{HTTP}-Anfrage eine Methode definiert, welche bei jedem Request ausgeführt wird.
+Als Rückgabewert dieser Methoden wird eine Instanz der \texttt{javax.ws.rs.core.Response} Klasse zurück gegeben.
+Diese enthält einen der obenstehenden Statusnummern sowie wie eine Entität, welche im Body der Serverantwort steht.
+
+
+Dort befinden sich sechs verschiedene Klassen, welche die \ac{REST}-Anfragen abfängt. Die \textbf{GameController}-Klasse kümmert sich dabei, um alle generellen Aufrufe, welche das Spiel und die Authentifizierung konfigurieren.
+Die \textbf{CompanyController}-Klasse kümmert sich um alle Anfragen an die URL \texttt{rest/companies}. Diese dient dazu unternehmensspezifische Informationen anzufragen oder Unternehmen zu konfigurieren. Für die jeweiligen Abteilungen des Unternehmens gibt es weiter Controllerklassen. 
+
+
+\subsection{Token - Autorisierung}
+
+Da es unsicher wäre jede Anfrage ohne Authentifizierung durch zu führen, gilt es bei vielen Funktionen zu überprüfen, ob eine bestimmte Anfrage sicher durchgeführt werden kann.
+Im Falle des Projektes wird als Authentifizierung der Name des Unternehmens, sowie ein Passwort verwendet. Will sich nun ein User im Namen eines Unternehmens anmelden, so muss dieser eine \texttt{POST}-Anfrage mit dem Unternehmensnamen und zugehörigen Passwort an die URL \texttt{/rest/} senden. 
+Die Anfrage empfängt die \texttt{authenticateUser}-Methode der \texttt{GameController}-Klasse, welche die Zugangsdaten als Parameter übergeben bekommt.(siehe Quelltext \ref{lst:auth}) 
+Anschließend werden die übergebenen Zugangsdaten überprüft. Dies wird mithilfe der \texttt{authenticate()}-Methode getan.(siehe (*@\label{lst:authenticateUser}@*))
+Sollten die Benutzerdaten nicht stimmen, so wirft die \texttt{authenticate}-Methode eine Exception und gibt eine Response mit dem Status 401(Unauthorized) zurück. Im Falle das die Daten valide sind, wird ein Token generiert und anschließend mit Status 200 zurückgegeben.
+
+\lstset{language=JAVA}
+\begin{lstlisting}[float=htbp, caption={\texttt{authentivateUser() Methode der \texttt{GameController}-Klasse} }, label={lst:auth}]
+@POST
+@Produces("application/json")
+@Consumes("application/x-www-form-urlencoded")
+public  Response authenticateUser(@FormParam("username") String companyName, @FormParam("password") String password) {
+	try {
+		authenticate(companyName, password);  (*@\label{lst:authenticateUser}@*)
+		String token = issueToken(companyName);
+		return Response.ok(token).build();
+	} catch (Exception e) {
+		return Response.status(Response.Status.UNAUTHORIZED).build();
+	}
+}
+\end{lstlisting}
+
+Auf das Generieren des Tokens wird aus Platzgründen nicht weiter eingegangen. 
+Damit der Benutzer nur auf sensible Methoden zugreifen kann, muss dieser den generierten Token bei jeder Anfrage als Headerparameter mitgeben werden. Direkt vor dem Token muss das Wort \texttt{Bearer} stehen. Dieses gibt an um welche Art der Verschlüsselung es sich handelt.
+Wenn eine Anfrage den Server erreicht, muss dieser gegebenenfalls den Headerparameter überprüfen.
+Dafür dient die \texttt{AuthentificationFilter}- Klasse. Sie ist eine Unterklasse eines \texttt{ContainerRequestFilter} und sorgt dafür, dass bei jedem Methodenaufruf der Headerparameter \texttt{Authorization} validiert wird. Zusätzlich dazu, ermöglicht dieser Filter eine eindeutige Identifizierung des Unternehmens. 
+Da ein Benutzer bloß sein eigenes Unternehmen konfigurieren darf, wird aus diesem Grund der Token als Validierung herangezogen.
+Um eine Methode nun zu sichern, wird ein Dekorator namens \texttt{@Secured} angegeben. Jede Methode, vor welcher diesen Dekorator steht, führt zuvor den \texttt{AuthentificationFilter} aus.
+Als Parameter kann man nun eine Instanz eines SecurityContextes erhalten. Durch diesen ist es nun möglich das eine Instanz des Unternehmens zu erhalten zu dem der Token zugewiesen ist. (siehe Quelltext \ref{lst:secured}),
+
+ \lstset{language=JAVA}
+ \begin{lstlisting}[float=htbp, caption={Beispiel des \texttt{@Secured}-Dekorators }, label={lst:secured}]
+ 
+	 @GET
+	 @Secured
+	 public Response getCompany(@Context SecurityContext securityContext) {
+	 	return Response.status(200).entity(gson.toJson(getCompanyFromContext(securityContext))).build();
+	 }
+ \end{lstlisting}
+ 
+
