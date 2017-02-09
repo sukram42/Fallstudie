@@ -81,7 +81,7 @@ public class Forschung extends Abteilung{
         return 0;
     }
 
-    public void starteProjekt(Kennzahlensammlung kennzahlensammlung, Forschung forschung, String forschungsobjekt,
+    public void starteProjekt(Forschung forschung, String forschungsobjekt,
                               int mitarbeiterAnzahl, int dauer, boolean herstellkosten)throws ZuWenigMitarbeiterException{
         if((beschäftigteMitarbeiter + mitarbeiterAnzahl) <= this.getMitarbeiterAnzahl()) { //Überprüfung, ob es genügend Mitarbeiter gibt
             beschäftigteMitarbeiter =+ mitarbeiterAnzahl;
