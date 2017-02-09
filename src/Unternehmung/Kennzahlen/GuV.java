@@ -107,7 +107,7 @@ public class GuV {
 //        this.archiv.put(Game.getCalendar().getTime(), archivGuV);
         if(archiv.size()==5)
             archiv.remove();
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMMM yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM yyyy");
         Map.Entry<Date,GuV> entry = new AbstractMap.SimpleEntry(sdf.format(Game.getCalendar().getTime()), archivGuV);
         archiv.add(entry);
 

@@ -17,7 +17,7 @@ export class NewEmployeeComponent {
 
     newEmployee:FormGroup;
 
-    constructor(private hrService : HRService, private fb :FormBuilder){
+    constructor(private _hrService : HRService, private fb :FormBuilder){
 
         this.newEmployee = fb.group({
            'anzahl' :    [null, Validators.compose([Validators.required,Validators.pattern("[0-9]+")])],
@@ -28,6 +28,6 @@ export class NewEmployeeComponent {
     }
 
     submitForm(value: any){
-        this.hrService.addEmployees({anzahl:value.anzahl,gehalt:value.gehalt,abteilung:value.abteilung});
+        this._hrService.addEmployees({anzahl:value.anzahl,gehalt:value.gehalt,abteilung:value.abteilung});
     }
 }

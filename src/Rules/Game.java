@@ -36,46 +36,11 @@ public class Game extends TimerTask {
         updateAusschreibungen();
     }
 
-    public static ArrayList<Unternehmen> getCompanies() {
-        return companies;
-    }
-    //Warum keine "addCompanies" Bennenung ? :D
-
-    public static Unternehmen getUnternehmenByName(String name) {
-        for (Unternehmen u : companies) {
-            if (name.equals(u.getName()))
-                return u;
-        }
-        return null;
-    }
-
-    /**
-     * Methode zum Zurückgeben des aktuellen Timervalues
-     *
-     * @return Counter value
-     */
-    public static long getTime() {
-        return counter;
-    }
-
-    public static String getTimeString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
-        return sdf.format(gameCalendar.getTime());
-    }
-
-    public static Calendar getCalendar() {
-        return gameCalendar;
-    }
-
     public static void main(String[] args) {
         Game game = new Game();
         System.out.println("AUSSCHREIBUNGEN:__" + new Gson().toJson(game.getAusschreibungen()));
     }
 
-    // Getter und Setter:
-    public static List<Ausschreibung> getAusschreibungen() {
-        return ausschreibungen;
-    }
 
     /**
      * Wird nach jedem Zyklus ausgeführt.
@@ -180,6 +145,34 @@ public class Game extends TimerTask {
         }
     }
 
+    private void updateCounter() {
+        gameCalendar.add(Calendar.DAY_OF_MONTH, 1);
+        System.out.println(gameCalendar.getTime().toString());
+    }
+
+    // Getter, Setter und Hilfsmethoden:
+
+    public static Map<String, Double> getMarktanteile() {
+        Map<String, Double> marktanteile = new HashMap<>();
+        for (Unternehmen unternehmen : companies){
+            marktanteile.put(unternehmen.getName(), unternehmen.getKennzahlensammlung().getMarktanteil());
+        }
+        return marktanteile;
+    }
+
+    public static ArrayList<Unternehmen> getCompanies() {
+        return companies;
+    }
+    //Warum keine "addCompanies" Bennenung ? :D
+
+    public static Unternehmen getUnternehmenByName(String name) {
+        for (Unternehmen u : companies) {
+            if (name.equals(u.getName()))
+                return u;
+        }
+        return null;
+    }
+
     /**
      * Ermitteln der gesamten Produktionsmenge aller Unternehmen
      */
@@ -192,9 +185,27 @@ public class Game extends TimerTask {
         return gesamtabsatz;
     }
 
-    private void updateCounter() {
-        gameCalendar.add(Calendar.DAY_OF_MONTH, 1);
-        System.out.println(gameCalendar.getTime().toString());
+    /**
+     * Methode zum Zurückgeben des aktuellen Timervalues
+     *
+     * @return Counter value
+     */
+    public static long getTime() {
+        return counter;
+    }
+
+    public static String getTimeString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
+        return sdf.format(gameCalendar.getTime());
+    }
+
+    public static Calendar getCalendar() {
+        return gameCalendar;
+    }
+
+
+    public static List<Ausschreibung> getAusschreibungen() {
+        return ausschreibungen;
     }
 
 }

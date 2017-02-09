@@ -20,7 +20,7 @@ public class Image extends Kennzahl{
         float mitarbeiterZufriedenheit = unternehmen.getKennzahlensammlung().getWeicheKennzahl("mitarbeiterzufriedenheit").getWert();
         float kundenZufriedenheit = unternehmen.getKennzahlensammlung().getWeicheKennzahl("kundenzufriedenheit").getWert();
 
-        setBasiswert(mitarbeiterZufriedenheit * 0.5f + kundenZufriedenheit * 0.25f);
+        setBasiswert(mitarbeiterZufriedenheit * 0.5f + kundenZufriedenheit * 0.5f);
         return super.berechnen();
     }
 }

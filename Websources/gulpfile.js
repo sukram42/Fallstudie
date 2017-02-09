@@ -79,16 +79,13 @@
                 'node_modules/es6-shim/es6-shim.min.js',
                 'node_modules/zone.js/dist/zone.js',
                 'node_modules/reflect-metadata/Reflect.js',
-                // 'node_modules/systemjs/dist/system-polyfills.js',
-                // 'node_modules/angular2/bundles/angular2-polyfills.js',
                 'node_modules/systemjs/dist/system.src.js'
-                // 'node_modules/rxjs/bundles/Rx.js',
-                // 'node_modules/angular2/bundles/angular2.dev.js'
             ])
             .pipe(gulp.dest(copyDist));
     });
 
-    gulp.task('copyToProject', ['copyHTMLJS', 'copyApp'])
+    gulp.task('copyToProject', ['copyHTMLJS', 'copyApp']);
+
 
     gulp.task('clean',function(){
         return del(['../WebContent/**/*','!../WebContent/WEB-INF{,/**}'],{force: true});
@@ -98,7 +95,7 @@
     gulp.task('copyHTMLJS',['default','clean'], function ()
     {
         return gulp.src(['.*js', '*.html', "!gulpfile.js"])
-            .pipe(gulp.dest('../WebContent'));
+            .pipe(gulp.dest('../WebContent/js/'));
     });
 
     gulp.task('copyApp',['default','clean'], function() {
