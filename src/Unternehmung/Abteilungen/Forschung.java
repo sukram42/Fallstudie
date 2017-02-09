@@ -48,9 +48,9 @@ public class Forschung extends Abteilung{
     public void setImagebonus (String id, float zusätzlicherImagebonus){
         for (Map.Entry<String, Float> Imagebonus : this.imageBoni.entrySet()){
             if (Imagebonus.getKey().equals(id)){
-                if(Imagebonus.getValue() + zusätzlicherImagebonus > 0.05f){ //Der neue Bonus würde den maximal Bonus übersteigen
-                    this.kennzahlensammlung.getWeicheKennzahl("kundenzufriedenheit").addModifier(0.05f - Imagebonus.getValue());
-                    Imagebonus.setValue(0.05f);
+                if(Imagebonus.getValue() + zusätzlicherImagebonus > 0.083f){ //Der neue Bonus würde den maximal Bonus übersteigen
+                    this.kennzahlensammlung.getWeicheKennzahl("kundenzufriedenheit").addModifier(0.083f - Imagebonus.getValue());
+                    Imagebonus.setValue(0.083f);
                 }else {
                     Imagebonus.setValue(Imagebonus.getValue() + zusätzlicherImagebonus);
                     this.kennzahlensammlung.getWeicheKennzahl("kundenzufriedenheit").addModifier(zusätzlicherImagebonus);
