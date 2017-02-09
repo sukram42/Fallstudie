@@ -11,6 +11,9 @@ import java.util.Calendar;
  */
 public class Forschungsprojekt {
 
+    private Forschung forschung;
+    Kennzahlensammlung kennzahlensammlung;
+
     private static float abbruchFaktor = 0.7f;
     private static float herstellungskostenFaktor = 0.0025f;
     private static float imageFaktor = 0.001245f;
@@ -23,8 +26,7 @@ public class Forschungsprojekt {
     private boolean herstellkosten; //Indikator, ob Kostenreduzierung oder Image gewählt wurde
     //Es kann immer nur an max. einer Eigenschaft geforscht werden, da sich die Entwicklungen ansonsten in die Quere kommen und 2 unterschiedliche
     // Produkte herauskommen würden.
-    private Forschung forschung;
-    Kennzahlensammlung kennzahlensammlung;
+
 
     //Effektivität über Mitarbeiterzufriedenheit
 

@@ -16,12 +16,14 @@ import java.util.Map;
 
 public class Forschung extends Abteilung{
 
+    private Produktion produktion;
+
+
     private Map<String, Float> imageBoni = new HashMap<>();
     private ArrayList<String> verfügbareProdukte; //um bereits beforschte Produkte reduzieren
     private ArrayList<String> beforschteProdukte = new ArrayList<>();
     private int beschäftigteMitarbeiter;
     private ArrayList<Forschungsprojekt> projekte = new ArrayList<>();
-    private Produktion produktion;
 
     public Forschung(Kennzahlensammlung kennzahlensammlung, Abteilung produktion) {
           super("Forschung",kennzahlensammlung);
