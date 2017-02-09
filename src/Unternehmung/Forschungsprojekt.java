@@ -11,8 +11,13 @@ import java.util.Calendar;
  */
 public class Forschungsprojekt {
 
-    private static float abbruchFaktor = 0.7f;
+    private Forschung forschung;
+    Kennzahlensammlung kennzahlensammlung;
 
+    private static float abbruchFaktor = 0.7f;
+    private static float herstellungskostenFaktor = 0.0025f;
+    private static float imageFaktor = 0.001245f;
+    //bei einer Mitarbeiterzufriedenheit von 0.5 (Faktor 5) soll ein Mitarbeiter 6 Monate für jeden Bonus beschäftigt sein
     private int mitarbeiterAnzahl;
     private String forschungsobjekt;
     private Calendar ende;
@@ -20,11 +25,9 @@ public class Forschungsprojekt {
     private boolean herstellkosten; //Indikator, ob Kostenreduzierung oder Image gewählt wurde
     //Es kann immer nur an max. einer Eigenschaft geforscht werden, da sich die Entwicklungen ansonsten in die Quere kommen und 2 unterschiedliche
     // Produkte herauskommen würden.
-    private Forschung forschung;
-    Kennzahlensammlung kennzahlensammlung;
+
 
     //Effektivität über Mitarbeiterzufriedenheit
-    //Ansonsten soll das Gehalt der Mitarbeiter immer x sein
 
     public Forschungsprojekt(Kennzahlensammlung kennzahlensammlung, Forschung forschung, String forschungsobjekt, int mitarbeiterAnzahl, int laufzeit, boolean herstellkosten){
     beginn = Game.getTime();
@@ -38,23 +41,23 @@ public class Forschungsprojekt {
     }
 
     public void abbrechen() {
-        float bonus = 0;
+        float bonus;
         if (herstellkosten) {
-            //    bonus  = abbruchFaktor * (Game.getTime() - beginn) * mitarbeiterAnzahl * irgendeinFaktor;
+                bonus  = abbruchFaktor * (Game.getTime() - beginn) * 10 * kennzahlensammlung.getMitarbeiterzufriedenheit().getWert() * mitarbeiterAnzahl * herstellungskostenFaktor;
             forschung.setForschungsbonus(forschungsobjekt, bonus);
         } else {
-            //bonus = abbruchFaktor * (Game.getTime() - beginn) * mitarbeiterAnzahl  * 1.5 * kennzahlensammlung.getMitarbeiterzufriedenheit() * irgendeinFaktor;
+            bonus = abbruchFaktor * (Game.getTime() - beginn) * mitarbeiterAnzahl  * 10 * kennzahlensammlung.getMitarbeiterzufriedenheit().getWert() * imageFaktor;
             forschung.setImagebonus(forschungsobjekt, bonus);
         }
     }
 
     public void abschließen(){
-        float bonus = 0;
+        float bonus;
         if(herstellkosten){
-            //    bonus  = (Game.getTime() - beginn) * mitarbeiterAnzahl * irgendeinFaktor;
+            bonus  = (Game.getTime() - beginn) * 10 * kennzahlensammlung.getMitarbeiterzufriedenheit().getWert() * mitarbeiterAnzahl * herstellungskostenFaktor;
             forschung.setForschungsbonus(forschungsobjekt, bonus);
         }else{
-            //bonus = (Game.getTime() - beginn) * mitarbeiterAnzahl  * 1.5 * kennzahlensammlung.getMitarbeiterzufriedenheit() * irgendeinFaktor;
+            bonus = (Game.getTime() - beginn) * mitarbeiterAnzahl  * 10 * kennzahlensammlung.getMitarbeiterzufriedenheit().getWert() * imageFaktor;
             forschung.setImagebonus(forschungsobjekt, bonus);
         }
     }
