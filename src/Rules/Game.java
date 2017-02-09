@@ -2,6 +2,7 @@ package Rules;
 
 import Unternehmung.Abteilungen.Vertrieb;
 import Unternehmung.Ausschreibung;
+import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 
@@ -143,6 +144,7 @@ public class Game extends TimerTask {
                     // Zuschlag geben:
                     if (gewinnerGefunden) {
                         Vertrieb vertrieb = (Vertrieb) gewinner.getAbteilung("vertrieb");
+                        ausschreibung.getVertrag().setPreisByKennzahlen(gewinner.getKennzahlensammlung());
                         vertrieb.getAccounts().add(ausschreibung.getVertrag());
                     }
                 }
