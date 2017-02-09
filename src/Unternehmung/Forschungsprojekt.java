@@ -18,7 +18,6 @@ public class Forschungsprojekt {
     private static float herstellungskostenFaktor = 0.0025f;
     private static float imageFaktor = 0.001245f;
     //bei einer Mitarbeiterzufriedenheit von 0.5 (Faktor 5) soll ein Mitarbeiter 6 Monate für jeden Bonus beschäftigt sein
-
     private int mitarbeiterAnzahl;
     private String forschungsobjekt;
     private Calendar ende;

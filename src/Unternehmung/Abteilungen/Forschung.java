@@ -18,7 +18,6 @@ public class Forschung extends Abteilung{
 
     private Produktion produktion;
 
-
     private Map<String, Float> imageBoni = new HashMap<>();
     private ArrayList<String> verfügbareProdukte; //um bereits beforschte Produkte reduzieren
     private ArrayList<String> beforschteProdukte = new ArrayList<>();
