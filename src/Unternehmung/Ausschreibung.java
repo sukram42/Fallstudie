@@ -41,20 +41,15 @@ public class Ausschreibung {
         Random random = new Random();
         String name = produkte[random.nextInt(4)];
         char qualitaetsstufe = qualitaetsstufen[random.nextInt(3)];
-        // durchschnittliche Produktionsmenge als Maßstab für Interval, in dem die Ausschreibungen generiert werden:
+        // durchschnittliche Produktionsmenge als Maßstab für Größe der Ausschreibungen:
         int durchschnittlicheProduktionsmenge = 0;
         int menge;
         if (Game.getCompanies().size() != 0) {
             durchschnittlicheProduktionsmenge = Game.getGesamtabsatz() / Game.getCompanies().size();
         }
-        if (durchschnittlicheProduktionsmenge <= 400) {
-            menge = random.nextInt(150) + 50; // Anfangsintervall = [50; 200]
-        } else {
-            // Intervall = [200; x]:
-            int intervallBeginn = Math.round(durchschnittlicheProduktionsmenge - durchschnittlicheProduktionsmenge * 0.5f);
-            int intervallEnde = Math.round(durchschnittlicheProduktionsmenge + durchschnittlicheProduktionsmenge * 0.5f);
-            menge = random.nextInt(intervallEnde) + intervallBeginn;
-        }
+        // Intervall = [50; durchschnittliche Produktionsmenge *1.5]:
+        int intervallEnde = Math.round(durchschnittlicheProduktionsmenge * 1.5f);
+        menge = random.nextInt(intervallEnde) + 50;
         return new Produktlinie(new Produkt(name, qualitaetsstufe), menge);
     }
 
