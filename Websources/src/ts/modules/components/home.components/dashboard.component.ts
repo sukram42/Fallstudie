@@ -107,7 +107,6 @@ export class DashboardComponent implements OnInit {
     }
 
     fillAufwandChar(data: {}) {
-        console.log(data);
         for (var key in data) {
             if (data.hasOwnProperty(key)) {
                 var guv = data[key];
