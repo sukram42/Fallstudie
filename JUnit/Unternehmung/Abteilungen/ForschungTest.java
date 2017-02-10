@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 /**
  * Created by D064018 on 21.01.2017.
  */
-public class ForschungTest {
+public class ForschungTest{
 
     private Forschung testForschung;
     private Unternehmen unternehmen;
@@ -25,17 +25,17 @@ public class ForschungTest {
     public void setUp() throws ZuWenigMitarbeiterException {
         forschungsobjekt = "ReisetascheA";
         unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
-        unternehmen.getAbteilung("hr").addMitarbeiter(1, 10000);
+        unternehmen.getAbteilung("hr").addMitarbeiter(1,10000);
         kennzahlensammlung = unternehmen.getKennzahlensammlung();
-        produktion = (Produktion) unternehmen.getAbteilung("produktion");
+        produktion = (Produktion)unternehmen.getAbteilung("produktion");
         testForschung = new Forschung(kennzahlensammlung, produktion);
         assertNotNull(testForschung);
     }
 
     @Test
     public void setImagebonus() throws Exception {
-        testForschung.setImagebonus(forschungsobjekt, 0.05f);
-        assertEquals(testForschung.getImagebonusById(forschungsobjekt), 0.05, 0.5);
+testForschung.setImagebonus(forschungsobjekt, 0.05f);
+assertEquals(testForschung.getImagebonusById(forschungsobjekt), 0.05, 0.5);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class ForschungTest {
 
     @Test
     public void getImagebonusById() throws Exception {
-        assertEquals(testForschung.getImagebonusById(forschungsobjekt), 0, 0.5);
+assertEquals(testForschung.getImagebonusById(forschungsobjekt), 0, 0.5);
     }
 
     @Test
@@ -76,12 +76,12 @@ public class ForschungTest {
         //double erwarteterBonus = x;
         testForschung.addMitarbeiter(5, 8000);
         testForschung.starteProjekt(testForschung, forschungsobjekt, 5, 100, true);
-        // assertEquals(produktion.getForschungsbonusById(forschungsobjekt), erwateterBonues);
+       // assertEquals(produktion.getForschungsbonusById(forschungsobjekt), erwateterBonues);
     }
 
     @Test
     public void getVerfügbareProdukte() throws Exception {
-        assertTrue(testForschung.getVerfügbareProdukte().size() == 12);
+assertTrue(testForschung.getVerfügbareProdukte().size() == 12);
     }
 
     @After
