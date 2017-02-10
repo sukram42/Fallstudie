@@ -29,7 +29,7 @@ public class Forschungsprojekt {
 
     //Effektivität über Mitarbeiterzufriedenheit
 
-    public Forschungsprojekt(Kennzahlensammlung kennzahlensammlung, Forschung forschung, String forschungsobjekt, int mitarbeiterAnzahl, int laufzeit, boolean herstellkosten){
+    public Forschungsprojekt(Forschung forschung, String forschungsobjekt, int mitarbeiterAnzahl, int laufzeit, boolean herstellkosten){
     beginn = Game.getTime();
     this.kennzahlensammlung = kennzahlensammlung;
     this.mitarbeiterAnzahl = mitarbeiterAnzahl;
