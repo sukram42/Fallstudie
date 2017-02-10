@@ -52,4 +52,8 @@ export class HomeService {
         return this.http.put("http://localhost:8080/rest/logout",null).map(res=>res.text());
     }
 
+    getMarktanteile()
+    {
+        return this.http.get("http://localhost:8080/rest/players").map(res=>res.json());
+    }
 }

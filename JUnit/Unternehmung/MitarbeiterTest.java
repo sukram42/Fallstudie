@@ -25,7 +25,6 @@ public class MitarbeiterTest{
 public void setUp(){
     name = "Peter";
     vorname = "Hans";
-    adresse = "Humugstraße 12, 12470 Warstadt";
     imagelink = "erster Bildpfad";
     gender = 'm';
     gehalt = 60000;
@@ -33,7 +32,7 @@ public void setUp(){
 
     @Before
     public void createMitarbeiter(){
-testMitarbeiter = new Mitarbeiter(name, vorname, adresse, imagelink, gender, gehalt);
+testMitarbeiter = new Mitarbeiter(name, vorname, imagelink, gender, gehalt);
         assertNotNull(testMitarbeiter);
     }
 
@@ -60,18 +59,6 @@ assertEquals( testMitarbeiter.getVorname(), vorname);
 String neuerVorName = "Friedrich";
 testMitarbeiter.setVorname(neuerVorName);
 assertEquals(testMitarbeiter.getVorname(), neuerVorName);
-    }
-
-    @Test
-    public void getAdresse() throws Exception {
-assertEquals(testMitarbeiter.getAdresse(), adresse);
-    }
-
-    @Test
-    public void setAdresse() throws Exception {
-String neueAdresse = "Bertholdstraße 7, 19862 Bonnstadt";
-testMitarbeiter.setAdresse(neueAdresse);
-assertEquals(testMitarbeiter.getAdresse(), neueAdresse);
     }
 
     @Test

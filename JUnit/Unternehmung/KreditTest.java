@@ -1,12 +1,11 @@
 package Unternehmung;
 
 import Rules.Game;
+import Unternehmung.Objekte.Kredit;
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by cs on 20.01.2017.
@@ -18,7 +17,7 @@ public class KreditTest extends TestCase {
     double zinssatz;
     double zinsen;
     double tilgung;
-    double annuität;
+    double annuitaet;
     long beginn;
 
     private Kredit testKredit;
@@ -30,7 +29,7 @@ public class KreditTest extends TestCase {
         restwert = hoehe;
         zinsen = zinssatz * restwert;
         tilgung = hoehe / laufzeit;
-        annuität = tilgung + zinsen;
+        annuitaet = tilgung + zinsen;
         beginn= Game.getTime();
     }
 
@@ -113,15 +112,15 @@ public class KreditTest extends TestCase {
     }
 
     @Test
-    public void getAnnuität() throws Exception {
-        assertEquals(testKredit.getAnnuität(),annuität);
+    public void getAnnuitaet() throws Exception {
+        assertEquals(testKredit.getAnnuitaet(), annuitaet);
     }
 
     @Test
-    public void setAnnuität() throws Exception {
-        double neueAnnuität = 9000;
-        testKredit.setAnnuität(neueAnnuität);
-        assertEquals(testKredit.getAnnuität(),neueAnnuität);
+    public void setAnnuitaet() throws Exception {
+        double neueAnnuitaet = 9000;
+        testKredit.setAnnuitaet(neueAnnuitaet);
+        assertEquals(testKredit.getAnnuitaet(),neueAnnuitaet);
     }
 
     @Test

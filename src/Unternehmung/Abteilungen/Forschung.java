@@ -3,7 +3,7 @@ package Unternehmung.Abteilungen;
 import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilung;
-import Unternehmung.Forschungsprojekt;
+import Unternehmung.Objekte.Forschungsprojekt;
 import Unternehmung.Kennzahlensammlung;
 
 import java.util.ArrayList;
@@ -16,12 +16,13 @@ import java.util.Map;
 
 public class Forschung extends Abteilung{
 
+    private Produktion produktion;
+
     private Map<String, Float> imageBoni = new HashMap<>();
     private ArrayList<String> verfügbareProdukte; //um bereits beforschte Produkte reduzieren
     private ArrayList<String> beforschteProdukte = new ArrayList<>();
     private int beschäftigteMitarbeiter;
     private ArrayList<Forschungsprojekt> projekte = new ArrayList<>();
-    private Produktion produktion;
 
     public Forschung(Kennzahlensammlung kennzahlensammlung, Abteilung produktion) {
           super("Forschung",kennzahlensammlung);
@@ -48,9 +49,9 @@ public class Forschung extends Abteilung{
     public void setImagebonus (String id, float zusätzlicherImagebonus){
         for (Map.Entry<String, Float> Imagebonus : this.imageBoni.entrySet()){
             if (Imagebonus.getKey().equals(id)){
-                if(Imagebonus.getValue() + zusätzlicherImagebonus > 0.05f){ //Der neue Bonus würde den maximal Bonus übersteigen
-                    this.kennzahlensammlung.getWeicheKennzahl("kundenzufriedenheit").addModifier(0.05f - Imagebonus.getValue());
-                    Imagebonus.setValue(0.05f);
+                if(Imagebonus.getValue() + zusätzlicherImagebonus > 0.083f){ //Der neue Bonus würde den maximal Bonus übersteigen
+                    this.kennzahlensammlung.getWeicheKennzahl("kundenzufriedenheit").addModifier(0.083f - Imagebonus.getValue());
+                    Imagebonus.setValue(0.083f);
                 }else {
                     Imagebonus.setValue(Imagebonus.getValue() + zusätzlicherImagebonus);
                     this.kennzahlensammlung.getWeicheKennzahl("kundenzufriedenheit").addModifier(zusätzlicherImagebonus);
@@ -80,11 +81,11 @@ public class Forschung extends Abteilung{
         return 0;
     }
 
-    public void starteProjekt(Kennzahlensammlung kennzahlensammlung, Forschung forschung, String forschungsobjekt,
+    public void starteProjekt(Forschung forschung, String forschungsobjekt,
                               int mitarbeiterAnzahl, int dauer, boolean herstellkosten)throws ZuWenigMitarbeiterException{
         if((beschäftigteMitarbeiter + mitarbeiterAnzahl) <= this.getMitarbeiterAnzahl()) { //Überprüfung, ob es genügend Mitarbeiter gibt
             beschäftigteMitarbeiter =+ mitarbeiterAnzahl;
-            Forschungsprojekt forschungsprojekt = new Forschungsprojekt(kennzahlensammlung, forschung, forschungsobjekt, mitarbeiterAnzahl, dauer, herstellkosten);
+            Forschungsprojekt forschungsprojekt = new Forschungsprojekt(forschung, forschungsobjekt, mitarbeiterAnzahl, dauer, herstellkosten);
             beforschteProdukte.add(forschungsobjekt);
             projekte.add(forschungsprojekt);
         }else{

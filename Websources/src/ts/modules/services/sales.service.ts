@@ -11,6 +11,7 @@ import {Injectable} from "@angular/core";
 export class SalesService {
 
     private opportunitiesSubject = new Subject<any>();
+    private creditSubject = new Subject<any>();
 
 
     constructor(private http: Http) {
@@ -41,6 +42,22 @@ export class SalesService {
     {
         // return Observable.interval(1000).flatMap(()=>this.http.get('http://localhost:8080/rest/ausschreibungen').map(response => response.json()));
         return this.http.get('http://localhost:8080/rest/companies/sales/accounts').map(response => response.json());
+    }
+    requestKredit(values:{})
+    {
+        return this.http.post('http://localhost:8080/rest/companies/sales/credits',values)
+            .map(response=> response.text())
+            .subscribe(data=>{this.creditSubject.next(data),console.log(data)});
+    }
 
+    getCredits()
+    {
+        return this.http.get('http://localhost:8080/rest/companies/sales/credits')
+            .map(response=> response.json());
+    }
+
+    getCreditSubject()
+    {
+        return this.creditSubject.asObservable();
     }
 }

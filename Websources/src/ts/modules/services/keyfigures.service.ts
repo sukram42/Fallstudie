@@ -46,6 +46,11 @@ export class KeyFiguresService {
         return Observable.interval(1000).flatMap(()=>this._http.get('http://localhost:8080/rest/companies/keyfigures/bilanz')
             .map(res=>res.json()));
     }
+    getArchivKennzahlen()
+    {
+        return Observable.interval(1000).flatMap(()=>this._http.get('http://localhost:8080/rest/companies/keyfigures/archiv')
+            .map(res=>res.json()));
+    }
 
 
 }

@@ -1,5 +1,6 @@
 package Unternehmung.Abteilungen.SozialeProjekte;
 
+import Unternehmung.Objekte.ZeitGeld;
 import Unternehmung.Unternehmen;
 import org.junit.After;
 import org.junit.Before;

@@ -3,6 +3,11 @@ package Unternehmung.Abteilungen;
 import Exceptions.*;
 import Rules.Game;
 import Unternehmung.*;
+import Unternehmung.Kennzahlensammlung;
+import Unternehmung.Objekte.Halle;
+import Unternehmung.Objekte.Maschine;
+import Unternehmung.Objekte.Produkt;
+import Unternehmung.Objekte.Produktlinie;
 
 import java.util.*;
 

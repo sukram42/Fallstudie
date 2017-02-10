@@ -11,4 +11,5 @@ import {HomeService} from "../services/home.service";
 })
 
 export class DatenschutzComponent{
+
 }

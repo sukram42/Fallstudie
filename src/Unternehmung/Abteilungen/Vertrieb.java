@@ -4,6 +4,10 @@ import Exceptions.BankruptException;
 import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.*;
+import Unternehmung.Kennzahlensammlung;
+import Unternehmung.Objekte.Ausschreibung;
+import Unternehmung.Objekte.Produktlinie;
+import Unternehmung.Objekte.Vertrag;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;

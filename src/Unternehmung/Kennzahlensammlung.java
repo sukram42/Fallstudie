@@ -3,10 +3,6 @@ package Unternehmung;
 import Exceptions.BankruptException;
 import Rules.Game;
 import Unternehmung.Kennzahlen.*;
-import Unternehmung.Kennzahlen.Bilanz;
-import Unternehmung.Kennzahlen.GuV;
-import Unternehmung.Kennzahlen.Kennzahl;
-import Unternehmung.Kennzahlen.Mitarbeiterzufriedenheit;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -26,7 +22,7 @@ public class Kennzahlensammlung {
     private Map<Date, Kennzahlensammlung> archiv = new HashMap<>(); // Archiv für Jahresabschlüsse (Bilanz + GuV)
 
     // "weiche" Kennzahlensammlung:
-    private Map<String,  Kennzahl> weicheKennzahlen = new HashMap<>();
+    private Map<String, Kennzahl> weicheKennzahlen = new HashMap<>();
 
     // faktische Kennzahlensammlung:
     private double marktanteil;
@@ -35,9 +31,9 @@ public class Kennzahlensammlung {
     private GuV guv;
 
     private transient int maxNeueMitarbeiter; // abhängig von HR-Mitarbeitern (für 10 Mitarbeiter ist ein HR-Mitarbeiter (=Manager) zuständig)
-    private boolean bankrupt=false;
-    // wird pro neu eingestelltem HR-Mitarbeiter um 10 hochgesetzt
-                                    // wird pro neu eingestelltem (Nicht-HR-) Mitarbeiter um 1 runtergesetzt
+                                            // wird pro neu eingestelltem HR-Mitarbeiter um 10 hochgesetzt
+                                            // wird pro neu eingestelltem (Nicht-HR-) Mitarbeiter um 1 runtergesetzt
+    private boolean bankrupt = false;
 
     /**
      * Konstruktor zum Erstellen einen Kennzahlenobjekts eines Unternehmens (wird im Unternehmenskonstruktor aufgerufen)
@@ -78,13 +74,14 @@ public class Kennzahlensammlung {
         berechnen();
         this.guv.importAufwandUndErlös(); // GuV updaten
         try {
-            this.getBilanz().liquiditaetAnpassen(this.guv.getTaeglicheLiquiditätsveränderung());
+            this.getBilanz().liquiditaetAnpassen(this.guv.getTaeglicheLiquiditaetsveraenderung());
         } catch (BankruptException e){
             e.printStackTrace();
         }
         if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH)) {
             this.getGuv().archivieren();
         }
+
     }
 
     /**

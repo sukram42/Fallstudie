@@ -45,7 +45,7 @@ public class GuVTest {
         Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
         produktion.produktionshalleKaufen(2);
         produktion.maschinenKaufen("Rucksack", 1, 1);
-        assertEquals(testGuV.getTaeglicheLiquiditätsveränderung(), -100, 0.5);
+        assertEquals(testGuV.getTaeglicheLiquiditaetsveraenderung(), -100, 0.5);
     }
 
     @Test

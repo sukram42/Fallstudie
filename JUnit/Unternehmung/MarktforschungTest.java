@@ -1,5 +1,6 @@
 package Unternehmung;
 
+import Unternehmung.Objekte.Marktforschung;
 import org.junit.Before;
 import org.junit.Test;
 

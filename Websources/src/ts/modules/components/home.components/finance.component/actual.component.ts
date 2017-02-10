@@ -31,7 +31,6 @@ export class ActualComponent implements OnInit{
     loadKonten() {
         this._keyfigService.getKeyFigures().subscribe(data => {
             this.keyfigures = data;
-            console.log(data);
         });
     }
 

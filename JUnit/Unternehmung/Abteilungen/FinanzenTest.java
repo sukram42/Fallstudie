@@ -21,7 +21,7 @@ public class FinanzenTest{
         Unternehmen unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
         kennzahlensammlung = unternehmen.getKennzahlensammlung();
         unternehmen.getAbteilung("hr").addMitarbeiter(1, 1000);
-        testfinanzen = new Finanzen(kennzahlensammlung);
+        testfinanzen = new Finanzen(unternehmen);
     }
 
     @Test

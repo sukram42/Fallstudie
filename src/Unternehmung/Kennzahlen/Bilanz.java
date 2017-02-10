@@ -24,7 +24,6 @@ public class Bilanz {
     private float summePassiva;
 
     public Bilanz(Unternehmen unternehmen) {
-
         this.eigenkapital = 100000;
         this.liquideMittel = 100000;
         this.unternehmen = unternehmen;
@@ -40,7 +39,7 @@ public class Bilanz {
      * passt zu jedem Timer Count die liquidität entsprechend an (wirft bei Zahlungsunfähigkeit eine BankruptException)
      * wird außerdem aufgerufen, wenn einmalige Liquiditätsveränderungen statt finden (z.B. Kauf einer Maschine oder einmaliger Umsatzerlös)
      *
-     * @param liquiditätsVeränderung berechnet von GuV.getTaeglicheLiquiditätsveränderung
+     * @param liquiditätsVeränderung berechnet von GuV.getTaeglicheLiquiditaetsveraenderung
      */
     public void liquiditaetAnpassen(float liquiditätsVeränderung) throws BankruptException {
         if (this.liquideMittel * -1 <= liquiditätsVeränderung) {

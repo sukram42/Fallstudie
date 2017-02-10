@@ -16,7 +16,7 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>com.fallstudie.Interface</param-value>
+            <param-value>controller</param-value>
         </init-param>
         <init-param>
             <param-name>jersey.config.server.provider.classnames</param-name>
@@ -29,6 +29,6 @@
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
     <listener>
-        <listener-class>com.fallstudie.Interface.GameInterface</listener-class>
+        <listener-class>controller.GameController</listener-class>
     </listener>
 </web-app>

@@ -1,5 +1,6 @@
 package Unternehmung;
 
+import Unternehmung.Objekte.Marketingkampagne;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,21 +12,6 @@ import static org.junit.Assert.assertNotNull;
  * Created by D064018 on 23.01.2017.
  */
 public class MarketingkampagneTest {
-
-    @Test
-    public void setParamsByArt() throws Exception {
-
-    }
-
-    @Test
-    public void getLaufzeit() throws Exception {
-
-    }
-
-    @Test
-    public void setLaufzeit() throws Exception {
-
-    }
 
     private String art;
     private int laufzeit;
@@ -46,6 +32,24 @@ public class MarketingkampagneTest {
     public void getArt() throws Exception {
         assertEquals(testmarketingkampagne.getArt(), art);
     }
+
+
+    @Test
+    public void setParamsByArt() throws Exception {
+        assertNotNull(testmarketingkampagne.setParamsByArt("Print"));
+    }
+
+    @Test
+    public void getLaufzeit() throws Exception {
+        assertEquals(testmarketingkampagne.getLaufzeit(), 5);
+    }
+
+    @Test
+    public void setLaufzeit() throws Exception {
+        testmarketingkampagne.setLaufzeit(1);
+        assertEquals(testmarketingkampagne.getLaufzeit(), 1);
+    }
+
 
     @Test
     public void getImpact() throws Exception {

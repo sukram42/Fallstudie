@@ -9,14 +9,14 @@ public class Kundenzufriedenheit extends Kennzahl {
 
     public Kundenzufriedenheit(Unternehmen unternehmen) {
         super(unternehmen);
-        setBasiswert(0.1f);
+        setBasiswert(0);
     }
     @Override
     public float berechnen() {
-        float mitarbeiterzufriedenheit = unternehmen.getKennzahlensammlung().getWeicheKennzahl("mitarbeiterzufriedenheit").getWert();
-        float image = unternehmen.getKennzahlensammlung().getWeicheKennzahl("image").getWert();
+        //float mitarbeiterzufriedenheit = unternehmen.getKennzahlensammlung().getWeicheKennzahl("mitarbeiterzufriedenheit").getWert();
+        //float image = unternehmen.getKennzahlensammlung().getWeicheKennzahl("image").getWert();
 
-        setBasiswert(mitarbeiterzufriedenheit * 0.1f + image * 0.3f);
+        //setBasiswert(mitarbeiterzufriedenheit * 0.1f + image * 0.3f);
         return super.berechnen();
     }
 }
