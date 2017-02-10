@@ -1,6 +1,5 @@
 package Unternehmung.Objekte;
 
-import Unternehmung.Abteilungen.HR;
 import Unternehmung.Unternehmen;
 
 /**

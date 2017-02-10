@@ -6,6 +6,7 @@ import Rules.Game;
 import Unternehmung.*;
 import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Objekte.Ausschreibung;
+import Unternehmung.Objekte.Produkt;
 import Unternehmung.Objekte.Produktlinie;
 import Unternehmung.Objekte.Vertrag;
 
@@ -29,6 +30,10 @@ public class Vertrieb extends Abteilung {
         super("Vertrieb",kennzahlensammlung);
         this.unternehmen = unternehmen;
         this.produktion = (Produktion) produktion;
+        // Erster Kunde, um schneller in das Spiel hinein zu kommen:
+        Vertrag ersterVertrag = new Vertrag(new Produktlinie(new Produkt("Rucksack", 'C'), 100), "FirstCustomer AG", 3);
+        ersterVertrag.setStrafe(0);
+        this.accounts.add(ersterVertrag);
     }
 
     /**
@@ -114,6 +119,20 @@ public class Vertrieb extends Abteilung {
 
 
     // Getter und Setter:
+    public Map<String, Integer> getAccountsAsMap(){
+        Map<String, Integer> accountMap = new HashMap<String, Integer>();
+        for (Vertrag vertrag : this.accounts){
+            String produktID = vertrag.getProduktlinie().getId();
+            if (accountMap.get(produktID) == null){
+                accountMap.put(produktID, vertrag.getProduktlinie().getMenge());
+            } else {
+                int neueAnzahl = accountMap.get(produktID) + vertrag.getProduktlinie().getMenge();
+                accountMap.put(produktID, neueAnzahl);
+            }
+        }
+        return accountMap;
+    }
+
     public int getVerkaufteProdukte() {
         return verkaufteProdukte;
     }
@@ -122,7 +141,7 @@ public class Vertrieb extends Abteilung {
         return opportunities;
     }
 
-    public List<Vertrag> getAccounts() {
+    public CopyOnWriteArrayList<Vertrag> getAccounts() {
         return accounts;
     }
 

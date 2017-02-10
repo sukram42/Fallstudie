@@ -27,12 +27,12 @@ public class HalleTest{
 
     @Test
     public void getGröße() throws Exception {
-assertEquals(testhalle.getGröße(), größe);
+assertEquals(testhalle.getGroesse(), größe);
     }
 
     @Test
     public void getKapazität() throws Exception {
-        assertEquals(testhalle.getKapazität(), 5000);
+        assertEquals(testhalle.getKapazitaet(), 5000);
     }
 
     @Test

@@ -116,28 +116,28 @@ public class Produktion extends Abteilung {
         }
     }
 
-    public void produktionshalleKaufen(int größe){
-        Halle halle = new Halle("Produktionshalle", größe);
+    public void produktionshalleKaufen(int groesse){
+        Halle halle = new Halle("Produktionshalle", groesse);
         try {
             if (kennzahlensammlung.getBilanz().liquiditaetAusreichend(halle.getPreis())) {
                 kennzahlensammlung.getBilanz().liquiditaetAnpassen((-1f) * halle.getPreis());
                 kennzahlensammlung.getBilanz().addGebäude(halle.getPreis());
                 this.produktionshallen.add(halle);
-                System.out.println("Produktionshalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
+                System.out.println("Produktionshalle der Größe " + groesse + " für " + halle.getPreis() + " € gekauft.");
             }
         } catch (ZuWenigCashException | BankruptException e) {
             e.printStackTrace();
         }
     }
 
-    public void lagerhalleKaufen(int größe){
-        Halle halle = new Halle("Lagerhalle", größe);
+    public void lagerhalleKaufen(int groesse){
+        Halle halle = new Halle("Lagerhalle", groesse);
         try{
             if (kennzahlensammlung.getBilanz().liquiditaetAusreichend(halle.getPreis())) {
                 kennzahlensammlung.getBilanz().liquiditaetAnpassen(-1f * halle.getPreis());
                 kennzahlensammlung.getBilanz().addGebäude(halle.getPreis());
                 this.lagerhallen.add(halle);
-                System.out.println("Lagerhalle der Größe " + größe + " für " + halle.getPreis() + " € gekauft.");
+                System.out.println("Lagerhalle der Größe " + groesse + " für " + halle.getPreis() + " € gekauft.");
             }
         } catch (ZuWenigCashException | BankruptException e) {
             e.printStackTrace();
@@ -331,7 +331,7 @@ public class Produktion extends Abteilung {
     public int getGesamtenLagerPlatz(){
         int lagerplatz = 0;
         for (Halle halle : lagerhallen){
-            lagerplatz += halle.getKapazität();
+            lagerplatz += halle.getKapazitaet();
         }
         return lagerplatz;
     }
@@ -346,7 +346,7 @@ public class Produktion extends Abteilung {
     {
         int maschinenPlaetze = 0;
         for (Halle halle : this.produktionshallen){
-            maschinenPlaetze += halle.getKapazität();
+            maschinenPlaetze += halle.getKapazitaet();
         }
         return maschinenPlaetze;
     }
@@ -391,6 +391,20 @@ public class Produktion extends Abteilung {
             auftrag.getProdukt().setForschungsbonus(forschungsbonus);
             auftrag.getProdukt().setHerstellkosten(auftrag.getProdukt().getHerstellkosten() * forschungsbonus);
         }
+    }
+
+    public Map<String, Integer> getLagerAsMap(){
+        Map<String, Integer> lager = new HashMap<String, Integer>();
+        for (Produktlinie produktlinie : this.lager){
+            String produktID = produktlinie.getId();
+            if (lager.get(produktID) == null){
+                lager.put(produktID, produktlinie.getMenge());
+            } else {
+                int neueAnzahl = lager.get(produktID) + produktlinie.getMenge();
+                lager.put(produktID, neueAnzahl);
+            }
+        }
+        return lager;
     }
 
 

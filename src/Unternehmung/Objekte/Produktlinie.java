@@ -35,7 +35,7 @@ public class Produktlinie {
     }
 
     /**
-     * Konstruktor, der beim Fertigstellen des Produktes verwendet wird -> zum "Abstellen" im Lager (keine Laufzeit mehr benötigt)
+     * Konstruktor, der beim Fertigstellen des Produktes verwendet wird -> zum "Abstellen" im Lager (keine Laufzeit mehr benötigt) aber auch für ersten Kunden (siehe Vertrieb-Konstruktor)
      * @param produkt fertiggestelltes Produkt
      * @param menge produzierte / im Lager vorhandene Menge
      */

@@ -10,7 +10,6 @@ public class Produkt {
     private char qualitaetsstufe; // A-, B- oder C-Produkt
     private double herstellkosten; // Herstellkosten eines Produktes
     private double forschungsbonus; // kann zwischen 0 und 0,25 sein (-> bis zu 25% niedrigere Herstellkosten)
-    //private double preis; // Verkaufspreis
 
     /**
      * Konstruktor zum Erstellen eines Produktes (Herstellkosten werden generiert) in der Produktion
@@ -33,6 +32,7 @@ public class Produkt {
     public Produkt(String name, char qualitaetsstufe) {
         this.name = name;
         this.qualitaetsstufe = qualitaetsstufe;
+        this.herstellkosten = this.findHerstellkosten(name, qualitaetsstufe);
     }
 
     /**
@@ -44,7 +44,6 @@ public class Produkt {
 
     private double findHerstellkosten(String name, char qualitaetsstufe){
         switch (name) {
-            // TODO realistische / zum Spiel passende Zahlen einsetzen
             case "Rucksack":
                 switch (qualitaetsstufe){
                     case 'A': return 70;
