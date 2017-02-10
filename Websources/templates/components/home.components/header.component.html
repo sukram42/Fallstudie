@@ -2,6 +2,18 @@
     <div class="container-fluid">
         <!--Responsive-->
         <div class="navbar-header">
+            <div class="dropdown left" id="responsivedropdown">
+                <button class="btn btn-link navbar-btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
 
             <h3 class="navbar-brand"> {{companyName}}
                 <small>{{time}}</small>
