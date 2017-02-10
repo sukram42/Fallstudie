@@ -1,4 +1,4 @@
-package Unternehmung.Abteilungen.SozialeProjekte;
+package Unternehmung.Objekte;
 
 import Unternehmung.Abteilungen.HR;
 import Unternehmung.Unternehmen;
@@ -38,7 +38,6 @@ public class SozialProjekt {
     {
         active = true;
         aktuelleKosten = einmaligKosten;
-        //Impact in die Mitarbeiterzufriedenheit schreiben
         unternehmen.getKennzahlensammlung().getMitarbeiterzufriedenheit().addModifier(impact);
     }
 

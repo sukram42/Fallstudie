@@ -2,7 +2,6 @@ package Unternehmung;
 
 import Rules.Game;
 import Unternehmung.Abteilungen.*;
-import Unternehmung.Kennzahlen.Kennzahlensammlung;
 
 import java.util.Calendar;
 import java.util.HashMap;

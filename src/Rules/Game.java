@@ -1,7 +1,7 @@
 package Rules;
 
 import Unternehmung.Abteilungen.Vertrieb;
-import Unternehmung.Ausschreibung;
+import Unternehmung.Objekte.Ausschreibung;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 
@@ -129,7 +129,7 @@ public class Game extends TimerTask {
     }
 
     /**
-     * berechnet und setzt bei jedem Timer Intervall den absoluten mengenmäßigen Marktanteil für jedes Unternehmen
+     * berechnet und setzt bei jedem Timer Count den absoluten mengenmäßigen Marktanteil für jedes Unternehmen
      */
     private void updateMarktanteile() {
         int gesamtabsatz = getGesamtabsatz();

@@ -1,6 +1,8 @@
 package Unternehmung;
 
 import Rules.Game;
+import Unternehmung.Objekte.Produkt;
+import Unternehmung.Objekte.Produktlinie;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

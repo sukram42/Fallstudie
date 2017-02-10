@@ -2,7 +2,7 @@ package controller;
 
 import Unternehmung.Kennzahlen.Bilanz;
 import Unternehmung.Kennzahlen.Kennzahl;
-import Unternehmung.Kennzahlen.Kennzahlensammlung;
+import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 import org.json.simple.JSONObject;

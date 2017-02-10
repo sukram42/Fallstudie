@@ -8,7 +8,7 @@ import Unternehmung.Unternehmen;
  */
 public class Mitarbeiterzufriedenheit extends Kennzahl{
 
-    public final float FESTGEL_GEHALT= 5000;
+    public final float FESTGEL_GEHALT= 5000; // TODO realistische Zahl!
 
     public Mitarbeiterzufriedenheit(Unternehmen unternehmen)
     {

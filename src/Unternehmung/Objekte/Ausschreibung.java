@@ -1,6 +1,7 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 import Rules.Game;
+import Unternehmung.Unternehmen;
 
 import java.util.ArrayList;
 import java.util.Random;

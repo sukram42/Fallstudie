@@ -1,4 +1,4 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 import Rules.Game;
 
@@ -13,7 +13,7 @@ public class Produktlinie {
     private String id; // zur Identifikation der Produktlinie in der Map in der Klasse Produktion
                         // setzt sich zusammen aus Produktname und Qualitätsstufe
     private Produkt produkt; // zu produzierendes Produkt
-    private int menge; // in der Produktion: zu produzierende Menge pro Tag (angegeben vom User pro Monat) | im Lager: vorhandene Produkte
+    private int menge; // in der Produktion: zu produzierende Menge pro Monat (wird in Produktion.produkteFertigstellen() in Tage umgerechnet) | im Lager: vorhandene Produkte
     private int laufzeit; // Anzahl der Perioden in denen das Produkt produziert werden soll
     private Calendar beginn;
     private Calendar end;

@@ -5,9 +5,9 @@ import Exceptions.ZuWenigCashException;
 import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilung;
-import Unternehmung.Kennzahlen.Kennzahlensammlung;
-import Unternehmung.Marketingkampagne;
-import Unternehmung.Marktforschung;
+import Unternehmung.Kennzahlensammlung;
+import Unternehmung.Objekte.Marketingkampagne;
+import Unternehmung.Objekte.Marktforschung;
 
 import java.util.*;
 import java.util.HashMap;

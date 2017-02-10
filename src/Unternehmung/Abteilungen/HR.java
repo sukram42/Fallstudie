@@ -3,9 +3,9 @@ package Unternehmung.Abteilungen;
 
 import Exceptions.ZuWenigMitarbeiterException;
 import Unternehmung.Abteilung;
-import Unternehmung.Abteilungen.SozialeProjekte.SozialProjekt;
-import Unternehmung.Abteilungen.SozialeProjekte.ZeitGeld;
-import Unternehmung.Kennzahlen.Kennzahlensammlung;
+import Unternehmung.Objekte.SozialProjekt;
+import Unternehmung.Objekte.ZeitGeld;
+import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Mitarbeiter;
 import Unternehmung.Unternehmen;
 

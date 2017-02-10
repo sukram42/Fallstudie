@@ -6,8 +6,7 @@ import Exceptions.ZuHochVerschuldetException;
 import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilung;
-import Unternehmung.Kennzahlen.Kennzahlensammlung;
-import Unternehmung.Kredit;
+import Unternehmung.Objekte.Kredit;
 import Unternehmung.Unternehmen;
 
 import java.util.ArrayList;

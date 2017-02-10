@@ -4,7 +4,7 @@ import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilung;
 import Unternehmung.Abteilungen.HR;
-import Unternehmung.Abteilungen.SozialeProjekte.SozialProjekt;
+import Unternehmung.Objekte.SozialProjekt;
 import Unternehmung.Mitarbeiter;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;

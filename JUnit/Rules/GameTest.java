@@ -1,7 +1,7 @@
 package Rules;
 
 import Unternehmung.Abteilungen.Produktion;
-import Unternehmung.Kennzahlen.Kennzahlensammlung;
+import Unternehmung.Kennzahlensammlung;
 import Unternehmung.Unternehmen;
 import org.junit.After;
 import org.junit.Before;

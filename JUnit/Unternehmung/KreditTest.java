@@ -1,6 +1,7 @@
 package Unternehmung;
 
 import Rules.Game;
+import Unternehmung.Objekte.Kredit;
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
