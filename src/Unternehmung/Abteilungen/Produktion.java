@@ -393,6 +393,20 @@ public class Produktion extends Abteilung {
         }
     }
 
+    public Map<String, Integer> getLagerAsMap(){
+        Map<String, Integer> lager = new HashMap<String, Integer>();
+        for (Produktlinie produktlinie : this.lager){
+            String produktID = produktlinie.getId();
+            if (lager.get(produktID) == null){
+                lager.put(produktID, produktlinie.getMenge());
+            } else {
+                int neueAnzahl = lager.get(produktID) + produktlinie.getMenge();
+                lager.put(produktID, neueAnzahl);
+            }
+        }
+        return lager;
+    }
+
 
     // Getter und Setter:
     public Map<String, Double> getForschungsboni() {

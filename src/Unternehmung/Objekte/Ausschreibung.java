@@ -18,6 +18,7 @@ public class Ausschreibung {
     private static final transient String[] kunden = {"SchickerRucksackAG","Outdoorjoh.com","BergNeelSen","BergeUndSo",
             "BergDoktor.com","Berglises Hausladen","My Litty Moutain","AdventureTime","LaBoutiqueDeLaSporte",
             "EA Sports", "Bags & more", "Climbers Equipment Inc.", "Wack Jolfskin", "Gear4Fun", "Travelbuddy GmbH", "TielschSports"};
+
     private Vertrag vertrag;
     private ArrayList<Unternehmen> bewerber = new ArrayList<>();
 

@@ -119,6 +119,20 @@ public class Vertrieb extends Abteilung {
 
 
     // Getter und Setter:
+    public Map<String, Integer> getAccountsAsMap(){
+        Map<String, Integer> accountMap = new HashMap<String, Integer>();
+        for (Vertrag vertrag : this.accounts){
+            String produktID = vertrag.getProduktlinie().getId();
+            if (accountMap.get(produktID) == null){
+                accountMap.put(produktID, vertrag.getProduktlinie().getMenge());
+            } else {
+                int neueAnzahl = accountMap.get(produktID) + vertrag.getProduktlinie().getMenge();
+                accountMap.put(produktID, neueAnzahl);
+            }
+        }
+        return accountMap;
+    }
+
     public int getVerkaufteProdukte() {
         return verkaufteProdukte;
     }
