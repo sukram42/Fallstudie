@@ -1,4 +1,5 @@
 \section{Rest-Schnittstelle \textnormal{\textsf{\small{Markus Böbel}}}}
+\label{sec:rest}
 
 Die Verbindung zwischen der Programmlogik im Java Backend und dem Angular-2-Frontend wird über eine so genannte \acf{REST}- Schnittstelle geschaffen. Dieses basiert auf dem \acf{HTTP}, welche es ermöglicht verschiedene Daten zwischen einem Client und einem Server zu senden.
 Eine Nachricht des \acl{HTTP} besteht aus einem Header, welcher Meta-Daten einer Anfrage, und einen Body, welcher Daten zur Übertragung enthält.
@@ -30,7 +31,7 @@ Nachdem eine Anfrage erfolgreich den Server erreicht hat, bearbeitet dieser die 
 	\item[200(\texttt{OK})] Die Anfrage wurde erfolgreich abgearbeitet
 	\item[201(\texttt{CREATED})] Ein Objekt wurde erfolgreich erstellt
 	
-	\item[400(\texttt{BAD REQUEST)})] Wird zurückgegeben wenn eine Anfrage fehlerhaft ist. Gründe dafür könnte ein falsch codierter Body sein.
+	\item[400(\texttt{BAD REQUEST})] Wird zurückgegeben wenn eine Anfrage fehlerhaft ist. Gründe dafür könnte ein falsch codierter Body sein.
 	\item[401(\texttt{UNAUTHORIZED})] Dieser Status wird zurückgegeben, wenn eine nicht autorisierte Anfrage getätigt wurde.
 	\item[405(\texttt{METHOD NOT ALLOWED})] Wird zurückgegeben, wenn eine URL für das gesendete Verb nicht definiert ist.
 	\item[409(\texttt{CONFLICT})] Dieser Status besagt, dass eine Anfrage nicht durchgeführt werden kann. Ein Beispiel dafür könnte sein, dass ein Unternehmen bereits existiert und deshalb nicht neu erstellt werden kann.
