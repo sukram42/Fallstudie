@@ -111,8 +111,6 @@ public class HR extends Abteilung {
         projekte.add(new ZeitGeld("urlaubsgeld", (this.getTotalGehalt() * 0.5f), 0.2f, Calendar.JULY, unternehmen));
         projekte.add(new ZeitGeld("weihnachtsgeld", (this.getTotalGehalt() * 0.3f), 0.15f, Calendar.DECEMBER, unternehmen));
         projekte.add(new SozialProjekt("kindergarten", 100000, 2000, 0.25f, unternehmen));
-
-        // TODO Mitarbeiterzufriedenheit erhöhen
     }
 
     // Hilfsmethoden + Getter und Setter:

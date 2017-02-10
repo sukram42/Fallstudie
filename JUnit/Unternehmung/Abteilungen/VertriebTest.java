@@ -62,7 +62,7 @@ public class VertriebTest{
         testVertrieb.addMitarbeiter(1, 2000);
         testVertrieb.bewerben(Game.getAusschreibungen().get(1));
         testVertrieb.getAccounts().add(Game.getAusschreibungen().get(1).getVertrag());
-        assertTrue(testVertrieb.getAccounts().size() == 1);
+        assertTrue(testVertrieb.getAccounts().size() == 2);
     }
 
     @After

@@ -7,48 +7,47 @@ package Unternehmung.Objekte;
 public class Halle {
 
     private String halle; // Art der Halle (Lager- oder Produktionshalle)
-    private int größe; // 1, 2 oder 3
-    private int kapazität; // abhängig von der Größe (Maschinenkapazität oder Lagerfläche)
+    private int groesse; // 1, 2 oder 3
+    private int kapazitaet; // abhängig von der Größe (Maschinenkapazität oder Lagerfläche)
     private float preis; // Kaufpreis, abhängig von der Größe
 
-    public Halle(String halle, int größe) {
+    public Halle(String halle, int groesse) {
         this.halle = halle;
-        this.größe = größe;
-        findPreisUndKapazität(halle, größe);
+        this.groesse = groesse;
+        findPreisUndKapazitaet(halle, groesse);
     }
 
-    private void findPreisUndKapazität(String halle, int größe){
+    private void findPreisUndKapazitaet(String halle, int groesse){
         switch (halle){
-            // TODO realistische / zum Spiel passende Zahlen einsetzen
             case "Lagerhalle": // wie viele Produkte passen in das Lager?
-                switch (größe){
+                switch (groesse){
                     case 1:
                         this.preis = 10000;
-                        this.kapazität = 2000;
+                        this.kapazitaet = 2000;
                         break;
                     case 2:
                         this.preis = 20000;
-                        this.kapazität = 5000;
+                        this.kapazitaet = 5000;
                         break;
                     case 3:
                         this.preis = 38000;
-                        this.kapazität = 10000;
+                        this.kapazitaet = 10000;
                         break;
                 }
                 break;
             case "Produktionshalle": // wie viele Maschinen passen in die Halle?
-                switch (größe){
+                switch (groesse){
                     case 1:
                         this.preis = 30000;
-                        this.kapazität = 20;
+                        this.kapazitaet = 20;
                         break;
                     case 2:
                         this.preis = 65000;
-                        this.kapazität = 50;
+                        this.kapazitaet = 50;
                         break;
                     case 3:
                         this.preis = 120000;
-                        this.kapazität = 100;
+                        this.kapazitaet = 100;
                         break;
                 }
                 break;
@@ -56,12 +55,12 @@ public class Halle {
     }
 
     // Getter und Setter:
-    public int getGröße() {
-        return größe;
+    public int getGroesse() {
+        return groesse;
     }
 
-    public int getKapazität() {
-        return kapazität;
+    public int getKapazitaet() {
+        return kapazitaet;
     }
 
     public float getPreis() {

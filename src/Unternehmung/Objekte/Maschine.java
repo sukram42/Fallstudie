@@ -26,9 +26,9 @@ public class Maschine {
     public Maschine(String produkt, int klasse) {
         this.produkt = produkt;
         this.klasse = klasse;
-        this.energiekosten = ENERGIEKOSTEN; // <- TODO realistischen / zum Spiel passenden Wert für Energiekosten einsetzen
+        this.energiekosten = ENERGIEKOSTEN;
         this.status = 1;
-        findKapazitätUndAnschaffungskst(klasse);
+        findKapazitaetUndAnschaffungskst(klasse);
     }
 
     /**
@@ -39,7 +39,6 @@ public class Maschine {
         double currentStatus = this.status; // Ausgangsstatus der Maschine
         float kosten = 0;
         try {
-            // TODO realistisch / zum Spiel passende Werte einsetzen
             if (currentStatus < 0.1) {
                 kosten = 1500;
             } else if (currentStatus < 0.2) {
@@ -71,7 +70,7 @@ public class Maschine {
         }
     }
 
-    private void findKapazitätUndAnschaffungskst(int klasse){
+    private void findKapazitaetUndAnschaffungskst(int klasse){
         switch (klasse){
             // TODO realistisch / zum Spiel passende Werte einsetzen
             case 1:
