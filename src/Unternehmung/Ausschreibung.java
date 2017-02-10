@@ -49,7 +49,7 @@ public class Ausschreibung {
         }
         // Intervall = [50; durchschnittliche Produktionsmenge *1.5]:
         int intervallEnde = Math.round(durchschnittlicheProduktionsmenge * 1.5f);
-        menge = random.nextInt(intervallEnde) + 50;
+        menge = random.nextInt(intervallEnde+1) + 50;
         return new Produktlinie(new Produkt(name, qualitaetsstufe), menge);
     }
 

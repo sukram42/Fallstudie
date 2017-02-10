@@ -5,6 +5,7 @@
 
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {KeyFiguresService} from "../../services/keyfigures.service";
+import {HomeService} from "../../services/home.service";
 
 @Component({
     selector: 'home-component',
@@ -15,6 +16,7 @@ import {KeyFiguresService} from "../../services/keyfigures.service";
 export class DashboardComponent implements OnInit {
 
     @ViewChild('barchart') chart;
+    @ViewChild('marktchart') marktanteile;
 
     keyfigures;
     type = 'radar';
@@ -51,14 +53,14 @@ export class DashboardComponent implements OnInit {
     };
 
     type3 = 'polarArea';
-    data3 = {
-        labels: ["Test AG", "Test AG 2", "Test AG 3"],
+    marktanteileData = {
+        labels: [],
         datasets: [
             {
                 label: "Erträge",
                 backgroundColor: ["rgba(255,173,41,0.7)", "rgba(49,35,61,0.7)", "rgba(28,29,33,0.7)"],
                 borderColor: ["rgba(255,173,41,1)", "rgba(49,35,61,1)", "rgba(28,29,33,1)"],
-                data: [60, 30, 10]
+                data: []
             }
         ]
     };
@@ -69,7 +71,7 @@ export class DashboardComponent implements OnInit {
     };
 
 
-    constructor(private _keyFigures: KeyFiguresService) {
+    constructor(private _keyFigures: KeyFiguresService,private _homeService:HomeService) {
         _keyFigures.getArchivKennzahlen()
             .subscribe(data => this.fillAufwandChar(data));
 
@@ -119,5 +121,20 @@ export class DashboardComponent implements OnInit {
             }
         }
         this.chart.chart.update();
+    }
+    fillMarktanteile()
+    {
+        this._homeService.getMarktanteile().subscribe(data=> {
+            for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    if (!this.aufwandchar.labels.includes(key)) {
+                        this.marktanteileData.labels.push(key)
+                        this.marktanteileData.datasets[0].data.push(data[key])
+                    }
+                }
+            }
+        });
+
+        this.marktanteile.chart.update();
     }
 }

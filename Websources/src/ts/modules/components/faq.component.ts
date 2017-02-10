@@ -6,10 +6,9 @@ import {Component, OnInit} from '@angular/core';
 import {HomeService} from "../services/home.service";
 
 @Component({
-    selector: 'datenschutz-component',
-    templateUrl: '../../../../templates/components/datenschutz.component.html',
+    selector: 'faq-component',
+    templateUrl: '../../../../templates/components/faq.component.html',
 })
 
-export class DatenschutzComponent{
-
+export class FAQComponent{
 }

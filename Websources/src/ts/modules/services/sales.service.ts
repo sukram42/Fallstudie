@@ -47,7 +47,7 @@ export class SalesService {
     {
         return this.http.post('http://localhost:8080/rest/companies/sales/credits',values)
             .map(response=> response.text())
-            .subscribe(data=>this.creditSubject.next(data));
+            .subscribe(data=>{this.creditSubject.next(data),console.log(data)});
     }
 
     getCredits()

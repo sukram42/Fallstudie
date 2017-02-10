@@ -1,3 +1,112 @@
+<div class="modal fade" id="impressumModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabe5">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="form-horizontal">
+                <div class="modal-header">
+                    <div class="row">
+
+                        <div class="col-md-11">
+                            <h4 class="modal-title" id="myModalLabe5"> Impressum</h4>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <impressum-component></impressum-component>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Modal Datenschutz-->
+<base href="/">
+<div class="modal fade" id="datenschutzModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabe6">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="form-horizontal">
+                <div class="modal-header">
+                    <div class="row">
+
+                        <div class="col-md-11">
+                            <h4 class="modal-title" id="myModalLabe6"> Datenschutzerklärung</h4>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <datenschutz-component></datenschutz-component>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Modal FAQ-->
+<base href="/">
+<div class="modal fade" id="faqModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabe7">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="form-horizontal">
+                <div class="modal-header">
+                    <div class="row">
+
+                        <div class="col-md-11">
+                            <h4 class="modal-title" id="myModalLabe7"> FAQ</h4>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <faq-component></faq-component>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<player-component>Loading</player-component>
+
+<!--Modal Highscore-->
+<base href="/">
+<div class="modal fade" id="scoreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabe9">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="form-horizontal">
+                <div class="modal-header">
+                    <div class="row">
+
+                        <div class="col-md-11">
+                            <h4 class="modal-title" id="myModalLabe9"> Highscores</h4>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <!-- Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="meinModalLabel">
     <div class="modal-dialog" role="document">
@@ -31,7 +140,8 @@
                         </div>
                     </div>
                     <div class="col-md-1">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Schließen"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Schließen"><span
+                                aria-hidden="true">&times;</span></button>
                     </div>
                 </div>
             </div>
@@ -94,25 +204,25 @@
         </div>
     </nav>
     <div class="content">
-            <div id="heading">
-                <h1>EARTHBOUND</h1>
-            </div>
-            <p>It's time for <br>another ADVENTURE</p>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
+        <div id="heading">
+            <h1>EARTHBOUND</h1>
+        </div>
+        <p>It's time for <br>another ADVENTURE</p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
 
-                        <!-- Button, der das Modal aufruft -->
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">
-                            Jetzt Loslegen!
-                        </button>
+                    <!-- Button, der das Modal aufruft -->
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">
+                        Jetzt Loslegen!
+                    </button>
 
-                    </div>
-                    <div class="col-md-4">
-                    </div>
+                </div>
+                <div class="col-md-4">
                 </div>
             </div>
+        </div>
         <div id="beta">
             <h6><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                 Open Beta

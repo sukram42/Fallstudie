@@ -131,7 +131,8 @@ import {KreditListComponent} from "./components/home.components/finance.componen
         ActualComponent,
         NewResearchComponent,
         NewKreditComponent,
-        KreditListComponent
+        KreditListComponent,
+        FinancesComponent
     ],
 
     bootstrap: [HomeComponent],

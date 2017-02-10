@@ -23,8 +23,12 @@ public class GameController implements ServletContextListener{
 
     private static Game game;
 
-
-
+    @GET
+    @Path("players")
+    public Response getMarktanteile()
+    {
+        return Response.ok(gson.toJson(Game.getMarktanteile())).build();
+    }
 
     @GET
     @Path("time")

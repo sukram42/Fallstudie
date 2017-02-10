@@ -6,7 +6,11 @@ import {HttpModule} from '@angular/http';
 import {StartComponent} from "./components/start.component";
 import {LoginFormComponent} from "./components/login-formular.component";
 import {RegisterFormularComponent} from "./components/register-formular.component";
+import {PlayerComponent} from "./components/player.component";
+import {FAQComponent} from "./components/faq.component";
 import {ImpressumComponent} from "./components/impressum.component";
+import {DatenschutzComponent} from "./components/datenschutz.component";
+import {MapToIterable} from "./pipes/map.pipe";
 
 @NgModule({
     imports: [
@@ -18,7 +22,11 @@ import {ImpressumComponent} from "./components/impressum.component";
         StartComponent,
         LoginFormComponent,
         RegisterFormularComponent,
-        ImpressumComponent],
+        PlayerComponent,
+        FAQComponent,
+        ImpressumComponent,
+        DatenschutzComponent,
+        MapToIterable],
 
     bootstrap:    [StartComponent]
 })
