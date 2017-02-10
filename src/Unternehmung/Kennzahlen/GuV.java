@@ -76,10 +76,9 @@ public class GuV {
 
     /**
      * wird von der update()-Methode der Kennzahlensammlung aufgerufen
-     *
      * @return tägliche Liquiditätsveränderung
      */
-    public float getTaeglicheLiquiditätsveränderung() {
+    public float getTaeglicheLiquiditaetsveraenderung() {
         float kosten;
         float gehälter = 0;
         float umsatz = 0; // TODO Umsatz ergänzen, wenn Sales-Klasse steht:

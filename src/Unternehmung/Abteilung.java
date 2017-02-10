@@ -1,7 +1,6 @@
 package Unternehmung;
 
 import Exceptions.ZuWenigMitarbeiterException;
-import Unternehmung.Kennzahlen.Kennzahlensammlung;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -38,7 +37,7 @@ public class Abteilung {
 //		if (this.kennzahlensammlung.liquiditätVorhanden(gehalt * anzahl, "gehälter")) {
 
             try {
-                URL url = new URL("https://randomuser.me/api/?results=" + anzahl + "&inc=name,picture,gender,location");
+                URL url = new URL("https://randomuser.me/api/?results=" + anzahl + "&inc=name,picture,gender");
                 URLConnection connection = url.openConnection();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 while ((content = reader.readLine()) != null) {
@@ -57,11 +56,9 @@ public class Abteilung {
 
             for (int i = 0; i < array.size(); i++) {
                 JsonObject name = (JsonObject) array.get(i).getAsJsonObject().get("name");
-                JsonObject address = (JsonObject) array.get(i).getAsJsonObject().get("location");
                 JsonObject picture = (JsonObject) array.get(i).getAsJsonObject().get("picture");
 
                 Mitarbeiter m = new Mitarbeiter(name.get("last").getAsString(), name.get("first").getAsString(),
-                        address.get("street").getAsString() + " " + address.get("city").getAsString(),
                         picture.get("medium").getAsString(), 'w', gehalt);
                 m.setDepartment(this);
 

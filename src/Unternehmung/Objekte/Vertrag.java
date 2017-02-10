@@ -1,7 +1,7 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 import Rules.Game;
-import Unternehmung.Kennzahlen.Kennzahlensammlung;
+import Unternehmung.Kennzahlensammlung;
 
 import java.util.Calendar;
 

@@ -1,4 +1,4 @@
-package Unternehmung.Abteilungen.SozialeProjekte;
+package Unternehmung.Objekte;
 
 import Rules.Game;
 import Unternehmung.Unternehmen;

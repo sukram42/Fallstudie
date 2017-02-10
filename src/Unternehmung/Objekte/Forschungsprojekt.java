@@ -1,8 +1,8 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 import Rules.Game;
 import Unternehmung.Abteilungen.Forschung;
-import Unternehmung.Kennzahlen.Kennzahlensammlung;
+import Unternehmung.Kennzahlensammlung;
 
 import java.util.Calendar;
 

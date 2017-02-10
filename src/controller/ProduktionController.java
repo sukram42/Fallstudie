@@ -3,7 +3,7 @@ package controller;
 import Exceptions.ZuWenigMaschinenstellplatzException;
 import Exceptions.ZuWenigMitarbeiterOderMaschinenException;
 import Unternehmung.Abteilungen.Produktion;
-import Unternehmung.Produktlinie;
+import Unternehmung.Objekte.Produktlinie;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

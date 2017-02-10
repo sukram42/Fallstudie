@@ -1,4 +1,4 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 /**
  * Klasse, die ein Produkt repräsentiert

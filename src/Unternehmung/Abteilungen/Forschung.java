@@ -3,8 +3,8 @@ package Unternehmung.Abteilungen;
 import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilung;
-import Unternehmung.Forschungsprojekt;
-import Unternehmung.Kennzahlen.Kennzahlensammlung;
+import Unternehmung.Objekte.Forschungsprojekt;
+import Unternehmung.Kennzahlensammlung;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,7 +85,7 @@ public class Forschung extends Abteilung{
                               int mitarbeiterAnzahl, int dauer, boolean herstellkosten)throws ZuWenigMitarbeiterException{
         if((beschäftigteMitarbeiter + mitarbeiterAnzahl) <= this.getMitarbeiterAnzahl()) { //Überprüfung, ob es genügend Mitarbeiter gibt
             beschäftigteMitarbeiter =+ mitarbeiterAnzahl;
-            Forschungsprojekt forschungsprojekt = new Forschungsprojekt(kennzahlensammlung, forschung, forschungsobjekt, mitarbeiterAnzahl, dauer, herstellkosten);
+            Forschungsprojekt forschungsprojekt = new Forschungsprojekt(forschung, forschungsobjekt, mitarbeiterAnzahl, dauer, herstellkosten);
             beforschteProdukte.add(forschungsobjekt);
             projekte.add(forschungsprojekt);
         }else{

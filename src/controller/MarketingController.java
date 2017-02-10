@@ -2,7 +2,7 @@ package controller;
 
 import Exceptions.ZuWenigMitarbeiterException;
 import Unternehmung.Abteilungen.Marketing;
-import Unternehmung.Marketingkampagne;
+import Unternehmung.Objekte.Marketingkampagne;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 

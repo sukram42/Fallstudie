@@ -1,4 +1,4 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 /**
  * eine Halle kann eintweder eine Lager- oder eine Produktionshalle sein

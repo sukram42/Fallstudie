@@ -1,8 +1,8 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 import Exceptions.BankruptException;
 import Exceptions.ZuWenigCashException;
-import Unternehmung.Kennzahlen.Kennzahlensammlung;
+import Unternehmung.Kennzahlensammlung;
 
 /**
  * repräsentiert eine Maschine
