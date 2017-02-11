@@ -1,5 +1,6 @@
 package Exceptions;
 
+import Rules.Game;
 import Unternehmung.Unternehmen;
 
 /**
@@ -11,6 +12,7 @@ public class BankruptException extends Exception{
     public BankruptException(Unternehmen company){
         super("GAME OVER: Das Unternehmen ist zahlungsunfähig!");
         company.getKennzahlensammlung().setBankrupt();
+        Game.getHighscores().put(company.getKennzahlensammlung().getBilanz().getEigenkapital(), company.getName());
     }
 
 }
