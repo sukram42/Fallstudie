@@ -4,6 +4,7 @@ import Unternehmung.Abteilungen.Vertrieb;
 import Unternehmung.Objekte.Ausschreibung;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
+import sun.reflect.generics.tree.Tree;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -23,6 +24,7 @@ public class Game extends TimerTask {
     private static ArrayList<Unternehmen> companies = new ArrayList<>();
     private static ArrayList<Unternehmen> companiesArchiv = new ArrayList<>();
     private static List<Ausschreibung> ausschreibungen = new CopyOnWriteArrayList<>();
+    private static Map<Float, String> highscores = new HashMap<>();
 
     /**
      * Konstruktor für ein Spiel mit 2 Spielern
@@ -151,6 +153,12 @@ public class Game extends TimerTask {
     }
 
     // Getter, Setter und Hilfsmethoden:
+    /**
+     * @return Highscores als sortierte TreeMap
+     */
+    public static Map<Float, String> getHighscoresAsTreeMap(){
+        return new TreeMap<Float, String>(highscores);
+    }
 
     public static Map<String, Double> getMarktanteile() {
         Map<String, Double> marktanteile = new HashMap<>();
@@ -206,6 +214,10 @@ public class Game extends TimerTask {
 
     public static List<Ausschreibung> getAusschreibungen() {
         return ausschreibungen;
+    }
+
+    public static Map<Float, String> getHighscores() {
+        return highscores;
     }
 
 }
