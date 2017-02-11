@@ -36,7 +36,7 @@ export class SalesService {
     {
         return this.http.post('http://localhost:8080/rest/companies/sales/ausschreibungen',index)
             .map(response => response.text())
-            .subscribe(data=>this.opportunitiesSubject.next(data),err=>this.opportunitiesSubject.error(err));
+            .subscribe(data=>this.opportunitiesSubject.next(data));
     }
     getAccounts()
     {
@@ -48,6 +48,16 @@ export class SalesService {
         return this.http.post('http://localhost:8080/rest/companies/sales/credits',values)
             .map(response=> response.text())
             .subscribe(data=>{this.creditSubject.next(data),console.log(data)});
+    }
+
+    getAusbringung()
+    {
+        return this.http.get('http://localhost:8080/rest/companies/sales/volume').map(res=>res.json());
+    }
+
+    getBestand()
+    {
+        return this.http.get('http://localhost:8080/rest/companies/sales/durations').map(res=>res.json());
     }
 
     getCredits()

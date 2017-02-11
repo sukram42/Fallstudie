@@ -2,6 +2,7 @@ package Unternehmung;
 
 import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
+import Unternehmung.Abteilungen.Forschung;
 import Unternehmung.Abteilungen.HR;
 import Unternehmung.Abteilungen.Marketing;
 import Unternehmung.Abteilungen.Vertrieb;
@@ -27,12 +28,6 @@ public class UnternehmenTestklasse {
 
         game.getCompanies().add(unternehmen1);
 
-        System.out.println("Liquide Mittel " + unternehmen1.getKennzahlensammlung().getBilanz().getLiquideMittel());
-
-        System.out.println("Unternehmen " + unternehmen1.getName() + " mit Eigenkapital in Höhe von " +
-                unternehmen1.getKennzahlensammlung().getBilanz().getEigenkapital() + " und Fremdkapital in Höhe von " +
-                unternehmen1.getKennzahlensammlung().getBilanz().getFremdkapital() + " gegründet.");
-
         try {
             unternehmen1.getAbteilung("hr").addMitarbeiter(1, 2500);
             System.out.println("Mitarbeiterzufriedenheit : " + unternehmen1.getKennzahlensammlung().getMitarbeiterzufriedenheit().berechnen());
@@ -40,58 +35,25 @@ public class UnternehmenTestklasse {
             e.printStackTrace();
         }
 
-        ((HR)unternehmen1.getAbteilung("hr")).startProjekt("kantine");
-        System.out.println("Mitarbeiterzufriedenheit mit Kantine: " + unternehmen1.getKennzahlensammlung().getMitarbeiterzufriedenheit().berechnen());
-        System.out.println("Kundenzufriedenheit: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("kundenzufriedenheit").berechnen());
-        System.out.println("Image: " + unternehmen1.getKennzahlensammlung().getWeicheKennzahl("image").berechnen());
-
         for(int i = 0; i < 40;i++)
         {
             game.run();
         }
-        System.out.println(new Gson().toJson(unternehmen1.getKennzahlensammlung().getGuv().getArchiv()));
 
-        // Mitarbeiter einstellen:
         try {
-//            unternehmen1.getAbteilung("hr").addMitarbeiter(5, 25000);
-//            unternehmen1.getAbteilung("produktion").addMitarbeiter(1, 25000);
-            unternehmen1.getAbteilung("vertrieb").addMitarbeiter(1, 25000);
-        } catch (ZuWenigMitarbeiterException e){
-            e.printStackTrace();
-        }
-        //unternehmen1.getAbteilung("vertrieb").addMitarbeiter(1, 35000);
+            Forschung f = (Forschung)unternehmen1.getAbteilung("forschung");
+            f.addMitarbeiter(2,2500);
+            f.starteProjekt("RucksackB",1,1,true);
+            System.out.println("PROJEKTE " + new Gson().toJson(f.getProjekte()));
 
+            game.run();
+            game.run();
+            System.out.println("PROJEKTE " + new Gson().toJson(f.getProjekte()));
+            System.out.println("ALTEPROJEKTE " + new Gson().toJson(f.getAbgeschlosseneForschungen()));
 
-        Vertrieb vertrieb = (Vertrieb)unternehmen1.getAbteilung("vertrieb");
-        try {
-            System.out.print("SIZE : "+ game.getAusschreibungen().size());
-            vertrieb.bewerben(Game.getAusschreibungen().get(0));
-            System.out.println(new Gson().toJson(vertrieb.getOpportunities()));
         } catch (ZuWenigMitarbeiterException e) {
             e.printStackTrace();
         }
-
-
-
-        // Marketingkampagne und Marktforschung:
-        Marketing marketing1 = (Marketing) unternehmen1.getAbteilung("marketing");
-        try {
-            marketing1.addMitarbeiter(1,1);
-            marketing1.marketingkampagneStarten("Social",1);
-            game.run();
-            game.run();
-            System.out.println(Game.getTimeString());
-        } catch (ZuWenigMitarbeiterException e) {
-            e.printStackTrace();
-        }
-//        marketing1.marketingKampagne("Print");
-//        marketing1.marketingKampagne("TV");
-//        marketing1.marktforschung(2);
-
-        // Rucksäcke verkaufen:
-        //Vertrieb vertrieb1 = (Vertrieb) unternehmen1.getAbteilung("vertrieb");
-        //vertrieb1.verkaufen("Rucksack", 55);
-
 
         // ############################## UNTERNEHMEN 2 ##############################
 //        // Unternehmen erstellen:

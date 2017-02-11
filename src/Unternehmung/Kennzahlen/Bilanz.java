@@ -20,8 +20,8 @@ public class Bilanz {
     private float eigenkapital;
     private float fremdkapital;
 
-    private float summeAktiva;
-    private float summePassiva;
+    private float summeAktiva = 0 ;
+    private float summePassiva = 0;
 
     public Bilanz(Unternehmen unternehmen) {
         this.eigenkapital = 100000;

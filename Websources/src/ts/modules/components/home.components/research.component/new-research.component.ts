@@ -3,10 +3,12 @@
  */
 
 
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {ResearchService} from "../../../services/research.service";
+import {FormGroup, Validators, FormBuilder} from "@angular/forms";
 
 @Component({
-    selector   : 'new-research-component',
+    selector: 'new-research-component',
     templateUrl: '../../../../templates/components/home.components/research.component/new-research.component.html',
 
 })
@@ -14,4 +16,19 @@ import { Component } from '@angular/core';
 export class NewResearchComponent {
 
 
+    newResearch: FormGroup;
+
+    constructor(private _researchService: ResearchService, private fb: FormBuilder) {
+
+        this.newResearch = fb.group({
+            'product': [null, Validators.required],
+            'quality':[null, Validators.required],
+            'mitCount': [null, Validators.compose([Validators.required, Validators.pattern("[0-9]+")])],
+            'dauer': [null, Validators.compose([Validators.required, Validators.pattern("[0-9]+")])],
+            'herstellkosten': [null, Validators.required]
+        });
+    }
+    submitForm(value: any) {
+        this._researchService.starteProjekt(value);
+    }
 }

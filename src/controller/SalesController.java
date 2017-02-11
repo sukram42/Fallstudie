@@ -6,10 +6,16 @@ import Exceptions.ZuHochVerschuldetException;
 import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilungen.Finanzen;
+import Unternehmung.Abteilungen.Produktion;
 import Unternehmung.Abteilungen.Vertrieb;
+import Unternehmung.Objekte.Ausschreibung;
+import Unternehmung.Objekte.Produkt;
+import Unternehmung.Objekte.Produktlinie;
+import Unternehmung.Objekte.Vertrag;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import sun.plugin.javascript.navig.Array;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,6 +24,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Path("companies/sales")
@@ -36,7 +43,7 @@ public class SalesController {
             sales.bewerben(Game.getAusschreibungen().get(index));
             return Response.ok("Auf Ausschreibung beworben").build();
         } catch (ZuWenigMitarbeiterException e) {
-            return Response.status(409).entity(e.toString()).build();
+            return Response.ok("ERROR:M" + e.toString()).entity(e.toString()).build();
         }
     }
 
@@ -56,7 +63,6 @@ public class SalesController {
     public Response getAccounts(@Context SecurityContext securityContext) {
         Unternehmen unternehmen = CompanyController.getCompanyFromContext(securityContext);
         Vertrieb sales = (Vertrieb) unternehmen.getAbteilung("vertrieb");
-
         return Response.ok().entity(gson.toJson(sales.getAccounts())).build();
     }
 
@@ -98,10 +104,30 @@ public class SalesController {
         Finanzen finanzen = getFinanzenFromContext(context);
         return Response.ok(gson.toJson(finanzen.getKredite())).build();
     }
+    @GET
+    @Secured
+    @Path("volume")
+    public Response getVolume(@Context SecurityContext context)
+    {
+        Vertrieb vertrieb = getVertriebFromContext(context);
+        return Response.ok(gson.toJson(vertrieb.getAccountsAsMap())).build();
+    }
+    @GET
+    @Secured
+    @Path("durations")
+    public Response getBestand(@Context SecurityContext context)
+    {
+        Unternehmen unternehmen = CompanyController.getCompanyFromContext(context);
+        Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
+        return Response.ok(gson.toJson(produktion.getLagerAsMap())).build();
+    }
 
-    public Finanzen getFinanzenFromContext(SecurityContext context) {
+    public static Finanzen getFinanzenFromContext(SecurityContext context) {
         Unternehmen unternehmen = CompanyController.getCompanyFromContext(context);
         return (Finanzen) unternehmen.getAbteilung("finanzen");
-
+    }
+    public static Vertrieb getVertriebFromContext(SecurityContext context) {
+        Unternehmen unternehmen = CompanyController.getCompanyFromContext(context);
+        return (Vertrieb) unternehmen.getAbteilung("vertrieb");
     }
 }

@@ -55,6 +55,7 @@ public class FinanceController {
     public Response getKennzahlensammlung(@Context SecurityContext securityContext) {
         Kennzahlensammlung kennzahl = CompanyController.getCompanyFromContext(securityContext).getKennzahlensammlung();
         kennzahl.getBilanz().setSummen();
+        kennzahl.getGuv().setSummen();
             return Response.ok(gson.toJson(kennzahl)).build();
     }
 

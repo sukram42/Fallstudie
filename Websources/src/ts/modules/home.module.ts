@@ -51,6 +51,9 @@ import {ActualComponent} from "./components/home.components/finance.component/ac
 import {NewResearchComponent} from "./components/home.components/research.component/new-research.component";
 import {NewKreditComponent} from "./components/home.components/finance.component/new-kredit.component";
 import {KreditListComponent} from "./components/home.components/finance.component/kredit-list.component";
+import {ResearchService} from "./services/research.service";
+import {ResearchListComponent} from "./components/home.components/research.component/research-list.component";
+import {OldResearchListComponent} from "./components/home.components/research.component/old-research-list.component";
 
 @NgModule({
     imports: [
@@ -132,12 +135,14 @@ import {KreditListComponent} from "./components/home.components/finance.componen
         NewResearchComponent,
         NewKreditComponent,
         KreditListComponent,
-        FinancesComponent
+        FinancesComponent,
+        ResearchListComponent,
+        OldResearchListComponent
     ],
 
     bootstrap: [HomeComponent],
     providers: [HRService, {provide: RequestOptions, useClass: AuthRequestOptions},
-        ProduktionService, KeyFiguresService, HomeService, SalesService,MarketingService
+        ProduktionService, KeyFiguresService, HomeService, ResearchService,SalesService,MarketingService
     ]
 })
 export class HomeModule {

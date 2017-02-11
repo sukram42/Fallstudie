@@ -20,12 +20,7 @@
                 <i class="fa fa-print" aria-hidden="true"      *ngIf = "campaign.art == 'Print'"></i>
                 <i class="fa fa-mobile" aria-hidden="true"     *ngIf = "campaign.art == 'Social Media'"></i>
                 {{campaign.art}}</h6>
-            Gesamtkosten: {{campaign.kosten}}
+            Restkosten: {{campaign.kosten * campaign.laufzeit}} €
         </li>
-        <!--<li class="list-group-item" >-->
-            <!--<span class="badge">300 Tage verbleibend</span>-->
-            <!--<h6><i class="fa fa-mobile" aria-hidden="true"></i> Social Media Kampagne</h6>-->
-            <!--Gesamtkosten: 2.500-->
-        <!--</li>-->
     </ul>
 </div>

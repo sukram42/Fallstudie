@@ -123,6 +123,10 @@ public class Maschine {
         return energiekosten;
     }
 
+    public static float getStaticEnergiekosten() {
+        return ENERGIEKOSTEN;
+    }
+
     public String getProdukt() {
         return produkt;
     }

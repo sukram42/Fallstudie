@@ -8,7 +8,7 @@
                     <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
                     Angebot #{{1+i}}
                 </a>
-                <span class="badge right">23 Tage verbleibend</span>
+                <span class="badge right">Entscheidung am {{opportunity.end.dayOfMonth}}-{{opportunity.end.month+1}}-{{opportunity.end.year}}</span>
             </h4>
         </div>
         <div [id]="'collapseopo' + i" class="panel-collapse collapse" role="tabpanel"
@@ -21,7 +21,8 @@
                     <h4 *ngIf="opportunity.vertrag.produktlinie.name == 'Reisetasche'">Ausschreibung für Reisetaschen</h4>
                     <br>
                     <h6>Produkt:</h6>
-                    <p>{{opportunity.vertrag.produktlinie.menge}} {{opportunity.vertrag.produktlinie.produkt.name}} pro Periode der Stufe {{opportunity.vertrag.produktlinie.produkt.qualitaetsstufe}}</p>
+                    <p>{{opportunity.vertrag.produktlinie.menge}}
+                        <span>{{opportunity.vertrag.produktlinie.produkt.name}}</span> pro Periode der Stufe {{opportunity.vertrag.produktlinie.produkt.qualitaetsstufe}}</p>
                     <h6>Laufzeit:</h6>
                     <p>{{opportunity.vertrag.laufzeit}} Monate</p>
                 </div>

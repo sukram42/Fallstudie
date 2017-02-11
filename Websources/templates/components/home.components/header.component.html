@@ -25,7 +25,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-brand">
                     <h4>
-                        <i class="fa fa-eur" aria-hidden="true"></i> {{liquideMittel}}
+                        <i class="fa fa-eur" aria-hidden="true"></i> {{runden(liquideMittel)}}
                     </h4>
                 </li>
                 <li class="navbar-brand">
@@ -53,7 +53,7 @@
                 <div class="center">
                     <img src="../../../src/img/skull2.png" height="362" width="400" style="padding-right: 30px;"/>
                     <p style="font-size: 30px;color: black;font-family: 'Walter Turncoat', cursive;">   you're pretty much dead!</p>
-                    <button class="ui inverted red secondary button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> zurück zur landingpage</button>
+                    <button class="ui inverted red secondary button" (click)="logOut()"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> zurück zur landingpage</button>
                 </div>
             </div>
         </div>

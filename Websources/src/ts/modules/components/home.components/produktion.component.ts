@@ -20,6 +20,7 @@ export class ProduktionComponent {
     employees;
     errorMaschinen;
     errorLinie;
+    sold;
     constructor(private proService:ProduktionService ,private hrService:HRService)
     {
         hrService.getEmployeesProduktion().subscribe(
@@ -30,7 +31,13 @@ export class ProduktionComponent {
             .subscribe(data=>{
                 if(data.toString().startsWith("ERROR"))
                     this.errorMaschinen = data;
-                else this.errorMaschinen = undefined;
+                else if (data.toString().startsWith("SOLD"))
+                    this.sold = data.toString().substring(5).trim();
+                else
+                {
+                    this.errorMaschinen = undefined;
+                    this.sold = undefined;
+                }
             });
 
         this.proService.getProductlinesSubject()

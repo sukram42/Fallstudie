@@ -3,12 +3,14 @@ package controller;
 import Exceptions.ZuWenigMaschinenstellplatzException;
 import Exceptions.ZuWenigMitarbeiterOderMaschinenException;
 import Unternehmung.Abteilungen.Produktion;
+import Unternehmung.Objekte.Maschine;
 import Unternehmung.Objekte.Produktlinie;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.json.simple.JSONObject;
 
+import javax.swing.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -60,11 +62,11 @@ public class ProduktionController {
 
         liste.put("Rucksack", (ArrayList<Produktlinie>) auftraege
                 .stream()
-                .filter(s -> s.getId().startsWith("Rucksack")&& !s.getId().startsWith("Rucksacktech"))
+                .filter(s -> s.getId().startsWith("Rucksack") && !s.getId().startsWith("Rucksacktech"))
                 .collect(Collectors.toList()));
-        liste.put("Rucksacktech",(ArrayList<Produktlinie>) auftraege
+        liste.put("Rucksacktech", (ArrayList<Produktlinie>) auftraege
                 .stream()
-                .filter(s->s.getId().startsWith("Rucksacktech"))
+                .filter(s -> s.getId().startsWith("Rucksacktech"))
                 .collect(Collectors.toList()));
         liste.put("Duffel", (ArrayList<Produktlinie>) auftraege
                 .stream()
@@ -105,13 +107,13 @@ public class ProduktionController {
     @Secured
     public Response buyWarehouse(@Context SecurityContext securityContext, String content) {
 //        try {
-            Unternehmen unternehmen = CompanyController.getCompanyFromContext(securityContext);
-            int groeße = Integer.parseInt(content);
+        Unternehmen unternehmen = CompanyController.getCompanyFromContext(securityContext);
+        int groeße = Integer.parseInt(content);
 
-            ((Produktion) unternehmen.getAbteilung("produktion"))
-                    .lagerhalleKaufen(groeße);
+        ((Produktion) unternehmen.getAbteilung("produktion"))
+                .lagerhalleKaufen(groeße);
 
-            return Response.ok("Lagerhalle erfolgreich gebaut").build();
+        return Response.ok("Lagerhalle erfolgreich gebaut").build();
 //        } catch (Exception e) {
 //            return Response.serverError().entity(e.toString()).build();
 //        }
@@ -195,16 +197,14 @@ public class ProduktionController {
     @GET
     @Secured
     @Path("machines/{no}/status")
-    public Response getMachinesStatus(@Context SecurityContext securityContext, @PathParam("no") String machinesNo)
-    {
+    public Response getMachinesStatus(@Context SecurityContext securityContext, @PathParam("no") String machinesNo) {
         Unternehmen unternehmen = CompanyController.getCompanyFromContext(securityContext);
         Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
 
         try {
             int no = Integer.parseInt(machinesNo);
             return Response.ok(produktion.getMaschinen().get(no).getStatus()).build();
-        }catch(NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             return Response.status(500).entity(gson.toJson(e)).build();
         }
 
@@ -214,7 +214,7 @@ public class ProduktionController {
     @PUT
     @Path("machines")
     @Secured
-    public Response repairMachines(@Context SecurityContext securityContext,String number) {
+    public Response repairMachines(@Context SecurityContext securityContext, String number) {
         try {
             Unternehmen unternehmen = CompanyController.getCompanyFromContext(securityContext);
             Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
@@ -229,4 +229,27 @@ public class ProduktionController {
         }
     }
 
+    @DELETE
+    @Path("machines/{number}")
+    @Secured
+    public Response sellMachines(@Context SecurityContext securityContext, @PathParam("number") String number) {
+        System.err.println(number);
+        try {
+            Unternehmen unternehmen = CompanyController.getCompanyFromContext(securityContext);
+            Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
+
+            int index = Integer.parseInt(number);
+            float preis = produktion.maschineVerkaufen(index);
+
+            return Response.ok("SOLD " + preis).build();
+        } catch (Exception e) {
+            return Response.serverError().entity(e.toString()).build();
+        }
+    }
+
+    @GET
+    @Path("machines/energy")
+    public Response getEnergiekosten() {
+        return Response.ok(Maschine.getStaticEnergiekosten()).build();
+    }
 }

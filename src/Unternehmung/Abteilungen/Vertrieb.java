@@ -27,7 +27,7 @@ public class Vertrieb extends Abteilung {
 
 
     public Vertrieb(Unternehmen unternehmen, Kennzahlensammlung kennzahlensammlung, Abteilung produktion) {
-        super("Vertrieb",kennzahlensammlung);
+        super("Sales",kennzahlensammlung);
         this.unternehmen = unternehmen;
         this.produktion = (Produktion) produktion;
         // Erster Kunde, um schneller in das Spiel hinein zu kommen:
