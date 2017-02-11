@@ -15,7 +15,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class Game extends TimerTask {
 
-    private static final int COUNTER_INTERVALL = 10 * 1000;//5 * 1000;//16*1000*60;//16 Minuten
+    private static final int COUNTER_INTERVALL =20 * 1000;//16*1000*60;//16 Minuten
     private static long counter = 0;
 
     private static Calendar gameCalendar = new GregorianCalendar(2010, 1, 1);
@@ -50,19 +50,23 @@ public class Game extends TimerTask {
         counter++;
         updateCounter();
 
-        for (Unternehmen u : companies) {
-            u.update();
-            bankruptTest(u);
-        }
-        this.updateMarktanteile();
-        if ((getCalendar().get(Calendar.MONTH) == Calendar.DECEMBER) && getCalendar().get(Calendar.DAY_OF_MONTH) == 31) {
+        try {
             for (Unternehmen u : companies) {
-                u.updateYearly();
+                u.update();
+                bankruptTest(u);
             }
+            this.updateMarktanteile();
+            if ((getCalendar().get(Calendar.MONTH) == Calendar.DECEMBER) && getCalendar().get(Calendar.DAY_OF_MONTH) == 31) {
+                for (Unternehmen u : companies) {
+                    u.updateYearly();
+                }
+            }
+
+            updateAusschreibungen();
+        }catch (Exception e)
+        {
+            System.out.println(e.toString());
         }
-
-        updateAusschreibungen();
-
     }
 
     /**
@@ -94,7 +98,7 @@ public class Game extends TimerTask {
                         float randomFloat = random.nextFloat();
                         float verkaufswahrscheinlichkeit = unternehmen.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert();
                         // Verkaufswahrscheinlichkeit auf 0.4 setzten, falls sie geringer ist, sodass die Chance nicht zu gering ist
-                        if (verkaufswahrscheinlichkeit < 0.4f) {
+                        if (verkaufswahrscheinlichkeit > 0.4f) {
                             verkaufswahrscheinlichkeit = 0.4f;
                         }
                         // das Unternehmen, dass als erstes ein Angebot abgegeben hat bekommt den Zuschlag, wenn ein zufälliger Float zwischen 0 und der Verkafuswahrscheinlichkeit liegt:
