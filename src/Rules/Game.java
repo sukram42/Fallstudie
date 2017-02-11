@@ -4,7 +4,6 @@ import Unternehmung.Abteilungen.Vertrieb;
 import Unternehmung.Objekte.Ausschreibung;
 import Unternehmung.Unternehmen;
 import com.google.gson.Gson;
-import sun.reflect.generics.tree.Tree;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -16,7 +15,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class Game extends TimerTask {
 
-    private static final int COUNTER_INTERVALL =20 * 1000;//16*1000*60;//16 Minuten
+    private static final int COUNTER_INTERVALL = 20 * 1000;//5 * 1000;//16*1000*60;//16 Minuten
     private static long counter = 0;
 
     private static Calendar gameCalendar = new GregorianCalendar(2010, 1, 1);
@@ -24,7 +23,6 @@ public class Game extends TimerTask {
     private static ArrayList<Unternehmen> companies = new ArrayList<>();
     private static ArrayList<Unternehmen> companiesArchiv = new ArrayList<>();
     private static List<Ausschreibung> ausschreibungen = new CopyOnWriteArrayList<>();
-    private static Map<Float, String> highscores = new HashMap<>();
 
     /**
      * Konstruktor für ein Spiel mit 2 Spielern
@@ -52,23 +50,19 @@ public class Game extends TimerTask {
         counter++;
         updateCounter();
 
-//        try {
+        for (Unternehmen u : companies) {
+            u.update();
+            bankruptTest(u);
+        }
+        this.updateMarktanteile();
+        if ((getCalendar().get(Calendar.MONTH) == Calendar.DECEMBER) && getCalendar().get(Calendar.DAY_OF_MONTH) == 31) {
             for (Unternehmen u : companies) {
-                u.update();
-                bankruptTest(u);
+                u.updateYearly();
             }
-            this.updateMarktanteile();
-            if ((getCalendar().get(Calendar.MONTH) == Calendar.DECEMBER) && getCalendar().get(Calendar.DAY_OF_MONTH) == 31) {
-                for (Unternehmen u : companies) {
-                    u.updateYearly();
-                }
-            }
+        }
 
-            updateAusschreibungen();
-//        }catch (Exception e)
-//        {
-//            System.out.println(e.toString());
-//        }
+        updateAusschreibungen();
+
     }
 
     /**
@@ -157,12 +151,6 @@ public class Game extends TimerTask {
     }
 
     // Getter, Setter und Hilfsmethoden:
-    /**
-     * @return Highscores als sortierte TreeMap
-     */
-    public static Map<Float, String> getHighscoresAsTreeMap(){
-        return new TreeMap<Float, String>(highscores);
-    }
 
     public static Map<String, Double> getMarktanteile() {
         Map<String, Double> marktanteile = new HashMap<>();
@@ -218,10 +206,6 @@ public class Game extends TimerTask {
 
     public static List<Ausschreibung> getAusschreibungen() {
         return ausschreibungen;
-    }
-
-    public static Map<Float, String> getHighscores() {
-        return highscores;
     }
 
 }
