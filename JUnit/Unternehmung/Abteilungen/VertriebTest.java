@@ -1,5 +1,6 @@
 package Unternehmung.Abteilungen;
 
+import Exceptions.BereitsBeworbenException;
 import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Unternehmen;
@@ -42,7 +43,11 @@ public class VertriebTest{
 
     @Test(expected = ZuWenigMitarbeiterException.class)
     public void bewerbenFail() throws ZuWenigMitarbeiterException{
-        testVertrieb.bewerben(Game.getAusschreibungen().get(1));
+        try {
+            testVertrieb.bewerben(Game.getAusschreibungen().get(1));
+        } catch (BereitsBeworbenException e){
+            e.printStackTrace();
+        }
     }
 
 

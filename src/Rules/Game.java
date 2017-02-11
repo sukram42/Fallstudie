@@ -23,6 +23,7 @@ public class Game extends TimerTask {
     private static ArrayList<Unternehmen> companies = new ArrayList<>();
     private static ArrayList<Unternehmen> companiesArchiv = new ArrayList<>();
     private static List<Ausschreibung> ausschreibungen = new CopyOnWriteArrayList<>();
+    private static Map<Float, String> highscores = new HashMap<>();
 
     /**
      * Konstruktor für ein Spiel mit 2 Spielern
@@ -107,6 +108,9 @@ public class Game extends TimerTask {
                             gewinnerGefunden = true;
                             break;
                         }
+                        // Werfen einer ZuschlangNichtBekommenException, falls Zuschlag nicht gegeben wurde:
+                        Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
+                        vertrieb.throwZuschlagNichtBekommenException();
                     }
                     // Zuschlag geben:
                     if (gewinnerGefunden) {
@@ -155,10 +159,16 @@ public class Game extends TimerTask {
     }
 
     // Getter, Setter und Hilfsmethoden:
+    /**
+     * @return Highscores als sortierte TreeMap
+     */
+    public static Map<Float, String> getHighscoresAsTreeMap() {
+        return new TreeMap<Float, String>(highscores);
+    }
 
     public static Map<String, Double> getMarktanteile() {
         Map<String, Double> marktanteile = new HashMap<>();
-        for (Unternehmen unternehmen : companies){
+        for (Unternehmen unternehmen : companies) {
             marktanteile.put(unternehmen.getName(), unternehmen.getKennzahlensammlung().getMarktanteil());
         }
         return marktanteile;
@@ -212,26 +222,7 @@ public class Game extends TimerTask {
         return ausschreibungen;
     }
 
+    public static Map<Float, String> getHighscores() {
+        return highscores;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

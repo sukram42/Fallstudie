@@ -1,7 +1,6 @@
 package Unternehmung.Abteilungen;
 
-import Exceptions.BankruptException;
-import Exceptions.ZuWenigMitarbeiterException;
+import Exceptions.*;
 import Rules.Game;
 import Unternehmung.*;
 import Unternehmung.Kennzahlensammlung;
@@ -41,10 +40,14 @@ public class Vertrieb extends Abteilung {
      * speichert ein Ausschreibungsobjekt mit dem index, in dem es in Game.ausschreibungen gespeichert ist ab (sofern genug Mitarbeiter vorhanden -> ein Mitarbeiter pro Bewerbung nötig)
      * @param ausschreibung aus der Liste in der Klasse Game
      */
-    public void bewerben(Ausschreibung ausschreibung) throws ZuWenigMitarbeiterException{
+    public void bewerben(Ausschreibung ausschreibung) throws ZuWenigMitarbeiterException, BereitsBeworbenException{
         if (this.getFreieMitarbeiter() > 0) {
-            ausschreibung.getBewerber().add(this.unternehmen);
-            opportunities.add(ausschreibung);
+            if (!this.opportunities.contains(ausschreibung)) {
+                ausschreibung.getBewerber().add(this.unternehmen);
+                opportunities.add(ausschreibung);
+            } else {
+                throw new BereitsBeworbenException();
+            }
         } else {
             throw new ZuWenigMitarbeiterException("Vertrieb");
         }
@@ -106,6 +109,18 @@ public class Vertrieb extends Abteilung {
         }
     }
 
+    /**
+     * wird aufgerufen, wenn ein Unternehmen einen Zuschlag für eine Ausschreibung für die es sich beworben hat
+     * löst eine ZuschlagNichtBekommenException aus
+     */
+    public void throwZuschlagNichtBekommenException(){
+        try{
+            throw new ZuschlagNichtBekommenException();
+        } catch (ZuschlagNichtBekommenException e){
+            e.printStackTrace();
+        }
+    }
+
    @Override
     public  void update() {
         if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH)){
@@ -113,6 +128,11 @@ public class Vertrieb extends Abteilung {
             for (Vertrag vertrag : this.accounts){
                 if (Game.getCalendar().equals(vertrag.getEnd())){
                     this.accounts.remove(vertrag);
+                    try{
+                        throw new VertragAusgelaufenException();
+                    } catch (VertragAusgelaufenException e){
+                        e.printStackTrace();
+                    }
                 }
             }
         }

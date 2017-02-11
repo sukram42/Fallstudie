@@ -1,9 +1,6 @@
 package controller;
 
-import Exceptions.BankruptException;
-import Exceptions.LaufzeitZuHochException;
-import Exceptions.ZuHochVerschuldetException;
-import Exceptions.ZuWenigMitarbeiterException;
+import Exceptions.*;
 import Rules.Game;
 import Unternehmung.Abteilungen.Finanzen;
 import Unternehmung.Abteilungen.Produktion;
@@ -42,7 +39,7 @@ public class SalesController {
         try {
             sales.bewerben(Game.getAusschreibungen().get(index));
             return Response.ok("Auf Ausschreibung beworben").build();
-        } catch (ZuWenigMitarbeiterException e) {
+        } catch (ZuWenigMitarbeiterException | BereitsBeworbenException e) {
             return Response.ok("ERROR:M" + e.toString()).entity(e.toString()).build();
         }
     }
