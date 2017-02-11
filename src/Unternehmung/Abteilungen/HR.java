@@ -125,13 +125,11 @@ public class HR extends Abteilung {
      * @return Monatsgehalt aller Beschäftigten zurück
      */
     public float getTotalGehalt() {
-        float gehalt = 0;
+        float gehaelter = 0;
         for (Abteilung abteilung : unternehmen.getAbteilungen().values()) {
-            for (Mitarbeiter arbeiter : abteilung.getMitarbeiter()) {
-                gehalt += (float) arbeiter.getGehalt() / 12;
-            }
+            gehaelter += abteilung.getMitarbeiterKosten();
         }
-        return gehalt;
+        return gehaelter;
     }
 
     public float getDurchschnittlichesGehalt() {

@@ -33,6 +33,7 @@ public class Vertrieb extends Abteilung {
         // Erster Kunde, um schneller in das Spiel hinein zu kommen:
         Vertrag ersterVertrag = new Vertrag(new Produktlinie(new Produkt("Rucksack", 'C'), 100), "FirstCustomer AG", 3);
         ersterVertrag.setStrafe(0);
+        ersterVertrag.setPreis((float) ersterVertrag.getProduktlinie().getProdukt().getHerstellkosten() * 1.2f);
         this.accounts.add(ersterVertrag);
     }
 
@@ -41,7 +42,7 @@ public class Vertrieb extends Abteilung {
      * @param ausschreibung aus der Liste in der Klasse Game
      */
     public void bewerben(Ausschreibung ausschreibung) throws ZuWenigMitarbeiterException{
-        if (this.mitarbeiter.size() > opportunities.size()) {
+        if (this.getFreieMitarbeiter() > 0) {
             ausschreibung.getBewerber().add(this.unternehmen);
             opportunities.add(ausschreibung);
         } else {
@@ -119,6 +120,15 @@ public class Vertrieb extends Abteilung {
 
 
     // Getter und Setter:
+
+    /**
+     * ein Mitarbeiter pro Account und pro Bewerbung nötig
+     * @return Anzahl freier Mitarbeiter
+     */
+    public int getFreieMitarbeiter(){
+        return this.mitarbeiter.size() - this.accounts.size() - this.opportunities.size();
+    }
+
     public Map<String, Integer> getAccountsAsMap(){
         Map<String, Integer> accountMap = new HashMap<String, Integer>();
         for (Vertrag vertrag : this.accounts){

@@ -315,7 +315,7 @@ public class Produktion extends Abteilung {
         }
         int freieMitarbeiterKapazitaet = this.getMaxMitarbeiterProdMenge() - inProduktion;
         int produktKapazitaet = this.getMaxMaschProdMengeByProdukt(produkt);
-        if (freieMitarbeiterKapazitaet >= produktKapazitaet){
+        if (freieMitarbeiterKapazitaet <= produktKapazitaet){
             return freieMitarbeiterKapazitaet;
         }
         return produktKapazitaet;

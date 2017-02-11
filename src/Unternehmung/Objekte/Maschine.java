@@ -72,7 +72,6 @@ public class Maschine {
 
     private void findKapazitaetUndAnschaffungskst(int klasse){
         switch (klasse){
-            // TODO realistisch / zum Spiel passende Werte einsetzen
             case 1:
                 this.kapazitaet = 300;
                 this.anschaffungskst = 7500;
