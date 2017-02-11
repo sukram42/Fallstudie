@@ -19,6 +19,10 @@ public class GuV {
     private float aufwendungenArchiv;
     private float erloeseArchiv;
 
+    private float summeErloes = 0;
+    private float summeAufwand = 0;
+
+
     //Aufwendungen
     private float aufwendungenFuerRohstoffe; //alle Produktionskosten
     private float aufwendungenFuerWerbung;
@@ -231,4 +235,15 @@ public class GuV {
         return archiv;
     }
 
+    public void setSummen() {
+        this.summeAufwand = aufwendungenFuerSozialeLeistungen
+                + aufwendungenFuerEnergie
+                + fremdinstandhaltung
+                + geleisteterSchadensersatz
+                + zinsaufwendungen
+                + aufwendungenFuerGehaelter
+                + aufwendungenFuerRohstoffe
+                + aufwendungenFuerWerbung;
+        this.summeErloes = umsatzErloese;
+    }
 }

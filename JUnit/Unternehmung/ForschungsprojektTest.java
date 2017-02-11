@@ -29,7 +29,7 @@ public class ForschungsprojektTest {
         unternehmen.getAbteilung("hr").addMitarbeiter(1, 1000);
         forschung.addMitarbeiter(5, 10000);
         kennzahlensammlung = unternehmen.getKennzahlensammlung();
-        testForschungsprojekt = new Forschungsprojekt(forschung, "RucksacktechA", 5, 50, true);
+        testForschungsprojekt = new Forschungsprojekt(kennzahlensammlung,forschung, "RucksacktechA", 5, 50, true);
         assertNotNull(testForschungsprojekt);
     }
 
@@ -47,14 +47,14 @@ public class ForschungsprojektTest {
 
     @Ignore //Wert muss noch angepasst werden
     public void abbrechen2() throws Exception {
-        testForschungsprojekt = new Forschungsprojekt(forschung, "RucksacktechA", 5, 50, false);
+        testForschungsprojekt = new Forschungsprojekt(kennzahlensammlung,forschung, "RucksacktechA", 5, 50, false);
         testForschungsprojekt.abbrechen();
         assertEquals(forschung.getImagebonusById("RucksacktechA"), 1, 0.5);
     }
 
     @Ignore //Wert muss noch angepasst werden
     public void abschließen2() throws Exception {
-        testForschungsprojekt = new Forschungsprojekt(forschung, "RucksacktechA", 5, 50, false);
+        testForschungsprojekt = new Forschungsprojekt(kennzahlensammlung,forschung, "RucksacktechA", 5, 50, false);
         testForschungsprojekt.abschließen();
         assertEquals(forschung.getImagebonusById("RucksacktechA"), 2, 0.5);
     }

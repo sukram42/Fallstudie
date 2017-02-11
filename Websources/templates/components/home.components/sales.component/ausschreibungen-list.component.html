@@ -6,8 +6,10 @@
                    [href]="'#collapse' + i" aria-expanded="true"
                    aria-controls="collapseEins">
                     <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
-                    Ausschreibung #{{1+i}} für  {{ausschreibung.vertrag.produktlinie.produkt.name}}
-                    <small>zum {{ausschreibung.vertrag.end.dayOfMonth}}-{{ausschreibung.vertrag.end.month+1}}-{{ausschreibung.vertrag.end.year}}</small>
+                    Ausschreibung #{{1+i}} für {{ausschreibung.vertrag.produktlinie.produkt.name}}
+                    <small>zum
+                        {{ausschreibung.vertrag.end.dayOfMonth}}-{{ausschreibung.vertrag.end.month+1}}-{{ausschreibung.vertrag.end.year}}
+                    </small>
                 </a>
             </h4>
         </div>
@@ -21,7 +23,8 @@
                 <h4>Ausschreibung der Firma {{ausschreibung.vertrag.kunde}}</h4>
                 <br>
                 <h6>Produkt:</h6>
-                <p>{{ausschreibung.vertrag.produktlinie.menge}} {{ausschreibung.vertrag.produktlinie.produkt.name}} pro Periode der Stufe {{ausschreibung.vertrag.produktlinie.produkt.qualitaetsstufe}}</p>
+                <p>{{ausschreibung.vertrag.produktlinie.menge}} {{ausschreibung.vertrag.produktlinie.produkt.name}} pro
+                    Periode der Stufe {{ausschreibung.vertrag.produktlinie.produkt.qualitaetsstufe}}</p>
                 <h6>Laufzeit:</h6>
                 <p>{{ausschreibung.vertrag.laufzeit}} Monate</p>
             </div>

@@ -1,0 +1,43 @@
+<div class="panel panel-default">
+    <!-- Standard-Panel-Inhalt -->
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            Aktive Forschungen
+        </h4>
+    </div>
+    <div class="panel-body">
+        Für jedes Forschungsprojekt gilt: Es können <b>Herstellkosten zu max. 25%</b> gesenkt bzw. das <b>Image um max. 0.3</b> gesteigert werden.
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let item of active;let i = index">
+            <span class="badge">Endet am {{item.ende.dayOfMonth}}.{{item.ende.month+1}}.{{item.ende.year}}</span>
+            <h4> Forschungsprojekt #{{1+i}}</h4>
+            <div class="media">
+                <div class="media-left media-top">
+                    <a >
+                        <img *ngIf = "item.forschungsobjekt.startsWith('Rucksack')&& !item.forschungsobjekt.startsWith('Rucksacktech')" class="media-object" src="../../../src/img/produkte/rucksacksmall.png" alt="...">
+                        <img *ngIf = "item.forschungsobjekt.startsWith('Duffel')" class="media-object" src="../../../src/img/produkte/duffelsmall.png" alt="...">
+                        <img *ngIf = "item.forschungsobjekt.startsWith('Rucksacktech')" class="media-object" src="../../../src/img/produkte/technischsmall.png" alt="...">
+                        <img *ngIf = "item.forschungsobjekt.startsWith('Reisetasche')" class="media-object" src="../../../src/img/produkte/gepaecksmall.png" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h6>Forschungstyp:</h6>
+                    <p>
+                       <span [hidden] = "!herstellkosten">Herstellkostenoptimierung</span>
+                       <span [hidden] = "herstellkosten">Imageverbesserung</span>
+                        für
+                        <span  *ngIf = "item.forschungsobjekt.startsWith('Rucksack') && !item.forschungsobjekt.startsWith('Rucksacktech')">Rucksäcke</span>
+                        <span  *ngIf = "item.forschungsobjekt.startsWith('Duffel')">Duffels</span>
+                        <span  *ngIf = "item.forschungsobjekt.startsWith('Rucksacktech')">technische Rucksäcke</span>
+                        <span  *ngIf = "item.forschungsobjekt.startsWith('Reisetasche')">Gepäcktaschen</span><br>
+                        der Stufe
+                        {{item.forschungsobjekt.charAt(item.forschungsobjekt.length-1)}}
+                        <span style= "color: #444444;font-size: small">({{item.mitarbeiterAnzahl}} Mitarbeiter beschäftigt)</span>
+                    </p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

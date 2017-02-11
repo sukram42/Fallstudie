@@ -94,4 +94,15 @@ export class ProduktionService {
         return this.http.get('http://localhost:8080/rest/companies/production/machines/' + no+ '/status').map(res=>res.text());
     }
 
+    sell(index) {
+        return this.http.delete('http://localhost:8080/rest/companies/production/machines/' + index).map(res => res.text()).subscribe(
+            (data)=> this.machinesSubject.next(data),
+            err=>console.log(err)
+        );
+    }
+
+    getStaticMachinesEnergyCosts()
+    {
+        return this.http.get('http://localhost:8080/rest/companies/production/machines/energy').map(res => res.text());
+    }
 }

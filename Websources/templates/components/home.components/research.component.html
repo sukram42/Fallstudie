@@ -21,75 +21,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row" *ngIf="error">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <h4>NICHT GENÜGEND MITARBEITER</h4>
+                                <p> Es sind nicht genügend Mitarbeiter in der Abteilung 'Research' eingestellt</p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="content">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="panel panel-default">
-                                    <!-- Standard-Panel-Inhalt -->
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <i class="fa fa-search" aria-hidden="true"></i>
-                                            Aktive Forschungen
-                                        </h4>
-                                    </div>
-                                    <div class="panel-body">
-                                        Für jedes Forschungsprojekt gilt: Es können <b>Herstellkosten zu max. 25%</b> gesenkt bzw. das <b>Image um max. 0.3</b> gesteigert werden.
-                                    </div>
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <span class="badge">240 Tage verbleibend</span>
-                                            <h4> Forschungsprojekt #2</h4>
-                                            <div class="media">
-                                                <div class="media-left media-top">
-                                                    <a href="#">
-                                                        <img class="media-object" src="../../../src/img/produkte/rucksacksmall.png"
-                                                             alt="...">
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h6>Forschungstyp:</h6>
-                                                    <p>Herstellkosten A-Luxury (7 Mitarbeiter beschäftigt)</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item">...</li>
-                                    </ul>
-                                </div>
+                                <research-list></research-list>
                             </div>
                             <div class="col-md-6">
-                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="überschriftEins4">
-                                            <h4 class="panel-title">
-                                                <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                                   href="#collapseEins4" aria-expanded="true"
-                                                   aria-controls="collapseEins4">
-                                                    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
-                                                    Forschungsprojekt #1
-                                                    <small>abgeschlossen am 07 Feb 2017</small>
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseEins4" class="panel-collapse collapse" role="tabpanel"
-                                             aria-labelledby="überschriftEins4">
-                                            <div class="panel-body">
-                                                <h4> Forschungsprojekt #1</h4>
-                                                <div class="media">
-                                                    <div class="media-left media-top">
-                                                        <a href="#">
-                                                            <img class="media-object" src="../../../src/img/produkte/technischsmall.png"
-                                                                 alt="...">
-                                                        </a>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h6>Forschungstyp:</h6>
-                                                        <p>Herstellkosten B-Commonly (7 Mitarbeiter beschäftigt)</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <old-research-list></old-research-list>
 
                             </div>
                         </div>

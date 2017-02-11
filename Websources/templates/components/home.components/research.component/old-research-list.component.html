@@ -1,0 +1,46 @@
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default"  *ngFor="let item of old;let i = index">
+        <div class="panel-heading" role="tab" id="überschriftEins4">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion"
+                   [href]="'#collapse' + i" aria-expanded="true"
+                   aria-controls="collapseEins4">
+                    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
+                    Forschungsprojekt #{{1+i}}
+                    <small>abgeschlossen am {{item.ende.dayOfMonth}}.{{item.ende.month+1}}.{{item.ende.year}}</small>
+                </a>
+            </h4>
+        </div>
+        <div [id]="'collapse'+i" class="panel-collapse collapse" role="tabpanel"
+             aria-labelledby="überschriftEins4">
+            <div class="panel-body">
+                <h4> Forschungsprojekt #{{1+i}}</h4>
+                <div class="media">
+                    <div class="media-left media-top">
+                        <a >
+                            <img *ngIf = "item.forschungsobjekt.startsWith('Rucksack')&& !item.forschungsobjekt.startsWith('Rucksacktech')" class="media-object" src="../../../src/img/produkte/rucksacksmall.png" alt="...">
+                            <img *ngIf = "item.forschungsobjekt.startsWith('Duffel')" class="media-object" src="../../../src/img/produkte/duffelsmall.png" alt="...">
+                            <img *ngIf = "item.forschungsobjekt.startsWith('Rucksacktech')" class="media-object" src="../../../src/img/produkte/technischsmall.png" alt="...">
+                            <img *ngIf = "item.forschungsobjekt.startsWith('Reisetasche')" class="media-object" src="../../../src/img/produkte/gepaecksmall.png" alt="...">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h6>Forschungstyp:</h6>
+                        <p>
+                            <span [hidden] = "!herstellkosten">Herstellkostenoptimierung</span>
+                            <span [hidden] = "herstellkosten">Imageverbesserung</span>
+                            für
+                            <span  *ngIf = "item.forschungsobjekt.startsWith('Rucksack') && !item.forschungsobjekt.startsWith('Rucksacktech')">Rucksäcke</span>
+                            <span  *ngIf = "item.forschungsobjekt.startsWith('Duffel')">Duffels</span>
+                            <span  *ngIf = "item.forschungsobjekt.startsWith('Rucksacktech')">technische Rucksäcke</span>
+                            <span  *ngIf = "item.forschungsobjekt.startsWith('Reisetasche')">Gepäcktaschen</span><br>
+                            der Stufe
+                            {{item.forschungsobjekt.charAt(item.forschungsobjekt.length-1)}}
+                            <span style= "color: #444444;font-size: small">({{item.mitarbeiterAnzahl}} Mitarbeiter beschäftigt)</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

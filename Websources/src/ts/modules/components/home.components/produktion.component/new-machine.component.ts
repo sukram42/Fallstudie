@@ -15,17 +15,21 @@ import {ProduktionService} from "../../../services/produktion.service";
 export class NewMachineComponent {
 
     newMachine:FormGroup;
+    costs;
 
-    constructor(private proService : ProduktionService, private fb :FormBuilder) {
+    constructor(private _proService : ProduktionService, private fb :FormBuilder) {
         this.newMachine = fb.group({
             'product': [null, Validators.required],
             'klasse' : [null, Validators.required]
         });
+        this._proService.getStaticMachinesEnergyCosts().subscribe(data=>this.costs=data);
     }
+
+
 
     submitForm(data)
     {
         console.log(data);
-        this.proService.kaufeMaschine(data);
+        this._proService.kaufeMaschine(data);
     }
 }

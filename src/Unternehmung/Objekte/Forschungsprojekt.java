@@ -11,8 +11,8 @@ import java.util.Calendar;
  */
 public class Forschungsprojekt {
 
-    private Forschung forschung;
-    Kennzahlensammlung kennzahlensammlung;
+    private transient Forschung forschung;
+    private transient Kennzahlensammlung kennzahlensammlung;
 
     private static float abbruchFaktor = 0.7f;
     private static float herstellungskostenFaktor = 0.0025f;
@@ -29,12 +29,12 @@ public class Forschungsprojekt {
 
     //Effektivität über Mitarbeiterzufriedenheit
 
-    public Forschungsprojekt(Forschung forschung, String forschungsobjekt, int mitarbeiterAnzahl, int laufzeit, boolean herstellkosten){
+    public Forschungsprojekt(Kennzahlensammlung kennzahlensammlung,Forschung forschung, String forschungsobjekt, int mitarbeiterAnzahl, int laufzeit, boolean herstellkosten){
     beginn = Game.getTime();
     this.kennzahlensammlung = kennzahlensammlung;
     this.mitarbeiterAnzahl = mitarbeiterAnzahl;
     this.forschungsobjekt = forschungsobjekt;
-    this.ende = Game.getCalendar();
+    this.ende = (Calendar)Game.getCalendar().clone();
     this.ende.add(Calendar.DAY_OF_MONTH, laufzeit);
     this.herstellkosten = herstellkosten;
     this.forschung = forschung;
@@ -54,7 +54,11 @@ public class Forschungsprojekt {
     public void abschließen(){
         float bonus;
         if(herstellkosten){
-            bonus  = (Game.getTime() - beginn) * 10 * kennzahlensammlung.getMitarbeiterzufriedenheit().getWert() * mitarbeiterAnzahl * herstellungskostenFaktor;
+            bonus  = (Game.getTime() - beginn)
+                    * 10
+                    * kennzahlensammlung.getMitarbeiterzufriedenheit().getWert()
+                    * mitarbeiterAnzahl
+                    * herstellungskostenFaktor;
             forschung.setForschungsbonus(forschungsobjekt, bonus);
         }else{
             bonus = (Game.getTime() - beginn) * mitarbeiterAnzahl  * 10 * kennzahlensammlung.getMitarbeiterzufriedenheit().getWert() * imageFaktor;

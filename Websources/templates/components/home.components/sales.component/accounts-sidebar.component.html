@@ -1,10 +1,39 @@
 <div class="panel-body">
     <h6>Aktive Verträge:</h6>
-    <p>13</p>
+    <p *ngIf="accounts">{{accounts.length}}</p>
+    <p [hidden]="accounts">0</p>
     <h6>Ausbringungsmenge:</h6>
-    5000 Rucksäcke (A)Luxury<br>
-    10000 Duffels (B)Commonly
+    <br>
+    <span *ngIf="ausbringung">
+    <span *ngIf="ausbringung.RucksackA"><p>{{ausbringung.RucksackA}}</p> Rucksäcke (A)Luxury<br></span>
+    <span *ngIf="ausbringung.RucksackB"><p>{{ausbringung.RucksackB}}</p> Rucksäcke (B)Ordinary</span>
+    <span *ngIf="ausbringung.RucksackC"><p>{{ausbringung.RucksackC}}</p> Rucksäcke (C)Cheesy<br></span>
+    <span *ngIf="ausbringung.DuffelA"><p>{{ausbringung.DuffelA}}</p> Duffels (A)Luxury<br></span>
+    <span *ngIf="ausbringung.DuffelB"><p>{{ausbringung.DuffelB}}</p> Duffels (B)Ordinary<br></span>
+    <span *ngIf="ausbringung.DuffelC"><p>{{ausbringung.DuffelC}}</p> Duffels (C)Cheesy<br></span>
+    <span *ngIf="ausbringung.RucksacktechA"><p>{{ausbringung.RucksacktechA}}</p> techn. Rucksäcke (A)Luxury <br></span>
+    <span *ngIf="ausbringung.RucksacktechB"><p>{{ausbringung.RucksacktechB}}</p> techn. Rucksäcke (B)Ordinary<br></span>
+    <span *ngIf="ausbringung.RucksacktechC"><p>{{ausbringung.RucksacktechC}}</p> techn. Rucksäcke (C)Cheesy  <br></span>
+    <span *ngIf="ausbringung.ReisetascheA"><p>{{ausbringung.ReisetascheA}}</p> Gepäcktasche       (A)Luxury <br></span>
+    <span *ngIf="ausbringung.ReisetascheB"><p>{{ausbringung.ReisetascheB}}</p> Gepäcktasche       (B)Ordinary<br></span>
+    <span *ngIf="ausbringung.ReisetascheC"><p>{{ausbringung.ReisetascheC}}</p> Gepäcktasche       (C)Cheesy </span>
+    </span>
+    <br>
+    <br>
     <h6>Lagerbestände:</h6>
-    3778 Rucksäcke (A)Luxury<br>
-    6700 Duffels (B)Commonly
+    <br>
+    <span *ngIf="bestand">
+    <span *ngIf="bestand.RucksackA"><p>{{bestand.RucksackA}}</p> Rucksäcke (A)Luxury<br></span>
+    <span *ngIf="bestand.RucksackB"><p>{{bestand.RucksackB}}</p> Rucksäcke (B)Ordinary</span>
+    <span *ngIf="bestand.RucksackC"><p>{{bestand.RucksackC}}</p> Rucksäcke (C)Cheesy<br></span>
+    <span *ngIf="bestand.DuffelA"><p>{{bestand.DuffelA}}</p> Duffels (A)Luxury<br></span>
+    <span *ngIf="bestand.DuffelB"><p>{{bestand.DuffelB}}</p> Duffels (B)Ordinary<br></span>
+    <span *ngIf="bestand.DuffelC"><p>{{bestand.DuffelC}}</p> Duffels (C)Cheesy<br></span>
+    <span *ngIf="bestand.RucksacktechA"><p>{{bestand.RucksacktechA}}</p> techn. Rucksäcke (A)Luxury <br></span>
+    <span *ngIf="bestand.RucksacktechB"><p>{{bestand.RucksacktechB}}</p> techn. Rucksäcke (B)Ordinary<br></span>
+    <span *ngIf="bestand.RucksacktechC"><p>{{bestand.RucksacktechC}}</p> techn. Rucksäcke (C)Cheesy  <br></span>
+    <span *ngIf="bestand.ReisetascheA"><p>{{bestand.ReisetascheA}}</p> Gepäcktasche       (A)Luxury <br></span>
+    <span *ngIf="bestand.ReisetascheB"><p>{{bestand.ReisetascheB}}</p> Gepäcktasche       (B)Ordinary<br></span>
+    <span *ngIf="bestand.ReisetascheC"><p>{{bestand.ReisetascheC}}</p> Gepäcktasche       (C)Cheesy </span>
+    </span>
 </div>

@@ -102,18 +102,22 @@ public class Produktion extends Abteilung {
 
     /**
      * Maschine wird zu den halben Anschaffungskosten, multipliziert mit dem Reparaturstatus, verkauft
-     * @param maschine, die zu verkaufen ist
+     * @param index, der zuverkaufenden Maschine
+     *               @return gib den Wiederverkaufspreis zurück, wenn ein fehler auftritt ist dieser -1;
      */
-    public void maschineVerkaufen(Maschine maschine){
+    public float maschineVerkaufen(int index){
         try {
+            Maschine maschine = this.maschinen.get(index);
             float wiederverkaufswert = (maschine.getAnschaffungskst() / 2) * (float) maschine.getStatus();
             this.maschinen.remove(maschine);
             this.kennzahlensammlung.getBilanz().liquiditaetAnpassen(wiederverkaufswert);
             this.kennzahlensammlung.getBilanz().addTAMasch(- maschine.getAnschaffungskst());
             this.kennzahlensammlung.getGuv().addUmsatz(wiederverkaufswert);
+            return wiederverkaufswert;
         } catch (BankruptException e){
             e.printStackTrace();
         }
+        return -1;
     }
 
     public void produktionshalleKaufen(int groesse){

@@ -83,5 +83,10 @@ export class HeaderComponent{
         window.localStorage.removeItem("auth_key");
         window.location.href = "index.html";
     }
+    runden(x)
+    {
+        return Math.round(x * 100) / 100 ;
+    }
+
 
 }
