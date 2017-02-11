@@ -94,7 +94,7 @@ public class Game extends TimerTask {
                         float randomFloat = random.nextFloat();
                         float verkaufswahrscheinlichkeit = unternehmen.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert();
                         // Verkaufswahrscheinlichkeit auf 0.4 setzten, falls sie geringer ist, sodass die Chance nicht zu gering ist
-                        if (verkaufswahrscheinlichkeit > 0.4f) {
+                        if (verkaufswahrscheinlichkeit < 0.4f) {
                             verkaufswahrscheinlichkeit = 0.4f;
                         }
                         // das Unternehmen, dass als erstes ein Angebot abgegeben hat bekommt den Zuschlag, wenn ein zufälliger Float zwischen 0 und der Verkafuswahrscheinlichkeit liegt:
