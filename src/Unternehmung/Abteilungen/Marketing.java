@@ -41,8 +41,8 @@ public class Marketing extends Abteilung {
         Marketingkampagne kampagne = new Marketingkampagne(art, laufzeit);
         if (kampagne.getNoetigeMitarbeiter() <= this.getVerfuegbareMitarbeiter()) {
             try{
-                if (this.kennzahlensammlung.getBilanz().liquiditaetAusreichend(kampagne.getKosten())) {
-                    float kosten = kampagne.getKosten() * kampagne.getLaufzeit();
+                float kosten = kampagne.getKosten() * kampagne.getLaufzeit();
+                if (this.kennzahlensammlung.getBilanz().liquiditaetAusreichend(kosten)) {
                     this.kampagnen.add(kampagne);
                     this.kennzahlensammlung.getBilanz().liquiditaetAnpassen(-kosten);
                     this.kennzahlensammlung.getGuv().addWerbeaufwendungen(kosten);
