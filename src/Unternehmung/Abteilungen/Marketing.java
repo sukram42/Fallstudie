@@ -1,5 +1,6 @@
 package Unternehmung.Abteilungen;
 
+import Exceptions.BankruptException;
 import Exceptions.LaeuftBereitsException;
 import Exceptions.ZuWenigCashException;
 import Exceptions.ZuWenigMitarbeiterException;
@@ -41,9 +42,12 @@ public class Marketing extends Abteilung {
         if (kampagne.getNoetigeMitarbeiter() <= this.getVerfuegbareMitarbeiter()) {
             try{
                 if (this.kennzahlensammlung.getBilanz().liquiditaetAusreichend(kampagne.getKosten())) {
+                    float kosten = kampagne.getKosten() * kampagne.getLaufzeit();
                     this.kampagnen.add(kampagne);
+                    this.kennzahlensammlung.getBilanz().liquiditaetAnpassen(-kosten);
+                    this.kennzahlensammlung.getGuv().addWerbeaufwendungen(kosten);
                 }
-            } catch (ZuWenigCashException e){
+            } catch (ZuWenigCashException | BankruptException e){
                 e.printStackTrace();
             }
         } else {
@@ -96,9 +100,6 @@ public class Marketing extends Abteilung {
     @Override
     public float getKosten(){
         float taeglicheKosten = 0;
-        for (Marketingkampagne kampagne : this.kampagnen) {
-            taeglicheKosten += kampagne.getKosten();
-        }
         for (Map.Entry<Integer, Marktforschung> mafo : this.mafos.entrySet()){
             taeglicheKosten += mafo.getValue().getKosten();
         }
@@ -112,7 +113,6 @@ public class Marketing extends Abteilung {
     private void updateMarketingkampagnen() {
         for (Marketingkampagne kampagne : this.kampagnen) {
             this.kennzahlensammlung.getWeicheKennzahl("bekanntheitsgrad").addModifier(kampagne.getImpact()); // impact weitergeben
-            kampagne.setLaufzeit(kampagne.getLaufzeit() - 1);
             if (kampagne.getEnd().equals(Game.getCalendar())) {
                 this.kampagnen.remove(kampagne);
             }

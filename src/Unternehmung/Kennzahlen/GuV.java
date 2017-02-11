@@ -115,6 +115,11 @@ public class GuV {
     }
 
     // add-Methoden (werden bei Zahlungen aufgerufen -> Alternative zu Abteilung.getKosten()):
+    public void addWerbeaufwendungen(float werbeaufwendungen){
+        this.aufwendungenFuerWerbung += werbeaufwendungen;
+        this.aufwendungenArchiv += werbeaufwendungen;
+    }
+
     public void addZinsaufwendungen(float zinsaufwendungen) {
         this.zinsaufwendungen += zinsaufwendungen;
         this.aufwendungenArchiv += zinsaufwendungen;
