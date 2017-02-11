@@ -105,6 +105,7 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   },
+
   "directories": {},
   "dist": {
     "shasum": "5f604ec4770c7d429bcee9be9ab945fbe8d00ebd",

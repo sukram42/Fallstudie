@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by D064018 on 11.01.2017.
+ * Created by Jan Scheuermann on 11.01.2017.
  */
 
 public class Forschung extends Abteilung{
