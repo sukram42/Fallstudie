@@ -32,7 +32,7 @@ public class HRTest {
     public void getTotalGehalt() throws Exception {
         unternehmen.getAbteilung("produktion").addMitarbeiter(1, 10000);
 
-        assertEquals(testHR.getTotalGehalt(), 20000f/12f, 0.5f);
+        assertEquals(testHR.getTotalGehalt(), 20000f/12f, 1f);
 }
 
     @Test

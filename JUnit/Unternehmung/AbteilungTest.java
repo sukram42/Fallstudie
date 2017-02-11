@@ -65,7 +65,7 @@ assertEquals(testAbteilung.getName(), "Produktion");
     public void getMitarbeiterKosten()  throws Exception{
 
         testAbteilung.addMitarbeiter(2, 10000);
-        assertEquals(testAbteilung.getMitarbeiterKosten(), (2 * 10000), 0.5);
+        assertEquals(testAbteilung.getMitarbeiterKosten(), (2 * 10000) / 12, 1);
 
     }
 

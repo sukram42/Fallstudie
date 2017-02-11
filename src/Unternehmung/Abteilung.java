@@ -109,7 +109,7 @@ public class Abteilung {
     public float getMitarbeiterKosten() {
         float mitarbeiterKosten = 0;
         for (Mitarbeiter m : mitarbeiter) {
-            mitarbeiterKosten += m.getGehalt();
+            mitarbeiterKosten += m.getGehalt() / 12;
         }
 
         return mitarbeiterKosten;
