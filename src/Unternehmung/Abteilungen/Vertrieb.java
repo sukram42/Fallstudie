@@ -42,7 +42,7 @@ public class Vertrieb extends Abteilung {
      * @param ausschreibung aus der Liste in der Klasse Game
      */
     public void bewerben(Ausschreibung ausschreibung) throws ZuWenigMitarbeiterException{
-        if (this.mitarbeiter.size() > opportunities.size()) {
+        if (this.getFreieMitarbeiter() > 0) {
             ausschreibung.getBewerber().add(this.unternehmen);
             opportunities.add(ausschreibung);
         } else {
@@ -120,6 +120,15 @@ public class Vertrieb extends Abteilung {
 
 
     // Getter und Setter:
+
+    /**
+     * ein Mitarbeiter pro Account und pro Bewerbung nötig
+     * @return Anzahl freier Mitarbeiter
+     */
+    public int getFreieMitarbeiter(){
+        return this.mitarbeiter.size() - this.accounts.size() - this.opportunities.size();
+    }
+
     public Map<String, Integer> getAccountsAsMap(){
         Map<String, Integer> accountMap = new HashMap<String, Integer>();
         for (Vertrag vertrag : this.accounts){
