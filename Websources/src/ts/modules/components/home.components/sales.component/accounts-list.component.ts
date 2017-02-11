@@ -4,6 +4,7 @@
 
 import {Component} from "@angular/core";
 import {SalesService} from "../../../services/sales.service";
+import {HomeService} from "../../../services/home.service";
 
 @Component({
     selector: 'accounts-list-component',
@@ -12,8 +13,12 @@ import {SalesService} from "../../../services/sales.service";
 
 export class AccountsListComponent {
     accounts;
-    constructor(private salesService: SalesService) {
-        this.salesService.getAccounts().subscribe(data=>{this.accounts = data,console.log(data)},err=>console.log(err));
+    constructor(private salesService: SalesService, private _homeService:HomeService) {
+        this.loadList()
+        this._homeService.getTime().subscribe(data=>this.loadList());
     }
-
+    loadList()
+    {
+        this.salesService.getAccounts().subscribe(data=>{this.accounts = data},err=>console.log(err));
+    }
 }
