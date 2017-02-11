@@ -67,7 +67,9 @@ public class GuV {
      */
     public void importAufwandUndErlös() {
         aufwendungenFuerWerbung += unternehmen.getAbteilung("marketing").getKosten();
-        aufwendungenFuerGehaelter += ((HR) unternehmen.getAbteilung("hr")).getTotalGehalt();
+        if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH)) {
+            aufwendungenFuerGehaelter += ((HR) unternehmen.getAbteilung("hr")).getTotalGehalt();
+        }
         aufwendungenFuerSozialeLeistungen += unternehmen.getAbteilung("hr").getKosten();
         Produktion produktion = (Produktion) unternehmen.getAbteilung("produktion");
         aufwendungenFuerRohstoffe += produktion.getTaeglicheHerstellkosten();
@@ -80,8 +82,7 @@ public class GuV {
      */
     public float getTaeglicheLiquiditaetsveraenderung() {
         float kosten;
-        float gehälter = 0;
-        float umsatz = 0; // TODO Umsatz ergänzen, wenn Sales-Klasse steht:
+        float gehaelter = 0;
 
         float werbekosten = unternehmen.getAbteilung("marketing").getKosten();
         float sozialeLeistungen = unternehmen.getAbteilung("hr").getKosten();
@@ -89,12 +90,11 @@ public class GuV {
         float herstellkosten = produktion.getTaeglicheHerstellkosten();
         float energiekosten = produktion.getTaeglicheEnergiekosten();
         if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)) { // Gehälter nur einmal im Monat (am 26. jeden Monats):
-            gehälter = ((HR) unternehmen.getAbteilung("hr")).getTotalGehalt();
+            gehaelter = ((HR) unternehmen.getAbteilung("hr")).getTotalGehalt();
         }
-        kosten = werbekosten + gehälter + sozialeLeistungen + herstellkosten + energiekosten;
+        kosten = werbekosten + gehaelter + sozialeLeistungen + herstellkosten + energiekosten;
         this.aufwendungenArchiv += kosten;
-        this.erloeseArchiv += umsatz;
-        return umsatz - kosten;
+        return -kosten;
     }
 
     /**

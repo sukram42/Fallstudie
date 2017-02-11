@@ -33,6 +33,7 @@ public class Vertrieb extends Abteilung {
         // Erster Kunde, um schneller in das Spiel hinein zu kommen:
         Vertrag ersterVertrag = new Vertrag(new Produktlinie(new Produkt("Rucksack", 'C'), 100), "FirstCustomer AG", 3);
         ersterVertrag.setStrafe(0);
+        ersterVertrag.setPreis((float) ersterVertrag.getProduktlinie().getProdukt().getHerstellkosten() * 1.2f);
         this.accounts.add(ersterVertrag);
     }
 
