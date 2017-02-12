@@ -1,7 +1,9 @@
 package Unternehmung;
 
+import Exceptions.SpielendeException;
 import Rules.Game;
 import Unternehmung.Abteilungen.*;
+import sun.security.provider.ConfigFile;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -47,6 +49,19 @@ public class Unternehmen {
             abteilungen.get(key).update();
         }
         kennzahlensammlung.update();
+
+        // falls 10 Jahre vergangen sind Abschlussbilanz aufstellen und Unternehmen in die Highscoreliste schreiben:
+        if (Game.getCalendar().equals(this.gameEnd)){
+            this.kennzahlensammlung.getGuv().jahresabschluss(this.kennzahlensammlung.getBilanz());
+            this.kennzahlensammlung.archivieren();
+            Game.getHighscores().put(this.kennzahlensammlung.getBilanz().getEigenkapital(), this.name);
+            // Exception, um am Frontend eine entsprechende Nachricht auszugeben:
+            try {
+                throw new SpielendeException();
+            } catch (SpielendeException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public void updateYearly() {
