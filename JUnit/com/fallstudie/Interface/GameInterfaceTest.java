@@ -38,7 +38,7 @@ public class GameInterfaceTest {
 
     @Test
     public void getTimer() throws Exception {
-        assertEquals(testGameInterface.getTimer().getEntity().toString(), "02 Mär 2010");
+        assertEquals(testGameInterface.getTimer().getEntity().toString(), "02 Apr 2011");
     }
 
     @Test
