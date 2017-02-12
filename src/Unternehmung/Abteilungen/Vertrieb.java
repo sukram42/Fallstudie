@@ -108,18 +108,6 @@ public class Vertrieb extends Abteilung {
         }
     }
 
-    /**
-     * wird aufgerufen, wenn ein Unternehmen einen Zuschlag für eine Ausschreibung für die es sich beworben hat
-     * löst eine ZuschlagNichtBekommenException aus
-     */
-    public void throwZuschlagNichtBekommenException(){ // TODO löschen
-        try{
-            throw new ZuschlagNichtBekommenException(this.unternehmen);
-        } catch (ZuschlagNichtBekommenException e){
-            e.printStackTrace();
-        }
-    }
-
    @Override
     public  void update() {
         if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH)){
