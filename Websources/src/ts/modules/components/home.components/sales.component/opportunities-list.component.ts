@@ -21,7 +21,7 @@ export class OpportunitiesListComponent {
 
     getOpportunities()
     {
-        this.salesService.getOpportunities().subscribe(data=>{this.opportunities = data,console.log(data)},err=>console.log(err));
+        this.salesService.getOpportunities().subscribe(data=>{this.opportunities = data},err=>console.log(err));
     }
 
 }

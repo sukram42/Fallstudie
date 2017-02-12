@@ -56,4 +56,15 @@ export class HomeService {
     {
         return this.http.get("http://localhost:8080/rest/players").map(res=>res.json());
     }
+
+    getHighscore()
+    {
+        return this.http.get("http://localhost:8080/rest/highscore").map(res=>res.json());
+    }
+
+    getNoZuschlagError()
+    {
+        return this.http.get("http://localhost:8080/rest/companies/zuschlagerror").map(res=>res.text());
+    }
+
 }

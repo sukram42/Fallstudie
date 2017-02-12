@@ -1,6 +1,7 @@
 package Unternehmung;
 
 import Exceptions.ZuWenigMitarbeiterException;
+import Exceptions.ZuschlagNichtBekommenException;
 import Rules.Game;
 import Unternehmung.Abteilungen.Forschung;
 import Unternehmung.Abteilungen.HR;
@@ -54,6 +55,8 @@ public class UnternehmenTestklasse {
         } catch (ZuWenigMitarbeiterException e) {
             e.printStackTrace();
         }
+
+        System.out.println("ERROR: "+ ZuschlagNichtBekommenException.getCount(unternehmen1));
 
         // ############################## UNTERNEHMEN 2 ##############################
 //        // Unternehmen erstellen:

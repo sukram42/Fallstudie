@@ -19,8 +19,16 @@
                         <div class="row" *ngIf="errorOpportunities">
                             <div class="col-md-12">
                                 <div  class="alert alert-danger alert-dismissible fade in" role="alert">
-                                    <h4>MEIN GOTT</h4>
-                                    <p>Mit nen paar Mitarbeitern werde ich das auch hinbekommen, aber NICHT in diesem Ton mein Freund... Was soll denn so ein kack !</p>
+                                    <h4>ZU WENIGE MITARBEITER</h4>
+                                    <p>Sie haben nicht genügend Mitarbeiter in der Abteilung 'Sales' eingestellt!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="errorBereitsBeworben">
+                            <div class="col-md-12">
+                                <div  class="alert alert-danger alert-dismissible fade in" role="alert">
+                                    <h4>BEREITS BEWORBEN</h4>
+                                    <p>Sie haben sich bereits auf diese Ausschreibung beworben!</p>
                                 </div>
                             </div>
                         </div>

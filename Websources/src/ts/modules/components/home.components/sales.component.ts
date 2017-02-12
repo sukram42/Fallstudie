@@ -19,11 +19,13 @@ import {HRService} from "../../services/hr.service";
 export class SalesComponent {
     errorOpportunities;
     employees;
+    errorBereitsBeworben;
     constructor(private _hrService:HRService,private _salesService:SalesService)
     {
         _salesService.getOpportunitiesSubject().subscribe(data=>
         {
             if(data.toString().startsWith("ERROR:M"))this.errorOpportunities=true;
+            else if(data.toString().startsWith("ERROR:BB"))this.errorBereitsBeworben=true;
         });
         _hrService.getEmployeesSales().subscribe(
             data=>{this.employees = data,console.log(data)}

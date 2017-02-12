@@ -39,8 +39,10 @@ public class SalesController {
         try {
             sales.bewerben(Game.getAusschreibungen().get(index));
             return Response.ok("Auf Ausschreibung beworben").build();
-        } catch (ZuWenigMitarbeiterException | BereitsBeworbenException e) {
-            return Response.ok("ERROR:M" + e.toString()).entity(e.toString()).build();
+        } catch (ZuWenigMitarbeiterException e) {
+            return Response.ok("ERROR:M" + e.toString()).build();
+        }catch( BereitsBeworbenException e2) {
+            return Response.ok("ERROR:BB" + e2.toString()).build();
         }
     }
 

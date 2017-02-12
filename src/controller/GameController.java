@@ -123,6 +123,14 @@ public class GameController implements ServletContextListener{
             return Response.status(409).entity("Not even logged in!").build();
     }
 
+
+    @GET
+    @Path("highscore")
+    public Response getHighscore()
+    {
+        return Response.ok(gson.toJson(Game.getHighscoresAsTreeMap())).build();
+    }
+
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         System.out.println("Spiel wird generiert");

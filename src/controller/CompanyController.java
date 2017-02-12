@@ -1,6 +1,7 @@
 package controller;
 
 import Exceptions.ZuWenigMitarbeiterException;
+import Exceptions.ZuschlagNichtBekommenException;
 import Rules.Game;
 import Unternehmung.Abteilung;
 import Unternehmung.Abteilungen.HR;
@@ -204,6 +205,15 @@ public class CompanyController {
         Unternehmen unternehmen = getCompanyFromContext(securityContext);
         List<SozialProjekt> projects = ((HR)unternehmen.getAbteilung("hr")).getProjects();
         return Response.ok(gson.toJson(projects)).build();
+    }
+
+    @Secured
+    @GET
+    @Path("zuschlagerror")
+    public static Response getNoZuschlagErrorCount(@Context SecurityContext context)
+    {
+        Unternehmen unternehmen = CompanyController.getCompanyFromContext(context);
+        return Response.ok(ZuschlagNichtBekommenException.getCount(unternehmen)).build();
     }
 
 }

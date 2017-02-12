@@ -11,6 +11,7 @@ import {FAQComponent} from "./components/faq.component";
 import {ImpressumComponent} from "./components/impressum.component";
 import {DatenschutzComponent} from "./components/datenschutz.component";
 import {MapToIterable} from "./pipes/map.pipe";
+import {HighscoreComponent} from "./components/highscore.component";
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import {MapToIterable} from "./pipes/map.pipe";
         FAQComponent,
         ImpressumComponent,
         DatenschutzComponent,
-        MapToIterable],
+        MapToIterable,
+        HighscoreComponent],
 
     bootstrap:    [StartComponent]
 })

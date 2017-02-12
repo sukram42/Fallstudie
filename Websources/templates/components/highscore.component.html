@@ -1,0 +1,34 @@
+<div class="modal fade" id="spielerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabe8">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="form-horizontal">
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <h4 class="modal-title" id="myModalLabe8"> Registrierte Spieler</h4>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <thead>
+                            <th>Rang</th>
+                            <th>Name</th>
+                            <th>Punkte</th>
+                        </thead>
+                        <tr *ngFor="let i = index,let unternehmen of highscore| mapToIterable">
+                            <td>{{i+1}}</td>
+                            <td>{{unternehmen.key}}</td>
+                            <td>{{unternehmen.val}} %</td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

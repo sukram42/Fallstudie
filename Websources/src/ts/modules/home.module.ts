@@ -54,6 +54,7 @@ import {KreditListComponent} from "./components/home.components/finance.componen
 import {ResearchService} from "./services/research.service";
 import {ResearchListComponent} from "./components/home.components/research.component/research-list.component";
 import {OldResearchListComponent} from "./components/home.components/research.component/old-research-list.component";
+import {HighscoreComponent} from "./components/highscore.component";
 
 @NgModule({
     imports: [

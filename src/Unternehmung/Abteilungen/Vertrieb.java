@@ -114,7 +114,7 @@ public class Vertrieb extends Abteilung {
      */
     public void throwZuschlagNichtBekommenException(){
         try{
-            throw new ZuschlagNichtBekommenException();
+            throw new ZuschlagNichtBekommenException(this.unternehmen);
         } catch (ZuschlagNichtBekommenException e){
             e.printStackTrace();
         }

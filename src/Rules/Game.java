@@ -51,7 +51,7 @@ public class Game extends TimerTask {
         counter++;
         updateCounter();
 
-        try {
+//        try {
             for (Unternehmen u : companies) {
                 u.update();
                 bankruptTest(u);
@@ -64,10 +64,10 @@ public class Game extends TimerTask {
             }
 
             updateAusschreibungen();
-        }catch (Exception e)
-        {
-            System.out.println(e.toString());
-        }
+//        }catch (Exception e)
+//        {
+//            System.out.println(e.toString());
+//        }
     }
 
     /**

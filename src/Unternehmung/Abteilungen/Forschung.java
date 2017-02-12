@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by D064018 on 11.01.2017.
@@ -24,7 +25,7 @@ public class Forschung extends Abteilung {
     private List<String> beforschteProdukte = new ArrayList<>();
     private List<Forschungsprojekt> abgeschlosseneForschungen = new ArrayList<>();
     private int beschäftigteMitarbeiter;
-    private List<Forschungsprojekt> projekte = new ArrayList<>();
+    private List<Forschungsprojekt> projekte = new CopyOnWriteArrayList<>();
 
     public Forschung(Kennzahlensammlung kennzahlensammlung, Abteilung produktion) {
         super("Forschung", kennzahlensammlung);
