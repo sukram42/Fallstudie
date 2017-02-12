@@ -175,7 +175,9 @@ public class Game extends TimerTask {
      * @return Highscores als sortierte TreeMap
      */
     public static Map<Float, String> getHighscoresAsTreeMap() {
-        return new TreeMap<Float, String>(highscores);
+        Map<Float, String> highscoreTreeMap = new TreeMap<Float, String>(Collections.reverseOrder());
+        highscoreTreeMap.putAll(highscores);
+        return highscoreTreeMap;
     }
 
     public static Map<String, Double> getMarktanteile() {
