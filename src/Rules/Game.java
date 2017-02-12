@@ -1,5 +1,6 @@
 package Rules;
 
+import Exceptions.ZuschlagNichtBekommenException;
 import Unternehmung.Abteilungen.Vertrieb;
 import Unternehmung.Objekte.Ausschreibung;
 import Unternehmung.Unternehmen;
@@ -34,7 +35,7 @@ public class Game extends TimerTask {
         Timer timer = new Timer();
         timer.schedule(this, 0, COUNTER_INTERVALL);
 
-        updateAusschreibungen();
+        ausschreibungenGenerieren();
     }
 
     public static void main(String[] args) {
@@ -86,7 +87,7 @@ public class Game extends TimerTask {
      * legt am ersten Tag jedes Monats fest, wer den Zuschlag bekommt, löscht dann alle Opportunities und Ausschreibungen und generiert neue Ausschreibungen
      * das Unternehmen, dass als erstes ein Angebot abgegeben hat bekommt den Zuschlag, wenn ein zufälliger Float zwischen 0 und der Verkafuswahrscheinlichkeit (oder 0.4, wenn Verkaufswahrscheinlichkeit niedriger als 0.4) liegt:
      */
-    private void updateAusschreibungen() {
+    private static void updateAusschreibungen() {
         if (Game.getCalendar().get(Calendar.DAY_OF_MONTH) == 1) {
             // Entscheidung über Zuschlag basierend auf der Kennzahl der Verkaufswahrscheinlichkeit:
             for (Ausschreibung ausschreibung : ausschreibungen) {
@@ -99,7 +100,7 @@ public class Game extends TimerTask {
                         float randomFloat = random.nextFloat();
                         float verkaufswahrscheinlichkeit = unternehmen.getKennzahlensammlung().getWeicheKennzahl("verkaufswahrscheinlichkeit").getWert();
                         // Verkaufswahrscheinlichkeit auf 0.4 setzten, falls sie geringer ist, sodass die Chance nicht zu gering ist
-                        if (verkaufswahrscheinlichkeit > 0.4f) {
+                        if (verkaufswahrscheinlichkeit < 0.4f) {
                             verkaufswahrscheinlichkeit = 0.4f;
                         }
                         // das Unternehmen, dass als erstes ein Angebot abgegeben hat bekommt den Zuschlag, wenn ein zufälliger Float zwischen 0 und der Verkafuswahrscheinlichkeit liegt:
@@ -110,7 +111,11 @@ public class Game extends TimerTask {
                         }
                         // Werfen einer ZuschlangNichtBekommenException, falls Zuschlag nicht gegeben wurde:
                         Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
-                        vertrieb.throwZuschlagNichtBekommenException();
+                        try{
+                            throw new ZuschlagNichtBekommenException(unternehmen);
+                        } catch (ZuschlagNichtBekommenException e){
+                            e.printStackTrace();
+                        }
                     }
                     // Zuschlag geben:
                     if (gewinnerGefunden) {
@@ -128,11 +133,18 @@ public class Game extends TimerTask {
             // alte Ausschreibugnen löschen:
             ausschreibungen.clear();
             // neue zufällige Ausschreibungen generieren:
-            Random random = new Random();
-            int anzahlAusschreibungen = random.nextInt(10) + 8;
-            for (int i = 1; i <= anzahlAusschreibungen; i++) {
-                ausschreibungen.add(new Ausschreibung());
-            }
+            ausschreibungenGenerieren();
+        }
+    }
+
+    /**
+     * generieren neuer zufälliger Ausschreibungen
+     */
+    private static void ausschreibungenGenerieren(){
+        Random random = new Random();
+        int anzahlAusschreibungen = random.nextInt(10) + 8;
+        for (int i = 1; i <= anzahlAusschreibungen; i++) {
+            ausschreibungen.add(new Ausschreibung());
         }
     }
 

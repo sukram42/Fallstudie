@@ -172,7 +172,7 @@ public class Produktion extends Abteilung {
     /**
      * wird bei jedem timer count ausgeführt und legt die pro timer count produzierten Produkte im Lager ab
      */
-    public void produkteFertigstellen () { // TODO private
+    private void produkteFertigstellen () {
         int mitarbeiterKapazitaet = this.getMaxMitarbeiterProdMenge();
         Map<String, Integer> prodMengen = this.getMaxMaschProdMengen();
 

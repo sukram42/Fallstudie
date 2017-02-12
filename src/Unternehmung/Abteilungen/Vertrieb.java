@@ -112,7 +112,7 @@ public class Vertrieb extends Abteilung {
      * wird aufgerufen, wenn ein Unternehmen einen Zuschlag für eine Ausschreibung für die es sich beworben hat
      * löst eine ZuschlagNichtBekommenException aus
      */
-    public void throwZuschlagNichtBekommenException(){
+    public void throwZuschlagNichtBekommenException(){ // TODO löschen
         try{
             throw new ZuschlagNichtBekommenException(this.unternehmen);
         } catch (ZuschlagNichtBekommenException e){
