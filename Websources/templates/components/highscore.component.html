@@ -15,16 +15,16 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <table>
+                    <table class="table table-hover">
                         <thead>
-                            <th>Rang</th>
-                            <th>Name</th>
-                            <th>Punkte</th>
+                            <th><h5><i class="fa fa-trophy" aria-hidden="true"></i> Rang</h5></th>
+                            <td><h5><i class="fa fa-user-circle-o" aria-hidden="true"></i> Unternehmen</h5></td>
+                            <td><h5><i class="fa fa-credit-card" aria-hidden="true"></i> Endstand</h5></td>
                         </thead>
                         <tr *ngFor="let i = index,let unternehmen of highscore| mapToIterable">
                             <td>{{i+1}}</td>
                             <td>{{unternehmen.key}}</td>
-                            <td>{{unternehmen.val}} %</td>
+                            <td>{{unternehmen.val}}</td>
                         </tr>
                     </table>
                 </div>
