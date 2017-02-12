@@ -7,7 +7,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Calendar;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by D064018 on 06.02.2017.
@@ -16,6 +19,7 @@ public class GameInterfaceTest {
 
     //  private static GameInterface testGameInterface;
     private GameController testGameInterface;
+    private Calendar startZeit;
 
    /* @BeforeClass
     public static void createGameInterface() {
@@ -26,16 +30,15 @@ public class GameInterfaceTest {
     @Before
     public void setUp() throws Exception {
         testGameInterface = new GameController();
+        startZeit = Game.getCalendar();
+        assertNotNull(testGameInterface);
     }
 
-    @After
-    public void tearDown() throws Exception {
 
-    }
 
     @Test
     public void getTimer() throws Exception {
-        assertEquals(testGameInterface.getTimer().getEntity().toString(), "01 Jan 2010");
+        assertEquals(testGameInterface.getTimer().getEntity().toString(), "02 Mär 2010");
     }
 
     @Test
@@ -72,4 +75,8 @@ public class GameInterfaceTest {
 
     }
 
+    @After
+    public void tearDown() throws Exception {
+
+    }
 }

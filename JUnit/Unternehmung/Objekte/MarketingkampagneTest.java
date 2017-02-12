@@ -1,4 +1,4 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 import Unternehmung.Objekte.Marketingkampagne;
 import org.junit.After;

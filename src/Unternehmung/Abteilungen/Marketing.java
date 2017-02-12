@@ -153,4 +153,8 @@ public class Marketing extends Abteilung {
     {
         return kampagnen;
     }
+
+    public Map<Integer, Marktforschung> getMafos() {
+        return mafos;
+    }
 }

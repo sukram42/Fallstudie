@@ -1,8 +1,9 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 import Unternehmung.Abteilungen.Forschung;
 import Unternehmung.Abteilungen.Produktion;
-import Unternehmung.Objekte.Forschungsprojekt;
+import Unternehmung.Kennzahlensammlung;
+import Unternehmung.Unternehmen;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

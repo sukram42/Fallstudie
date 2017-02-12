@@ -1,4 +1,4 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 import Unternehmung.Objekte.Marktforschung;
 import org.junit.Before;
