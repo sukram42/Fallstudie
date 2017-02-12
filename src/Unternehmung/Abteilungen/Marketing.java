@@ -88,7 +88,7 @@ public class Marketing extends Abteilung {
      * @param umfang 1, 2 oder 3
      */
     public void marktforschungAbbrechen(int umfang){
-        this.kampagnen.remove(umfang);
+        this.mafos.remove(umfang);
     }
 
     @Override

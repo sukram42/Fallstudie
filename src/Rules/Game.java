@@ -144,7 +144,7 @@ public class Game extends TimerTask {
         if (gesamtabsatz > 0) {
             for (Unternehmen unternehmen : companies) {
                 Vertrieb vertrieb = (Vertrieb) unternehmen.getAbteilung("vertrieb");
-                unternehmen.getKennzahlensammlung().setMarktanteil(vertrieb.getVerkaufteProdukte() / gesamtabsatz);
+                unternehmen.getKennzahlensammlung().setMarktanteil((float) vertrieb.getVerkaufteProdukte() / gesamtabsatz);
             }
         } else {
             for (Unternehmen unternehmen : companies) {

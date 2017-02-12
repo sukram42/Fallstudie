@@ -81,7 +81,7 @@ public class GuV {
     }
 
     /**
-     * wird von der update()-Methode der Kennzahlensammlung aufgerufen
+     * wird von der updateYearly()-Methode der Kennzahlensammlung aufgerufen
      * @return tägliche Liquiditätsveränderung
      */
     public float getTaeglicheLiquiditaetsveraenderung() {
@@ -102,7 +102,7 @@ public class GuV {
     }
 
     /**
-     * wird von Kennzahlensammlung.update() am Monatsende aufgerufen
+     * wird von Kennzahlensammlung.updateYearly() am Monatsende aufgerufen
      * klont die GuV, zieht alle vorherigen Kosten und Erlöse ab legt sie in archiv ab
      */
     public void archivieren() {
@@ -115,7 +115,7 @@ public class GuV {
         archiv.add(entry);
 
         this.aufwendungenArchiv = 0;
-        this.umsatzErloese = 0;
+        this.erloeseArchiv = 0;
     }
 
     // add-Methoden (werden bei Zahlungen aufgerufen -> Alternative zu Abteilung.getKosten()):

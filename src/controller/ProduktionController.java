@@ -18,6 +18,7 @@ import javax.ws.rs.core.SecurityContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 /**
@@ -56,7 +57,7 @@ public class ProduktionController {
     public Response getProductLines(@Context SecurityContext securityContext) {
         Unternehmen unternehmen = CompanyController.getCompanyFromContext(securityContext);
 
-        ArrayList<Produktlinie> auftraege = ((Produktion) unternehmen.getAbteilung("produktion")).getAufträge();
+        CopyOnWriteArrayList<Produktlinie> auftraege = ((Produktion) unternehmen.getAbteilung("produktion")).getAufträge();
         Map<String, ArrayList<Produktlinie>> liste = new HashMap<>();
 
 

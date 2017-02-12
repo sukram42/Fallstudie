@@ -10,6 +10,7 @@ import Unternehmung.Objekte.Produkt;
 import Unternehmung.Objekte.Produktlinie;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static java.lang.Math.round;
 
@@ -26,7 +27,7 @@ public class Produktion extends Abteilung {
     private ArrayList<Halle> produktionshallen = new ArrayList<Halle>();
     private ArrayList<Halle> lagerhallen = new ArrayList<Halle>();
 
-    private ArrayList<Produktlinie> aufträge = new ArrayList<Produktlinie>(); // Produktionsaufträge
+    private CopyOnWriteArrayList<Produktlinie> aufträge = new CopyOnWriteArrayList<Produktlinie>(); // Produktionsaufträge
     private ArrayList<Produktlinie> lager = new ArrayList<Produktlinie>(); // Lagerbestand
     private Map<String, Double> forschungsboni = new HashMap<String, Double>(); // Verzeichnis über alle Produktlinien und ihrer Forschungsboni
 
@@ -155,7 +156,7 @@ public class Produktion extends Abteilung {
     public void update(){
         produkteFertigstellen();
         updateForschungsboni();
-        // update Maschinen:
+        // updateYearly Maschinen:
         for (Maschine maschine : this.maschinen){
             maschine.statusUndEnergiekstRuntersetzen();
         }
@@ -171,7 +172,7 @@ public class Produktion extends Abteilung {
     /**
      * wird bei jedem timer count ausgeführt und legt die pro timer count produzierten Produkte im Lager ab
      */
-    private void produkteFertigstellen () {
+    public void produkteFertigstellen () { // TODO private
         int mitarbeiterKapazitaet = this.getMaxMitarbeiterProdMenge();
         Map<String, Integer> prodMengen = this.getMaxMaschProdMengen();
 
@@ -186,7 +187,7 @@ public class Produktion extends Abteilung {
                 prodMengen.put(auftrag.getProdukt().getName(), vorherigeMenge - auftrag.getMenge());
                 mitarbeiterKapazitaet -= auftrag.getMenge();
                 // Produzieren:
-                Produktlinie produktlinie = new Produktlinie(auftrag.getProdukt(), round(auftrag.getMenge() / Game.getCalendar().getActualMaximum(Calendar.MONTH))); // neue Produktlinie
+                Produktlinie produktlinie = new Produktlinie(auftrag.getProdukt(), auftrag.getMenge()); // neue Produktlinie
                 if (auftrag.getMenge() <= this.getFreienLagerPlatz()) { // genügend Lagerplatz verfügbar?
                     //Prüfen ob Lager leer ist:
                     if (lager.isEmpty()) {
@@ -295,6 +296,7 @@ public class Produktion extends Abteilung {
                 if (maschine.getProdukt().equals(produkt)){
                     if (maschine.getStatus() > 0) {
                         maschKapazität += maschine.getKapazitaet();
+                        break;
                     }
                 }
             }
@@ -421,7 +423,7 @@ public class Produktion extends Abteilung {
         return lager;
     }
 
-    public ArrayList<Produktlinie> getAufträge() {
+    public CopyOnWriteArrayList<Produktlinie> getAufträge() {
         return aufträge;
     }
 

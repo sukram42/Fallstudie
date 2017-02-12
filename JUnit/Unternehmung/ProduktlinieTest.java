@@ -80,7 +80,7 @@ public class ProduktlinieTest {
 
     @Test
     public void getMenge() throws Exception {
-        assertEquals(testProduktlinie.getMenge(), menge / Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH));
+        assertEquals(testProduktlinie.getMenge(), (Math.round(menge / Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH) + 0.5f)));
     }
 
     @Test

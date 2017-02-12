@@ -59,7 +59,7 @@ public class Vertrieb extends Abteilung {
      */
     private  void produkteVerkaufen(){
         float umsatz = 0;
-        int verkaufteProdukte = 0;
+        this.verkaufteProdukte = 0;
         for (Vertrag vertrag : accounts){
             boolean vertragErfüllt = false;
             int menge = vertrag.getProduktlinie().getMenge();
@@ -72,12 +72,12 @@ public class Vertrieb extends Abteilung {
                         // Menge verringern, Umsatz addieren:
                         bestand.setMenge(bestand.getMenge() - menge);
                         umsatz += vertrag.getPreis() * vertrag.getProduktlinie().getMenge();
-                        verkaufteProdukte += vertrag.getProduktlinie().getMenge();
+                        this.verkaufteProdukte += vertrag.getProduktlinie().getMenge();
                         vertragErfüllt = true;
                     } else {
                         // alle vorhandenen Produkte verkaufen:
                         umsatz += bestand.getMenge() * vertrag.getPreis();
-                        verkaufteProdukte += bestand.getMenge();
+                        this.verkaufteProdukte += bestand.getMenge();
                         this.produktion.getLager().remove(bestand);
                     }
                 }
@@ -86,9 +86,8 @@ public class Vertrieb extends Abteilung {
                 this.vertragBrechen(vertrag);
             }
         }
-        this.verkaufteProdukte = verkaufteProdukte;
+        this.kennzahlensammlung.getGuv().addUmsatz(umsatz);
         try {
-            this.kennzahlensammlung.getGuv().addUmsatz(umsatz);
             this.kennzahlensammlung.getBilanz().liquiditaetAnpassen(umsatz);
         } catch (BankruptException e) {
             e.printStackTrace();

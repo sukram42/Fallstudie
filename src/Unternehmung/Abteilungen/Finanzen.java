@@ -86,12 +86,19 @@ public class Finanzen extends Abteilung {
             if (Game.getCalendar().get(Calendar.MONTH) == kredit.getBeginn().get(Calendar.MONTH) &&
                     Game.getCalendar().get(Calendar.DAY_OF_MONTH) == kredit.getBeginn().get(Calendar.DAY_OF_MONTH) &&
                     Game.getCalendar().get(Calendar.YEAR) > kredit.getBeginn().get(Calendar.YEAR)){ // einmal im Jahr Zinsen und Tilgung zahlen
-                kredit.update();
+                kredit.updateYearly();
                 tilgung += kredit.getTilgung();
                 zinsen += kredit.getZinsen();
-                if (kredit.getRestwert() <= 0){
-                    kredite.remove(kredit);
+            }
+            // bei Laufzeitende löschen des Kredits und ggf. Berechnung der anteiligen Zinsen eines angebrochenen Jahres
+            kredit.setLaufzeit(kredit.getLaufzeit() - 1);
+            if (kredit.getLaufzeit() == 0) {
+                int angebrochenesJahr = kredit.getBeginn().get(Calendar.MONTH) - Game.getCalendar().get(Calendar.MONTH); // = Anzahl Monate für die Zinsen gezahlt werden müssen
+                if (angebrochenesJahr < 0){
+                    angebrochenesJahr = 12 + angebrochenesJahr;
                 }
+                zinsen += (float) (kredit.getZinsen() / 12) * angebrochenesJahr;
+                kredite.remove(kredit);
             }
         }
         try {

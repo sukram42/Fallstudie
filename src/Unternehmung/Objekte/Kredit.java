@@ -23,7 +23,7 @@ public class Kredit {
     /**
      * Spieler wählt Laufzeit und Höhe des Kredits aus, der Rest wird vorgegeben
      * @param hoehe in €
-     * @param laufzeit in Timer Counts
+     * @param laufzeit in Monaten
      * @param zinssatz basierend auf dem neuen Verschuldungsgrad (siehe Finanzen.java)
      */
     public Kredit(int hoehe, int laufzeit, double zinssatz) {
@@ -39,7 +39,7 @@ public class Kredit {
         this.end.add(Calendar.DAY_OF_MONTH, laufzeit);
     }
 
-    public void update() {
+    public void updateYearly() {
         this.restwert -= this.tilgung;
         this.zinsen = this.zinssatz * this.restwert;
         this.annuitaet = this.tilgung + this.zinsen;
