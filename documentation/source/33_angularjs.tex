@@ -1,2 +1,28 @@
-\section{Angular JS}
+\section{Angular JS \textnormal{\textsf{\small{Markus Böbel}}}}
+
+Die Präsentationsschicht des Unternehmensplanspiels besteht wie in Kapitel \ref{sec:architektur} beschrieben aus einer einfachen Webanwendung, einer \acf{SPA}. Dies ist eine Webseite, welche grundlegend nur aus einer einzelnen Seite besteht. Erforderliche Daten werden zur Laufzeit nachgeladen und angezeigt. Somit entsteht eine eigenständige Webanwendung. Für diese Dynamik wird des Öfteren die Webprogrammiersprache JavaScript verwand. Diese ist eine asynchrone Programmiersprache. Der Unterschied zu einer synchronen Sprache zeigt sich im Beispiel einer simplen \acs{HTTP}-Abfrage. Während synchrone Sprachen einen Aufruf starten und bis zum Erhalten der Antwort warten, fahren asynchrone Sprachen fort und realisieren das entgegennehmen durch \texttt{Callbacks}, also Funktionen, welche nachträglich aufgerufen werden, und die Daten übergeben bekommen. Der Vorteil darin besteht, dass die Anwendung flüssiger läuft, da der Programmablauf zu keinem Zeitpunkt gesperrt werden kann. Die schnell wachsende Komplexität des Quellcodes relativiert die genannten Punkte. Im Umkehrschluss würde die Implementierung einer solchen \acl{SPA} sehr komplex und unübersichtlich werden. 
+
+Um dagegen vorzugehen, wurden bestimmte Frameworks entwickelt die Entwickler Möglichkeiten geben, solche Webanwendungen strukturiert und übersichtlich zu entwerfen und implementieren. Eines solcher Frameworks ist Googles AngularJS, welches speziell für die Entwicklung von \acp{SPA} entwickelt wurde. Eine Besonderheit von Angular 2 ist es, dass anstatt reinem JavaScript die Anwendung in TypeScript geschrieben wird.
+TypeScript ist eine Erweiterung des ECMA-Script 6 JavaScript Standards und ermöglicht zum einen das Typisieren von Variablen, sowie das Beschreiben von Objekten mit Hilfe von Dekoratoren. (Erkennbar durch ein \texttt{@}- Zeichen) 
+Bevor die Webanwendung gestartet werden kann, gilt es das TypeScript wieder in natives JavaScript zu kompilieren.
+
+\subsection{Aufbau einer Angular 2 Anwendung}
+Während die erste Version von Angular Webanwendungen durch vereinfachte JavaScript-Skripte entwickelt wurden, ist Angular 2 nun Komponenten-basiert. 
+Dies bedeutet, dass die komplette Anwendung in verschiedene Komponenten unterteilt wird, welche eigene Funktionalitäten besitzen. Werden in einem Teil der Webseite zum Beispiel Informationen über ein Unternehmen angezeigt, so wird dies in einem Komponenten beschrieben. In anderen Worten besteht die komplette Anwendung aus ineinander-verschachtelten Komponenten. Neben Komponenten gibt es noch weitere Elemente:
+
+\begin{description}
+	\item[Services] Services dienen dazu Daten anzufragen. Angular 2 arbeitet nach dem \ac{MVC}-Pattern, die Services dienen dabei als Model. Sie fragen Daten an und stellen sie den einzelnen Komponenten bereit. Somit werden alle Anfragen an die REST Schnittstelle in Services getätigt.
+	\item[Components] Wie oben beschrieben dienen Komponenten dazu die Applikation in viele kleine Teile zu teilen. Sie besitzen ein HTML Template und einen \texttt{Selector}. Der \texttt{Selector} dient dazu den Komponenten anzuzeigen. Dies geschieht über die einfache Erwähnung in einer anderen HTML Seite, beziehungsweise in dem Template eines weiteren Komponenten. Der \texttt{Selector} \texttt{'test-component'} kann somit in anderen HTML Files mit dem Tag \texttt{<test-component></test-component>} eingebunden werden. Zwischen den Tags ist es möglich eine Ladeanzeige zu implementieren. Diese wird solange angezeigt, wie der Komponent geladen wird.
+	\item[Modules] Ein Modul ist das oberste Element. In ihm werden alle Elemente wie Komponenten oder Services definiert und integriert. Nur wenn ein Element im entsprechenden Angular-Modul initialisiert wird, kann es verwendet werden.
+\end{description}
+
+
+\subsection{Dateistruktur des Frontends}
+
+Aufgrund der verschiedenen Elemente des Angular-Frontends ist ein hohes Dateiaufkommen unvermeidbar. Damit das Projekt dennoch übersichtlich bleibt gilt es eine bestimmte Dateistruktur zu verfolgen. Im Projektordner gibt zwei verschiedene Ordner für das Frontend. 
+\begin{description}
+	\item[Webssources] Der \texttt{Websources}-Ordner dient zur Entwicklung des Frontends. Hier werden alle nötigen TypeScript-Dateien (\texttt{*.ts}) gehalten. 
+	\item[WebContent] Der Ordner \texttt{WebContent} wird vom Tomcat Server benötigt um dort die Webanwendung darzustellen.
+\end{description}
+
 

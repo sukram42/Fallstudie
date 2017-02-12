@@ -5,6 +5,6 @@ import {ValidatorFn, AbstractControl} from "@angular/forms";
 export function maximumWageValidator(nameRe): ValidatorFn {
     return (control: AbstractControl): {[key: string]: any} => {
         const wage = control.value;
-        return wage < 1800 ? {'toohighwage': {wage}} : null;
+        return wage < 24500 ? {'toohighwage': {wage}} : null;
     };
 }
