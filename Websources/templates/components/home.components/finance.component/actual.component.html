@@ -78,27 +78,29 @@
                         <table class="table table-condensed">
                             <thead>
                             <tr>
-                                <th data-field="aktiva">Aktiva</th>
-                                <th data-field="bilanz" style="text-align: center;"><b>Aktueller GuV zum {{time}}</b></th>
-                                <th data-field="passiva" style="text-align: right;">Passiva</th>
+                                <th data-field="head" colspan="5" style="text-align: center;">
+                                    <span style="float: left;">Soll</span>
+                                    <b>Aktueller GuV zum {{time}}</b>
+                                    <span style="float: right;">Haben</span>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td>
                                     <ul style="list-style-type: none;white-space:nowrap;">
-                                        <li><b>Aufwendungen für Rohstoffe</b></li>
-                                        <li><b>Aufwendungen für Werbung</b></li>
-                                        <li><b>Aufwendungen für Gehälter</b></li>
-                                        <li><b>Aufwendungen für Energie</b></li>
-                                        <li><b>Aufwendungen für Soziale Leistungen</b></li>
-                                        <li><b>Aufwendungen für Zinsen</b></li>
-                                        <li><b>Aufwendungen für Fremdinstandhaltung</b></li>
-                                        <li><b>Aufwendungen für Schadensersatz</b></li>
+                                        <li><b>A. f. Rohstoffe</b></li>
+                                        <li><b>A. f. Werbung</b></li>
+                                        <li><b>A. f. Gehälter</b></li>
+                                        <li><b>A. f. Energie</b></li>
+                                        <li><b>A. f. Soz. Leistungen</b></li>
+                                        <li><b>A. f. Zinsen</b></li>
+                                        <li><b>Fremdinstandhaltung</b></li>
+                                        <li><b>Schadensersatz</b></li>
                                     </ul>
                                 </td>
                                 <td>
-                                    <ul style="list-style-type: none;white-space:nowrap;">
+                                    <ul style="list-style-type: none;white-space:nowrap;text-align: left;">
                                         <li>{{runden(keyfigures.guv.aufwendungenFuerRohstoffe)}} €</li>
                                         <li>{{runden(keyfigures.guv.aufwendungenFuerWerbung)}} €</li>
                                         <li>{{runden(keyfigures.guv.aufwendungenFuerGehaelter)}} €</li>
@@ -109,9 +111,9 @@
                                         <li>{{runden(keyfigures.guv.geleisteterSchadensersatz)}} €</li>
                                     </ul>
                                 </td>
-                                <td></td>
+                                <td style="color: #FFFFFF;">........................................................</td>
                                 <td style="text-align: right;">
-                                    <ul style="list-style-type: none; ">
+                                    <ul style="list-style-type: none;text-align: right;">
                                         <li><b>Umsatzerlöse</b></li>
                                         <li></li>
                                         <li></li>
@@ -122,7 +124,7 @@
                                         <li></li>
                                     </ul>
                                 </td>
-                                <td style="white-space:nowrap;">
+                                <td style="white-space:nowrap;text-align: right;">
                                     <ul style="list-style-type: none; white-space:nowrap;">
                                         <li>{{runden(keyfigures.guv.umsatzErloese)}} €</li>
                                         <li></li>
@@ -140,10 +142,8 @@
                             <tfoot>
                             <tr>
                                 <td></td>
-                                <td><b>{{runden(keyfigures.guv.summeAufwand)}} €</b></td>
-                                <td></td>
-                                <td></td>
-                                <td><b>{{runden(keyfigures.guv.summeErloes)}} €</b></td>
+                                <td colspan="2" style="text-align: left;white-space:nowrap;">{{runden(keyfigures.guv.summeAufwand)}} €</td>
+                                <td colspan="2" style="text-align: right;white-space:nowrap;">{{runden(keyfigures.guv.summeErloes)}} €</td>
                             </tr>
                             </tfoot>
                         </table>
