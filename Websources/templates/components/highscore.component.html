@@ -22,9 +22,9 @@
                             <td><h5><i class="fa fa-credit-card" aria-hidden="true"></i> Endstand</h5></td>
                         </thead>
                         <tr *ngFor="let i = index,let unternehmen of highscore| mapToIterable">
-                            <td>{{i+1}}</td>
-                            <td>{{unternehmen.key}}</td>
+                            <td><b>#{{i+1}}</b></td>
                             <td>{{unternehmen.val}}</td>
+                            <td>{{unternehmen.key}} €</td>
                         </tr>
                     </table>
                 </div>
