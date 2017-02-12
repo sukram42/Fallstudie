@@ -1,9 +1,9 @@
 package Unternehmung;
 
 import Exceptions.SpielendeException;
+import Exceptions.ZuWenigMitarbeiterException;
 import Rules.Game;
 import Unternehmung.Abteilungen.*;
-import sun.security.provider.ConfigFile;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -42,6 +42,13 @@ public class Unternehmen {
         abteilungen.put("forschung", new Forschung(kennzahlensammlung, abteilungen.get("produktion")));
         abteilungen.put("vertrieb", new Vertrieb(this, kennzahlensammlung, abteilungen.get("produktion")));
         abteilungen.put("hr", new HR(this, kennzahlensammlung));
+        //Hinzufügen eines Vertriebsangestellten für den ersten Vertrag
+        try {
+            abteilungen.get("vertrieb").addMitarbeiter(1, 2000 );
+
+        }catch (ZuWenigMitarbeiterException e){
+            e.printStackTrace();
+        }
     }
 
     public void update() {
