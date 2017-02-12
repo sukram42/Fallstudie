@@ -65,7 +65,7 @@ assertEquals(testKennzahlensammlung.getArchiv().size(), 0);
     @Test
     public void getMaxNeueMitarbeiter() throws Exception {
         unternehmen.getAbteilung("hr").addMitarbeiter(1, 1000);
-        assertEquals(unternehmen.getKennzahlensammlung().getMaxNeueMitarbeiter(), 9);
+        assertEquals(unternehmen.getKennzahlensammlung().getMaxNeueMitarbeiter(), 19);
     }
 
     @Test

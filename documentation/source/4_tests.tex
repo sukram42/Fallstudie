@@ -1,13 +1,50 @@
 \chapter{Tests}
 \section{Ziel des Testens}
-blablabla
-\section{Whitebox Testing}
-blublublu
-\subsection{JUnit}
-jujuju
-\section{Akzeptanztest}
-akakakak
-\section{Forschung}
-jojojo
-\subsection{Forschungsprojekt}
-jajaja
+Durch das Testen wird die Software dahingehend überprüft, ob zum einen Funktionalitäten einwandfrei funktionieren, aber auch ob die Handhabung mit der Software nutzerfreundlich ist.
+Zu diesen Zwecken wurde das Coding selbst überprüft, die Interfaces der Software, welche von den Spielern gesehen und verwendet werden und schließlich mithilfe eines Nutzerakzeptanztests die Usability.
+\section{Testen mit JUnit}
+Hier wurde mittels eines Modultests der Quellcode überprüft, indem einzelne Komponenten (engl. Units) auf das korrekte Verhalten hin kontrolliert wurden. Modultests gehören in der Software Entwicklung zu den sogenannten White-Box-Tests. Bei dem weiteren Vorgehen ist zu beachten, dass die Besonderheiten der Modultests darin liegen, dass sie unabhängig voneinander ausgeführt werden können.
+Dafür werden jegliche zu prüfenden Klassen in eigenständige Testeinheiten aufgenommen. Diese kann man dann entweder für sich alleine ausführen, oder aber zusammen mit allen anderen bestehenden Testeinheiten.
+
+Hierfür wurde in unserem Projekt das JUnit Framework verwendet, welches bereits mit vielen bestehenden Funktionalitäten ausgestattet ist, um das Testen von Software, entwickelt in Java, zu optimieren. So gibt es die Möglichkeit, zum einen Ergebnisse von Tests darzustellen, aber auch den Deckungsgrad der Codezeilen, Methoden und Klassen, welche getestet wurden, abzubilden.
+Das Vorgehen bei dem Testen ist abhängig davon, welche Funktionalitäten innerhalb der Methoden abgebildet sind. Meistens wurden bestimmte Objekte nach ihren Eigenschaften hin untersucht, um festzustellen, ob nach Ausführung einer Methode die erwartete Veränderung stattgefunden hat.
+Das Projekt besitzt eine insgesamte Code-Abdeckung von : 60 \%.
+
+\section{User Akzeptanztest}
+Abgesehen von dem Coding selbst wurden auch die Oberflächen getestet. Dies hat den Hintergrund, dass man wissen möchte wie die Software von Nutzern verwendet wird, die nicht an der Entwicklung beteiligt waren und welche in Zukunft mit dem Programm in Kontakt kommen werden.
+Diese Personen sollten dementsprechend keinerlei Vorkenntnis darüber haben, wie sie sich in den Oberflächen zu orientieren haben und wie man vorzugehen hat, wenn man eine Aktionskette ausführen möchte. Zur Überprüfung der Nutzbarkeit des Unternehmensplanspiels wurden drei Szenarien entwickelt, welche von einer Testperson ausgeführt werden sollten.
+Hierfür hat man die Aktionen verwendet, die typischerweise beim spielen mehr oder weniger häufig anfallen.
+
+\subsection{Erstes Szenario}
+In dem ersten Szenario soll sich der Nutzer auf eine Ausschreibung bewerben und danach bereits veranlassen, das Produkt für die Ausschreibung herzustellen. Dafür ist es nötig, zuerst einen HR Mitarbeiter einzustellen, damit man Angestellte in den Abteilungen Vertrieb und Produktion hinzufügen kann. Ist dies erledigt erhält, man die Möglichkeit, sich für eine Ausschreibung zu bewerben und auch zu produzieren, falls vorher eine Lagerhalle, eine Produktionshalle und eine Maschine mit den nötigen Anforderungen angeschafft worden ist.
+Um zu produzieren wird zuerst eine entsprechende Maschine des zutreffenden Types benötigt und eine Produktlinie mit der erforderlichen produktqualität, der Laufzeit und der Ausbringungsmenge.
+
+\paragraph{Ergebnis}
+Der Proband hat sich schnell auf der Startseite orientiert und direkt ein Unternehmen erstellt. Die Buttons um Mitarbeiter hinzuzufügen konnten schnell ausgemacht werden und nachdem alle benötigten Mitarbeiter hinzugefügt wurden, ist der Nutzer zielstrebig zu der Abteilung Sales übergegangen. Hier hat er sich für das erste Ausschrieben entschieden und sich unmittelbar beworben. Als es dann zur Produktionsklasse weiterging, wollte der Nutzer zuerst eine Maschine, ohne vorher für entsprechenden Platz gesorgt zu haben, kaufen.
+Als dies nicht funktionierte, sah er sich das Interface für wenige Sekunden an und wählte dann eigenständig die Produktions- und Lagerhalle aus. Trotz der Erklärung wollte der Nutzer zuerst eine Produktlinie starten, durch die Fehlermeldung wusste er aber sofort, dass erst eine Maschine benötigt wird.
+
+\paragraph{ Vorgeschlagene Veränderungen }
+Fehlermeldungen noch spezifischer machen. Sie sollen den Nutzer anleiten, was genau gemacht werden muss. Auch könnten Buttons ausgegraut werden, falls die Vorbedingungen noch nicht erfüllt sind (Beispiel: erst Maschine und dann Produktionslinie).
+
+\subsection{Zweites Szenario}
+In dem zweiten Szenario soll der Nutzer für das produzierte Produkt ein Forschungsprojekt starten, um dessen Herstellungskosten zu senken. Hierfür wird zuerst ein Angesteller in der Abteilung Forschung benötigt, welchen man dann dem zu startenden Projekt hinzufügen kann. Desweiteren soll ein Kredit in Höhe von 15000 \€ für 10 Monate aufgenommen werden. Dafür ist es nötig zuerst einen Angestelten in Finanzen  hinzuzufügen.
+
+\paragraph{Ergebnis}
+Der Proband hatte hier keinerlei Probleme, die Anforderungen umzusetzen. Die Schritte wurden schnell und größtenteils sicher ausgeführt. Nur zur Kreditaufnahme wurde der Button erst drei bis vier Sekunden später entdeckt, da er sich relativ weit unten am Rand befindet.
+
+\paragraph{ Vorgeschlagene Veränderungen }
+Vorgeschlagene Veränderungen: Verrücken des Buttons auf der Finanzen Seite, nach oben oder den rechten Rand.
+
+\subsection{Drittes Szenario}
+In dem letzten Szenario wird der Nutzer schließlich aufgefordert, ein Weihnachtsgeld für die Mitarbeiter einzuführen und eine Social Media Marketingkampagne zu starten. Hierfür müssen wieder vorerst die benötigten Mitarbeier den entsprechenden Abteilungen hinzugefügt werden.
+
+\paragraph{Ergebnis}
+Die Marketingkampagne konnte schnell und ohne Probleme gestartet werden. Allerdings wusste der Nutzer nicht wie er vorzugehen hat, um soziale Leistungen freizuschalten. Nachdem er wenige Sekunden überlegt hat, wählte er die Abteilung Human Recources aus, mit der Begründung, dass die anderen Abteilungen aufgrund ihrer Bezeichnungen unpassend erschienen.
+
+\paragraph{ Vorgeschlagene Veränderungen }
+Die fehlenden Angaben aus der Szenario-Beschreibung können noch bei weiteren Testverfahren ergänzt werden. Ansonsten gab es hier keine Vorschläge zu dem Produkt.
+
+\subsection{Nutzerbeschreibung und Feedback}
+Bei der Testperson handelt es sich um einen Mann Mitte 20 Jahre, welcher selbst beruflich in der Wirtschaft tätig ist und hobbymäßig Videospiele spielt.
+Das Feedback zum Spiel war positiv, und besonders gefiel ihm die Möglichkeit, sich erst auf Ausschreibungen bewerben zu müssen. Das Layout der Navigationsbar fand er übersichtlich, genauso wie die Aufteilung der anderen Oberflächen. Die Farbe fand er zwar etwas markant, empfand dies aber nicht als negativ.
+Auch die Anzeige des Dashboard wurde sehr positiv kommentiert, wie sie die Kennzahlen des Unternehmens dynamisch abbildet.

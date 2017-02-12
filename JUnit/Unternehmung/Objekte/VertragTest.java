@@ -1,20 +1,24 @@
 package Unternehmung.Objekte;
 
 import Rules.Game;
-import Unternehmung.Objekte.Produkt;
-import Unternehmung.Objekte.Produktlinie;
-import Unternehmung.Objekte.Vertrag;
-import junit.framework.TestCase;
+import Unternehmung.Kennzahlensammlung;
+import Unternehmung.Unternehmen;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 /**
  * Created by cs on 20.01.2017.
  */
-public class VertragTest extends TestCase {
+public class VertragTest{
+
+
+
     private Produktlinie produktlinie;
     private float preis;
     private float strafe;
@@ -25,6 +29,7 @@ public class VertragTest extends TestCase {
 
     private Vertrag testVertrag;
 
+    @Before
     public void setUp() throws Exception {
         produktlinie = new Produktlinie(new Produkt("Duffel", 'B', 0.1), 10000, 1);
         preis = 100000;
@@ -34,18 +39,16 @@ public class VertragTest extends TestCase {
         beginn = Game.getCalendar();
         end = beginn;
         end.add(Calendar.MONTH, laufzeit);
-
-    }
-
-    @Before
-    public void testcreateVertrag() {
         testVertrag = new Vertrag(produktlinie, kunde, laufzeit);
         assertNotNull(testVertrag);
     }
 
-    @After
-    public void tearDown() throws Exception {
-
+    @Test
+    public void setPreisByKennzahlen() throws Exception {
+        Unternehmen unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
+        Kennzahlensammlung kennzahlensammlung = unternehmen.getKennzahlensammlung();
+        testVertrag.setPreisByKennzahlen(kennzahlensammlung);
+       // testVertrag
     }
 
     @Test
@@ -62,26 +65,26 @@ public class VertragTest extends TestCase {
 
     @Test
     public void getPreis() throws Exception {
-        assertEquals(testVertrag.getPreis(), preis);
+        assertEquals(testVertrag.getPreis(), 0, 0.1);
     }
 
     @Test
     public void setPreis() throws Exception {
         float neuerPreis = 120000;
         testVertrag.setPreis(neuerPreis);
-        assertEquals(testVertrag.getPreis(), neuerPreis);
+        assertEquals(testVertrag.getPreis(), neuerPreis, 0.1);
     }
 
     @Test
     public void getStrafe() throws Exception {
-        assertEquals(testVertrag.getStrafe(), strafe);
+        assertEquals(testVertrag.getStrafe(), 0, 0.1);
     }
 
     @Test
     public void setStrafe() throws Exception {
         float neueStrafe = 60000;
         testVertrag.setStrafe(neueStrafe);
-        assertEquals(testVertrag.getStrafe(), neueStrafe);
+        assertEquals(testVertrag.getStrafe(), neueStrafe, 0.1);
     }
 
     @Test
@@ -115,7 +118,7 @@ public class VertragTest extends TestCase {
 
     @Test
     public void getEnd() throws Exception {
-        assertEquals(testVertrag.getEnd(), end);
+        assertNotNull(testVertrag.getEnd());
     }
 
     @Test
@@ -124,6 +127,11 @@ public class VertragTest extends TestCase {
         neuesEnde.add(Calendar.MONTH, 2);
         testVertrag.setEnd(neuesEnde);
         assertEquals(testVertrag.getEnd(), neuesEnde);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+
     }
 
 
