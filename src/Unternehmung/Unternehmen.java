@@ -50,11 +50,12 @@ public class Unternehmen {
         }
         kennzahlensammlung.update();
 
-        // falls 10 Jahre vergangen sind Abschlussbilanz aufstellen und Unternehmen in die Highscoreliste schreiben:
+        // falls 10 Jahre vergangen sind Abschlussbilanz aufstellen und Unternehmen in die Highscoreliste schreiben und aus Unternehmensliste entfernen:
         if (Game.getCalendar().equals(this.gameEnd)){
             this.kennzahlensammlung.getGuv().jahresabschluss(this.kennzahlensammlung.getBilanz());
             this.kennzahlensammlung.archivieren();
             Game.getHighscores().put(this.kennzahlensammlung.getBilanz().getEigenkapital(), this.name);
+            Game.getCompanies().remove(this);
             // Exception, um am Frontend eine entsprechende Nachricht auszugeben:
             try {
                 throw new SpielendeException();

@@ -16,7 +16,8 @@ import java.util.List;
 /**
  * Abteilung Human Resources
  */
-public class HR extends Abteilung {
+public class
+HR extends Abteilung {
     private transient Unternehmen unternehmen;
     private List<SozialProjekt> projekte = new ArrayList<>();
 
@@ -78,14 +79,14 @@ public class HR extends Abteilung {
         getProjektByName(name).start();
     }
 
-    public void stopProjekt(String name) {
+    public void stoppeProjekt(String name) {
         getProjektByName(name).stop();
     }
 
     public void changeProjectActivity(String name) {
         SozialProjekt sp = getProjektByName(name);
         if (sp.isActive()) {
-            stopProjekt(name);
+            stoppeProjekt(name);
         } else {
             startProjekt(name);
         }
@@ -105,7 +106,7 @@ public class HR extends Abteilung {
         }
     }
 
-    public void initProjects() {
+    private void initProjects() {
         projekte.add(new SozialProjekt("kantine", 100000, 5000, 0.3f, unternehmen));
         projekte.add(new SozialProjekt("wifi", 10000, 500, 0.1f, unternehmen));
         projekte.add(new ZeitGeld("urlaubsgeld", (this.getTotalGehalt() * 0.5f), 0.2f, Calendar.JULY, unternehmen));

@@ -1,8 +1,6 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 import Rules.Game;
-import Unternehmung.Objekte.Produkt;
-import Unternehmung.Objekte.Produktlinie;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,20 +15,11 @@ import static org.junit.Assert.assertNotNull;
  */
 public class ProduktlinieTest {
 
-    @Test
-    public void getBeginn() throws Exception {
-        assertEquals(testProduktlinie.getBeginn().getTime().toString(), "Fri Jan 01 00:00:00 CET 2010");
-    }
-
-    @Test
-    public void getEnd() throws Exception {
-        assertEquals(testProduktlinie.getEnd().getTime().toString(), "Sun Jan 03 00:00:00 CET 2010");
-    }
-
     private String id;
     private Produkt produkt;
     private int menge;
     private int laufzeit;
+    private Calendar startZeit;
 
     private Produktlinie testProduktlinie;
 
@@ -40,16 +29,20 @@ public class ProduktlinieTest {
         produkt = new Produkt("Duffel", 'B', 0.2);
         menge = 5000;
         laufzeit = 2;
-    }
-
-    @Before
-    public void testcreateProduktlinie() {
         testProduktlinie = new Produktlinie(produkt, menge, laufzeit);
+        startZeit = Game.getCalendar();
         assertNotNull(testProduktlinie);
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @Test
+    public void getBeginn() throws Exception {
+        assertEquals(testProduktlinie.getBeginn().getTime().toString(), startZeit.getTime().toString());
+    }
+
+    @Test
+    public void getEnd() throws Exception {
+        startZeit.add(Calendar.DAY_OF_MONTH, laufzeit);
+        assertEquals(testProduktlinie.getEnd().getTime().toString(), startZeit.getTime().toString());
 
     }
 
@@ -102,4 +95,8 @@ public class ProduktlinieTest {
         assertEquals(testProduktlinie.getLaufzeit(), neueLaufzeit);
     }
 
+    @After
+    public void tearDown() throws Exception {
+
+    }
 }

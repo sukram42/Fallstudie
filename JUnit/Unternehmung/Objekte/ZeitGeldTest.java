@@ -1,11 +1,8 @@
-package Unternehmung.Abteilungen.SozialeProjekte;
+package Unternehmung.Objekte;
 
-import Unternehmung.Objekte.ZeitGeld;
 import Unternehmung.Unternehmen;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -20,17 +17,8 @@ public class ZeitGeldTest {
     @Before
     public void setUp() {
         unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
-    }
-
-    @Test
-    public void constructor() {
         testZeitGeld = new ZeitGeld("Urlaubsgeld", 150, 2, 6, unternehmen);
         assertNotNull(testZeitGeld);
-    }
-
-    @Ignore
-    public void update() throws Exception {
-//ToDO
     }
 
     @After

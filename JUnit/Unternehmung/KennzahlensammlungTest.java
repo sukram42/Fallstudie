@@ -1,5 +1,6 @@
 package Unternehmung;
 
+import Unternehmung.Abteilungen.Forschung;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,42 @@ import static org.junit.Assert.*;
  * Created by D064018 on 23.01.2017.
  */
 public class KennzahlensammlungTest {
+
+    @Test
+    public void berechnen() throws Exception {
+        Forschung forschung = (Forschung)unternehmen.getAbteilung("forschung");
+        forschung.setImagebonus("RucksackA", 0.08f);
+        testKennzahlensammlung.berechnen();
+        assertNotNull(testKennzahlensammlung.getWeicheKennzahl("kundenzufriedenheit").getWert());
+    }
+
+    @Test
+    public void archivieren() throws Exception {
+testKennzahlensammlung.archivieren();
+assertTrue(testKennzahlensammlung.getArchiv().size() == 1);
+    }
+
+    @Test
+    public void getWeicheKennzahlen() throws Exception {
+        int i = testKennzahlensammlung.getWeicheKennzahlen().size();
+       assertEquals(testKennzahlensammlung.getWeicheKennzahlen().size(), 5);
+    }
+
+    @Test
+    public void setBankrupt() throws Exception {
+        testKennzahlensammlung.setBankrupt();
+        assertTrue(testKennzahlensammlung.isBankrupt());
+    }
+
+    @Test
+    public void isBankrupt() throws Exception {
+        assertFalse(testKennzahlensammlung.isBankrupt());
+    }
+
+    @Test
+    public void getArchiv() throws Exception {
+assertEquals(testKennzahlensammlung.getArchiv().size(), 0);
+    }
 
 
     private Kennzahlensammlung testKennzahlensammlung;

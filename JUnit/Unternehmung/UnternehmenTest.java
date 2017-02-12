@@ -16,22 +16,6 @@ import static org.junit.Assert.assertNotNull;
  */
 public class UnternehmenTest{
 
-    @Test
-    public void initDepartments() throws Exception {
-
-    }
-
-    @Test
-    public void updateYearly() throws Exception {
-
-    }
-
-    @Test
-    public void getName() throws Exception {
-
-    }
-
-
     private Unternehmen testUnternehmen;
     private String passwort;
     private String name;
@@ -47,9 +31,20 @@ public class UnternehmenTest{
 passwort = "12345";
 name = "Test_Unternehmen";
 eigenkapital = 500000;
-
         testUnternehmen = new Unternehmen( name, passwort, eigenkapital);
+kennzahlensammlung = testUnternehmen.getKennzahlensammlung();
         assertNotNull(testUnternehmen);
+    }
+
+    @Test
+    public void updateYearly() throws Exception {
+        testUnternehmen.updateYearly();
+        assertEquals(kennzahlensammlung.getArchiv().size(), 1);
+    }
+
+    @Test
+    public void getName() throws Exception {
+        assertEquals(testUnternehmen.getName(), name);
     }
 
     @Test

@@ -1,4 +1,4 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 import Unternehmung.Objekte.Halle;
 import org.junit.After;

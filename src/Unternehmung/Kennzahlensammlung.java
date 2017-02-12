@@ -41,13 +41,12 @@ public class Kennzahlensammlung {
      * @param eigenkapital muss bei Gründung des Unternehmens definiert werden
      */
     public Kennzahlensammlung(Unternehmen unternehmen, float eigenkapital) {
-        // TODO alle Defaultwerte definieren (zumindest solche, die nicht 0 sein sollen)
         this.guv = new GuV(unternehmen);
         this.bilanz = new Bilanz(unternehmen);
         this.getBilanz().setEigenkapital(eigenkapital);
         this.getBilanz().setLiquideMittel(eigenkapital);
         this.unternehmen = unternehmen;
-        this.maxNeueMitarbeiter = 0;
+        this.maxNeueMitarbeiter = 10; // die ersten 10 Mitarbeiter können ohne HR-Mitarbeiter eingestellt werden
     }
 
     /**

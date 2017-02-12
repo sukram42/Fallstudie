@@ -31,6 +31,43 @@ public class ProduktionTest {
     }
 
     @Test
+    public void maschineVerkaufen() throws Exception {
+        testProduktion.produktionshalleKaufen(2);
+        testProduktion.maschinenKaufen("Rucksack",1, 1);
+        int anfangsMaschinen = testProduktion.getMaschinen().size();
+        testProduktion.maschineVerkaufen(0);
+        assertFalse(testProduktion.getMaschinen().size() == anfangsMaschinen);
+    }
+
+    @Test
+    public void getMaxMaschProdMengeByProdukt() throws Exception {
+        testProduktion.produktionshalleKaufen(2);
+        testProduktion.maschinenKaufen("Rucksack",1, 1);
+        assertEquals(testProduktion.getMaxMaschProdMengeByProdukt("Rucksack"), 300);
+    }
+
+    @Test
+    public void getLagerAsMap() throws Exception {
+        //Mitarbeiter einstellen
+        HR hr = (HR)unternehmen.getAbteilung("hr");
+        hr.addMitarbeiter(1, 2000);
+        testProduktion.addMitarbeiter(1, 2000);
+
+        // Produktions- und Lagerhalle kaufen:
+        testProduktion.produktionshalleKaufen(1);
+        testProduktion.lagerhalleKaufen(1);
+
+        // Maschinen kaufen:
+        testProduktion.maschinenKaufen("Rucksack", 1, 1);
+
+        // Rucksäcke produzieren:
+           testProduktion.produzieren("Rucksack", 'C', 1, 1);
+           testProduktion.update();
+        assertEquals(testProduktion.getLagerAsMap().size(), 1);
+    }
+
+
+    @Test
     public void getGesamtenLagerPlatz() throws Exception {
         testProduktion.lagerhalleKaufen(2);
         testProduktion.lagerhalleKaufen(2);

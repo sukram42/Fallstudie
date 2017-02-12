@@ -45,8 +45,6 @@ public class Kredit {
         this.annuitaet = this.tilgung + this.zinsen;
     }
 
-
-
     // Getter und Setter:
     public int getLaufzeit() {
         return laufzeit;
