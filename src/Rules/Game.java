@@ -142,7 +142,13 @@ public class Game extends TimerTask {
      */
     private static void ausschreibungenGenerieren(){
         Random random = new Random();
-        int anzahlAusschreibungen = random.nextInt(10) + 8;
+        int intervallBeginn = 8;
+        int intervallSpanne = 10;
+        if (companies.size() > 8){
+            intervallBeginn = companies.size();
+            intervallSpanne = companies.size() * 3;
+        }
+        int anzahlAusschreibungen = random.nextInt(intervallSpanne) + intervallBeginn;
         for (int i = 1; i <= anzahlAusschreibungen; i++) {
             ausschreibungen.add(new Ausschreibung());
         }
