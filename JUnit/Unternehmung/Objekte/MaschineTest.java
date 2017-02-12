@@ -1,6 +1,7 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
-import Unternehmung.Objekte.Maschine;
+import Unternehmung.Kennzahlensammlung;
+import Unternehmung.Unternehmen;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,9 +68,9 @@ public class MaschineTest {
     public void reparieren() {
         Unternehmen Unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
         Kennzahlensammlung kennzahlensammlung = Unternehmen.getKennzahlensammlung();
-        // testMaschine.setStatus(0.5);
-        // testMaschine.reparieren(kenn);
-        //ToDo überprüfen
+        testMaschine.setStatus(0.5);
+        testMaschine.reparieren(kennzahlensammlung);
+        assertEquals(testMaschine.getStatus(), 1, 0.1);
     }
 
     @Test

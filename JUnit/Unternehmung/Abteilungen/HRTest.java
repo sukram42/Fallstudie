@@ -20,7 +20,7 @@ public class HRTest {
     private Unternehmen unternehmen;
 
     @Before
-    public void createHR() throws ZuWenigMitarbeiterException {
+    public void setup() throws ZuWenigMitarbeiterException {
         unternehmen = new Unternehmen("Test_Unternehmen", "12345", 500000);
         kennzahlensammlung = unternehmen.getKennzahlensammlung();
         testHR = (HR)unternehmen.getAbteilung("hr");
@@ -28,10 +28,41 @@ public class HRTest {
         assertNotNull(testHR);
     }
 
+
+    @Test
+    public void starteProjekt() throws Exception {
+        testHR.startProjekt("wifi");
+        testHR.update();
+        assertEquals(testHR.getKosten(), 10000, 0.01);
+    }
+
+    @Test
+    public void stoppeProjekt() throws Exception {
+        testHR.startProjekt("wifi");
+        testHR.stoppeProjekt("wifi");
+        testHR.update();
+        assertEquals(testHR.getKosten(), 0, 0.01);
+    }
+
+    @Test
+    public void changeProjectActivity() throws Exception {
+        double wifiKosten = 500000 - 10000;
+        testHR.startProjekt("wifi");
+        testHR.changeProjectActivity("wifi");
+        testHR.update();
+        assertEquals(testHR.getKosten(), 0, 0.01);
+
+    }
+
+    @Test
+    public void getProjects() throws Exception {
+        assertEquals(testHR.getProjects().size(), 5);
+    }
+
+
     @Test
     public void getTotalGehalt() throws Exception {
         unternehmen.getAbteilung("produktion").addMitarbeiter(1, 10000);
-
         assertEquals(testHR.getTotalGehalt(), 20000f/12f, 1f);
 }
 
@@ -55,7 +86,9 @@ public class HRTest {
 
     @Test
     public void update() throws Exception {
-
+        testHR.startProjekt("wifi");
+        testHR.update();
+        assertEquals(testHR.getKosten(), 10000, 0.01);
     }
 
     @Test

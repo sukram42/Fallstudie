@@ -1,4 +1,4 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 import Unternehmung.Objekte.Ausschreibung;
 import org.junit.After;

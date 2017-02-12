@@ -1,6 +1,7 @@
-package Unternehmung;
+package Unternehmung.Objekte;
 
 import Unternehmung.Objekte.Produkt;
+import Unternehmung.Unternehmen;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

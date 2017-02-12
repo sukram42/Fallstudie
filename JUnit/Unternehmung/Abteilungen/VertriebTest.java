@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 /**
@@ -31,6 +32,30 @@ public class VertriebTest{
         testVertrieb = (Vertrieb)unternehmen.getAbteilung("vertrieb");
         game.getCompanies().add(unternehmen);
     }
+
+    @Test
+    public void getFreieMitarbeiter() throws Exception {
+        unternehmen.getAbteilung("hr").addMitarbeiter(1, 2000);
+        unternehmen.getAbteilung("vertrieb").addMitarbeiter(2, 2000);
+        assertEquals(testVertrieb.getFreieMitarbeiter(), 1);
+    }
+
+    @Test
+    public void getAccountsAsMap() throws Exception {
+        HR hr = (HR)unternehmen.getAbteilung("hr");
+        hr.addMitarbeiter(1, 1000);
+        testVertrieb.addMitarbeiter(2, 2000);
+        testVertrieb.bewerben(Game.getAusschreibungen().get(1));
+        testVertrieb.getAccounts().add(Game.getAusschreibungen().get(1).getVertrag());
+        assertEquals(testVertrieb.getAccountsAsMap().size() , 2);
+
+    }
+
+    @Test
+    public void getVerkaufteProdukte() throws Exception {
+        assertEquals(testVertrieb.getVerkaufteProdukte(), 0);
+    }
+
 
     @Test
     public void bewerben() throws Exception {
