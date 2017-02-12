@@ -102,7 +102,34 @@ In der Methode \enquote{produkteFertigstellen()}, die über Produktion.update() 
 
 \subsubsubsection{Marketing} \textnormal{\textsf{\small{Jan Scheuermann}}}}
 \label{Marketing}
-% Jan Scheuermann
+Die Abteilung Marketing dient der Erhöhung der Verkaufswahrscheinlichkeiten und des Bekanntheitsgrades. Nachdem hier Mitarbeiter hinzugefügt worden sind, kann man eine Marketingkampagne, oder aber eine Marketingforschung starten, indem man eine Laufzeit festlegt, wie viele Tage das Projekt andauern soll.
+Was diese genau machen wird in den zugehörigen Unterkapiteln genauer erläutert.
+
+Hat man eine Marketingkampagne, oder -forschung mit genügend freien Mitarbeitern erfolgreich begonnen, wird mit jedem Aufruf der update() Methode der Bonus aller laufenden Marketingkampagnen/-forschungen durch die Methoden updateMafos() und updateMarketingkampagnen() der jeweiligen Kennzahl hinzugefügt. Die laufenden Kosten werden als Aufwendungen beachtet und es wird überprüft, ob das jeweilige Enddatum mit dem aktuellen Datum übereinstimmt. Sind die Daten gleich, wird das laufende Projekt entfernt.
+
+Die noch verfügbaren Mitarbeiter lassen sich durch die Methode getVerfuegbareMitarbeiter ausgeben, indem alle Mitarbeiter die Kampagnen zugeteilt sind, mit denen, welche in Marktforschungen aktiv sind, zusammengezählt werden. Dieser errechnete Wert wird dann mit den in der Marketingabteilung angestellten Mitarbeitern subtrahiert, und der Restwert schließlich ausgegeben.
+
+\subsubsubsubsection{Marketingkampagne}
+Bei den Marketingkampagnen gibt es die Möglichkeit, aus vier verschiedenen Szenarien zu wählen, die sich in ihren Kosten, den benötigten Mitarbeitern und natürlich der Auswirkung hin unterscheiden.
+
+Mögliche Kampagnen sind Social Media, Print, Radio und TV. Die laufenden Kosten und die Anzahl der benötigten Mitarbeiter liegen je nach Kampagne zwischen 1.000 \€ und einem Mitarbeiter für Social Media, und 130.000 \€ und sieben Mitarbeiter für den TV-Spot. Der Bonus für den Bekanntheitsgrad nimmt natürlich mit Anstieg der Kosten und benötigten Mitarbeitern zu.
+Sollten für die Kampagnenaufnahme nicht genügend Mitarbeiter vorhanden sein, wird die Exception ZuWenigMitarbeiter geworfen. Analog wird bei zu geringem Geldvermögen die Exception ZuWenigCash ausgegeben.
+
+Die Idee ist, dass zu Beginn einer Marketingkampagne die laufenden Kosten mit der Laufzeit multipliziert werden. Nach der erfolgreichen Überprüfung, ob man sich die Kampagne leisten kann, werden die Kosten zu Aufwendungen und die Kampagne beginnt, tägliche Vorteile zu erbringen.
+
+Der Hintergedanke hier ist, dass durch Publicity der Bekanntheitsgrad des Unternehmens erhöht wird. Je höher die Kosten desto mehr Menschen werden durch die Werbung erreicht und somit wird der Effekt größer. Leider kann man den Umfang einer bestimmten Kampagne nicht verändern. Man ist also gezwungen, falls man TV-Werbung schalten möchte, einen festen Betrag zu zahlen, wie er beispielsweise bei einer Werbeunterbrechung in „Wer wird Millionär“ anfallen würde.
+Ist einem dies zu teuer, können ohne Bedenken günstigere Varianten gewählt werden. Die erzielbaren Effekte bleiben bei jeder Kampagne gleich, man ist also nicht gezwungen nach einer Weile die Kampagne zu wechseln, weil die Rentabilität gesunken ist.
+
+Man kann so viele Marketingkampagnen starten, wie Geld und Mitarbeiter vorhanden sind, selbst wenn es mehrere desselben Typs sind.
+
+\subsubsubsubsection{Marktforschung}
+Bei der Marktforschung hat man die Wahl zwischen drei Möglichkeiten. Welche genau gestartet wird, legt man durch Angabe des Umfangs fest. Wenn eine Marketingforschung gestartet werden soll, wird zuerst überprüft, ob ein Forschung desselben Umfangs bereits am Laufen ist. Trifft dies zu, wird die Exception LaeuftBereits geworfen. Auch wird kontrolliert, ob ausreichend freie Mitarbeiter und genügend liquide Mittel vorhanden sind. Sind diese Vorgaben nicht erfüllt, werden die Exceptions ZuWenigMitarbeiter oder ZuWenigCash geworfen. Eine Laufzeit kann man hier nicht angeben, da diese bereits für die verschiedenen Typen festgelegt ist.
+Die einzelnen Marktforschungen unterscheiden sich in Hinsicht der Dauer, der Anzahl an benötigten Mitarbeitern und dem täglichen Bonus für die Verkaufswahrscheinlichkeit. Marktforschungen können so drei, sechs oder neun Monate andauern und jederzeit abgebrochen werden. Marktforschungen kosten täglich 50 \€, zzgl. Der Gehälter der eingesetzten Mitarbeiter und erbringen einen Bonus zwischen 0,05 und 0,3.
+
+Die Idee ist, dass bei einer Marktforschung Mitarbeiter nach draußen geschickt werden, um Passanten und andere Personen zu befragen. Je länger die Marktforschung also andauert, desto mehr Wissen und Informationen können gesammelt werden und desto besser wird das Bild davon, was die Kunden eigentlich haben wollen. Dementsprechend wird nach Abschluss einer Marktforschung die Verkaufswahrscheinlichkeit des Unternehmens erhöht.
+
+ Aus zeitlichen Gründen konnten die Marktforschungen allerdings leider nicht mit dem Frontend verknüpft werden. Eine Implementierung besteht deshalb rein auf Backend-Seite.
+
 
 \subsubsubsection{Vertrieb} \textnormal{\textsf{\small{Jan Oehlers}}}}
 \label{Vertrieb}
@@ -110,11 +137,36 @@ In der Methode \enquote{produkteFertigstellen()}, die über Produktion.update() 
 
 \subsubsubsection{Forschung} \textnormal{\textsf{\small{Jan Scheuermann}}}}
 \label{Forschung}
-% Jan Scheuermann
+In der Abteilung Forschung können verschiedene Boni für den Spieler freigeschaltet werden. Sind hier Mitarbeiter eingestellt, kann man mit diesen ein Forschungsprojekt starten.
+ Nach der Auswahl erhält man die Möglichkeit, zwischen einer Herstellkostenreduzierung des Produktes, oder der Verbesserung der Kundenzufriedenheit. Hintergedanke hier ist, dass man dies durch Optimierungen im Herstellungsprozess, sei es durch herausgefundene Best-Practices, durch Materialreduzierung, oder aber durch Reduzierung des Ausschusses, erreichen kann.
+Der Grund dafür, die Kundenzufriedenheit durch Forschungen zu erhöhen beruht darin, dass die Qualität der Produkte bei gleichbleibenden Kosten erhöht wird. Dies kann beispielsweise durch ein neues Design, neue Funktionalitäten oder bessere Produktions-Prüfungsverfahren, bei denen minderwertige Produkte eher erkannt werden, erreicht werden.
+ Die maximale Wert für die Herstellungskostenreduzierung eines Produktes beträgt 25  \% und für den Kundenzufriedenheitsbonus je Produkt 8.3 \%. Würde der neue Wert höher als der Maximalwert sein, wird in den Methoden setImagebonus() und setForschungsbonus() der Wert auf den Maximalwert gesetzt und jeglicher Restwert verworfen.
+
+Die Liste mit den Produkten und den Forschungsboni für die Kundenzufriedenheit sind in der Forschungsklasse abgelegt. Bei jedem Erhöhen des Wertes durch das Abschließen von Forschungsprojekten wird zusätzlich in den Methoden setImagebonus() und setForschungsbonus() überprüft, ob der neue Wert den Maximalwert überschreiten würde. Falls dies zutreffend ist, wird der Wert auf den Maximalwert gesetzt und jeglicher Restwert verworfen.
+Analog wird bei den Herstellungskosten vorgegangen. Hier ist die Werteliste jedoch in der Produktionsklasse abgelegt, da die Kostenreduzierung bei den Herstellkosten mit jedem Produktionstag abgefragt wird. Dies bietet einen Performance Vorteil, da keine Abfragen auf ein Forschungsabteilungsobjekt stattfinden müssen.
+ Möchte man jetzt ein Forschungsprojekt mithilfe der Methode forschungsprojektStarten() beginnen, müssen verschiedene Angaben getätigt werden. Zum einen die Anzahl der zugeteilten Mitarbeiter, die zeitliche Dauer des Projekts, ob Herstellkosten reduziert werden sollen oder die Kundenzufriedenheit erhöht, und natürlich das zu beforschende Produkt.
+Ob genügend freie Angestellte vorhanden sind wird über die Variable beschäftigteMitarbeiter kontrolliert, die die Anzahl an Mitarbeitern wiedergibt, welche momentan laufenden Forschungsprojekten zugeteilt sind. Falls hier nicht genügend freie Mitarbeiter angestellt sein sollten, wird die Exception ZuWenigMitarbeiter geworfen.
+Zusätzliche Kosten entstehen bei der Aufnahme von Projekten nicht, lediglich das Gehalt der angestellten Forscher bestimmt die Ausgaben der Forschungsabteilung.
+
+ Mit jedem vergangen Tag wird dann über die update() Methode geprüft, ob das Enddatum eines Projektes mit dem aktuellen Tag übereinstimmt. Ist dies zutreffend, wird das Projekt durch Aufruf der Methode forschungsprojektAbschließen() erfolgreich abgeschlossen. Der Wert berechnet sich dann aus der Mitarbeiteranzahl, den vergangenen Tagen und der Mitarbeiterzufriedenheit im Unternehmen, multipliziert mit einem festgelegten Faktor, der die Arbeitsleistung passend zu dem Bonus umwandelt.
+ Will man Mitarbeiter entlassen, oder anderen Forschungsprojekten zuteilen, gibt es die Möglichkeit, laufende Forschungsprojekte mithilfe der Methode forschungsprojektAbbrechen() vorzeitig abzubrechen. Der Bonus errechnet sich dann aus der bereits vergangenen Zeit und einem zusätzlichen Straffaktor von 0.7, welcher davon herrührt, dass die Forscher vor regulärem Ende das Projekt gezwungenermaßen abschließen mussten und so teilweise Ideen oder Ansätze nicht vollständig umsetzen konnten.
+Mitarbeiter, welche den Projekten zugeteilt gewesen sind, werden dann natürlich wieder frei um entweder in anderen Forschungsprojekten arbeiten zu können, oder aber um ohne Auswirkungen aus dem Unternehmen entlassen zu werden.
+ Entlässt man allerdings Mitarbeiter aus der Forschungsabteilung, wenn alle Angestellte Projekten zugeteilt sind, wird dem zuletzt hinzugefügten Forschungsprojekt einer der Mitarbeiter entnommen, dessen Leistungen ebenfalls nichtig gemacht werden. Sinkt so die Mitarbeiteranzahl eines Projekts auf null, wird das Projekt ohne jegliche Auswirkungen eingestampft.
+ Des Weiteren ist die Forschung der einzige Weg, um die Kundenzufriedenheit zu erhöhen. Deswegen sollte hiervon unbedingt Gebrauch gemacht werden.
+
+Anzumerken ist noch, dass mit Produkten, an welchen bereits geforscht wird, keine weiteren Forschungen gestartet werden können. Hierfür gibt es die beiden Listen verfügbareProdukte und beforschteProdukte. Das hat den einfachen Hintergrund, dass mit Forschungsbeginn ein Tranformationsprozess des Produktes eingeleitet wird, nach welchem Veränderungen stattfinden. Zwei parallellaufende Projekte zu dem gleichen Produkt würden also nach Abschluss theoretisch zwei unterschiedliche Zustände des Produkts erzeugen.
+
 
 \subsubsubsection{Finanzen} \textnormal{\textsf{\small{Jan Scheuermann}}}}
 \label{Finanzen}
-% Jan Scheuermann
+Die Abteilung Finanzen dient dem Aufnehmen von Krediten zur Finanzierung von Investitionen. Sobald man hier einen Mitarbeiter angestellt hat, kann damit begonnen werden Geld für das Unternehmen zu leihen. Zur Aufnahme eines Kredits werden noch weitere Angaben benötigt, so z.B. wie hoch der Betrag ist, und wie lange der Kredit gewährt werden soll.
+Der genaue Zinssatz für den Kredit wird dann durch Errechnung des neuen Verschuldungsgrades nach Abschluss festgelegt. Beginnend bei einem Satz von 2  \%  steigert sich der Zinssatz dann bis zu maximal 6 \%, da sich mit Anstieg des Verschuldungsgrades auch das Kreditrisiko erhöht. Jeder Verschuldungsgrad oberhalb von 200  \%  verwehrt die weitere Kreditaufnahme und wirft die Exception ZuHochVerschuldet. Kreditinstitute empfinden das Unternehmen dann nicht mehr als kreditwürdig, da die Wahrscheinlichkeit einer Insolvenz relativ hoch ist.
+Auch wird überprüft, ob der Kredit noch vor Spielende (Also innerhalb der Lebensdauer des Unternehmens) abbezahlt werden würde. Tut er dies nicht, wird die Exception LaufzeitZuHoch geworfen.
+
+Kredite besitzen abgesehen von der Höhe, der Laufzeit und dem errechneten Zinssatz noch einen Wert für die Tilgung, welcher sich aus der Höhe geteilt durch die Laufzeit ergibt, einen für die Zinsen, welche sich aus Zinssatz multipliziert mit dem Restwert ergibt, und einen letzten für die Annuität, die sich aus Addition von Zinsen und Tilgung ergibt. Die Annuität ist schließlich der Betrag, welcher von unseren Liquiden Mitteln gedeckt werden muss, da andernfalls das Unternehmen durch Aufruf der Exception Bankrupt aufhört zu existieren.
+
+Mit jedem Aufruf der update() Methode wird nun überprüft, ob der Kredit fällig ist und ob die Laufzeit zu Ende ist. Sollte ein ganzes Jahr seit Kredit Aufnahme vergangen sein, wird der jährliche Zinssatz berechnet und zusammen mit der Tilgung zur Annutität. Ist die Laufzeit schließlich auf null gesunken, wird überprüft, wie viele Monate seit der letzten Annuitätenzahlung vergangen sind. Der herauskommende Wert wird dann als Faktor verwendet, um die Restzinsen und die Resttilgung für den Kredit, sprich die Restannuität, berechnen zu können.
+Dafür werden die Werte dann, falls sie Aufwendungen darstellen, an die GuV weitergegeben, und ansonsten in die Bilanz übernommen. Hier werden dann die liquiden Mittel und das Fremdkapital entsprechend angepasst. Sollten nicht genügend liquide Mittel vorhanden sein, wird ebenfalls die Exception Bankrupt geworfen.
 
 
 % Markus:
