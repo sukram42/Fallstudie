@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+    <!-- Standard-Panel-Inhalt -->
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <i class="fa fa-building" aria-hidden="true"></i>
+            Aktive Werbekampagnen
+        </h4>
+    </div>
+    <div class="panel-body">
+        Hier sind alle aktiven Werbekampagnen gelistet.
+    </div>
+
+    <!-- Listengruppe -->
+    <ul class="list-group" *ngIf="campaigns">
+        <li class="list-group-item" *ngFor="let campaign of campaigns">
+            <span class="badge">{{campaign.laufzeit}} Tage verbleibend</span>
+            <h6>
+                <i class="fa fa-television" aria-hidden="true" *ngIf = "campaign.art == 'TV'"></i>
+                <i class="fa fa-microphone" aria-hidden="true" *ngIf = "campaign.art == 'Radio'"></i>
+                <i class="fa fa-print" aria-hidden="true"      *ngIf = "campaign.art == 'Print'"></i>
+                <i class="fa fa-mobile" aria-hidden="true"     *ngIf = "campaign.art == 'Social Media'"></i>
+                {{campaign.art}}</h6>
+            Restkosten: {{campaign.kosten * campaign.laufzeit}} €
+        </li>
+    </ul>
+</div>

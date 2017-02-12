@@ -14,7 +14,7 @@ export class AusschreibungListComponent {
     ausschreibungen;
 
     constructor(private salesService: SalesService) {
-        this.salesService.getAusschreibungen().subscribe(data=>{this.ausschreibungen = data,console.log(data)},err=>console.log(err));
+        this.salesService.getAusschreibungen().subscribe(data=>this.ausschreibungen = data,err=>console.log(err));
     }
 
     bewerben(index)

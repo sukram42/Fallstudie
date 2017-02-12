@@ -1,0 +1,32 @@
+<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true" *ngIf="opportunities">
+    <div class="panel panel-default" *ngFor="let opportunity of opportunities;let i = index">
+        <div class="panel-heading" role="tab" id="überschriftEins2">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion2"
+                   [href]="'#collapseopo' + i" aria-expanded="true"
+                   aria-controls="collapseEins2">
+                    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
+                    Angebot #{{1+i}}
+                </a>
+                <span class="badge right">Entscheidung am {{opportunity.vertrag.end.dayOfMonth}}-{{opportunity.vertrag.end.month+1}}-{{opportunity.vertrag.end.year}}</span>
+            </h4>
+        </div>
+        <div [id]="'collapseopo' + i" class="panel-collapse collapse" role="tabpanel"
+             aria-labelledby="überschriftEins2">
+            <div class="panel-body">
+                <div>
+                    <h4 *ngIf="opportunity.vertrag.produktlinie.name == 'Rucksack'">Ausschreibung für Rucksäcke</h4>
+                    <h4 *ngIf="opportunity.vertrag.produktlinie.name == 'Duffel'">Ausschreibung für Duffels</h4>
+                    <h4 *ngIf="opportunity.vertrag.produktlinie.name == 'Rucksacktech'">Ausschreibung für technische Rucksäcke</h4>
+                    <h4 *ngIf="opportunity.vertrag.produktlinie.name == 'Reisetasche'">Ausschreibung für Reisetaschen</h4>
+                    <br>
+                    <h6>Produkt:</h6>
+                    <p>{{opportunity.vertrag.produktlinie.menge}}
+                        <span>{{opportunity.vertrag.produktlinie.produkt.name}}</span> pro Periode der Stufe {{opportunity.vertrag.produktlinie.produkt.qualitaetsstufe}}</p>
+                    <h6>Laufzeit:</h6>
+                    <p>{{opportunity.vertrag.laufzeit}} Monate</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

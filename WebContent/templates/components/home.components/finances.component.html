@@ -1,0 +1,81 @@
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="title">Finances</h4>
+                                <p class="category">Liste aller Aufwendungen und Erträge</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="right">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#finanzModal">
+                                        <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                        Kredit aufnehmen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="errorL">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10" >
+                            <div  class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <h4>KREDIT ZU LANG</h4>
+                                <p>Die Bank hat Zweifel, dass die Laufzeit des Kredites zu lang ist. Beantragen Sie einen kürzeren Kredit</p>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <div class="row" *ngIf="errorV">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10" >
+                            <div  class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <h4>ZU HOCH VERSCHULDET</h4>
+                                <p>Die Bank fühlt sich nicht sicher bei einem solchen Kredit. Der Verschuldungsgrad sei schlicht zu hoch.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <div class="row" *ngIf="errorM">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10" >
+                            <div  class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <h4>MITARBEITER FEHLT</h4>
+                                <p>Sie haben zu wenige Mitarbeiter in der Abteilung 'Finanzen' eingestellt.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <div class="content">
+                        <div>
+                            <!-- Tabs-Navs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#SollesJahr" role="tab" data-toggle="tab">aktuelles Jahr</a></li>
+                                <!--<li role="presentation"><a href="#jahr1" role="tab" data-toggle="tab">1. Jahr</a></li>-->
+                                <!--<li role="presentation"><a href="#jahr2" role="tab" data-toggle="tab">2. Jahr</a></li>-->
+                                <!--<li role="presentation"><a href="#jahr3" role="tab" data-toggle="tab">3. Jahr</a></li>-->
+                            </ul>
+                            <!-- Tab-Inhalte -->
+                            <div class="tab-content">
+                                <actual-component>Loading...</actual-component>
+                                <!--<div role="tabpanel" class="tab-pane" id="jahr1">...</div>-->
+                                <!--<div role="tabpanel" class="tab-pane" id="jahr2">...</div>-->
+                                <!--<div role="tabpanel" class="tab-pane" id="jahr3">...</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

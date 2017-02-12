@@ -1,0 +1,65 @@
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="title">Mitarbeiter <i class="fa fa-users" aria-hidden="true"></i> {{employees}}</h4>
+                                <h4 class="title"></h4>
+                                <p class="category">Liste aller beschäftigten Mitarbeiter im Unternehmen</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="right">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#myModal">
+                                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                        Mitarbeiter hinzufügen
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10" *ngIf="error">
+                            <div  class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <h4>Kein Personal</h4>
+                                <p>Stellen Sie sicher, dass Sie genügend Mitarbeiter in die Abteilung 'Human Resources' eingestellt haben.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="panel panel-default">
+                                    <employee-list></employee-list>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-default">
+                                    <!-- Standard-Panel-Inhalt -->
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <i class="fa fa-building" aria-hidden="true"></i>
+                                            Zusätzliche Leistungen
+                                        </h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        Investieren sie in soziale Leistungen für ihre Mitarbeiter. Zufriedene Mitarbeiter können den langfristigen Erfolg ihres Unternehmens positiv beinflussen.
+
+                                    </div>
+                                    <soziale-leistungen></soziale-leistungen>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

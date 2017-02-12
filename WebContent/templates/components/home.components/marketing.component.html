@@ -1,0 +1,152 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 class="title">Marketing <i class="fa fa-users" aria-hidden="true"></i> {{employees}}
+                            </h4>
+                            <p class="category">Liste aller möglichen Werbekampagnen für ihr Unternehmen</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div align="right">
+                                <button type="button" class="btn btn-success" data-toggle="modal"
+                                        data-target="#marketingModal">
+                                    <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                                    Werbekampagne starten
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10" *ngIf="error">
+                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                            <h4>Kein Personal</h4>
+                            <p>Sie brauchen genügend Mitarbeiter in der Abteilung 'Marketing'.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <i class="fa fa-television" aria-hidden="true"></i>
+                                                TV Spot
+                                            </h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="media">
+                                                <div class="media-left media-top">
+                                                    <a >
+                                                        <img class="media-object"
+                                                             src="../../../src/img/marketing/monitor.png"
+                                                             alt="...">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body" >
+                                                    Erstellen Sie einen TV Spot um ihre Produkte zu bewerben und ihren
+                                                    Bekanntheitsgrad zu steigern. Hierfür benötigen Sie <strong *ngIf="costs">{{costs.tv.noetigeMitarbeiter}} Mitarbeiter</strong>.
+                                                </div>
+                                            </div>
+                                            <h6>Kosten</h6>
+                                            <p *ngIf="costs">{{costs.tv.kosten}} € pro Tag</p>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                Radio Kampagne
+                                            </h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="media">
+                                                <div class="media-left media-top">
+                                                    <a>
+                                                        <img class="media-object"
+                                                             src="../../../src/img/marketing/antenna.png"
+                                                             alt="...">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    Erstellen Sie eine Radio Kampagne um ihre Produkte im Radio zu
+                                                    bewerben und ihren Bekanntheitsgrad zu steigern. Zur Erstellung und Schalten dieser Werbungen benötigen Sie <strong *ngIf="costs">{{costs.radio.noetigeMitarbeiter}} Mitarbeiter</strong>.
+                                                </div>
+                                            </div>
+                                            <h6>Kosten</h6>
+                                            <p *ngIf="costs">{{costs.radio.kosten}} € pro Tag</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                Social Media Kampagne
+                                            </h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="media">
+                                                <div class="media-left media-top">
+                                                    <a>
+                                                        <img class="media-object"
+                                                             src="../../../src/img/marketing/social.png"
+                                                             alt="...">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    Werben Sie für Ihre Produkte mit Hilfe von Social Media Kampagnen.
+                                                    Dies erhöht Ihr ansehen und Bekanntheitsgrad. Damit ihr Produkt durch die Welten der Social Media fliegen kann, benötigen Sie <strong *ngIf="costs">{{costs.social.noetigeMitarbeiter}} Mitarbeiter</strong>.
+                                                </div>
+                                            </div>
+                                            <h6>Kosten</h6>
+                                            <p *ngIf="costs">{{costs.social.kosten}} € pro Tag</p>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <i class="fa fa-print" aria-hidden="true"></i>
+                                                Print Media Kampagne
+                                            </h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="media">
+                                                <div class="media-left media-top">
+                                                    <a>
+                                                        <img class="media-object"
+                                                             src="../../../src/img/marketing/text-lines.png"
+                                                             alt="...">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    Mit Hilfe von Printmedien wie Zeitungen, Zeitschriften oder Flyern
+                                                    können Sie ihre Produkte werben. Dies führt zu einem erhöhten
+                                                    Bekanntheitsgrad.
+                                                </div>
+                                            </div>
+                                            <h6>Kosten</h6>
+                                            <p *ngIf="costs">{{costs.print.kosten}} € pro Tag</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <campaign-list-component></campaign-list-component>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

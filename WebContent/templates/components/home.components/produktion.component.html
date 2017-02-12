@@ -1,0 +1,73 @@
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="title">Produktion <i class="fa fa-users" aria-hidden="true"></i><span
+                                        *ngIf="employees">{{employees}}</span></h4>
+                                <p class="category">Liste aller möglichen Produktlinien in ihrem Unternehmen</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="right">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#productModal">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                        Produktlinie hinzufügen
+                                    </button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#machineModal">
+                                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                        Produktionsmaschine kaufen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="errorMaschinen">
+                            <div class="col-md-12">
+                                <div  class="alert alert-danger alert-dismissible fade in" role="alert">
+                                    <h4>KEINE MASCHINENSTELLPLÄTZE</h4>
+                                    <p> Sie haben nicht genügend Maschinenstellplätze um Maschinen zu erwerben!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="errorLinie">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                    <h4>NICHT GENÜGEND MASCHINEN ODER MITARBEITER</h4>
+                                    <p> Sie haben nicht genügend Maschinen oder Mitarbeiter, um eine neue Produktlinie in Auftrag zu geben!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="sold">
+                            <div class="col-md-12">
+                                <div class="alert alert-success alert-dismissible fade in" role="alert">
+                                    <h4>ERFOLGREICH!</h4>
+                                    <p> Ihre Maschine wurde erfolgreich verkauft. Der Liquiditätsbetrag beträgt : {{sold}} €</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <new-warehouse-component>Loading</new-warehouse-component>
+                                <new-production-hall-component>Loading</new-production-hall-component>
+                                <machine-list-component></machine-list-component>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel panel-default">
+                                    <productline-list-component></productline-list-component>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

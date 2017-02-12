@@ -84,23 +84,70 @@
             .pipe(gulp.dest(copyDist));
     });
 
-    gulp.task('copyToProject', ['copyHTMLJS', 'copyApp']);
-
+    gulp.task('copyToProject', ['copyHTMLJS', 'copyApp','copyNode','copyTemplates','copySrc']);
 
     gulp.task('clean',function(){
         return del(['../WebContent/**/*','!../WebContent/WEB-INF{,/**}'],{force: true});
     })
 
+    gulp.task('copyTemplates',['default','clean'],function () {
+        return gulp.src(['templates/**'])
+            .pipe(gulp.dest('../WebContent/templates'));
+
+    });
+    gulp.task('copySrc',['default','clean'],function(){
+        return gulp.src(['src/**','!src/ts','!src/ts/**'])
+            .pipe(gulp.dest('../WebContent/src'));
+
+    });
 
     gulp.task('copyHTMLJS',['default','clean'], function ()
     {
-        return gulp.src(['.*js', '*.html', "!gulpfile.js"])
-            .pipe(gulp.dest('../WebContent/js/'));
+        return gulp.src(['.*js', '*.html', 'systemjs.config.js','home.systemjs.config.js',"!gulpfile.js"])
+            .pipe(gulp.dest('../WebContent/'));
     });
 
     gulp.task('copyApp',['default','clean'], function() {
         return gulp.src('app/**/')
             .pipe(gulp.dest('../WebContent/app'));
+    });
+
+    gulp.task('copyNode',['copyAngular'
+        ,'copyAngularChartjs'
+        ,'copyAngular2InMemoryWebApi'
+        ,'copyChartJs'
+        ,'copyChartJsColor'
+        ,'copyChartJsColorString'
+        ,'copyRXJS'
+    ]);
+
+    gulp.task('copyAngular',['default','clean'],function () {
+        return gulp.src(['node_modules/@angular/**'])
+            .pipe(gulp.dest('../WebContent/node_modules/@angular'));
+    });
+    gulp.task('copyAngularChartjs',['default','clean'],function () {
+        return gulp.src(['node_modules/angular2-chartjs/**'])
+            .pipe(gulp.dest('../WebContent/node_modules/angular2-chartjs'));
+    });
+    gulp.task('copyAngular2InMemoryWebApi',['default','clean'],function () {
+        return gulp.src(['node_modules/angular2-in-memory-web-api/**'])
+            .pipe(gulp.dest('../WebContent/node_modules/angular2-in-memory-web-api'));
+    });
+    gulp.task('copyChartJs',['default','clean'],function () {
+        return gulp.src(['node_modules/chart.js/**'])
+            .pipe(gulp.dest('../WebContent/node_modules/chart.js'));
+    });
+    gulp.task('copyChartJsColor',['default','clean'],function () {
+        return gulp.src(['node_modules/chartjs-color/**'])
+            .pipe(gulp.dest('../WebContent/node_modules/chartjs-color'));
+    });
+    gulp.task('copyChartJsColorString',['default','clean'],function () {
+        return gulp.src(['node_modules/chartjs-color-string/**'])
+            .pipe(gulp.dest('../WebContent/node_modules/chartjs-color-string'));
+    });
+    gulp.task('copyRXJS',['default','clean'],function () {
+        return gulp.src(['node_modules/rxjs/**'])
+            .pipe(gulp.dest('../WebContent/node_modules/rxjs'));
     });
 
     // Lint Task
