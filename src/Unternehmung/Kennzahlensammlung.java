@@ -47,7 +47,7 @@ public class Kennzahlensammlung {
         this.getBilanz().setEigenkapital(eigenkapital);
         this.getBilanz().setLiquideMittel(eigenkapital);
         this.unternehmen = unternehmen;
-        this.maxNeueMitarbeiter = 0;
+        this.maxNeueMitarbeiter = 10; // die ersten 10 Mitarbeiter können ohne HR-Mitarbeiter eingestellt werden
     }
 
     /**
