@@ -12,9 +12,11 @@
                         <table class="table table-condensed">
                             <thead>
                             <tr>
-                                <th data-field="aktiva">Aktiva</th>
-                                <th data-field="bilanz" style="text-align: center;"><b>Aktueller Bilanzstand zum {{time}}</b></th>
-                                <th data-field="passiva" style="text-align: right;float:right;">Passiva</th>
+                                <th data-field="head" colspan="5" style="text-align: center;">
+                                    <span style="float: left;">Aktiva</span>
+                                    <b>Aktueller Bilanzstand zum {{time}}</b>
+                                    <span style="float: right;">Passiva</span>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -28,24 +30,21 @@
                                     </ul>
                                 </td>
                                 <td>
-                                    <ul style="list-style-type: none;white-space:nowrap;">
+                                    <ul style="list-style-type: none;white-space:nowrap;text-align: left;">
                                         <li>{{runden(keyfigures.bilanz.gebaeudeWert)}} €</li>
                                         <li>{{runden(keyfigures.bilanz.taMaschWert)}} €</li>
                                         <li>{{runden(keyfigures.bilanz.feWert)}} €</li>
                                         <li>{{runden(keyfigures.bilanz.liquideMittel)}} €</li>
                                     </ul>
                                 </td>
-                                <td></td>
+                                <td style="color: #FFFFFF;">........................................................</td>
                                 <td style="text-align: right;">
-                                    <ul style="list-style-type: none; ">
+                                    <ul style="list-style-type: none;text-align: right;">
                                         <li><b>Eigenkapital</b></li>
                                         <li><b>Fremdkapital</b></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
                                     </ul>
                                 </td>
-                                <td style="white-space:nowrap;">
+                                <td style="white-space:nowrap;text-align: right;">
                                     <ul style="list-style-type: none; white-space:nowrap;">
                                         <li>{{runden(keyfigures.bilanz.eigenkapital)}} €</li>
                                         <li>{{runden(keyfigures.bilanz.fremdkapital)}} €</li>
@@ -56,10 +55,8 @@
                             <tfoot>
                             <tr>
                                 <td></td>
-                                <td><b>{{runden(keyfigures.bilanz.summeAktiva)}} €</b></td>
-                                <td></td>
-                                <td></td>
-                                <td><b>{{runden(keyfigures.bilanz.summePassiva)}} €</b></td>
+                                <td colspan="2" style="text-align: left;white-space:nowrap;">{{runden(keyfigures.bilanz.summeAktiva)}} €</td>
+                                <td colspan="2" style="text-align: right;white-space:nowrap;">{{runden(keyfigures.bilanz.summePassiva)}} €</td>
                             </tr>
                             </tfoot>
                         </table>
