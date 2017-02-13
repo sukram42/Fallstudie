@@ -1,7 +1,6 @@
 package Unternehmung.Kennzahlen;
 
 import Rules.Game;
-import Unternehmung.Abteilungen.HR;
 import Unternehmung.Abteilungen.Produktion;
 import Unternehmung.Unternehmen;
 import org.junit.After;
@@ -36,10 +35,9 @@ public class GuVTest {
 
     @Test
     public void importAufwandUndErlös() throws Exception {
-        HR hr = (HR) unternehmen.getAbteilung("hr");
-        hr.addMitarbeiter(2, 1000);
         Game.getCalendar().set(Calendar.DAY_OF_MONTH, Game.getCalendar().getActualMaximum(Calendar.DAY_OF_MONTH)); // Tag auf letzten Tag im Monat setzen, sodass importAufwandUndErlös() funktioniert
         testGuV.importAufwandUndErlös();
+        //der Erste Vertriebler mit Gehalt von 2000 wird automatisch eingestellt
         float gehalt = (float) 2000 / 12;
         assertEquals(testGuV.getAufwendungenFuerGehaelter(), gehalt, 1);
     }

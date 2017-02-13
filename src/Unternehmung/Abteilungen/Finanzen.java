@@ -78,6 +78,7 @@ public class Finanzen extends Abteilung {
     /**
      * rechnet für jeden Kredit einmal jährlich Zinsen und Tilgung ab
      */
+
     @Override
     public void update(){
         double tilgung = 0;
