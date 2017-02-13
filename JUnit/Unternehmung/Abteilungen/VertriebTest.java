@@ -35,15 +35,12 @@ public class VertriebTest{
 
     @Test
     public void getFreieMitarbeiter() throws Exception {
-        unternehmen.getAbteilung("hr").addMitarbeiter(1, 2000);
-        unternehmen.getAbteilung("vertrieb").addMitarbeiter(2, 2000);
+        unternehmen.getAbteilung("vertrieb").addMitarbeiter(1, 2000);
         assertEquals(testVertrieb.getFreieMitarbeiter(), 1);
     }
 
     @Test
     public void getAccountsAsMap() throws Exception {
-        HR hr = (HR)unternehmen.getAbteilung("hr");
-        hr.addMitarbeiter(1, 1000);
         testVertrieb.addMitarbeiter(2, 2000);
         testVertrieb.bewerben(Game.getAusschreibungen().get(1));
         testVertrieb.getAccounts().add(Game.getAusschreibungen().get(1).getVertrag());
@@ -59,8 +56,6 @@ public class VertriebTest{
 
     @Test
     public void bewerben() throws Exception {
-        HR hr = (HR)unternehmen.getAbteilung("hr");
-        hr.addMitarbeiter(1, 1000);
         testVertrieb.addMitarbeiter(2, 2000);
         testVertrieb.bewerben(Game.getAusschreibungen().get(1));
         assertTrue(testVertrieb.getOpportunities().size() == 1);
@@ -78,8 +73,6 @@ public class VertriebTest{
 
     @Test
     public void getOpportunities() throws Exception {
-        HR hr = (HR)unternehmen.getAbteilung("hr");
-        hr.addMitarbeiter(1, 1000);
         testVertrieb.addMitarbeiter(2, 2000);
         testVertrieb.bewerben(Game.getAusschreibungen().get(1));
         assertTrue(testVertrieb.getOpportunities().size() > 0);
@@ -87,8 +80,6 @@ public class VertriebTest{
 
     @Test
     public void getAccounts() throws Exception {
-        HR hr = (HR)unternehmen.getAbteilung("hr");
-        hr.addMitarbeiter(1, 1000);
         testVertrieb.addMitarbeiter(2, 2000);
         testVertrieb.bewerben(Game.getAusschreibungen().get(1));
         testVertrieb.getAccounts().add(Game.getAusschreibungen().get(1).getVertrag());

@@ -64,8 +64,8 @@ assertEquals(testKennzahlensammlung.getArchiv().size(), 0);
 
     @Test
     public void getMaxNeueMitarbeiter() throws Exception {
-        unternehmen.getAbteilung("hr").addMitarbeiter(1, 1000);
-        assertEquals(unternehmen.getKennzahlensammlung().getMaxNeueMitarbeiter(), 19);
+        //Die ersten 10 können ohne HR-Manager eingestellt werden, allerdings wird automatisch ein Vertriebler zu Beginn hinzugefügt
+        assertEquals(unternehmen.getKennzahlensammlung().getMaxNeueMitarbeiter(), 9);
     }
 
     @Test

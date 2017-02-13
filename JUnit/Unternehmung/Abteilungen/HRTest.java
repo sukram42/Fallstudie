@@ -62,26 +62,27 @@ public class HRTest {
 
     @Test
     public void getTotalGehalt() throws Exception {
-        unternehmen.getAbteilung("produktion").addMitarbeiter(1, 10000);
-        assertEquals(testHR.getTotalGehalt(), 20000f/12f, 1f);
+        //der Erste Vertriebler wird automatisch eingestellt
+        assertEquals(testHR.getTotalGehalt(), (10000 + 2000)/12, 2);
 }
 
     @Test
     public void getDurchschnittlichesGehalt() throws Exception {
-        unternehmen.getAbteilung("produktion").addMitarbeiter(1, 10000);
-        assertEquals(testHR.getDurchschnittlichesGehalt(), 10000/12, 0.5);
+        //der Erste Vertriebler wird automatisch eingestellt
+        assertEquals(testHR.getDurchschnittlichesGehalt(), (10000 + 2000)/2/12, 0.5);
     }
 
     @Test
     public void getTotalMitarbeiterCount() throws Exception {
-        unternehmen.getAbteilung("produktion").addMitarbeiter(1, 10000);
+        //der Erste Vertriebler wird automatisch eingestellt
         assertEquals(testHR.getTotalMitarbeiterCount(), 2);
     }
 
     @Test
     public void getTotalMitarbeiter() throws Exception {
-        unternehmen.getAbteilung("hr").addMitarbeiter(2, 10000);
-        assertEquals(testHR.getTotalMitarbeiter(), unternehmen.getAbteilung("hr").getMitarbeiter());
+        //der Erste Vertriebler wird automatisch eingestellt
+        unternehmen.getAbteilung("hr").getMitarbeiter().remove(0);
+        assertEquals(testHR.getTotalMitarbeiter(), unternehmen.getAbteilung("vertrieb").getMitarbeiter());
     }
 
     @Test
