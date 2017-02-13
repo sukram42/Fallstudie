@@ -44,7 +44,7 @@ public class VertriebTest{
         testVertrieb.addMitarbeiter(2, 2000);
         testVertrieb.bewerben(Game.getAusschreibungen().get(1));
         testVertrieb.getAccounts().add(Game.getAusschreibungen().get(1).getVertrag());
-        assertEquals(testVertrieb.getAccountsAsMap().size() , 2);
+        assertEquals(testVertrieb.getAccountsAsMap().size() , 2, 1);
 
     }
 
