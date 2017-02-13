@@ -7,7 +7,7 @@ public class Mitarbeiter {
     private String imagelink;
     private Abteilung department;
     private char gender;
-    private int gehalt; // Jahresgehalt
+    private int gehalt; // Monatsgehalt
     private int prodLeistung; // Produktionsleistung eines Mitarbeiters (wie viele Produkte kann ein Mitarbeitern pro Monat produzieren?)
     // nur relevant für Mitarbeiter, die in der Abteilung Produktion eingestellt sind
     // ist abhängig von der Mitarbeiterzufriedenheit

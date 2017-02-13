@@ -87,7 +87,7 @@ public class Kennzahlensammlung {
      */
     private void kennzahlenRuntersetzen() {
         for (Kennzahl kennzahl : this.weicheKennzahlen.values()) {
-            kennzahl.setModifier(kennzahl.getModifier() - 0.01f);
+            kennzahl.setModifier(kennzahl.getModifier() - 0.001f);
         }
     }
 
