@@ -21,6 +21,7 @@ export class ProduktionComponent {
     errorMaschinen;
     errorLinie;
     sold;
+
     constructor(private proService:ProduktionService ,private hrService:HRService)
     {
         hrService.getEmployeesProduktion().subscribe(

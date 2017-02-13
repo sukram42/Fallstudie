@@ -25,7 +25,7 @@ export class MachineListComponent {
     loadList()
     {
         this._proService.getMachines()
-            .subscribe(data=>{this.data = data,console.log(data)});
+            .subscribe(data=>this.data = data);
     }
 
     refreshStatus()
